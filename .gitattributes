@@ -1,0 +1,22 @@
+* text=auto
+
+*.c	text 
+*.cpp	text
+*.h	text
+*h.in	text eol=lf
+*pc.in	text eol=lf
+
+*.sln		text eol=crlf
+*.vcproj	text eol=crlf
+*.rc		text eol=crlf
+*.vcxproj	text eol=crlf
+*.bat		text eol=crlf
+
+*.m4 		text eol=lf
+bootstrap 	text eol=lf
+depcomp		text eol=lf
+install-sh	text eol=lf
+missing		text eol=lf
+mkinstalldirs	text eol=lf
+*.am		text eol=lf
+*.ac		text eol=lf

@@ -1,0 +1,8 @@
+#! /bin/sh
+
+aclocal -I m4
+libtoolize --copy --force
+automake -ac
+autoconf
+
+# Taf!

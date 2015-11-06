@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "esystest", "esystest.vcproj", "{D6D30C22-C7F3-43D2-BFDB-2B8D9B2FB86E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "esystest_t", "esystest_t.vcproj", "{D434BC44-7578-4D0C-938D-32ECFB3F0C59}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6D30C22-C7F3-43D2-BFDB-2B8D9B2FB86E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D6D30C22-C7F3-43D2-BFDB-2B8D9B2FB86E}.Debug|Win32.Build.0 = Debug|Win32
+		{D6D30C22-C7F3-43D2-BFDB-2B8D9B2FB86E}.Release|Win32.ActiveCfg = Release|Win32
+		{D6D30C22-C7F3-43D2-BFDB-2B8D9B2FB86E}.Release|Win32.Build.0 = Release|Win32
+		{D434BC44-7578-4D0C-938D-32ECFB3F0C59}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D434BC44-7578-4D0C-938D-32ECFB3F0C59}.Debug|Win32.Build.0 = Debug|Win32
+		{D434BC44-7578-4D0C-938D-32ECFB3F0C59}.Release|Win32.ActiveCfg = Release|Win32
+		{D434BC44-7578-4D0C-938D-32ECFB3F0C59}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

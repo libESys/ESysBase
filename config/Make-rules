@@ -1,0 +1,7 @@
+DEFS	= -I.
+INCLUDES = $(EXTRA_INCLUDES) -I$(top_builddir)/include -I$(top_srcdir)/include -I$(top_srcdir)/include/unipro -I$(top_srcdir)/include/errmod -I$(top_srcdir)/include/phymod -I$(top_srcdir)/include/stat -I$(top_srcdir)/include/trafgen -I$(top_srcdir)/include/app -I$(top_srcdir)/include/app/gmi -I$(top_srcdir)/include/logmod -I$(top_srcdir)/include/testmod
+
+
+
+
+
