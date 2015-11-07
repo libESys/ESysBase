@@ -232,6 +232,18 @@
 				RelativePath="..\..\include\esystest\version.h"
 				>
 			</File>
+			<Filter
+				Name="boost"
+				>
+				<Filter
+					Name="test"
+					>
+					<File
+						RelativePath="..\..\include\esystest\boost\test\unit_test.hpp"
+						>
+					</File>
+				</Filter>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"
