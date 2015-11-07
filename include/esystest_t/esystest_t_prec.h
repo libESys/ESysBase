@@ -10,12 +10,20 @@
  *
  */
 
-// esystest_t_prec.h : include file for standard system include files,
-// or project specific include files that are used frequently, but
-// are changed infrequently
-//
+#ifndef __ESYSTEST_ESYSTEST_T_PREC_H__
+#define __ESYSTEST_ESYSTEST_T_PREC_H__
 
-#pragma once
+#ifdef _MSC_VER
+#pragma warning (disable : 4996)
+#pragma warning (disable : 4985)
+#endif
+
+#include <boost/test/unit_test.hpp>
+
+#ifdef _MSC_VER
+#pragma warning (default : 4996)
+#pragma warning (default : 4985)
+#endif
 
 #ifdef WIN32
     #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
@@ -25,3 +33,4 @@
 
 // TODO: reference additional headers your program requires here
 
+#endif
