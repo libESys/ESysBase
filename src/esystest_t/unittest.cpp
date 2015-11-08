@@ -15,7 +15,7 @@
  *
  */
 
-//#define BOOST_TEST_MAIN
+#define BOOST_TEST_MAIN
 
 #ifdef WIN32
 #include <vld.h>
@@ -33,14 +33,4 @@
 #pragma warning (default : 4985)
 #endif
 
-#include <esystest/testsuite.h>
 
-int main(int argc, char *argv[])
-{
-	esystest::TestSuite *master;
-
-	master = esystest::TestSuite::GetMaster();
-	master->RunTestCases();
-
-	return 0;
-}

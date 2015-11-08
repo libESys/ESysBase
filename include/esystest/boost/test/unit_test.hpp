@@ -238,7 +238,12 @@ struct nil_t {};
 #ifdef BOOST_TEST_MAIN 
 int main(int argc, char *argv[])
 {
-    return 0;
+	esystest::TestSuite *master;
+
+	master = esystest::TestSuite::GetMaster();
+	master->RunTestCases();
+
+	return 0;
 }
 #endif
 
