@@ -122,6 +122,46 @@ struct equal_impl_frwd {
 	}
 };
 
+struct ne_impl {
+	template <class Left, class Right>
+	bool operator()(Left const& left, Right const& right) const
+	{
+		return !equal_impl_frwd()(left, right);
+	}
+};
+
+struct lt_impl {
+	template <class Left, class Right>
+	bool operator()(Left const& left, Right const& right) const
+	{
+		return left < right;
+	}
+};
+
+struct le_impl {
+	template <class Left, class Right>
+	bool operator()(Left const& left, Right const& right) const
+	{
+		return left <= right;
+	}
+};
+
+struct gt_impl {
+	template <class Left, class Right>
+	bool operator()(Left const& left, Right const& right) const
+	{
+		return left > right;
+	}
+};
+
+struct ge_impl {
+	template <class Left, class Right>
+	bool operator()(Left const& left, Right const& right) const
+	{
+		return left >= right;
+	}
+};
+
 template <typename L, typename R, typename P>
 void boost_test_tool_impl(const L &left, const R &right, const P &p, const char *file, int line)
 {
@@ -136,6 +176,8 @@ void boost_require_equal(const L &left, const R &right, const char *file, int li
 	boost_test_tool_impl(left, right, equal_impl_frwd(), file, line);
 }
 
+
+
 }
 
 #define BOOST_TEST_TOOL_IMPL( frwd_type, P, assertion_descr, TL, CT, L, R )     \
@@ -148,6 +190,41 @@ void boost_require_equal(const L &left, const R &right, const char *file, int li
     ::esystest::equal_impl_frwd, "", CHECK, CHECK_EQUAL, (L), (R) )
 #define BOOST_REQUIRE_EQUAL( L, R )         BOOST_TEST_TOOL_IMPL( 0, \
     ::esystest::equal_impl_frwd, "", REQUIRE, CHECK_EQUAL, (L), (R) )
+
+#define BOOST_WARN_NE( L, R )               BOOST_TEST_TOOL_IMPL( 0, \
+    ::esystest::ne_impl, "", WARN, CHECK_NE, (L), (R) )
+#define BOOST_CHECK_NE( L, R )              BOOST_TEST_TOOL_IMPL( 0, \
+    ::esystest::ne_impl, "", CHECK, CHECK_NE, (L), (R) )
+#define BOOST_REQUIRE_NE( L, R )            BOOST_TEST_TOOL_IMPL( 0, \
+    ::esystest::ne_impl, "", REQUIRE, CHECK_NE, (L), (R) )
+
+#define BOOST_WARN_LT( L, R )               BOOST_TEST_TOOL_IMPL( 0, \
+    ::esystest::lt_impl, "", WARN, CHECK_LT, (L), (R) )
+#define BOOST_CHECK_LT( L, R )              BOOST_TEST_TOOL_IMPL( 0, \
+    ::esystest::lt_impl, "", CHECK, CHECK_LT, (L), (R) )
+#define BOOST_REQUIRE_LT( L, R )            BOOST_TEST_TOOL_IMPL( 0, \
+    ::esystest::lt_impl, "", REQUIRE, CHECK_LT, (L), (R) )
+
+#define BOOST_WARN_LE( L, R )               BOOST_TEST_TOOL_IMPL( 0, \
+    ::esystest::le_impl, "", WARN, CHECK_LE, (L), (R) )
+#define BOOST_CHECK_LE( L, R )              BOOST_TEST_TOOL_IMPL( 0, \
+    ::esystest::le_impl, "", CHECK, CHECK_LE, (L), (R) )
+#define BOOST_REQUIRE_LE( L, R )            BOOST_TEST_TOOL_IMPL( 0, \
+    ::esystest::le_impl, "", REQUIRE, CHECK_LE, (L), (R) )
+
+#define BOOST_WARN_GT( L, R )               BOOST_TEST_TOOL_IMPL( 0, \
+    ::esystest::gt_impl, "", WARN, CHECK_GT, (L), (R) )
+#define BOOST_CHECK_GT( L, R )              BOOST_TEST_TOOL_IMPL( 0, \
+    ::esystest::gt_impl, "", CHECK, CHECK_GT, (L), (R) )
+#define BOOST_REQUIRE_GT( L, R )            BOOST_TEST_TOOL_IMPL( 0, \
+    ::esystest::gt_impl, "", REQUIRE, CHECK_GT, (L), (R) )
+
+#define BOOST_WARN_GE( L, R )               BOOST_TEST_TOOL_IMPL( 0, \
+    ::esystest::ge_impl, "", WARN, CHECK_GE, (L), (R) )
+#define BOOST_CHECK_GE( L, R )              BOOST_TEST_TOOL_IMPL( 0, \
+    ::esystest::ge_impl, "", CHECK, CHECK_GE, (L), (R) )
+#define BOOST_REQUIRE_GE( L, R )            BOOST_TEST_TOOL_IMPL( 0, \
+    ::esystest::ge_impl, "", REQUIRE, CHECK_GE, (L), (R) )
 
 namespace esystest
 {
