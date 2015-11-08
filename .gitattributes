@@ -10,6 +10,7 @@
 *.vcproj	text eol=crlf
 *.rc		text eol=crlf
 *.vcxproj	text eol=crlf
+*.vcxproj.filters	text eol=crlf
 *.bat		text eol=crlf
 
 *.m4 		text eol=lf

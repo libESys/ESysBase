@@ -18,9 +18,9 @@
 namespace esystest
 {
 
-TestSuite *TestSuite::g_current = nullptr;
 TestSuite TestSuite::g_dft("MasterSuite");
-TestSuite *TestSuite::g_p_dft = &g_dft;
+TestSuite *TestSuite::g_current = &g_dft;
+TestSuite *TestSuite::g_master = &g_dft;
 
 void TestSuite::SetCurrent(TestSuite *current)
 {
@@ -29,7 +29,14 @@ void TestSuite::SetCurrent(TestSuite *current)
 
 TestSuite *TestSuite::GetCurrent()
 {
+	if (g_current == nullptr)
+		g_current = g_master;
 	return g_current;
+}
+
+TestSuite *TestSuite::GetMaster()
+{
+	return g_master;
 }
 
 TestSuite::TestSuite(const char *name)
@@ -140,6 +147,25 @@ TestCaseInfo *TestSuite::GetLastCase()
 	return m_last_case;
 }
 
+void TestSuite::RunTestCases()
+{
+	TestSuite *cur;
+	TestCaseInfo *cur_test;
+
+	cur = GetFirst();
+	while (cur != nullptr)
+	{
+		cur->RunTestCases();
+		cur = m_first->GetNext();
+	}
+
+	cur_test = GetFirstCase();
+	while (cur_test != nullptr)
+	{
+		cur_test->Invoke();
+		cur_test = cur_test->GetNext();
+	}
+}
 
 }
 

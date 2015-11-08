@@ -49,11 +49,14 @@ public:
 	void SetLastCase(TestCaseInfo *last_case);
 	TestCaseInfo *GetLastCase();
 
+	void RunTestCases();
+
 	static void SetCurrent(TestSuite *current);
 	static TestSuite *GetCurrent();
+	static TestSuite *GetMaster();
 protected:
 	static TestSuite *g_current;
-	static TestSuite *g_p_dft;
+	static TestSuite *g_master;
 	static TestSuite g_dft;
 	const char *m_name;
 	TestSuite *m_first;
