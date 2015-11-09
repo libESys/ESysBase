@@ -51,13 +51,18 @@ public:
 
 	void RunTestCases();
 
+	unsigned int GetTestCaseCount();
+	unsigned int GetChildSuiteCount();
+
 	static void SetCurrent(TestSuite *current);
 	static TestSuite *GetCurrent();
 	static TestSuite *GetMaster();
+	static unsigned int GetCount();
 protected:
 	static TestSuite *g_current;
 	static TestSuite *g_master;
-	static TestSuite g_dft;
+	static TestSuite g_dft;	
+	static unsigned int g_count;
 	const char *m_name;
 	TestSuite *m_first;
 	TestSuite *m_last;
@@ -66,6 +71,8 @@ protected:
 	TestSuite *m_first_child;
 	TestCaseInfo *m_first_case;
 	TestCaseInfo *m_last_case;
+	unsigned int m_test_case_count;
+	unsigned int m_child_suite_count;
 };
 
 }

@@ -16,8 +16,16 @@
 namespace esystest
 {
 
+unsigned int TestCase::g_count = 0;
+
+unsigned int TestCase::GetCount()
+{
+	return g_count;
+}
+
 TestCase::TestCase()
 {
+	++TestCase::g_count;
 }
 
 TestCase::~TestCase()

@@ -21,6 +21,7 @@ namespace esystest
 TestSuite TestSuite::g_dft("MasterSuite");
 TestSuite *TestSuite::g_current = &g_dft;
 TestSuite *TestSuite::g_master = &g_dft;
+unsigned int TestSuite::g_count = 0;
 
 void TestSuite::SetCurrent(TestSuite *current)
 {
@@ -41,8 +42,9 @@ TestSuite *TestSuite::GetMaster()
 
 TestSuite::TestSuite(const char *name)
 	: m_name(name), m_first(nullptr), m_last(nullptr), m_prev(nullptr), m_next(nullptr), m_first_child(nullptr)
-	, m_first_case(nullptr), m_last_case(nullptr)
+	, m_first_case(nullptr), m_last_case(nullptr), m_test_case_count(0), m_child_suite_count(0)
 {
+	++TestSuite::g_count;
 }
 
 TestSuite::~TestSuite()
@@ -102,6 +104,8 @@ TestSuite *TestSuite::GetFirstChild()
 
 void TestSuite::AddSuite(TestSuite *test_suite)
 {
+	++m_child_suite_count;
+
 	if (GetFirst() == nullptr)
 	{
 		SetFirst(test_suite);
@@ -115,6 +119,8 @@ void TestSuite::AddSuite(TestSuite *test_suite)
 
 void TestSuite::AddTest(TestCaseInfo *test_case)
 {
+	++m_test_case_count;
+
 	if (GetFirstCase() == nullptr)
 	{
 		SetFirstCase(test_case);
@@ -165,6 +171,16 @@ void TestSuite::RunTestCases()
 		cur_test->Invoke();
 		cur_test = cur_test->GetNext();
 	}
+}
+
+unsigned int TestSuite::GetTestCaseCount()
+{
+	return m_test_case_count;
+}
+
+unsigned int TestSuite::GetChildSuiteCount()
+{
+	return m_child_suite_count;
 }
 
 }

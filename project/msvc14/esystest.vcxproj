@@ -120,6 +120,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\src\esystest\globalfixture.cpp" />
     <ClCompile Include="..\..\src\esystest\testcase.cpp" />
     <ClCompile Include="..\..\src\esystest\testcaseinfo.cpp" />
     <ClCompile Include="..\..\src\esystest\testsuite.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="..\..\include\esystest\boost\test\unit_test.hpp" />
     <ClInclude Include="..\..\include\esystest\esystest_defs.h" />
     <ClInclude Include="..\..\include\esystest\esystest_prec.h" />
+    <ClInclude Include="..\..\include\esystest\globalfixture.h" />
     <ClInclude Include="..\..\include\esystest\testcase.h" />
     <ClInclude Include="..\..\include\esystest\testcaseinfo.h" />
     <ClInclude Include="..\..\include\esystest\testsuite.h" />

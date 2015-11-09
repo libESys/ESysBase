@@ -36,6 +36,9 @@
     <ClCompile Include="..\..\src\esystest\testcase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\esystest\globalfixture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\esystest\esystest_defs.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\esystest\testcase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esystest\globalfixture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

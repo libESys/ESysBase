@@ -16,6 +16,7 @@
 #include "esystest/testcaseinfo.h"
 #include "esystest/testcase.h"
 #include "esystest/testsuite.h"
+#include "esystest/globalfixture.h"
 
 namespace esystest
 {
@@ -95,6 +96,10 @@ BOOST_FIXTURE_TEST_CASE_WITH_DECOR( test_name, F,                       \
 
 #define BOOST_AUTO_TEST_CASE( test_name )                               \
     BOOST_AUTO_TEST_CASE_NO_DECOR( test_name )                          \
+/**/
+
+#define BOOST_FIXTURE_TEST_CASE( test_name, F )                         \
+     BOOST_FIXTURE_TEST_CASE_NO_DECOR(test_name, F)                     \
 /**/
 
 namespace esystest
@@ -225,6 +230,10 @@ void boost_require_equal(const L &left, const R &right, const char *file, int li
     ::esystest::ge_impl, "", CHECK, CHECK_GE, (L), (R) )
 #define BOOST_REQUIRE_GE( L, R )            BOOST_TEST_TOOL_IMPL( 0, \
     ::esystest::ge_impl, "", REQUIRE, CHECK_GE, (L), (R) )
+
+#define BOOST_GLOBAL_FIXTURE( F ) \
+::esystest::GlobalFixture_t<F> g_ ## gf ## F \
+/**/
 
 namespace esystest
 {

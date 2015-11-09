@@ -25,7 +25,9 @@ public:
 	virtual ~TestCase();
 	
 	virtual void TestMethod()=0;
+	static unsigned int GetCount();
 protected:
+	static unsigned int g_count;
 };
 
 }
