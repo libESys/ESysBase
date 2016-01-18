@@ -13,39 +13,12 @@
 #ifndef __ESYSTEST_BOOST_TEST_UNIT_TEST_HPP__
 #define __ESYSTEST_BOOST_TEST_UNIT_TEST_HPP__
 
+#include "esystest/esystest_defs.h"
 #include "esystest/testcaseinfo.h"
 #include "esystest/testcase.h"
 #include "esystest/testsuite.h"
 #include "esystest/globalfixture.h"
-
-namespace esystest
-{
-
-enum ToolLevel 
-{
-	WARN, CHECK, REQUIRE, PASS
-};
-
-enum CheckType 
-{
-	CHECK_PRED,
-	CHECK_MSG,
-	CHECK_EQUAL,
-	CHECK_NE,
-	CHECK_LT,
-	CHECK_LE,
-	CHECK_GT,
-	CHECK_GE,
-	CHECK_CLOSE,
-	CHECK_CLOSE_FRACTION,
-	CHECK_SMALL,
-	CHECK_BITWISE_EQUAL,
-	CHECK_PRED_WITH_ARGS,
-	CHECK_EQUAL_COLL,
-	CHECK_BUILT_ASSERTION
-};
-
-}
+#include "esystest/report.h"
 
 #define BOOST_FIXTURE_TEST_CASE_WITH_DECOR( test_name, F, decorators )  \
 class test_name ## Info : public esystest::TestCaseInfo					\
@@ -168,17 +141,18 @@ struct ge_impl {
 };
 
 template <typename L, typename R, typename P>
-void boost_test_tool_impl(const L &left, const R &right, const P &p, const char *file, int line)
+bool boost_test_tool_impl(const L &left, const R &right, const P &p, const char *file, int line)
 {
 	bool result;
 
 	result = p(left, right);
+    return result;
 }
 
 template<typename L, typename R>
-void boost_require_equal(const L &left, const R &right, const char *file, int line)
+bool boost_require_equal(const L &left, const R &right, const char *file, int line)
 {	
-	boost_test_tool_impl(left, right, equal_impl_frwd(), file, line);
+	return boost_test_tool_impl(left, right, equal_impl_frwd(), file, line);
 }
 
 
@@ -186,50 +160,53 @@ void boost_require_equal(const L &left, const R &right, const char *file, int li
 }
 
 #define BOOST_TEST_TOOL_IMPL( frwd_type, P, assertion_descr, TL, CT, L, R )     \
-	::esystest::boost_test_tool_impl(L, R, P ## (),__FILE__, __LINE__);
+    { \
+	bool esystest_result=::esystest::boost_test_tool_impl(L, R, P ## (),__FILE__, __LINE__); \
+    ::esystest::report_assertion(esystest_result, __FILE__, __LINE__, TL, CT); \
+    }
 /**/
 
 #define BOOST_WARN_EQUAL( L, R )            BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::equal_impl_frwd, "", WARN, CHECK_EQUAL, (L), (R) )
+    ::esystest::equal_impl_frwd, "", ::esystest::WARN, ::esystest::CHECK_EQUAL, (L), (R) )
 #define BOOST_CHECK_EQUAL( L, R )           BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::equal_impl_frwd, "", CHECK, CHECK_EQUAL, (L), (R) )
+    ::esystest::equal_impl_frwd, "", ::esystest::CHECK, ::esystest::CHECK_EQUAL, (L), (R) )
 #define BOOST_REQUIRE_EQUAL( L, R )         BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::equal_impl_frwd, "", REQUIRE, CHECK_EQUAL, (L), (R) )
+    ::esystest::equal_impl_frwd, "", ::esystest::REQUIRE, ::esystest::CHECK_EQUAL, (L), (R) )
 
 #define BOOST_WARN_NE( L, R )               BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::ne_impl, "", WARN, CHECK_NE, (L), (R) )
+    ::esystest::ne_impl, "", ::esystest::WARN, ::esystest::CHECK_NE, (L), (R) )
 #define BOOST_CHECK_NE( L, R )              BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::ne_impl, "", CHECK, CHECK_NE, (L), (R) )
+    ::esystest::ne_impl, "", ::esystest::CHECK, ::esystest::CHECK_NE, (L), (R) )
 #define BOOST_REQUIRE_NE( L, R )            BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::ne_impl, "", REQUIRE, CHECK_NE, (L), (R) )
+    ::esystest::ne_impl, "", ::esystest::REQUIRE, ::esystest::CHECK_NE, (L), (R) )
 
 #define BOOST_WARN_LT( L, R )               BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::lt_impl, "", WARN, CHECK_LT, (L), (R) )
+    ::esystest::lt_impl, "", ::esystest::WARN, ::esystest::CHECK_LT, (L), (R) )
 #define BOOST_CHECK_LT( L, R )              BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::lt_impl, "", CHECK, CHECK_LT, (L), (R) )
+    ::esystest::lt_impl, "", ::esystest::CHECK, ::esystest::CHECK_LT, (L), (R) )
 #define BOOST_REQUIRE_LT( L, R )            BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::lt_impl, "", REQUIRE, CHECK_LT, (L), (R) )
+    ::esystest::lt_impl, "", ::esystest::REQUIRE, ::esystest::CHECK_LT, (L), (R) )
 
 #define BOOST_WARN_LE( L, R )               BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::le_impl, "", WARN, CHECK_LE, (L), (R) )
+    ::esystest::le_impl, "", ::esystest::WARN, ::esystest::CHECK_LE, (L), (R) )
 #define BOOST_CHECK_LE( L, R )              BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::le_impl, "", CHECK, CHECK_LE, (L), (R) )
+    ::esystest::le_impl, "", ::esystest::CHECK, ::esystest::CHECK_LE, (L), (R) )
 #define BOOST_REQUIRE_LE( L, R )            BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::le_impl, "", REQUIRE, CHECK_LE, (L), (R) )
+    ::esystest::le_impl, "", ::esystest::REQUIRE, ::esystest::CHECK_LE, (L), (R) )
 
 #define BOOST_WARN_GT( L, R )               BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::gt_impl, "", WARN, CHECK_GT, (L), (R) )
+    ::esystest::gt_impl, "", ::esystest::WARN, ::esystest::CHECK_GT, (L), (R) )
 #define BOOST_CHECK_GT( L, R )              BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::gt_impl, "", CHECK, CHECK_GT, (L), (R) )
+    ::esystest::gt_impl, "", ::esystest::CHECK, ::esystest::CHECK_GT, (L), (R) )
 #define BOOST_REQUIRE_GT( L, R )            BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::gt_impl, "", REQUIRE, CHECK_GT, (L), (R) )
+    ::esystest::gt_impl, "", ::esystest::REQUIRE, ::esystest::CHECK_GT, (L), (R) )
 
 #define BOOST_WARN_GE( L, R )               BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::ge_impl, "", WARN, CHECK_GE, (L), (R) )
+    ::esystest::ge_impl, "", ::esystest::WARN, ::esystest::CHECK_GE, (L), (R) )
 #define BOOST_CHECK_GE( L, R )              BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::ge_impl, "", CHECK, CHECK_GE, (L), (R) )
+    ::esystest::ge_impl, "", ::esystest::CHECK, ::esystest::CHECK_GE, (L), (R) )
 #define BOOST_REQUIRE_GE( L, R )            BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::ge_impl, "", REQUIRE, CHECK_GE, (L), (R) )
+    ::esystest::ge_impl, "", ::esystest::REQUIRE, ::esystest::CHECK_GE, (L), (R) )
 
 #define BOOST_GLOBAL_FIXTURE( F ) \
 ::esystest::GlobalFixture_t<F> g_ ## gf ## F \

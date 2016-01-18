@@ -28,5 +28,34 @@
 #pragma warning (disable : 4251)
 #endif
 
+namespace esystest
+{
+
+enum ToolLevel
+{
+    WARN, CHECK, REQUIRE, PASS
+};
+
+enum CheckType
+{
+    CHECK_PRED,
+    CHECK_MSG,
+    CHECK_EQUAL,
+    CHECK_NE,
+    CHECK_LT,
+    CHECK_LE,
+    CHECK_GT,
+    CHECK_GE,
+    CHECK_CLOSE,
+    CHECK_CLOSE_FRACTION,
+    CHECK_SMALL,
+    CHECK_BITWISE_EQUAL,
+    CHECK_PRED_WITH_ARGS,
+    CHECK_EQUAL_COLL,
+    CHECK_BUILT_ASSERTION
+};
+
+}
+
 #endif
 
