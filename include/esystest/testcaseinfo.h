@@ -1,14 +1,14 @@
 /*!
-* \file esystest/TestCaseInfo.h
-* \brief 
-*
-* \cond
-*__legal_b__
-*
-*__legal_e__
-* \endcond
-*
-*/
+ * \file esystest/TestCaseInfo.h
+ * \brief 
+ *
+ * \cond
+ *__legal_b__
+ *
+ *__legal_e__
+ * \endcond
+ *
+ */
 
 #ifndef __ESYSTEST_TESTCASEINFO_H__
 #define __ESYSTEST_TESTCASEINFO_H__
@@ -36,6 +36,12 @@ public:
 	virtual TestCaseInfo *GetNext();
 
 	virtual void Invoke() = 0;
+
+    static TestCaseInfo *GetFirst();
+    static TestCaseInfo *GetLast();
+    static int GetCount();
+    static void Populate();
+
 protected:
 	const char *m_name;
 	const char *m_file;
@@ -43,6 +49,9 @@ protected:
 	TestSuite *m_test_suite;
 	TestCaseInfo *m_prev;
 	TestCaseInfo *m_next;
+    static TestCaseInfo *m_first;
+    static TestCaseInfo *m_last;
+    static int m_count;
 };
 
 }

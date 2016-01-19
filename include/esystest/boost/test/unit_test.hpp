@@ -29,14 +29,13 @@ public:																	\
 	{																	\
 		esystest::TestSuite *test_suite;								\
 		test_suite=esystest::TestSuite::GetCurrent();					\
-		test_suite->AddTest(this);										\
+        SetSuite(test_suite);                                           \
 	}																	\
 	virtual ~ test_name ## Info() {}									\
 	virtual void Invoke();												\
-	static test_name ## Info g_test_case_info;							\
  };																		\
                                                                         \
-test_name ## Info test_name ## Info::g_test_case_info;					\
+test_name ## Info g_test_case_ ## test_name ## _info;					\
 																		\
 class test_name : public F, public esystest::TestCase					\
 {																		\
@@ -224,6 +223,8 @@ struct nil_t {};
 int main(int argc, char *argv[])
 {
 	esystest::TestSuite *master;
+
+    esystest::TestCaseInfo::Populate();
 
 	master = esystest::TestSuite::GetMaster();
 	master->RunTestCases();

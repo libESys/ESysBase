@@ -12,13 +12,64 @@
 
 #include "esystest/esystest_prec.h"
 #include "esystest/testcaseinfo.h"
+#include "esystest/testsuite.h"
+#include "esystest/assert.h"
 
 namespace esystest
 {
 
+TestCaseInfo *TestCaseInfo::m_first = nullptr;
+TestCaseInfo *TestCaseInfo::m_last = nullptr;
+int TestCaseInfo::m_count = 0;
+
+TestCaseInfo *TestCaseInfo::GetFirst()
+{
+    return m_first;
+}
+
+TestCaseInfo *TestCaseInfo::GetLast()
+{
+    return m_last;
+}
+
+int TestCaseInfo::GetCount()
+{
+    return m_count;
+}
+
+void TestCaseInfo::Populate()
+{
+    TestCaseInfo *cur = GetFirst();
+    TestSuite *test_suite;
+
+    while (cur != nullptr)
+    {
+        test_suite = cur->GetSuite();
+
+        assert(test_suite != nullptr);
+
+        test_suite->AddTest(cur);
+
+        cur = cur->GetNext();
+    }
+}
+
 TestCaseInfo::TestCaseInfo(const char *name, const char *file, int line)
 	: m_name(name), m_file(file), m_line(line), m_test_suite(nullptr), m_prev(nullptr), m_next(nullptr)
 {
+    ++m_count;
+
+    if (m_first == nullptr)
+    {
+        m_first = this;
+        m_last = this;
+    }
+    else
+    {
+        m_last->m_next = this;
+        m_prev = m_last;
+        m_last = this;
+    }
 }
 
 TestCaseInfo::~TestCaseInfo()
