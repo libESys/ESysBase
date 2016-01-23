@@ -232,6 +232,7 @@ int main(int argc, char *argv[])
     esystest::TestCaseInfo::Populate();
 
 	master = esystest::TestSuite::GetMaster();
+    master->SetCommandLine(argc, argv);
 	master->RunTestCases();
 
 	return 0;

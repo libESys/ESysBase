@@ -59,6 +59,11 @@ public:
 	unsigned int GetTestCaseCount();
 	unsigned int GetChildSuiteCount();
 
+    void SetCommandLine(int argc, char **argv);
+
+    int GetArgC();
+    char **GetArgV();
+
 	static void SetCurrent(TestSuite *current);
 	static TestSuite *GetCurrent();
 	static TestSuite *GetMaster();
@@ -78,6 +83,8 @@ protected:
 	TestCaseInfo *m_last_case;
 	unsigned int m_test_case_count;
 	unsigned int m_child_suite_count;
+    int m_argc;
+    char **m_argv;
 };
 
 }

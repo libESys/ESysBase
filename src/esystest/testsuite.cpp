@@ -48,6 +48,7 @@ TestSuite *TestSuite::GetMaster()
 TestSuite::TestSuite(const char *name)
 	: m_name(name), m_first(nullptr), m_last(nullptr), m_prev(nullptr), m_next(nullptr), m_first_child(nullptr)
 	, m_first_case(nullptr), m_last_case(nullptr), m_test_case_count(0), m_child_suite_count(0)
+    , m_argc(0), m_argv(nullptr)
 {
 	++TestSuite::g_count;
 }
@@ -186,6 +187,22 @@ unsigned int TestSuite::GetTestCaseCount()
 unsigned int TestSuite::GetChildSuiteCount()
 {
 	return m_child_suite_count;
+}
+
+void TestSuite::SetCommandLine(int argc, char **argv)
+{
+    m_argc = argc;
+    m_argv = argv;
+}
+
+int TestSuite::GetArgC()
+{
+    return m_argc;
+}
+
+char **TestSuite::GetArgV()
+{
+    return m_argv;
 }
 
 }
