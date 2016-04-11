@@ -154,7 +154,7 @@ bool boost_test_tool_impl(const L &left, const R &right, const P &p, const char 
 
 template<typename L, typename R>
 bool boost_require_equal(const L &left, const R &right, const char *file, int line)
-{	
+{
 	return boost_test_tool_impl(left, right, equal_impl_frwd(), file, line);
 }
 
@@ -164,10 +164,23 @@ bool boost_require_equal(const L &left, const R &right, const char *file, int li
 
 #define BOOST_TEST_TOOL_IMPL( frwd_type, P, assertion_descr, TL, CT, L, R )     \
     { \
-	bool esystest_result=::esystest::boost_test_tool_impl(L, R, P,__FILE__, __LINE__); \
-    ::esystest::report_assertion(esystest_result, __FILE__, __LINE__, TL, CT); \
+        bool esystest_result=::esystest::boost_test_tool_impl(L, R, P,__FILE__, __LINE__); \
+        ::esystest::report_assertion(esystest_result, __FILE__, __LINE__, TL, CT); \
     }
 /**/
+
+#define BOOST_TEST_TOOL_IMPL_P( frwd_type, P, assertion_descr, TL, CT, L, R )     \
+    { \
+        ::esystest::report_assertion((P), __FILE__, __LINE__, TL, CT); \
+    }
+/**/
+
+#define BOOST_WARN( P )                     BOOST_TEST_TOOL_IMPL_P( 2, \
+    (P), "", ::esystest::WARN, ::esystest::CHECK_PRED, _, _)
+#define BOOST_CHECK( P )                    BOOST_TEST_TOOL_IMPL_P( 2, \
+    (P), "", ::esystest::CHECK, ::esystest::CHECK_PRED, _, _ )
+#define BOOST_REQUIRE( P )                  BOOST_TEST_TOOL_IMPL_P( 2, \
+    (P), "", ::esystest::REQUIRE, ::esystest::CHECK_PRED, _, _ )
 
 #define BOOST_WARN_EQUAL( L, R )            BOOST_TEST_TOOL_IMPL( 0, \
     ::esystest::equal_impl_frwd(), "", ::esystest::WARN, ::esystest::CHECK_EQUAL, (L), (R) )
@@ -224,7 +237,7 @@ struct nil_t {};
 
 }
 
-#ifdef BOOST_TEST_MAIN 
+#ifdef BOOST_TEST_MAIN
 int main(int argc, char *argv[])
 {
 	esystest::TestSuite *master;
