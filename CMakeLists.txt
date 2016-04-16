@@ -11,10 +11,12 @@ SET( LIBESYSTEST_CXX_SOURCES
     src/esystest/esystest_prec.cpp
     src/esystest/globalfixture.cpp
     src/esystest/logger.cpp
+    src/esystest/order.cpp
     src/esystest/report.cpp
     src/esystest/testcase.cpp
     src/esystest/testcaseinfo.cpp
     src/esystest/testsuite.cpp
+    src/esystest/types.cpp
 )
 
 if( ${MOE_BOARD} STREQUAL "virtualhw")
