@@ -1,5 +1,5 @@
 /*!
- * \file esystest/testcase.h
+ * \file esystest/types.h
  * \brief
  *
  * \cond
@@ -15,29 +15,20 @@
  *
  */
 
-#ifndef __ESYSTEST_TESTCASE_H__
-#define __ESYSTEST_TESTCASE_H__
+#ifndef __ESYSTEST_TYPES_H__
+#define __ESYSTEST_TYPES_H__
 
 #include "esystest/esystest_defs.h"
 
 namespace esystest
 {
 
-class ESYSTEST_API TestCase
-{
-public:
-	TestCase();
-	virtual ~TestCase();
+class ESYSTEST_API TestCaseInfo;
 
-	virtual void TestMethod()=0;
-	static unsigned int GetCount();
-
-protected:
-	static unsigned int g_count;
-};
+struct nil_t {};
 
 }
 
+ESYSTEST_API esystest::TestCaseInfo &operator*(esystest::TestCaseInfo& info, const esystest::nil_t &n);
+
 #endif
-
-

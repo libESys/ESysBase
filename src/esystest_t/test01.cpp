@@ -42,10 +42,10 @@ BOOST_AUTO_TEST_CASE(Test01)
 	int32_t result;
 
 	result = 0;
-	BOOST_REQUIRE_EQUAL(0, result);	
+	BOOST_REQUIRE_EQUAL(0, result);
 
 	BOOST_REQUIRE_NE(1, result);
 
 	BOOST_REQUIRE_LT(-1, result);
-	
+
 }

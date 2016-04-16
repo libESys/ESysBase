@@ -18,6 +18,7 @@
 #include "esystest/esystest_prec.h"
 #include "esystest/testcaseinfo.h"
 #include "esystest/testsuite.h"
+#include "esystest/order.h"
 #include "esystest/assert.h"
 
 namespace esystest
@@ -60,8 +61,11 @@ void TestCaseInfo::Populate()
 }
 
 TestCaseInfo::TestCaseInfo(const char *name, const char *file, int line)
-	: m_name(name), m_file(file), m_line(line), m_test_suite(nullptr), m_prev(nullptr), m_next(nullptr)
+	: m_name(name), m_file(file), m_line(line), m_test_suite(nullptr), m_prev(nullptr), m_next(nullptr), m_order(ORDER_NOT_SET)
 {
+#ifdef ESYSTEST_DBG
+    m_id = m_count;
+#endif
     ++m_count;
 
     if (m_first == nullptr)
@@ -121,7 +125,22 @@ TestCaseInfo *TestCaseInfo::GetNext()
 	return m_next;
 }
 
+void TestCaseInfo::SetOrder(unsigned int order)
+{
+    m_order = order;
 }
 
+unsigned int TestCaseInfo::GetOrder()
+{
+    return m_order;
+}
 
+#ifdef ESYSTEST_DBG
+int TestCaseInfo::GetId()
+{
+    return m_id;
+}
+#endif
+
+}
 

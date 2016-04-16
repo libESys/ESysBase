@@ -45,7 +45,7 @@ public:
 
 	void SetFirstChild(TestSuite *first_child);
 	TestSuite *GetFirstChild();
-	
+
 	void AddSuite(TestSuite *test_suite);
 	void AddTest(TestCaseInfo *test_case);
 
@@ -55,7 +55,9 @@ public:
 	TestCaseInfo *GetLastCase();
 
 	void RunTestCases();
-
+    void Sort();
+    void SortTestCaseInfo();
+    void Swap(TestCaseInfo *test1, TestCaseInfo *test2);
 	unsigned int GetTestCaseCount();
 	unsigned int GetChildSuiteCount();
 
@@ -71,13 +73,13 @@ public:
 protected:
 	static TestSuite *g_current;
 	static TestSuite *g_master;
-	static TestSuite g_dft;	
+	static TestSuite g_dft;
 	static unsigned int g_count;
 	const char *m_name;
 	TestSuite *m_first;
 	TestSuite *m_last;
 	TestSuite *m_prev;
-	TestSuite *m_next;	
+	TestSuite *m_next;
 	TestSuite *m_first_child;
 	TestCaseInfo *m_first_case;
 	TestCaseInfo *m_last_case;

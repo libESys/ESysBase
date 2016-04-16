@@ -179,6 +179,67 @@ void TestSuite::RunTestCases()
 	}
 }
 
+void TestSuite::Sort()
+{
+    SortTestCaseInfo();
+}
+
+void TestSuite::SortTestCaseInfo()
+{
+    TestCaseInfo *test1;
+    TestCaseInfo *test2;
+
+    bool swapped = true;
+    unsigned int idx;
+    unsigned int count;
+
+    if (m_test_case_count < 2)
+        return;
+
+    // Very simply bubble sort, mostly because there is no need for auxiliary memory
+    count = m_test_case_count - 1;
+
+    while (swapped == true)
+    {
+        swapped = false;
+        test1 = GetFirstCase();
+        test2 = test1->GetNext();
+
+        for (idx = 0; idx < count; ++idx)
+        {
+            if (test1->GetOrder() > test2->GetOrder())
+            {
+                Swap(test1, test2);
+                swapped = true;
+                test2 = test1->GetNext();
+            }
+            else
+            {
+                test1 = test2;
+                test2 = test1->GetNext();
+            }
+        }
+        --count;
+    }
+}
+
+void TestSuite::Swap(TestCaseInfo *test1, TestCaseInfo *test2)
+{
+    if (test1->GetPrev()!=nullptr)
+        test1->GetPrev()->SetNext(test2);
+    if (test2->GetNext() != nullptr)
+        test2->GetNext()->SetPrev(test1);
+    test2->SetPrev(test1->GetPrev());
+    test1->SetNext(test2->GetNext());
+    test2->SetNext(test1);
+    test1->SetPrev(test2);
+
+    if (m_first_case == test1)
+        m_first_case = test2;
+    if (m_last_case == test2)
+        m_last_case = test1;
+}
+
 unsigned int TestSuite::GetTestCaseCount()
 {
 	return m_test_case_count;

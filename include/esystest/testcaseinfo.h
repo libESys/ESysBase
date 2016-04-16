@@ -1,6 +1,6 @@
 /*!
  * \file esystest/TestCaseInfo.h
- * \brief 
+ * \brief
  *
  * \cond
  *__legal_b__
@@ -40,6 +40,9 @@ public:
 	virtual void SetNext(TestCaseInfo *next);
 	virtual TestCaseInfo *GetNext();
 
+    void SetOrder(unsigned int order);
+    unsigned int GetOrder();
+
 	virtual void Invoke() = 0;
 
     static TestCaseInfo *GetFirst();
@@ -47,6 +50,9 @@ public:
     static int GetCount();
     static void Populate();
 
+#ifdef ESYSTEST_DBG
+    int GetId();
+#endif
 protected:
 	const char *m_name;
 	const char *m_file;
@@ -57,6 +63,10 @@ protected:
     static TestCaseInfo *m_first;
     static TestCaseInfo *m_last;
     static int m_count;
+    unsigned int m_order;
+#ifdef ESYSTEST_DBG
+    int m_id;
+#endif
 };
 
 }

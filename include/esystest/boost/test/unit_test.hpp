@@ -24,6 +24,8 @@
 #include "esystest/testsuite.h"
 #include "esystest/globalfixture.h"
 #include "esystest/report.h"
+#include "esystest/types.h"
+#include "esystest/order.h"
 
 #define BOOST_FIXTURE_TEST_CASE_WITH_DECOR( test_name, F, decorators )  \
 class test_name ## Info : public esystest::TestCaseInfo					\
@@ -35,6 +37,7 @@ public:																	\
 		esystest::TestSuite *test_suite;								\
 		test_suite=esystest::TestSuite::GetCurrent();					\
         SetSuite(test_suite);                                           \
+        *this decorators;                                               \
 	}																	\
 	virtual ~ test_name ## Info() {}									\
 	virtual void Invoke();												\
@@ -62,7 +65,7 @@ void test_name::TestMethod()											\
 
 #define BOOST_FIXTURE_TEST_CASE_NO_DECOR( test_name, F )                \
 BOOST_FIXTURE_TEST_CASE_WITH_DECOR( test_name, F,                       \
-    ::esystest::nil_t )													\
+    * ::esystest::nil_t() )												\
 /**/
 
 #define BOOST_AUTO_TEST_CASE_NO_DECOR( test_name )                      \
@@ -228,15 +231,6 @@ bool boost_require_equal(const L &left, const R &right, const char *file, int li
 ::esystest::GlobalFixture_t<F> g_ ## gf ## F \
 /**/
 
-namespace esystest
-{
-
-struct nil_t {};
-
-
-
-}
-
 #ifdef BOOST_TEST_MAIN
 int main(int argc, char *argv[])
 {
@@ -246,6 +240,7 @@ int main(int argc, char *argv[])
 
 	master = esystest::TestSuite::GetMaster();
     master->SetCommandLine(argc, argv);
+    master->Sort();
 	master->RunTestCases();
 
 	return 0;
