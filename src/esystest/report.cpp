@@ -67,7 +67,7 @@ ESYSTEST_API bool report_assertion(bool result, const char *file_name, int line_
             *logger << prefix << suffix << " : ";
             if (desc!=nullptr)
                 *logger << desc << "\n";
-            *logger << "File: " << file_name << " Line: " << line_num << "\n";
+            *logger << "File: " << file_name << " Line: " << (int32_t)line_num << "\n";
         }
     }
 

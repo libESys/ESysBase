@@ -34,7 +34,7 @@ public:
     virtual Logger& operator<< (const uint8_t &value) = 0;
     virtual Logger& operator<< (const uint16_t &value) = 0;
     virtual Logger& operator<< (const uint32_t &value) = 0;
-    virtual Logger& operator<< (const int8_t &value) = 0;
+    virtual Logger& operator<< (const char &value) = 0;
     virtual Logger& operator<< (const int16_t &value) = 0;
     virtual Logger& operator<< (const int32_t &value) = 0;
 
@@ -65,7 +65,7 @@ public:
     virtual Logger& operator<< (const uint8_t &value);
     virtual Logger& operator<< (const uint16_t &value);
     virtual Logger& operator<< (const uint32_t &value);
-    virtual Logger& operator<< (const int8_t &value);
+    virtual Logger& operator<< (const char &value);
     virtual Logger& operator<< (const int16_t &value);
     virtual Logger& operator<< (const int32_t &value);
 
@@ -122,7 +122,7 @@ Logger& Logger_t<T>::operator<< (const uint32_t &value)
 }
 
 template<typename T>
-Logger& Logger_t<T>::operator<< (const int8_t &value)
+Logger& Logger_t<T>::operator<< (const char &value)
 {
     if (m_logger != nullptr)
         *m_logger << value;
