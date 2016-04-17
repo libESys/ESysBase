@@ -33,4 +33,31 @@
 #pragma warning (default : 4985)
 #endif
 
+#include <esystest/testcasectrlexception.h>
+#include <esystest/stdlogger.h>
+#include <iostream>
 
+class GlobalInit
+{
+public:
+    GlobalInit();
+    ~GlobalInit();
+    int m_count;
+protected:
+    esystest::StdLogger m_logger;
+    esystest::TestCaseCtrlException m_test_ctrl;
+};
+
+GlobalInit::GlobalInit() : m_count(0)
+{
+    m_count++;
+    m_logger.Set(&std::cout);
+    esystest::Logger::Set(&m_logger);
+    esystest::TestCaseCtrl::Set(&m_test_ctrl);
+}
+
+GlobalInit::~GlobalInit()
+{
+}
+
+BOOST_GLOBAL_FIXTURE(GlobalInit);

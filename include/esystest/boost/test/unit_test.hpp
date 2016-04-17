@@ -57,7 +57,9 @@ protected:																\
 void test_name##Info::Invoke()											\
 {																		\
 	test_name test;														\
+    Start();                                                            \
 	test.TestMethod();													\
+    End();                                                              \
 }																		\
 																		\
 void test_name::TestMethod()											\
@@ -168,13 +170,13 @@ bool boost_require_equal(const L &left, const R &right, const char *file, int li
 #define BOOST_TEST_TOOL_IMPL( frwd_type, P, assertion_descr, TL, CT, L, R )     \
     { \
         bool esystest_result=::esystest::boost_test_tool_impl(L, R, P,__FILE__, __LINE__); \
-        ::esystest::report_assertion(esystest_result, __FILE__, __LINE__, TL, CT); \
+        ::esystest::report_assertion(esystest_result, __FILE__, __LINE__, TL, CT, assertion_descr); \
     }
 /**/
 
 #define BOOST_TEST_TOOL_IMPL_P( frwd_type, P, assertion_descr, TL, CT, L, R )     \
     { \
-        ::esystest::report_assertion((P), __FILE__, __LINE__, TL, CT); \
+        ::esystest::report_assertion((P), __FILE__, __LINE__, TL, CT, assertion_descr); \
     }
 /**/
 
@@ -190,7 +192,7 @@ bool boost_require_equal(const L &left, const R &right, const char *file, int li
 #define BOOST_CHECK_EQUAL( L, R )           BOOST_TEST_TOOL_IMPL( 0, \
     ::esystest::equal_impl_frwd(), "", ::esystest::CHECK, ::esystest::CHECK_EQUAL, (L), (R) )
 #define BOOST_REQUIRE_EQUAL( L, R )         BOOST_TEST_TOOL_IMPL( 0, \
-    ::esystest::equal_impl_frwd(), "", ::esystest::REQUIRE, ::esystest::CHECK_EQUAL, (L), (R) )
+    ::esystest::equal_impl_frwd(), #L " == " #R, ::esystest::REQUIRE, ::esystest::CHECK_EQUAL, (L), (R) )
 
 #define BOOST_WARN_NE( L, R )               BOOST_TEST_TOOL_IMPL( 0, \
     ::esystest::ne_impl(), "", ::esystest::WARN, ::esystest::CHECK_NE, (L), (R) )

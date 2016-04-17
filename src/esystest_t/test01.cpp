@@ -18,25 +18,6 @@
 #include "esystest_t/esystest_t_prec.h"
 #include <esys/inttypes.h>
 
-class GlobalInit
-{
-public:
-	GlobalInit();
-	~GlobalInit();
-	int m_count;
-};
-
-GlobalInit::GlobalInit() : m_count(0)
-{
-	m_count++;
-}
-
-GlobalInit::~GlobalInit()
-{
-}
-
-BOOST_GLOBAL_FIXTURE(GlobalInit);
-
 BOOST_AUTO_TEST_CASE(Test01)
 {
 	int32_t result;
@@ -45,6 +26,8 @@ BOOST_AUTO_TEST_CASE(Test01)
 	BOOST_REQUIRE_EQUAL(0, result);
 
 	BOOST_REQUIRE_NE(1, result);
+
+    BOOST_REQUIRE_EQUAL(1, result);
 
 	BOOST_REQUIRE_LT(-1, result);
 

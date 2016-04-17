@@ -12,18 +12,19 @@
  *
  *__legal_e__
  * \endcond
- * 
+ *
  */
 
 #include "esystest/esystest_prec.h"
 #include "esystest/report.h"
 #include "esystest/logger.h"
+#include "esystest/testcasectrl.h"
 #include "esystest/assert.h"
 
 namespace esystest
 {
 
-ESYSTEST_API bool report_assertion(bool result, const char *file_name, int line_num, ToolLevel tl, CheckType ct)
+ESYSTEST_API bool report_assertion(bool result, const char *file_name, int line_num, ToolLevel tl, CheckType ct, const char *desc)
 {
     //log_level    ll;
     char const*  prefix;
@@ -33,7 +34,7 @@ ESYSTEST_API bool report_assertion(bool result, const char *file_name, int line_
     if (result==true)
         tl = PASS;
 
-    switch (tl) 
+    switch (tl)
     {
         case PASS:
             //ll = log_successful_tests;
@@ -63,12 +64,14 @@ ESYSTEST_API bool report_assertion(bool result, const char *file_name, int line_
     {
         if ((tl != PASS) || (tl == PASS) && (logger->GetReportPass() == true))
         {
-            *logger << prefix << suffix << "\n";
+            *logger << prefix << suffix << " : ";
+            if (desc!=nullptr)
+                *logger << desc << "\n";
             *logger << "File: " << file_name << " Line: " << line_num << "\n";
         }
     }
 
-    switch (tl) 
+    switch (tl)
     {
     case PASS:
         //framework::assertion_result(AR_PASSED);
@@ -88,10 +91,33 @@ ESYSTEST_API bool report_assertion(bool result, const char *file_name, int line_
         //framework::test_unit_aborted(framework::current_test_case());
 
         //BOOST_TEST_IMPL_THROW(execution_aborted());
-        assert(false);
+        if (TestCaseCtrl::Get() != nullptr)
+            TestCaseCtrl::Get()->Assert();
+        else
+            assert(false);
     }
 
     return true;
+}
+
+Report *Report::s_report = nullptr;
+
+void Report::Set(Report *report)
+{
+    s_report = report;
+}
+
+Report *Report::Get()
+{
+    return s_report;
+}
+
+Report::Report()
+{
+}
+
+Report::~Report()
+{
 }
 
 }

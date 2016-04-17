@@ -66,6 +66,10 @@ public:
     int GetArgC();
     char **GetArgV();
 
+    void Start();
+    void End();
+    const char *GetName();
+
 	static void SetCurrent(TestSuite *current);
 	static TestSuite *GetCurrent();
 	static TestSuite *GetMaster();

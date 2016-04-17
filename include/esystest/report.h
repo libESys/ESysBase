@@ -12,7 +12,7 @@
  *
  *__legal_e__
  * \endcond
- * 
+ *
  */
 
 #ifndef __ESYSTEST_REPORT_H__
@@ -23,7 +23,26 @@
 namespace esystest
 {
 
-ESYSTEST_API bool report_assertion(bool result, const char *file_name, int line_num, ToolLevel tl, CheckType ct);
+ESYSTEST_API bool report_assertion(bool result, const char *file_name, int line_num
+    , ToolLevel tl, CheckType ct, const char *desc="");
+
+class ESYSTEST_API TestCaseInfo;
+
+class ESYSTEST_API Report
+{
+public:
+    Report();
+    virtual ~Report();
+
+    virtual void Start(TestCaseInfo *test_case_info) = 0;
+    virtual void End(TestCaseInfo *test_case_info) = 0;
+    virtual void Failed(TestCaseInfo *test_case_info) = 0;
+
+    static void Set(Report *report);
+    static Report *Get();
+protected:
+    static Report *s_report;
+};
 
 }
 

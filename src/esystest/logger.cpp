@@ -21,16 +21,16 @@
 namespace esystest
 {
 
-Logger *Logger::m_logger = nullptr;
+Logger *Logger::s_logger = nullptr;
 
 void Logger::Set(Logger *logger)
 {
-    m_logger = logger;
+    s_logger = logger;
 }
 
 Logger *Logger::Get()
 {
-    return m_logger;
+    return s_logger;
 }
 
 Logger::Logger(): m_report_pass(false)
@@ -49,6 +49,16 @@ void Logger::SetReportPass(bool report_pass)
 bool Logger::GetReportPass()
 {
     return m_report_pass;
+}
+
+Logger& Logger::operator<< (Logger& (*op)(Logger&))
+{
+    return (*op)(*this);
+}
+
+ESYSTEST_API Logger& endl(Logger &log)
+{
+    return log.endl();
 }
 
 }

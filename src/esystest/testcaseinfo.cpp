@@ -19,6 +19,8 @@
 #include "esystest/testcaseinfo.h"
 #include "esystest/testsuite.h"
 #include "esystest/order.h"
+#include "esystest/logger.h"
+#include "esystest/report.h"
 #include "esystest/assert.h"
 
 namespace esystest
@@ -61,7 +63,8 @@ void TestCaseInfo::Populate()
 }
 
 TestCaseInfo::TestCaseInfo(const char *name, const char *file, int line)
-	: m_name(name), m_file(file), m_line(line), m_test_suite(nullptr), m_prev(nullptr), m_next(nullptr), m_order(ORDER_NOT_SET)
+	: m_name(name), m_file(file), m_line(line), m_test_suite(nullptr), m_prev(nullptr)
+    , m_next(nullptr), m_order(ORDER_NOT_SET), m_result(0)
 {
 #ifdef ESYSTEST_DBG
     m_id = m_count;
@@ -93,6 +96,21 @@ const char *TestCaseInfo::GetFile()
 int TestCaseInfo::GetLine()
 {
 	return m_line;
+}
+
+const char *TestCaseInfo::GetName()
+{
+    return m_name;
+}
+
+void TestCaseInfo::SetResult(int result)
+{
+    m_result = result;
+}
+
+int TestCaseInfo::GetResult()
+{
+    return m_result;
 }
 
 void TestCaseInfo::SetSuite(TestSuite *test_suite)
@@ -133,6 +151,42 @@ void TestCaseInfo::SetOrder(unsigned int order)
 unsigned int TestCaseInfo::GetOrder()
 {
     return m_order;
+}
+
+void TestCaseInfo::Start()
+{
+    Report *report = Report::Get();
+    Logger *log = Logger::Get();
+
+    if (report != nullptr)
+        report->Start(this);
+    else if (log == nullptr)
+        return;
+    *log << "[Start: " << GetName() << "]" << esystest::endl;
+}
+
+void TestCaseInfo::End()
+{
+    Report *report = Report::Get();
+    Logger *log = Logger::Get();
+
+    if (report != nullptr)
+        report->End(this);
+    else if (log == nullptr)
+        return;
+    *log << "[End: " << GetName() << "]" << esystest::endl;
+}
+
+void TestCaseInfo::Failed()
+{
+    Report *report = Report::Get();
+    Logger *log = Logger::Get();
+
+    if (report != nullptr)
+        report->Failed(this);
+    else if (log == nullptr)
+        return;
+    *log << "[Failed: " << GetName() << "]" << esystest::endl;
 }
 
 #ifdef ESYSTEST_DBG

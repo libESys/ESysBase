@@ -33,6 +33,8 @@ public:
 
 	const char *GetFile();
 	int GetLine();
+    const char *GetName();
+
 	virtual void SetSuite(TestSuite *test_suite);
 	virtual TestSuite *GetSuite();
 	virtual void SetPrev(TestCaseInfo *prev);
@@ -44,6 +46,13 @@ public:
     unsigned int GetOrder();
 
 	virtual void Invoke() = 0;
+
+    void Start();
+    void End();
+    void Failed();
+
+    void SetResult(int result);
+    int GetResult();
 
     static TestCaseInfo *GetFirst();
     static TestCaseInfo *GetLast();
@@ -64,6 +73,7 @@ protected:
     static TestCaseInfo *m_last;
     static int m_count;
     unsigned int m_order;
+    int m_result;
 #ifdef ESYSTEST_DBG
     int m_id;
 #endif

@@ -19,6 +19,8 @@
 #include "esystest/esystest_prec.h"
 #include "esystest/testsuite.h"
 #include "esystest/testcaseinfo.h"
+#include "esystest/testcasectrl.h"
+#include "esystest/logger.h"
 
 namespace esystest
 {
@@ -163,6 +165,9 @@ void TestSuite::RunTestCases()
 {
 	TestSuite *cur;
 	TestCaseInfo *cur_test;
+    TestCaseCtrl *ctrl= TestCaseCtrl::Get();
+
+    Start();
 
 	cur = GetFirst();
 	while (cur != nullptr)
@@ -174,9 +179,22 @@ void TestSuite::RunTestCases()
 	cur_test = GetFirstCase();
 	while (cur_test != nullptr)
 	{
-		cur_test->Invoke();
+        if (ctrl != nullptr)
+        {
+            ctrl->BeforeTest();
+            ctrl->Invoke(cur_test);
+        }
+        else
+		    cur_test->Invoke();
+        if (ctrl != nullptr)
+            ctrl->AfterTest();
+        if (cur_test->GetResult() < 0)
+            cur_test->Failed();
+
 		cur_test = cur_test->GetNext();
 	}
+
+    End();
 }
 
 void TestSuite::Sort()
@@ -264,6 +282,33 @@ int TestSuite::GetArgC()
 char **TestSuite::GetArgV()
 {
     return m_argv;
+}
+
+const char *TestSuite::GetName()
+{
+    return m_name;
+}
+
+void TestSuite::Start()
+{
+    Logger *log = Logger::Get();
+    if (log == nullptr)
+        return;
+    *log << "[StartSuite: ";
+    if (GetName() != nullptr)
+        *log << GetName();
+    *log << "]" << esystest::endl;
+}
+
+void TestSuite::End()
+{
+    Logger *log = Logger::Get();
+    if (log == nullptr)
+        return;
+    *log << "[EndSuite: ";
+    if (GetName() != nullptr)
+        *log << GetName();
+    *log << "]" << esystest::endl;
 }
 
 }
