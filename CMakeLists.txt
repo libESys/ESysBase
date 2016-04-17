@@ -14,6 +14,7 @@ SET( LIBESYSTEST_CXX_SOURCES
     src/esystest/order.cpp
     src/esystest/report.cpp
     src/esystest/testcase.cpp
+    src/esystest/testcasectrl.cpp
     src/esystest/testcaseinfo.cpp
     src/esystest/testsuite.cpp
     src/esystest/types.cpp
