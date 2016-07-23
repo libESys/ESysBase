@@ -203,6 +203,7 @@
     <ClInclude Include="..\..\include\esystest\testcaseinfo.h" />
     <ClInclude Include="..\..\include\esystest\testsuite.h" />
     <ClInclude Include="..\..\include\esystest\types.h" />
+    <ClInclude Include="..\..\include\esystest\unit_test.h" />
     <ClInclude Include="..\..\include\esystest\version.h" />
   </ItemGroup>
   <ItemGroup>

@@ -127,6 +127,7 @@
       <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>
     </ClCompile>
     <ClCompile Include="..\..\src\esystest_t\test02.cpp" />
+    <ClCompile Include="..\..\src\esystest_t\test03.cpp" />
     <ClCompile Include="..\..\src\esystest_t\unittest.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeader>
