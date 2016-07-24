@@ -20,14 +20,14 @@
 
 BOOST_FIXTURE_TEST_CASE_WITH_DECOR(Test02, esystest::nil_t, *esystest::order(esystest::ORDER_LAST) )
 {
-	int32_t result;
+    int32_t result;
 
-	result = 0;
-	BOOST_REQUIRE_EQUAL(0, result);
+    result = 0;
+    BOOST_REQUIRE_EQUAL(0, result);
 
-	BOOST_REQUIRE_NE(1, result);
+    BOOST_REQUIRE_NE(1, result);
 
-	BOOST_REQUIRE_LT(-1, result);
+    BOOST_REQUIRE_LT(-1, result);
 
 }
 

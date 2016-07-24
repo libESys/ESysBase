@@ -20,26 +20,15 @@
 
 #include "esystest/esystest_defs.h"
 
-#ifdef ESYSTEST_USE_ESYS
-#include <esys/mutex.h>
-#include <esys/modulebase.h>
-#endif
 namespace esystest
 {
 
 class ESYSTEST_API TestCaseInfo;
 
 class ESYSTEST_API TestSuite
-#ifdef ESYSTEST_USE_ESYS
-    : public esys::ModuleBase
-#endif
 {
 public:
-#ifdef ESYSTEST_USE_ESYS
-    TestSuite(const esys::ObjectName &name = "");
-#else
     TestSuite(const char *name = nullptr);
-#endif
     virtual ~TestSuite();
 
     void SetFirst(TestSuite *first);
@@ -79,9 +68,8 @@ public:
 
     void Start();
     void End();
-#ifndef ESYSTEST_USE_ESYS
     const char *GetName();
-#endif
+
     static void SetCurrent(TestSuite *current);
     static TestSuite *GetCurrent();
     static TestSuite *GetMaster();
@@ -89,7 +77,7 @@ public:
 protected:
     static TestSuite *g_current;
     static TestSuite *g_master;
-    static TestSuite g_dft;
+    //static TestSuite g_dft;
     static unsigned int g_count;
 
     TestSuite *m_first;
@@ -103,10 +91,7 @@ protected:
     unsigned int m_child_suite_count;
     int m_argc;
     char **m_argv;
-#ifndef ESYSTEST_USE_ESYS
     const char *m_name;
-#endif
-
 };
 
 }

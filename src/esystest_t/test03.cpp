@@ -27,8 +27,8 @@ ESYSTEST_AUTO_TEST_CASE(Test03)
 
     ESYSTEST_REQUIRE_NE(1, result);
 
-    ESYSTEST_REQUIRE_EQUAL(1, result);
-
     ESYSTEST_REQUIRE_LT(-1, result);
+
+    ESYSTEST_MT_REQUIRE_LT(-1, result);
 
 }

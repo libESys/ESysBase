@@ -18,7 +18,11 @@
 #define BOOST_TEST_MAIN
 
 #ifdef WIN32
+
+#if ESYS_USE_VLD
 #include <vld.h>
+#endif
+
 #endif
 
 #ifdef _MSC_VER

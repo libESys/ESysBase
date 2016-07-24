@@ -18,6 +18,7 @@
 
 #include "esystest/esystest_prec.h"
 #include "esystest/testsuite.h"
+#include "esystest/mastertestsuite.h"
 #include "esystest/testcaseinfo.h"
 #include "esystest/testcasectrl.h"
 #include "esystest/logger.h"
@@ -25,7 +26,7 @@
 namespace esystest
 {
 
-TestSuite TestSuite::g_dft("MasterSuite");
+MasterTestSuite g_dft("MasterSuite");
 TestSuite *TestSuite::g_current = &g_dft;
 TestSuite *TestSuite::g_master = &g_dft;
 unsigned int TestSuite::g_count = 0;
@@ -47,16 +48,6 @@ TestSuite *TestSuite::GetMaster()
     return g_master;
 }
 
-
-#ifdef ESYSTEST_USE_ESYS
-TestSuite::TestSuite(const esys::ObjectName &name)
-    : ModuleBase(name), m_first(nullptr), m_last(nullptr), m_prev(nullptr), m_next(nullptr), m_first_child(nullptr)
-    , m_first_case(nullptr), m_last_case(nullptr), m_test_case_count(0), m_child_suite_count(0)
-    , m_argc(0), m_argv(nullptr)
-{
-    ++TestSuite::g_count;
-}
-#else
 TestSuite::TestSuite(const char *name)
     : m_first(nullptr), m_last(nullptr), m_prev(nullptr), m_next(nullptr), m_first_child(nullptr)
     , m_first_case(nullptr), m_last_case(nullptr), m_test_case_count(0), m_child_suite_count(0)
@@ -64,7 +55,7 @@ TestSuite::TestSuite(const char *name)
 {
     ++TestSuite::g_count;
 }
-#endif
+
 TestSuite::~TestSuite()
 {
 }

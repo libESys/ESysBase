@@ -21,14 +21,15 @@
 #include "esystest/esystest_defs.h"
 #include "esystest/testcaseinfo.h"
 #include "esystest/testcase.h"
-#include "esystest/testsuite.h"
+#include "esystest/mastertestsuite.h"
 #include "esystest/globalfixture.h"
 #include "esystest/report.h"
 #include "esystest/types.h"
 #include "esystest/order.h"
 
-#include <esys/mutex.h>
+#ifdef ESYSTEST_USE_ESYS
 #include <esys/mutexlocker.h>
+#endif
 
 #define ESYSTEST_FIXTURE_TEST_CASE_WITH_DECOR( test_name, F, decorators )  \
 class test_name ## Info : public esystest::TestCaseInfo					\
@@ -230,7 +231,11 @@ namespace esystest
     ::esystest::ge_impl(), "", ::esystest::REQUIRE, ::esystest::CHECK_GE, (L), (R) )
 
 // MT version
-#define ESYSTEST_LOCK ::esys::MutexLocker lock(* esystest::TestSuite::GetMaster().GetMutex())
+#ifdef ESYSTEST_USE_ESYS
+#define ESYSTEST_LOCK ::esys::MutexLocker lock( esystest::MasterTestSuite::Get().GetMutex())
+#else
+#define ESYSTEST_LOCK
+#endif
 
 #define ESYSTEST_MT_WARN_EQUAL( L, R ) \
     { \
@@ -366,14 +371,13 @@ namespace esystest
 #ifdef ESYSTEST_MAIN
 int main(int argc, char *argv[])
 {
-    esystest::TestSuite *master;
+    esystest::MasterTestSuite &master = esystest::MasterTestSuite::Get();
 
     esystest::TestCaseInfo::Populate();
 
-    master = esystest::TestSuite::GetMaster();
-    master->SetCommandLine(argc, argv);
-    master->Sort();
-    master->RunTestCases();
+    master.SetCommandLine(argc, argv);
+    master.Sort();
+    master.RunTestCases();
 
     return 0;
 }
