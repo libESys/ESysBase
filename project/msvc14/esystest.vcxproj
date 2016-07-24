@@ -75,8 +75,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ESYSTEST_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include;$(ESYS)\include;$(ESYS_CFG);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ESYSTEST_EXPORTS;ESYS_USE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -98,6 +98,8 @@
       <DataExecutionPrevention />
       <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalLibraryDirectories>$(ESYS)\lib\vc14_dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>esysd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy $(OutDir)$(TargetFileName) $(ESYS_DEV)\bin\vc14_dll</Command>
@@ -175,6 +177,7 @@
     <ClCompile Include="..\..\src\esystest\exception.cpp" />
     <ClCompile Include="..\..\src\esystest\globalfixture.cpp" />
     <ClCompile Include="..\..\src\esystest\logger.cpp" />
+    <ClCompile Include="..\..\src\esystest\mastertestsuite.cpp" />
     <ClCompile Include="..\..\src\esystest\order.cpp" />
     <ClCompile Include="..\..\src\esystest\report.cpp" />
     <ClCompile Include="..\..\src\esystest\stdlogger.cpp" />
@@ -194,8 +197,10 @@
     <ClInclude Include="..\..\include\esystest\globalfixture.h" />
     <ClInclude Include="..\..\include\esystest\inttypes.h" />
     <ClInclude Include="..\..\include\esystest\logger.h" />
+    <ClInclude Include="..\..\include\esystest\mastertestsuite.h" />
     <ClInclude Include="..\..\include\esystest\order.h" />
     <ClInclude Include="..\..\include\esystest\report.h" />
+    <ClInclude Include="..\..\include\esystest\setup.h" />
     <ClInclude Include="..\..\include\esystest\stdlogger.h" />
     <ClInclude Include="..\..\include\esystest\testcase.h" />
     <ClInclude Include="..\..\include\esystest\testcasectrl.h" />
