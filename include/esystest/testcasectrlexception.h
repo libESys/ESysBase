@@ -21,6 +21,8 @@
 #include "esystest/esystest_defs.h"
 #include "esystest/testcasectrl.h"
 
+#include <string>
+
 namespace esystest
 {
 
@@ -28,12 +30,16 @@ class ESYSTEST_API TestCaseCtrlException: public TestCaseCtrl
 {
 public:
     TestCaseCtrlException();
-	virtual ~TestCaseCtrlException();
+    virtual ~TestCaseCtrlException();
+
+    virtual esys::int32_t Init() override;
 
     virtual void BeforeTest();
     virtual void AfterTest();
     virtual void Invoke(TestCaseInfo *cur_test);
     virtual void Assert();
+protected:
+    std::string m_run_test;
 };
 
 }

@@ -18,6 +18,8 @@
 #include "esystest/esystest_prec.h"
 #include "esystest/testcasectrl.h"
 
+#include <string.h>
+
 namespace esystest
 {
 
@@ -34,12 +36,28 @@ void TestCaseCtrl::Set(TestCaseCtrl *ctrl)
 }
 
 
-TestCaseCtrl::TestCaseCtrl()
+TestCaseCtrl::TestCaseCtrl(): m_run_all(true)
 {
 }
 
 TestCaseCtrl::~TestCaseCtrl()
 {
+}
+
+void TestCaseCtrl::RunOneTest(char *name)
+{
+    m_run_all = false;
+    strcpy(m_test_case_name, name);
+}
+
+bool TestCaseCtrl::GetRunAll()
+{
+    return m_run_all;
+}
+
+char *TestCaseCtrl::GetTestToRun()
+{
+    return m_test_case_name;
 }
 
 }

@@ -167,6 +167,14 @@ void TestSuite::RunTestCases()
     TestSuite *cur;
     TestCaseInfo *cur_test;
     TestCaseCtrl *ctrl= TestCaseCtrl::Get();
+    esys::int32_t result;
+
+    if (ctrl != nullptr)
+    {
+        result = ctrl->Init();
+        if (result < 0)
+            return;
+    }
 
     Start();
 
