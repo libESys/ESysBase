@@ -19,6 +19,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
     </Filter>
+    <Filter Include="Source Files\boost">
+      <UniqueIdentifier>{7c49ca78-63ef-41f2-81b7-d7403afafb08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\esystest\esystest_dll.cpp">
@@ -54,17 +57,17 @@
     <ClCompile Include="..\..\src\esystest\stdlogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\esystest\testcasectrl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\esystest\testcasectrlexception.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\esystest\exception.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\esystest\mastertestsuite.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esystest\testcasectrlbase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esystest\boost\testcasectrl_boost.cpp">
+      <Filter>Source Files\boost</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,12 +116,6 @@
     <ClInclude Include="..\..\include\esystest\stdlogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\esystest\testcasectrl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\esystest\testcasectrlexception.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\esystest\exception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -130,6 +127,15 @@
     </ClInclude>
     <ClInclude Include="..\..\include\esystest\setup.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esystest\testcasectrlbase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esystest\testcasectrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esystest\boost\testcasectrl.h">
+      <Filter>Header Files\boost</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

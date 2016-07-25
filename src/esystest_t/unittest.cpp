@@ -37,7 +37,7 @@
 #pragma warning (default : 4985)
 #endif
 
-#include <esystest/testcasectrlexception.h>
+#include <esystest/testcasectrl.h>
 #include <esystest/stdlogger.h>
 #include <iostream>
 
@@ -49,7 +49,7 @@ public:
     int m_count;
 protected:
     esystest::StdLogger m_logger;
-    esystest::TestCaseCtrlException m_test_ctrl;
+    esystest::TestCaseCtrl m_test_ctrl;
 };
 
 GlobalInit::GlobalInit() : m_count(0)

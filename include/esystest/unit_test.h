@@ -377,7 +377,7 @@ int main(int argc, char *argv[])
 
     master.SetCommandLine(argc, argv);
     master.Sort();
-    master.RunTestCases();
+    master.Run();
 
     return 0;
 }

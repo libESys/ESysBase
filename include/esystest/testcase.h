@@ -26,14 +26,14 @@ namespace esystest
 class ESYSTEST_API TestCase
 {
 public:
-	TestCase();
-	virtual ~TestCase();
+    TestCase();
+    virtual ~TestCase();
 
-	virtual void TestMethod()=0;
-	static unsigned int GetCount();
+    virtual void TestMethod()=0;
+    static unsigned int GetCount();
 
 protected:
-	static unsigned int g_count;
+    static unsigned int g_count;
 };
 
 }

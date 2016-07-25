@@ -1,5 +1,5 @@
 /*!
- * \file esystest/testcasectrlexception.cpp
+ * \file esystest/boost/testcasectrl.cpp
  * \brief
  *
  * \cond
@@ -16,7 +16,7 @@
  */
 
 #include "esystest/esystest_prec.h"
-#include "esystest/testcasectrlexception.h"
+#include "esystest/boost/testcasectrl.h"
 #include "esystest/testcaseinfo.h"
 #include "esystest/mastertestsuite.h"
 #include "esystest/exception.h"
@@ -26,60 +26,47 @@
 #include <iostream>
 
 #include <boost/program_options/cmdline.hpp>
-#include <boost/program_options/options_description.hpp>
-#include <boost/program_options/variables_map.hpp>
 #include <boost/program_options/parsers.hpp>
-
-namespace po = boost::program_options;
 
 namespace esystest
 {
 
-TestCaseCtrlException::TestCaseCtrlException() : TestCaseCtrl()
+namespace boost
+{
+
+TestCaseCtrl::TestCaseCtrl()
+    : TestCaseCtrlBase(), m_desc("ESysTest options"), m_is_parsed(false)
+    , m_verbose(-1), m_log_trace(false)
 {
 }
 
-TestCaseCtrlException::~TestCaseCtrlException()
+TestCaseCtrl::~TestCaseCtrl()
 {
 }
 
-esys::int32_t TestCaseCtrlException::Init()
+esys::int32_t TestCaseCtrl::Init()
 {
-    po::variables_map vm;
-    po::options_description desc("Allowed options");
-
-    desc.add_options()
+    m_desc.add_options()
         ("help", "produce help message")
-        ("run_test", po::value<std::string>(&m_run_test), "give the name of the test to run");
+        ("run_test", po::value<std::string>(&m_run_test), "give the name of the test to run")
+        ("list", "list all unit tests")
+        ;
 
-    po::store(po::parse_command_line(MasterTestSuite::Get().GetArgC(), MasterTestSuite::Get().GetArgV(), desc), vm);
-    po::notify(vm);
+    AddOptions(m_desc);
 
-    if (vm.count("help"))
-    {
-        std::cout << desc << "\n";
-        return -1;
-    }
-    else
-    {
-        if (vm.count("run_test"))
-        {
-            RunOneTest((char *)m_run_test.c_str());
-        }
-    }
-    return 0;
+    return Parse();
 }
 
-void TestCaseCtrlException::BeforeTest()
+void TestCaseCtrl::BeforeTest()
 {
 
 }
 
-void TestCaseCtrlException::AfterTest()
+void TestCaseCtrl::AfterTest()
 {
 }
 
-void TestCaseCtrlException::Invoke(TestCaseInfo *cur_test)
+void TestCaseCtrl::Invoke(TestCaseInfo *cur_test)
 {
     bool succeeded = true;
     bool run_test = true;
@@ -114,9 +101,49 @@ void TestCaseCtrlException::Invoke(TestCaseInfo *cur_test)
         cur_test->SetResult(0);
 }
 
-void TestCaseCtrlException::Assert()
+void TestCaseCtrl::Assert()
 {
     throw Exception(Exception::TEST_FAILED);
+}
+
+void TestCaseCtrl::AddOptions(po::options_description &desc)
+{
+}
+
+int32_t TestCaseCtrl::Parse()
+{
+    int32_t result = 0;
+
+    po::store(po::parse_command_line(MasterTestSuite::Get().GetArgC(), MasterTestSuite::Get().GetArgV(), m_desc), m_vm);
+    po::notify(m_vm);
+
+    m_is_parsed = true;
+
+    if (m_vm.count("help"))
+    {
+        std::cout << m_desc << "\n";
+        return -1;
+    }
+    else
+    {
+        if (m_vm.count("run_test"))
+        {
+            RunOneTest((char *)m_run_test.c_str());
+        }
+        else if (m_vm.count("list"))
+        {
+            PrintList();
+            result = -1;
+        }
+    }
+    return result;
+}
+
+bool TestCaseCtrl::IsParsed()
+{
+    return m_is_parsed;
+}
+
 }
 
 }

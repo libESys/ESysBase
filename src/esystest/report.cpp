@@ -18,7 +18,7 @@
 #include "esystest/esystest_prec.h"
 #include "esystest/report.h"
 #include "esystest/logger.h"
-#include "esystest/testcasectrl.h"
+#include "esystest/testcasectrlbase.h"
 #include "esystest/assert.h"
 
 namespace esystest
@@ -91,8 +91,8 @@ ESYSTEST_API bool report_assertion(bool result, const char *file_name, int line_
         //framework::test_unit_aborted(framework::current_test_case());
 
         //BOOST_TEST_IMPL_THROW(execution_aborted());
-        if (TestCaseCtrl::Get() != nullptr)
-            TestCaseCtrl::Get()->Assert();
+        if (TestCaseCtrlBase::Get() != nullptr)
+            TestCaseCtrlBase::Get()->Assert();
         else
             assert(false);
     }

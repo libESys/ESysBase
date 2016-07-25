@@ -168,6 +168,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\esystest\boost\testcasectrl_boost.cpp" />
     <ClCompile Include="..\..\src\esystest\esystest_dll.cpp" />
     <ClCompile Include="..\..\src\esystest\esystest_prec.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -182,14 +183,14 @@
     <ClCompile Include="..\..\src\esystest\report.cpp" />
     <ClCompile Include="..\..\src\esystest\stdlogger.cpp" />
     <ClCompile Include="..\..\src\esystest\testcase.cpp" />
-    <ClCompile Include="..\..\src\esystest\testcasectrl.cpp" />
-    <ClCompile Include="..\..\src\esystest\testcasectrlexception.cpp" />
+    <ClCompile Include="..\..\src\esystest\testcasectrlbase.cpp" />
     <ClCompile Include="..\..\src\esystest\testcaseinfo.cpp" />
     <ClCompile Include="..\..\src\esystest\testsuite.cpp" />
     <ClCompile Include="..\..\src\esystest\types.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\esystest\assert.h" />
+    <ClInclude Include="..\..\include\esystest\boost\testcasectrl.h" />
     <ClInclude Include="..\..\include\esystest\boost\test\unit_test.hpp" />
     <ClInclude Include="..\..\include\esystest\esystest_defs.h" />
     <ClInclude Include="..\..\include\esystest\esystest_prec.h" />
@@ -204,7 +205,7 @@
     <ClInclude Include="..\..\include\esystest\stdlogger.h" />
     <ClInclude Include="..\..\include\esystest\testcase.h" />
     <ClInclude Include="..\..\include\esystest\testcasectrl.h" />
-    <ClInclude Include="..\..\include\esystest\testcasectrlexception.h" />
+    <ClInclude Include="..\..\include\esystest\testcasectrlbase.h" />
     <ClInclude Include="..\..\include\esystest\testcaseinfo.h" />
     <ClInclude Include="..\..\include\esystest\testsuite.h" />
     <ClInclude Include="..\..\include\esystest\types.h" />

@@ -20,7 +20,7 @@
 #include "esystest/testsuite.h"
 #include "esystest/mastertestsuite.h"
 #include "esystest/testcaseinfo.h"
-#include "esystest/testcasectrl.h"
+#include "esystest/testcasectrlbase.h"
 #include "esystest/logger.h"
 
 namespace esystest
@@ -162,12 +162,10 @@ TestCaseInfo *TestSuite::GetLastCase()
     return m_last_case;
 }
 
-void TestSuite::RunTestCases()
+void TestSuite::Run()
 {
-    TestSuite *cur;
-    TestCaseInfo *cur_test;
-    TestCaseCtrl *ctrl= TestCaseCtrl::Get();
-    esys::int32_t result;
+    int32_t result;
+    TestCaseCtrlBase *ctrl = TestCaseCtrlBase::Get();
 
     if (ctrl != nullptr)
     {
@@ -176,14 +174,18 @@ void TestSuite::RunTestCases()
             return;
     }
 
-    Start();
+    // This is the default behavior if there is TestCase Controller
+    RunTestCases();
+}
 
-    cur = GetFirst();
-    while (cur != nullptr)
-    {
-        cur->RunTestCases();
-        cur = m_first->GetNext();
-    }
+void TestSuite::RunTestCases()
+{
+    TestSuite *cur;
+    TestCaseInfo *cur_test;
+    TestCaseCtrlBase *ctrl= TestCaseCtrlBase::Get();
+    esys::int32_t result;
+
+    Start();
 
     cur_test = GetFirstCase();
     while (cur_test != nullptr)
@@ -203,7 +205,46 @@ void TestSuite::RunTestCases()
         cur_test = cur_test->GetNext();
     }
 
+    cur = GetFirst();
+    while (cur != nullptr)
+    {
+        cur->RunTestCases();
+        cur = m_first->GetNext();
+    }
+
     End();
+}
+
+void TestSuite::ListTestCases()
+{
+    TestSuite *cur;
+    TestCaseInfo *cur_test;
+    TestCaseCtrlBase *ctrl = TestCaseCtrlBase::Get();
+    esys::int32_t result;
+    Logger *log = Logger::Get();
+
+    if (log == nullptr)
+        return;
+
+    *log << "TestSuite " << this->GetName() << ":" << endl;
+    cur_test = GetFirstCase();
+    while (cur_test != nullptr)
+    {
+        *log << cur_test->GetName() << endl;
+        cur_test = cur_test->GetNext();
+    }
+
+    *log << "TestSuite " << this->GetName() << " done." << endl << endl;
+
+    cur = GetFirst();
+    while (cur != nullptr)
+    {
+        cur->ListTestCases();
+        cur = m_first->GetNext();
+    }
+
+
+
 }
 
 void TestSuite::Sort()

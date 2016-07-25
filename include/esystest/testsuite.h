@@ -54,7 +54,10 @@ public:
     void SetLastCase(TestCaseInfo *last_case);
     TestCaseInfo *GetLastCase();
 
+    void Run();
     void RunTestCases();
+    void ListTestCases();
+
     void Sort();
     void SortTestCaseInfo();
     void Swap(TestCaseInfo *test1, TestCaseInfo *test2);
