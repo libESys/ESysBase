@@ -4,7 +4,7 @@
  *
  * \cond
  *__legal_b__
- * 
+ *
  * Copyright (c) 2015-2016 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
@@ -23,7 +23,8 @@
 #pragma warning (disable : 4985)
 #endif
 
-#include <boost/test/unit_test.hpp>
+//#include <boost/test/unit_test.hpp>
+#include "esystest/unit_test.h"
 
 #ifdef _MSC_VER
 #pragma warning (default : 4996)

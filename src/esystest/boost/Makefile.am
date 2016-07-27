@@ -11,7 +11,7 @@
 ##
 ## ****************************************************************************
 ##
-##  Makefile.am
+##  src/esystest/boost/Makefile.am
 ##  Process this file with automake to produce a Makefile.in file.
 ##
 ##  Original Author: Michel Gillet, 2016-07-26
@@ -29,42 +29,21 @@
 
 include $(top_srcdir)/config/Make-rules
 
-ACLOCAL_AMFLAGS = -I m4
+noinst_LTLIBRARIES = libesystest_boost.la
+libesystest_boost_la_CXXFLAGS = $(AM_CXXFLAGS) -std=c++11
+libesystest_boost_la_LDFLAGS = $(EXTRA_LD_CONFIG) \
+    -lboost_filesystem \
+    -lboost_system \
+    -lboost_date_time
 
-SUBDIRS = \
-    src \
-    .
+H_FILES =
 
-INST_FILES = \
-    readme.txt \
-    doc
+CXX_FILES = \
+    testcasectrl_boost.cpp
+
+libesystest_boost_la_SOURCES = $(H_FILES) $(CXX_FILES) 
+
+INCLUDE_DIR = $(prefix)/include/esystest/boost
 
 
-
-install-data-local:
-    @$(NORMAL_INSTALL) \
-    for file in $(INST_FILES); do \
-      d=$(srcdir); \
-      if test -d $$d/$$file; then \
-        test -d $(prefix)/$$file \
-        || cp -pr $$d/$$file $(prefix) || :; \
-      else \
-        test -f $(prefix)/$$file \
-        || cp -p $$d/$$file $(prefix)/$$file || :; \
-      fi; \
-    done
-
-uninstall-local:
-    @$(NORMAL_UNINSTALL) \
-    w=`pwd`; cd $(srcdir); s=`pwd`; cd $$w; \
-    if test $(prefix) != $$s; then \
-      for file in $(INST_FILES); do \
-        d=$(srcdir); \
-        if test -d $$d/$$file; then \
-          rm -rf $(prefix)/$$file; \
-        else \
-          rm -f $(prefix)/$$file; \
-        fi; \
-      done; \
-    fi
 

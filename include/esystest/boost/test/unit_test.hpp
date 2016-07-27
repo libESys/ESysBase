@@ -19,6 +19,8 @@
 #define __ESYSTEST_BOOST_TEST_UNIT_TEST_HPP__
 
 #include "esystest/esystest_defs.h"
+#include "esystest/unit_test.h"
+
 /*#include "esystest/testcaseinfo.h"
 #include "esystest/testcase.h"
 #include "esystest/testsuite.h"

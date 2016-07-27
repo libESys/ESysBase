@@ -1,8 +1,10 @@
 #! /bin/sh
 
+echo "** ESysTest bootstrap **"
+
 aclocal -I m4
 libtoolize --copy --force
 automake -ac
 autoconf
 
-# Taf!
+

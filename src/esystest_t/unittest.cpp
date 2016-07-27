@@ -15,7 +15,7 @@
  *
  */
 
-#define BOOST_TEST_MAIN
+#define ESYSTEST_MAIN
 
 #ifdef WIN32
 
@@ -25,17 +25,7 @@
 
 #endif
 
-#ifdef _MSC_VER
-#pragma warning (disable : 4996)
-#pragma warning (disable : 4985)
-#endif
-
-#include <boost/test/unit_test.hpp>
-
-#ifdef _MSC_VER
-#pragma warning (default : 4996)
-#pragma warning (default : 4985)
-#endif
+#include <esystest/unit_test.h>
 
 #include <esystest/testcasectrl.h>
 #include <esystest/stdlogger.h>
@@ -64,4 +54,4 @@ GlobalInit::~GlobalInit()
 {
 }
 
-BOOST_GLOBAL_FIXTURE(GlobalInit);
+ESYSTEST_GLOBAL_FIXTURE(GlobalInit);
