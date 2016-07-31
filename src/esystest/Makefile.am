@@ -29,12 +29,19 @@
 
 include $(top_srcdir)/config/Make-rules
 
+
+    
 lib_LTLIBRARIES = libesystest.la
 libesystest_la_CXXFLAGS = $(AM_CXXFLAGS)
 libesystest_la_LDFLAGS = $(EXTRA_LD_CONFIG)  \
         -lboost_program_options \
         ../../$(ESYS_LIB)/libesys.la
 
+LIB_NAME="esys"
+        
+registermake-local:
+	$(ESYSBUILD_reglib)
+        
 H_FILES =
 
 CXX_FILES = \

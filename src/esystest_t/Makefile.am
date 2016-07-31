@@ -29,10 +29,6 @@
 
 include $(top_srcdir)/config/Make-rules
 
-##lib_LTLIBRARIES = libesystest_tc.la
-##libesystest_tc_la_CXXFLAGS = $(AM_CXXFLAGS)
-##libesystest_tc_la_LDFLAGS = $(EXTRA_LD_CONFIG)        
-
 bin_PROGRAMS = esystest_t
 esystest_t_CXXFLAGS = $(AM_CXXFLAGS) -DBOOST_ALL_DYN_LINK -std=c++11 \
     -I$(top_srcdir)/../../$(ESYS)/include
@@ -58,6 +54,9 @@ CXX_FILES = \
 esystest_t_SOURCES = $(H_FILES) $(CXX_FILES) 
 
 INCLUDE_DIR = $(prefix)/include/esystest_t
+
+registermake-local:
+	$(ESYSBUILD_regmake)
 
 install-data-local:
     @$(NORMAL_INSTALL) \

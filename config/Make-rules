@@ -3,6 +3,8 @@ include $(ESYSCFG)/esyscfg.mk
 DEFS = -I.
 AM_CPPFLAGS = $(EXTRA_INCLUDES) -I$(ESYSCFG) -std=c++11 -I$(top_builddir)/include -I$(top_srcdir)/include \
     -I$(top_srcdir)/../esys/include -I$(top_builddir)/../esys/include 
+    
+LIB_NAME=esystest
 
 
 
