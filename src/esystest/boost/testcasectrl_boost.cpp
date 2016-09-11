@@ -110,6 +110,16 @@ void TestCaseCtrl::AddOptions(po::options_description &desc)
 {
 }
 
+int32_t TestCaseCtrl::HandleActions()
+{
+    return 1;
+}
+
+int32_t TestCaseCtrl::HandleSwitches()
+{
+    return 0;
+}
+
 int32_t TestCaseCtrl::Parse()
 {
     int32_t result = 0;
@@ -118,6 +128,13 @@ int32_t TestCaseCtrl::Parse()
     po::notify(m_vm);
 
     m_is_parsed = true;
+
+    result = HandleSwitches();
+    if (result < 0)
+        return -1;
+    result = HandleActions();
+    if (result <= 0)
+        return result;
 
     if (m_vm.count("help"))
     {

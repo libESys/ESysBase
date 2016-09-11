@@ -49,6 +49,8 @@ public:
 
     virtual void AddOptions(po::options_description &desc);
     virtual int32_t Parse();
+    virtual int32_t HandleActions();
+    virtual int32_t HandleSwitches();
     bool IsParsed();
 protected:
     std::string m_run_test;
