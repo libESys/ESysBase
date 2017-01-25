@@ -32,7 +32,7 @@ public:
     TestCaseCtrlBase();
     virtual ~TestCaseCtrlBase();
 
-    virtual esys::int32_t Init() = 0;
+    virtual int32_t Init() = 0;
 
     virtual void BeforeTest() = 0;
     virtual void AfterTest() = 0;

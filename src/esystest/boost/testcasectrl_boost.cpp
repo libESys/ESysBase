@@ -44,7 +44,7 @@ TestCaseCtrl::~TestCaseCtrl()
 {
 }
 
-esys::int32_t TestCaseCtrl::Init()
+int32_t TestCaseCtrl::Init()
 {
     m_desc.add_options()
         ("help", "produce help message")

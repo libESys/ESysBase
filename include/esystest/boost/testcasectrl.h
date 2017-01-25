@@ -40,7 +40,7 @@ public:
     TestCaseCtrl();
     virtual ~TestCaseCtrl();
 
-    virtual esys::int32_t Init() override;
+    virtual int32_t Init() override;
 
     virtual void BeforeTest() override;
     virtual void AfterTest() override;

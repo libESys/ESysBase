@@ -217,7 +217,7 @@ void TestSuite::RunTestCases()
     TestSuite *cur;
     TestCaseInfo *cur_test;
     TestCaseCtrlBase *ctrl= TestCaseCtrlBase::Get();
-    esys::int32_t result;
+    int32_t result;
 
     Start();
 
@@ -254,7 +254,7 @@ void TestSuite::ListTestCases()
     TestSuite *cur;
     TestCaseInfo *cur_test;
     TestCaseCtrlBase *ctrl = TestCaseCtrlBase::Get();
-    esys::int32_t result;
+    int32_t result;
     Logger *log = Logger::Get();
 
     if (log == nullptr)

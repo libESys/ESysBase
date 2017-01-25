@@ -11,16 +11,34 @@ SET( LIBESYSTEST_CXX_SOURCES
     src/esystest/esystest_prec.cpp
     src/esystest/globalfixture.cpp
     src/esystest/logger.cpp
+    src/esystest/mastertestsuite.cpp
     src/esystest/order.cpp
     src/esystest/report.cpp
     src/esystest/testcase.cpp
-    src/esystest/testcasectrl.cpp
+    src/esystest/testcasectrlbase.cpp
     src/esystest/testcaseinfo.cpp
     src/esystest/testsuite.cpp
     src/esystest/types.cpp
 )
 
 if (DEFINED ESYSTEST_BUILD_VHW)
+SET( LIBESYSTEST_CXX_SOURCES
+    ${LIBESYSTEST_CXX_SOURCES}
+    src/esystest/exception.cpp
+    src/esystest/stdlogger.cpp
+)
+endif()
+
+SET( LIBESYSTEST_BOOST_CXX_SOURCES
+    src/esystest/boost/testcasectrl_boost.cpp
+)
+
+if (DEFINED ESYSTEST_BUILD_VHW)
+    set(LIBESYSTEST_CXX_SOURCES
+        ${LIBESYSTEST_CXX_SOURCES}
+        ${LIBESYSTEST_BOOST_CXX_SOURCES}
+    )
+
     add_library (esystest SHARED ${LIBESYSTEST_CXX_SOURCES})
 else ()
     add_library (esystest STATIC ${LIBESYSTEST_CXX_SOURCES})
