@@ -64,10 +64,13 @@ endif ()
 #    ral
 #    pal)
 
-if ( ${MOE_BOARD} STREQUAL "virtualhw" )
+if (DEFINED ESYSTEST_BUILD_VHW)
 #    target_link_libraries( cal
 #        ral
 #        pal)
+    add_dependencies( esystest
+        esys
+    )
 else ()
 #    target_link_libraries( cal
 #        ral
