@@ -32,51 +32,51 @@
 #endif
 
 #define ESYSTEST_FIXTURE_TEST_CASE_WITH_DECOR( test_name, F, decorators )  \
-class test_name ## Info : public esystest::TestCaseInfo					\
-{																		\
-public:																	\
-	test_name ## Info()													\
-		: esystest::TestCaseInfo(#test_name,__FILE__, __LINE__)			\
-	{																	\
-		esystest::TestSuite *test_suite;								\
-		test_suite=esystest::TestSuite::GetCurrent();					\
+class test_name ## Info : public esystest::TestCaseInfo                 \
+{                                                                       \
+public:                                                                 \
+    test_name ## Info()                                                 \
+        : esystest::TestCaseInfo(#test_name,__FILE__, __LINE__)         \
+    {                                                                   \
+        esystest::TestSuite *test_suite;                                \
+        test_suite=esystest::TestSuite::GetCurrent();                   \
         SetSuite(test_suite);                                           \
         *this decorators;                                               \
-	}																	\
-	virtual ~ test_name ## Info() {}									\
-	virtual void Invoke();												\
- };																		\
+    }                                                                   \
+    virtual ~ test_name ## Info() {}                                    \
+    virtual void Invoke();                                              \
+ };                                                                     \
                                                                         \
-test_name ## Info g_test_case_ ## test_name ## _info;					\
-																		\
-class test_name : public F, public esystest::TestCase					\
-{																		\
-public:																	\
-	test_name() : F(), esystest::TestCase() {}							\
-	virtual ~test_name() {}												\
-	virtual void TestMethod();											\
-protected:																\
-};																		\
-																		\
-void test_name##Info::Invoke()											\
-{																		\
-	test_name test;														\
+test_name ## Info g_test_case_ ## test_name ## _info;                   \
+                                                                        \
+class test_name : public F, public esystest::TestCase                   \
+{                                                                       \
+public:                                                                 \
+    test_name() : F(), esystest::TestCase() {}                          \
+    virtual ~test_name() {}                                             \
+    virtual void TestMethod();                                          \
+protected:                                                              \
+};                                                                      \
+                                                                        \
+void test_name##Info::Invoke()                                          \
+{                                                                       \
+    test_name test;                                                     \
     Start();                                                            \
-	test.TestMethod();													\
+    test.TestMethod();                                                  \
     End();                                                              \
-}																		\
-																		\
-void test_name::TestMethod()											\
+}                                                                       \
+                                                                        \
+void test_name::TestMethod()                                            \
 /**/
 
 #define ESYSTEST_FIXTURE_TEST_CASE_NO_DECOR( test_name, F )                \
 ESYSTEST_FIXTURE_TEST_CASE_WITH_DECOR( test_name, F,                       \
-    * ::esystest::nil_t() )												\
+    * ::esystest::nil_t() )                                             \
 /**/
 
 #define ESYSTEST_AUTO_TEST_CASE_NO_DECOR( test_name )                      \
     ESYSTEST_FIXTURE_TEST_CASE_NO_DECOR( test_name,                        \
-        ::esystest::nil_t )												\
+        ::esystest::nil_t )                                             \
 /**/
 
 #define ESYSTEST_AUTO_TEST_CASE( test_name )                               \
@@ -256,95 +256,95 @@ namespace esystest
     }
 
 #define ESYSTEST_MT_WARN_NE( L, R ) \
-	{ \
-		ESYSTEST_LOCK; \
-		ESYSTEST_WARN_NE(L, R); \
-	}
+    { \
+        ESYSTEST_LOCK; \
+        ESYSTEST_WARN_NE(L, R); \
+    }
 
 #define ESYSTEST_MT_CHECK_NE( L, R ) \
-	{ \
-		ESYSTEST_LOCK; \
-		ESYSTEST_CHECK_NE(L, R); \
-	}
+    { \
+        ESYSTEST_LOCK; \
+        ESYSTEST_CHECK_NE(L, R); \
+    }
 
 #define ESYSTEST_MT_REQUIRE_NE( L, R ) \
-	{ \
-		ESYSTEST_LOCK; \
-		ESYSTEST_REQUIRE_NE(L, R); \
-	}
+    { \
+        ESYSTEST_LOCK; \
+        ESYSTEST_REQUIRE_NE(L, R); \
+    }
 
 #define ESYSTEST_MT_WARN_LT( L, R ) \
-	{ \
-		ESYSTEST_LOCK; \
-		ESYSTEST_WARN_LT(L, R); \
-	}
+    { \
+        ESYSTEST_LOCK; \
+        ESYSTEST_WARN_LT(L, R); \
+    }
 
 
 #define ESYSTEST_MT_CHECK_LT( L, R ) \
-	{ \
-		ESYSTEST_LOCK; \
-		ESYSTEST_CHECK_LT(L, R); \
-	}
+    { \
+        ESYSTEST_LOCK; \
+        ESYSTEST_CHECK_LT(L, R); \
+    }
 
 #define ESYSTEST_MT_REQUIRE_LT( L, R ) \
-	{ \
-		ESYSTEST_LOCK; \
-		ESYSTEST_REQUIRE_LT(L, R); \
-	}
+    { \
+        ESYSTEST_LOCK; \
+        ESYSTEST_REQUIRE_LT(L, R); \
+    }
 
 #define ESYSTEST_MT_WARN_LE( L, R ) \
-	{ \
-		ESYSTEST_LOCK; \
-		ESYSTEST_WARN_LE(L, R); \
-	}
+    { \
+        ESYSTEST_LOCK; \
+        ESYSTEST_WARN_LE(L, R); \
+    }
 
 #define ESYSTEST_MT_CHECK_LE( L, R ) \
-	{ \
-		ESYSTEST_LOCK; \
-		ESYSTEST_CHECK_LE(L, R); \
-	}
+    { \
+        ESYSTEST_LOCK; \
+        ESYSTEST_CHECK_LE(L, R); \
+    }
 
 #define ESYSTEST_MT_REQUIRE_LE( L, R ) \
-	{ \
-		ESYSTEST_LOCK; \
-		ESYSTEST_REQUIRE_LE(L, R); \
-	}
+    { \
+        ESYSTEST_LOCK; \
+        ESYSTEST_REQUIRE_LE(L, R); \
+    }
 
 #define ESYSTEST_MT_WARN_GT( L, R ) \
-	{ \
-		ESYSTEST_LOCK; \
-		ESYSTEST_WARN_GT(L, R); \
-	}
+    { \
+        ESYSTEST_LOCK; \
+        ESYSTEST_WARN_GT(L, R); \
+    }
 
 #define ESYSTEST_MT_CHECK_GT( L, R ) \
-	{ \
-		ESYSTEST_LOCK; \
-		ESYSTEST_CHECK_GT(L, R); \
-	}
+    { \
+        ESYSTEST_LOCK; \
+        ESYSTEST_CHECK_GT(L, R); \
+    }
 
 #define ESYSTEST_MT_REQUIRE_GT( L, R ) \
-	{ \
-		ESYSTEST_LOCK; \
-		ESYSTEST_REQUIRE_GT(L, R); \
-	}
+    { \
+        ESYSTEST_LOCK; \
+        ESYSTEST_REQUIRE_GT(L, R); \
+    }
 
 #define ESYSTEST_MT_WARN_GE( L, R ) \
-	{ \
-		ESYSTEST_LOCK; \
-		ESYSTEST_WARN_GE(L, R); \
-	}
+    { \
+        ESYSTEST_LOCK; \
+        ESYSTEST_WARN_GE(L, R); \
+    }
 
 #define ESYSTEST_MT_CHECK_GE( L, R ) \
-	{ \
-		ESYSTEST_LOCK; \
-		ESYSTEST_CHECK_GE(L, R); \
-	}
+    { \
+        ESYSTEST_LOCK; \
+        ESYSTEST_CHECK_GE(L, R); \
+    }
 
 #define ESYSTEST_MT_REQUIRE_GE( L, R ) \
-	{ \
-		ESYSTEST_LOCK; \
-		ESYSTEST_REQUIRE_GE(L, R); \
-	}
+    { \
+        ESYSTEST_LOCK; \
+        ESYSTEST_REQUIRE_GE(L, R); \
+    }
 
 #define ESYSTEST_MT_WARN( C ) \
         { \
@@ -367,6 +367,23 @@ namespace esystest
 #define ESYSTEST_GLOBAL_FIXTURE( F ) \
 ::esystest::GlobalFixture_t<F> g_ ## gf ## F \
 /**/
+
+#ifdef ESYSTEST_USE_ESYS
+#define ESYSTEST_TASK_BEGIN \
+std::exception_ptr esystest_task_eptr; \
+try \
+{
+
+#define ESYSTEST_TASK_END \
+} \
+catch (const Exception &e) \
+{ \
+    esystest_task_eptr=std::current_exception(); \
+    \
+}
+
+#else
+#endif
 
 #ifdef ESYSTEST_MAIN
 int main(int argc, char *argv[])

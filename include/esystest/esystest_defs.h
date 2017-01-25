@@ -38,7 +38,9 @@ namespace esystest
 
 enum ToolLevel
 {
-    WARN, CHECK, REQUIRE, PASS
+    WARN, CHECK, REQUIRE, PASS,
+    TOOLLEVEL_COUNT
+
 };
 
 enum CheckType
@@ -57,7 +59,8 @@ enum CheckType
     CHECK_BITWISE_EQUAL,
     CHECK_PRED_WITH_ARGS,
     CHECK_EQUAL_COLL,
-    CHECK_BUILT_ASSERTION
+    CHECK_BUILT_ASSERTION,
+    CHECKTYPE_COUNT
 };
 
 }

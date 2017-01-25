@@ -31,6 +31,29 @@ TestSuite *TestSuite::g_current = &g_dft;
 TestSuite *TestSuite::g_master = &g_dft;
 unsigned int TestSuite::g_count = 0;
 
+int TestSuite::g_total_success_count = 0;
+int TestSuite::g_total_failure_count = 0;
+
+int TestSuite::GetTotalSuccessCount()
+{
+    return g_total_success_count;
+}
+
+int TestSuite::GetTotalFailureCount()
+{
+    return g_total_failure_count;
+}
+
+void TestSuite::IncTotalSuccessCount()
+{
+    ++g_total_success_count;
+}
+
+void TestSuite::IncTotalFailureCount()
+{
+    ++g_total_failure_count;
+}
+
 void TestSuite::SetCurrent(TestSuite *current)
 {
     g_current = current;
@@ -54,6 +77,17 @@ TestSuite::TestSuite(const char *name)
     , m_argc(0), m_argv(nullptr), m_name(name)
 {
     ++TestSuite::g_count;
+
+#ifdef ESYSTEST_META
+    for (idx0 = 0; idx0 < CHECKTYPE_COUNT; ++idx0)
+    {
+        for (idx1 = 0; idx1 < TOOLLEVEL_COUNT; ++idx1)
+        {
+            m_success_count_array[idx0][idx1] = 0;
+            m_failure_count_array[idx0][idx1] = 0;
+        }
+    }
+#endif
 }
 
 TestSuite::~TestSuite()
@@ -316,6 +350,76 @@ unsigned int TestSuite::GetTestCaseCount()
 unsigned int TestSuite::GetChildSuiteCount()
 {
     return m_child_suite_count;
+}
+
+int TestSuite::GetSuccessCount()
+{
+    return m_success_count;
+}
+
+int TestSuite::GetFailureCount()
+{
+    return m_failure_count;
+}
+
+void TestSuite::IncSuccessCount()
+{
+    ++m_success_count;
+    IncTotalSuccessCount();
+}
+
+void TestSuite::IncFailureCount()
+{
+    ++m_failure_count;
+    IncTotalFailureCount();
+}
+
+int TestSuite::GetSuccessCountArray(CheckType check_type, ToolLevel tool_level)
+{
+#ifdef ESYSTEST_META
+    if (check_type >= CHECKTYPE_COUNT)
+        return -2;
+    if (tool_level >= TOOLLEVEL_COUNT)
+        return -3;
+    return m_success_count_array[check_type, tool_level];
+#else
+    return -1;
+#endif
+}
+
+int TestSuite::GetFailureCountArray(CheckType check_type, ToolLevel tool_level)
+{
+#ifdef ESYSTEST_META
+    if (check_type >= CHECKTYPE_COUNT)
+        return -2;
+    if (tool_level >= TOOLLEVEL_COUNT)
+        return -3;
+    return m_failure_count_array[check_type, tool_level];
+#else
+    return -1;
+#endif
+}
+
+void TestSuite::IncSuccessCountArray(CheckType check_type, ToolLevel tool_level)
+{
+#ifdef ESYSTEST_META
+    assert(check_type < CHECKTYPE_COUNT);
+    assert(tool_level < TOOLLEVEL_COUNT);
+
+    ++m_success_count_array[check_type, tool_level];
+#else
+#endif
+}
+
+void TestSuite::IncFailureCountArray(CheckType check_type, ToolLevel tool_level)
+{
+#ifdef ESYSTEST_META
+    assert(check_type < CHECKTYPE_COUNT);
+    assert(tool_level < TOOLLEVEL_COUNT);
+
+    ++m_failure_count_array[check_type, tool_level];
+#else
+#endif
 }
 
 void TestSuite::SetCommandLine(int argc, char **argv)

@@ -64,6 +64,16 @@ public:
     unsigned int GetTestCaseCount();
     unsigned int GetChildSuiteCount();
 
+    int GetSuccessCount();
+    int GetFailureCount();
+    void IncSuccessCount();
+    void IncFailureCount();
+
+    int GetSuccessCountArray(CheckType check_type, ToolLevel tool_level);
+    int GetFailureCountArray(CheckType check_type, ToolLevel tool_level);
+    void IncSuccessCountArray(CheckType check_type, ToolLevel tool_level);
+    void IncFailureCountArray(CheckType check_type, ToolLevel tool_level);
+
     void SetCommandLine(int argc, char **argv);
 
     int GetArgC();
@@ -77,6 +87,11 @@ public:
     static TestSuite *GetCurrent();
     static TestSuite *GetMaster();
     static unsigned int GetCount();
+
+    static int GetTotalSuccessCount();
+    static int GetTotalFailureCount();
+    static void IncTotalSuccessCount();
+    static void IncTotalFailureCount();
 protected:
     static TestSuite *g_current;
     static TestSuite *g_master;
@@ -95,6 +110,14 @@ protected:
     int m_argc;
     char **m_argv;
     const char *m_name;
+    int m_success_count;
+    int m_failure_count;
+    static int g_total_success_count;
+    static int g_total_failure_count;
+#ifdef ESYSTEST_META
+    int m_success_count_array[CHECKTYPE_COUNT][TOOLLEVEL_COUNT];
+    int m_failure_count_array[CHECKTYPE_COUNT][TOOLLEVEL_COUNT];
+#endif
 };
 
 }

@@ -20,7 +20,7 @@ SET( LIBESYSTEST_CXX_SOURCES
     src/esystest/types.cpp
 )
 
-if( ${MOE_BOARD} STREQUAL "virtualhw")
+if (DEFINED ESYSTEST_BUILD_VHW)
     add_library (esystest SHARED ${LIBESYSTEST_CXX_SOURCES})
 else ()
     add_library (esystest STATIC ${LIBESYSTEST_CXX_SOURCES})
@@ -56,3 +56,7 @@ else ()
 #        pal        
 #        )
 endif ()
+
+ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_OBJDUMP} -C -x -w $<TARGET_FILE:${PROJECT_NAME}> >${LOGS_OUTPUT_PATH}/$<TARGET_FILE_NAME:${PROJECT_NAME}>.objdump)
+ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_NM} --print-size --size-sort --reverse-sort --radix=d  -C $<TARGET_FILE:${PROJECT_NAME}> >${LOGS_OUTPUT_PATH}/$<TARGET_FILE_NAME:${PROJECT_NAME}>.nm)
+

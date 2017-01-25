@@ -19,6 +19,7 @@
 #include "esystest/report.h"
 #include "esystest/logger.h"
 #include "esystest/testcasectrlbase.h"
+#include "esystest/testsuite.h"
 #include "esystest/assert.h"
 
 namespace esystest
@@ -30,8 +31,23 @@ ESYSTEST_API bool report_assertion(bool result, const char *file_name, int line_
     char const*  prefix;
     char const*  suffix;
     Logger *logger=Logger::Get();
+    TestSuite *cur_test_suite = TestSuite::GetCurrent();
 
-    if (result==true)
+    if (cur_test_suite != nullptr)
+    {
+        if (result == true)
+        {
+            cur_test_suite->IncSuccessCountArray(ct, tl);
+            cur_test_suite->IncSuccessCount();
+        }
+        else
+        {
+            cur_test_suite->IncFailureCountArray(ct, tl);
+            cur_test_suite->IncFailureCount();
+        }
+    }
+
+    if (result == true)
         tl = PASS;
 
     switch (tl)

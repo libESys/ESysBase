@@ -1,0 +1,26 @@
+## Package Information for pkg-config
+##
+## __legal_b__
+## 
+## Copyright (c) 2017 Michel Gillet  
+## Distributed under the wxWindows Library Licence, Version 3.1. 
+## (See accompanying file LICENSE_3_1.txt or 
+## copy at http://www.wxwidgets.org/about/licence)
+## 
+## __legal_e__
+##
+##  Original Author: Michel Gillet, 2017-01-23
+##
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: ESysTest
+Description: ESysTest library
+Version: @PACKAGE_VERSION@
+Libs: -L${libdir} -lesystest
+Libs.private: @LIBS@
+Cflags: -I${includedir}
+

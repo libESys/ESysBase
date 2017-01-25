@@ -252,6 +252,7 @@ dnl
 AC_OUTPUT(Makefile
 src/Makefile
 src/esystest/Makefile
+src/esystest/esystest.pc
 src/esystest/boost/Makefile
 
 src/esystest_t/Makefile

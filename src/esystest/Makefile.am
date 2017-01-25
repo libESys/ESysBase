@@ -70,6 +70,9 @@ SUBDIRS = \
     boost \
     .
 
+pkgconfigdir = ${libdir}/pkgconfig
+pkgconfig_DATA = esystest.pc
+
 install-data-local:
     @$(NORMAL_INSTALL) \
     $(mkinstalldirs) $(INCLUDE_DIR) \
