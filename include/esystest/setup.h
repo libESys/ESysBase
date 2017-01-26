@@ -18,7 +18,7 @@
 #ifndef __ESYSTEST_SETUP_H__
 #define __ESYSTEST_SETUP_H__
 
-#include <esys/setup.h>
+
 
 #if defined(WIN32)
 
@@ -26,6 +26,10 @@
 #define ESYSTEST_USE_ESYS
 #endif
 
+#endif
+
+#ifdef ESYSTEST_USE_ESYS
+#include <esys/setup.h>
 #endif
 
 #endif
