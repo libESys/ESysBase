@@ -40,7 +40,7 @@ public:
     TestCaseCtrl();
     virtual ~TestCaseCtrl();
 
-    virtual int32_t Init() override;
+    virtual int Init() override;
 
     virtual void BeforeTest() override;
     virtual void AfterTest() override;
@@ -48,9 +48,9 @@ public:
     virtual void Assert() override;
 
     virtual void AddOptions(po::options_description &desc);
-    virtual int32_t Parse();
-    virtual int32_t HandleActions();
-    virtual int32_t HandleSwitches();
+    virtual int Parse();
+    virtual int HandleActions();
+    virtual int HandleSwitches();
     bool IsParsed();
 protected:
     std::string m_run_test;

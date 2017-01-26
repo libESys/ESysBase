@@ -19,7 +19,9 @@
 #define __ESYSTEST_TESTCASECTRLBASE_H__
 
 #include "esystest/esystest_defs.h"
+#ifdef ESYSTEST_USE_ESYS
 #include <esys/inttypes.h>
+#endif
 
 namespace esystest
 {
@@ -32,7 +34,7 @@ public:
     TestCaseCtrlBase();
     virtual ~TestCaseCtrlBase();
 
-    virtual int32_t Init() = 0;
+    virtual int Init() = 0;
 
     virtual void BeforeTest() = 0;
     virtual void AfterTest() = 0;

@@ -110,19 +110,19 @@ void TestCaseCtrl::AddOptions(po::options_description &desc)
 {
 }
 
-int32_t TestCaseCtrl::HandleActions()
+int TestCaseCtrl::HandleActions()
 {
     return 1;
 }
 
-int32_t TestCaseCtrl::HandleSwitches()
+int TestCaseCtrl::HandleSwitches()
 {
     return 0;
 }
 
-int32_t TestCaseCtrl::Parse()
+int TestCaseCtrl::Parse()
 {
-    int32_t result = 0;
+    int result = 0;
 
     po::store(po::parse_command_line(MasterTestSuite::Get().GetArgC(), MasterTestSuite::Get().GetArgV(), m_desc), m_vm);
     po::notify(m_vm);
