@@ -23,7 +23,7 @@
 #if defined(WIN32)
 
 #ifndef ESYSTEST_USE_ESYS
-#define ESYSTEST_USE_ESYS
+//#define ESYSTEST_USE_ESYS
 #endif
 
 #endif
