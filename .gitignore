@@ -43,3 +43,4 @@ Makefile.in
 /lib
 project/msvc9/DebugEP
 .metadata/
+*.pyc
