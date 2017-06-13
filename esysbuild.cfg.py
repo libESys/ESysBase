@@ -14,12 +14,13 @@ class ESysTestBuildFile(BuildFile):
         esystest.AddGroupName(vhw_hw)
         esystest.SetLinkCfg(Lib.LINK_LIBTOOL, "src/esystest/libesystest.la")
         esystest.SetLinkCfg(Lib.LINK_INSTALLED, "-lesystest")
-        esystest.AddDependencies(["esys"])
+        #esystest.AddDependencies(["esys"])
         lib_mngr.Add(esystest)
         
         esystest_t=Exe("esystest_t")
         esystest_t.AddGroupName("vhw")
-        esystest_t.AddDependencies(["esys", "esystest"])
+        #esystest_t.AddDependencies(["esys", "esystest"])
+        esystest_t.AddDependencies(["esystest"])
         lib_mngr.Add(esystest_t)            
         return 0
     
