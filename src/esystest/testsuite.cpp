@@ -15,13 +15,24 @@
  *
  */
 
-
 #include "esystest/esystest_prec.h"
 #include "esystest/testsuite.h"
 #include "esystest/mastertestsuite.h"
 #include "esystest/testcaseinfo.h"
 #include "esystest/testcasectrlbase.h"
 #include "esystest/logger.h"
+
+extern "C"
+{
+
+static before_main_type ESYSTEST_DATA_SECTION g_esystest_before_main = 0;
+
+void esystest_set_before_main(before_main_type before_main)
+{
+    g_esystest_before_main = before_main;
+}
+
+}
 
 namespace esystest
 {
@@ -33,6 +44,11 @@ unsigned int TestSuite::g_count = 0;
 
 int TestSuite::g_total_success_count = 0;
 int TestSuite::g_total_failure_count = 0;
+
+before_main_type TestSuite::GetBeforeMain()
+{
+	return g_esystest_before_main;
+}
 
 int TestSuite::GetTotalSuccessCount()
 {
@@ -237,6 +253,8 @@ void TestSuite::RunTestCases()
             cur_test->Failed();
 
         cur_test = cur_test->GetNext();
+        if (GetBeforeMain() != nullptr)
+        	(*GetBeforeMain())();
     }
 
     cur = GetFirst();

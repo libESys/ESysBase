@@ -20,6 +20,17 @@
 
 #include "esystest/esystest_defs.h"
 
+extern "C"
+{
+
+typedef void (*before_main_type)(void);
+
+ESYSTEST_API void esystest_set_before_main(before_main_type before_main);
+
+}
+
+#ifdef __cplusplus
+
 namespace esystest
 {
 
@@ -92,11 +103,13 @@ public:
     static int GetTotalFailureCount();
     static void IncTotalSuccessCount();
     static void IncTotalFailureCount();
+
+    static before_main_type GetBeforeMain();
 protected:
-    static TestSuite *g_current;
-    static TestSuite *g_master;
+    static TestSuite ESYSTEST_DATA_SECTION *g_current;
+    static TestSuite ESYSTEST_DATA_SECTION *g_master;
     //static TestSuite g_dft;
-    static unsigned int g_count;
+    static unsigned int ESYSTEST_DATA_SECTION g_count;
 
     TestSuite *m_first;
     TestSuite *m_last;
@@ -112,8 +125,8 @@ protected:
     const char *m_name;
     int m_success_count;
     int m_failure_count;
-    static int g_total_success_count;
-    static int g_total_failure_count;
+    static int ESYSTEST_DATA_SECTION g_total_success_count;
+    static int ESYSTEST_DATA_SECTION g_total_failure_count;
 #ifdef ESYSTEST_META
     int m_success_count_array[CHECKTYPE_COUNT][TOOLLEVEL_COUNT];
     int m_failure_count_array[CHECKTYPE_COUNT][TOOLLEVEL_COUNT];
@@ -121,6 +134,8 @@ protected:
 };
 
 }
+#endif
+
 
 #endif
 

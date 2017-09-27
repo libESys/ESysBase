@@ -33,6 +33,21 @@
 #pragma warning (disable : 4251)
 #endif
 
+#ifndef ESYSTEST_USE_OWN_DATA_SECTION
+#define ESYSTEST_DATA_SECTION
+#else
+
+#if defined(__GNUC__) || defined(__GNUG__)
+#define ESYSTEST_DATA_SECTION __attribute__((section (".data_esystest")))
+#else
+#error Compiler doesn''t support the usage of ESYSTEST_USE_OWN_SECTION
+#endif
+
+#endif
+
+
+#ifdef __cplusplus
+
 namespace esystest
 {
 
@@ -64,6 +79,7 @@ enum CheckType
 };
 
 }
+#endif
 
 #endif
 
