@@ -78,7 +78,7 @@ ESYSTEST_API bool report_assertion(bool result, const char *file_name, int line_
 
     if (logger != nullptr)
     {
-        if ((tl != PASS) || (tl == PASS) && (logger->GetReportPass() == true))
+        if ((tl != PASS) || ((tl == PASS) && (logger->GetReportPass() == true)))
         {
             *logger << prefix << suffix << " : ";
             if (desc!=nullptr)
@@ -89,27 +89,29 @@ ESYSTEST_API bool report_assertion(bool result, const char *file_name, int line_
 
     switch (tl)
     {
-    case PASS:
-        //framework::assertion_result(AR_PASSED);
-        return true;
+        case PASS:
+            //framework::assertion_result(AR_PASSED);
+            return true;
 
-    case WARN:
-        //framework::assertion_result(AR_TRIGGERED);
-        return false;
+        case WARN:
+            //framework::assertion_result(AR_TRIGGERED);
+            return false;
 
-    case CHECK:
-        //framework::assertion_result(AR_FAILED);
-        return false;
+        case CHECK:
+            //framework::assertion_result(AR_FAILED);
+            return false;
 
-    case REQUIRE:
-        //framework::assertion_result(AR_FAILED);
+        case REQUIRE:
+            //framework::assertion_result(AR_FAILED);
 
-        //framework::test_unit_aborted(framework::current_test_case());
+            //framework::test_unit_aborted(framework::current_test_case());
 
-        //BOOST_TEST_IMPL_THROW(execution_aborted());
-        if (TestCaseCtrlBase::Get() != nullptr)
-            TestCaseCtrlBase::Get()->Assert();
-        else
+            //BOOST_TEST_IMPL_THROW(execution_aborted());
+            if (TestCaseCtrlBase::Get() != nullptr)
+                TestCaseCtrlBase::Get()->Assert();
+            else
+                assert(false);
+        default:
             assert(false);
     }
 

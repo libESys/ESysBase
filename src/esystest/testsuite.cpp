@@ -233,7 +233,6 @@ void TestSuite::RunTestCases()
     TestSuite *cur;
     TestCaseInfo *cur_test;
     TestCaseCtrlBase *ctrl= TestCaseCtrlBase::Get();
-    int32_t result;
 
     Start();
 
@@ -271,8 +270,7 @@ void TestSuite::ListTestCases()
 {
     TestSuite *cur;
     TestCaseInfo *cur_test;
-    TestCaseCtrlBase *ctrl = TestCaseCtrlBase::Get();
-    int32_t result;
+    //TestCaseCtrlBase *ctrl = TestCaseCtrlBase::Get();
     Logger *log = Logger::Get();
 
     if (log == nullptr)
