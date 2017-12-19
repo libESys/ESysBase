@@ -3,7 +3,7 @@ message(STATUS "ESysTest CMakeLists.txt")
 # Helper function for adding source files from HW build files
 
 include_directories(
-        ./include
+    ./include
 )
 
 SET( LIBESYSTEST_CXX_SOURCES
@@ -47,7 +47,7 @@ endif ()
 if (NOT WIN32)
 	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++11")
 	target_include_directories ( esystest  PUBLIC
-        ./include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
     )
 
 else ()
@@ -60,22 +60,13 @@ else ()
 
 endif ()
 
-#add_dependencies( cal
-#    ral
-#    pal)
 
 if (DEFINED ESYSTEST_BUILD_VHW)
-#    target_link_libraries( cal
-#        ral
-#        pal)
     add_dependencies( esystest
         esys
     )
 else ()
-#    target_link_libraries( cal
-#        ral
-#        pal        
-#        )
+
 endif ()
 
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_OBJDUMP} -C -x -w $<TARGET_FILE:${PROJECT_NAME}> >${LOGS_OUTPUT_PATH}/$<TARGET_FILE_NAME:${PROJECT_NAME}>.objdump)
