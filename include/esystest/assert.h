@@ -18,10 +18,20 @@
 #ifndef __ESYSTEST_ASSERT_H__
 #define __ESYSTEST_ASSERT_H__
 
+#ifdef ESYSTEST_USE_ESYS
+#include <esys/assert.h>
+#else
+
 #ifdef _MSC_VER
 #include <cassert>
 #else
 #include <assert.h>
+#endif
+
+#endif
+
+#ifndef assert
+#define assert
 #endif
 
 #endif

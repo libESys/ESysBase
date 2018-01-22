@@ -385,7 +385,7 @@ catch (const Exception &e) \
 #else
 #endif
 
-#ifdef ESYSTEST_MAIN
+#ifdef ESYSTEST_TEST_MAIN
 int main(int argc, char *argv[])
 {
     esystest::MasterTestSuite &master = esystest::MasterTestSuite::Get();

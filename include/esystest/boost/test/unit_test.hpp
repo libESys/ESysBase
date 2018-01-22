@@ -77,7 +77,7 @@
 #define BOOST_GLOBAL_FIXTURE( F )   ESYSTEST_GLOBAL_FIXTURE( F )
 
 #ifdef BOOST_TEST_MAIN
-#define ESYSTEST_MAIN
+#define ESYSTEST_TEST_MAIN
 #endif
 
 #include "esystest/unit_test.h"
