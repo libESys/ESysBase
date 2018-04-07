@@ -31,7 +31,7 @@
 #endif
 
 #ifndef assert
-#define assert
+//#define assert
 #endif
 
 #endif

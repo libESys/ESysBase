@@ -20,7 +20,7 @@
 #include <esys/inttypes.h>
 
 
-ESYSTEST_FIXTURE_TEST_CASE_WITH_DECOR(Test02, esystest::nil_t, *esystest::order(esystest::ORDER_LAST) )
+ESYSTEST_AUTO_TEST_CASE_WITH_DECOR(Test02, *esystest::order(esystest::ORDER_LAST) )
 {
     int32_t result;
 
@@ -33,7 +33,7 @@ ESYSTEST_FIXTURE_TEST_CASE_WITH_DECOR(Test02, esystest::nil_t, *esystest::order(
 
 }
 
-ESYSTEST_FIXTURE_TEST_CASE_WITH_DECOR(Test02_3, esystest::nil_t, *esystest::order(3))
+ESYSTEST_AUTO_TEST_CASE_WITH_DECOR(Test02_3, *esystest::order(3))
 {
     int32_t result;
 

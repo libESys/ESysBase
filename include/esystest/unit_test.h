@@ -26,6 +26,7 @@
 #include "esystest/report.h"
 #include "esystest/types.h"
 #include "esystest/order.h"
+#include "esystest/assert.h"
 
 #ifdef ESYSTEST_USE_ESYS
 #include <esys/mutexlocker.h>
@@ -67,6 +68,10 @@ void test_name##Info::Invoke()                                          \
 }                                                                       \
                                                                         \
 void test_name::TestMethod()                                            \
+/**/
+
+#define ESYSTEST_AUTO_TEST_CASE_WITH_DECOR( test_name, decorators )  \
+ESYSTEST_FIXTURE_TEST_CASE_WITH_DECOR( test_name, ::esystest::nil_t, decorators) \
 /**/
 
 #define ESYSTEST_FIXTURE_TEST_CASE_NO_DECOR( test_name, F )                \

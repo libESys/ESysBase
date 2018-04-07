@@ -15,7 +15,7 @@
  *
  */
 
-#define ESYSTEST_MAIN
+#define ESYSTEST_TEST_MAIN
 
 #ifdef WIN32
 
@@ -26,7 +26,6 @@
 #endif
 
 #include <esystest/unit_test.h>
-
 #include <esystest/testcasectrl.h>
 #include <esystest/stdlogger.h>
 #include <iostream>
