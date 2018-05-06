@@ -25,7 +25,7 @@
 #ifdef _MSC_VER
 #include <cassert>
 #else
-#include <assert.h>
+#include <cassert>
 #endif
 
 #endif

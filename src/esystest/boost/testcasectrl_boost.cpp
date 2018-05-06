@@ -16,7 +16,7 @@
  */
 
 #include "esystest/esystest_prec.h"
-#include "esystest/boost/testcasectrl.h"
+#include "esystest/boost/boost/testcasectrl.h"
 #include "esystest/testcaseinfo.h"
 #include "esystest/mastertestsuite.h"
 #include "esystest/exception.h"
@@ -47,10 +47,10 @@ TestCaseCtrl::~TestCaseCtrl()
 int32_t TestCaseCtrl::Init()
 {
     m_desc.add_options()
-        ("help", "produce help message")
-        ("run_test", po::value<std::string>(&m_run_test), "give the name of the test to run")
-        ("list", "list all unit tests")
-        ;
+    ("help", "produce help message")
+    ("run_test", po::value<std::string>(&m_run_test), "give the name of the test to run")
+    ("list", "list all unit tests")
+    ;
 
     AddOptions(m_desc);
 

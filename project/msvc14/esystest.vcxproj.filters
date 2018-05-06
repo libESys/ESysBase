@@ -80,9 +80,6 @@
     <ClInclude Include="..\..\include\esystest\version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\esystest\boost\test\unit_test.hpp">
-      <Filter>Header Files\boost\test</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\esystest\testsuite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -134,7 +131,10 @@
     <ClInclude Include="..\..\include\esystest\testcasectrl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\esystest\boost\testcasectrl.h">
+    <ClInclude Include="..\..\include\esystest\boost\boost\test\unit_test.hpp">
+      <Filter>Header Files\boost\test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esystest\boost\boost\testcasectrl.h">
       <Filter>Header Files\boost</Filter>
     </ClInclude>
   </ItemGroup>
