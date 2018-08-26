@@ -1,5 +1,5 @@
 /*!
- * \file esystest/types.h
+ * \file esystest/em/testcasectrlcore_em.cpp
  * \brief
  *
  * \cond
@@ -15,18 +15,33 @@
  *
  */
 
-#pragma once
-
-#include "esystest/esystest_defs.h"
+#include "esystest/esystest_prec.h"
+#include "esystest/em/testcasectrlcore.h"
 
 namespace esystest
 {
 
-class ESYSTEST_API TestCaseInfo;
+namespace em
+{
 
-struct nil_t {};
+TestCaseCtrlCore::TestCaseCtrlCore() : TestCaseCtrlBase()
+{
+}
+
+TestCaseCtrlCore::~TestCaseCtrlCore()
+{
+}
+
+void TestCaseCtrlCore::Invoke(TestCaseInfo *cur_test)
+{
+}
 
 }
 
-ESYSTEST_API esystest::TestCaseInfo &operator*(esystest::TestCaseInfo& info, const esystest::nil_t &n);
+}
+
+
+
+
+
 

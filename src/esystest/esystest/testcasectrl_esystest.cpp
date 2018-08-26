@@ -1,5 +1,5 @@
 /*!
- * \file esystest/boost/testcasectrl.cpp
+ * \file esystest/esystest/testcasectrl_esystest.cpp
  * \brief
  *
  * \cond
@@ -16,27 +16,31 @@
  */
 
 #include "esystest/esystest_prec.h"
-#include "esystest/boost/boost/testcasectrl.h"
+#include "esystest/esystest/testcasectrl.h"
 #include "esystest/testcaseinfo.h"
 #include "esystest/mastertestsuite.h"
 #include "esystest/exception.h"
 #include "esystest/assert.h"
 
-#include <string.h>
-#include <iostream>
-
-#include <boost/program_options/cmdline.hpp>
-#include <boost/program_options/parsers.hpp>
+namespace esystest
+{
 
 namespace esystest
 {
 
-namespace boost
+TestCaseCtrl *TestCaseCtrl::g_test_case = nullptr;
+
+TestCaseCtrl &TestCaseCtrl::Get()
 {
+    assert(g_test_case != nullptr);
+
+    return *g_test_case;
+}
 
 TestCaseCtrl::TestCaseCtrl()
     : TestCaseCtrlCore()
 {
+    g_test_case = this;
 }
 
 TestCaseCtrl::~TestCaseCtrl()

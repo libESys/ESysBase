@@ -25,12 +25,12 @@
 extern "C"
 {
 
-static before_main_type ESYSTEST_DATA_SECTION g_esystest_before_main = 0;
+    static before_main_type ESYSTEST_DATA_SECTION g_esystest_before_main = 0;
 
-void esystest_set_before_main(before_main_type before_main)
-{
-    g_esystest_before_main = before_main;
-}
+    void esystest_set_before_main(before_main_type before_main)
+    {
+        g_esystest_before_main = before_main;
+    }
 
 }
 
@@ -47,7 +47,7 @@ int TestSuite::g_total_failure_count = 0;
 
 before_main_type TestSuite::GetBeforeMain()
 {
-	return g_esystest_before_main;
+    return g_esystest_before_main;
 }
 
 int TestSuite::GetTotalSuccessCount()
@@ -253,7 +253,7 @@ void TestSuite::RunTestCases()
 
         cur_test = cur_test->GetNext();
         if (GetBeforeMain() != nullptr)
-        	(*GetBeforeMain())();
+            (*GetBeforeMain())();
     }
 
     cur = GetFirst();

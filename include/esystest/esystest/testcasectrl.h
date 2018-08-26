@@ -1,5 +1,5 @@
 /*!
- * \file esystest/order.h
+ * \file esystest/esystest/testcasectrl.h
  * \brief
  *
  * \cond
@@ -18,29 +18,34 @@
 #pragma once
 
 #include "esystest/esystest_defs.h"
-#include "esystest/order_defs.h"
+#include "esystest/testcasectrlcore.h"
 
 namespace esystest
 {
 
-class ESYSTEST_API TestCaseInfo;
+namespace esystest
+{
 
-class ESYSTEST_API Order
+class ESYSTEST_API TestCaseCtrl: public TestCaseCtrlCore
 {
 public:
-    Order(int value);
+    TestCaseCtrl();
+    virtual ~TestCaseCtrl();
 
-    void set_value(int order);
-    int value() const;
-
+    static TestCaseCtrl &Get();
 protected:
-    int m_order;
+    static TestCaseCtrl *g_test_case;
 };
-
-ESYSTEST_API Order order(int value);
 
 }
 
-ESYSTEST_API esystest::TestCaseInfo &operator*(esystest::TestCaseInfo& info, const esystest::Order & order);
+#ifdef ESYSTEST_USE_ESYSTEST
+using namespace esystest;
+#endif
+
+}
+
+
+
 
 

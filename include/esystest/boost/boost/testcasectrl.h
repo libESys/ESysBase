@@ -15,18 +15,10 @@
  *
  */
 
-#ifndef __ESYSTEST_BOOST_TESTCASECTRL_H__
-#define __ESYSTEST_BOOST_TESTCASECTRL_H__
+#pragma once
 
 #include "esystest/esystest_defs.h"
-#include "esystest/testcasectrlbase.h"
-
-#include <string>
-
-#include <boost/program_options/options_description.hpp>
-#include <boost/program_options/variables_map.hpp>
-
-namespace po = boost::program_options;
+#include "esystest/testcasectrlcore.h"
 
 namespace esystest
 {
@@ -34,42 +26,21 @@ namespace esystest
 namespace boost
 {
 
-class ESYSTEST_API TestCaseCtrl: public TestCaseCtrlBase
+class ESYSTEST_API TestCaseCtrl: public TestCaseCtrlCore
 {
 public:
     TestCaseCtrl();
     virtual ~TestCaseCtrl();
-
-    virtual int Init() override;
-
-    virtual void BeforeTest() override;
-    virtual void AfterTest() override;
-    virtual void Invoke(TestCaseInfo *cur_test) override;
-    virtual void Assert() override;
-
-    virtual void AddOptions(po::options_description &desc);
-    virtual int Parse();
-    virtual int HandleActions();
-    virtual int HandleSwitches();
-    bool IsParsed();
-protected:
-    std::string m_run_test;
-    po::variables_map m_vm;
-    po::options_description m_desc;
-    bool m_is_parsed;
-    int m_verbose;
-    bool m_log_trace;
 };
 
 }
 
-#ifdef ESYSTEST_CMD_LINE
+#ifdef ESYSTEST_USE_BOOST
 using namespace boost;
 #endif
 
 }
 
-#endif
 
 
 

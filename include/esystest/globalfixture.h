@@ -12,7 +12,7 @@
  *
  *__legal_e__
  * \endcond
- * 
+ *
  */
 
 #ifndef __ESYSTEST_GLOBALFIXTURE_H__
@@ -26,23 +26,23 @@ namespace esystest
 class ESYSTEST_API GlobalFixture
 {
 public:
-	GlobalFixture();
-	virtual ~GlobalFixture();
+    GlobalFixture();
+    virtual ~GlobalFixture();
 
 protected:
-	static GlobalFixture *m_last;
-	GlobalFixture *m_prev;
+    static GlobalFixture *m_last;
+    GlobalFixture *m_prev;
 };
 
 template<typename T>
 class GlobalFixture_t : public GlobalFixture
 {
 public:
-	GlobalFixture_t();
-	virtual ~GlobalFixture_t();
+    GlobalFixture_t();
+    virtual ~GlobalFixture_t();
 protected:
-	static GlobalFixture_t<T> g_gf;
-	T m_fixture;
+    static GlobalFixture_t<T> g_gf;
+    T m_fixture;
 };
 
 template<typename T>

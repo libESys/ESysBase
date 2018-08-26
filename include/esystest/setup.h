@@ -5,7 +5,7 @@
  * \cond
  * __legal_b__
  *
- * Copyright (c) 2016 Michel Gillet
+ * Copyright (c) 2016-2018 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
@@ -15,10 +15,17 @@
  *
  */
 
-#ifndef __ESYSTEST_SETUP_H__
-#define __ESYSTEST_SETUP_H__
+#pragma once
 
+#ifdef ESYSTEST_USE_BOOST
 
+#else
+
+#ifndef ESYSTEST_USE_ESYSTEST
+#define ESYSTEST_USE_ESYSTEST
+#endif
+
+#endif
 
 #if defined(WIN32)
 
@@ -32,5 +39,4 @@
 #include <esys/setup.h>
 #endif
 
-#endif
 

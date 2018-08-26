@@ -22,6 +22,24 @@
     <Filter Include="Source Files\boost">
       <UniqueIdentifier>{7c49ca78-63ef-41f2-81b7-d7403afafb08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\multios">
+      <UniqueIdentifier>{75085a10-6a04-4170-8919-0df7592ba166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\multios">
+      <UniqueIdentifier>{a2cf9daf-fbf3-4a65-99f5-99a087f0e0aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\em">
+      <UniqueIdentifier>{59cd9a67-be88-4211-a5f5-735fb8e8a962}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\em">
+      <UniqueIdentifier>{7685ca40-bed7-4873-93ca-100398deeae0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\esystest">
+      <UniqueIdentifier>{35d56762-e00f-4203-aca0-1d6b8b0759ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\esystest">
+      <UniqueIdentifier>{3bab5632-9ec3-4704-bfff-729ed5820d51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\esystest\esystest_dll.cpp">
@@ -68,6 +86,15 @@
     </ClCompile>
     <ClCompile Include="..\..\src\esystest\boost\testcasectrl_boost.cpp">
       <Filter>Source Files\boost</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esystest\multios\testcasectrlcore_multios.cpp">
+      <Filter>Source Files\multios</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esystest\em\testcasectrlcore_em.cpp">
+      <Filter>Source Files\em</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esystest\esystest\testcasectrl_esystest.cpp">
+      <Filter>Source Files\esystest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +163,36 @@
     </ClInclude>
     <ClInclude Include="..\..\include\esystest\boost\boost\testcasectrl.h">
       <Filter>Header Files\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esystest\multios\testcasectrlcore.h">
+      <Filter>Header Files\multios</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esystest\testcasectrlcore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esystest\em\testcasectrlcore.h">
+      <Filter>Header Files\em</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esystest\esystest\testcasectrl.h">
+      <Filter>Header Files\esystest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esystest\esystest\unit_test.h">
+      <Filter>Header Files\esystest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esystest\boost\unit_test.h">
+      <Filter>Header Files\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esystest\esystest\boost.h">
+      <Filter>Header Files\esystest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esystest\boost\order.h">
+      <Filter>Header Files\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esystest\boost\esystest.h">
+      <Filter>Header Files\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esystest\order_defs.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

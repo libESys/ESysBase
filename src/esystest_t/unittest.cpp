@@ -17,17 +17,12 @@
 
 #define ESYSTEST_TEST_MAIN
 
-#ifdef WIN32
-
-#if ESYS_USE_VLD
-#include <vld.h>
-#endif
-
-#endif
-
 #include <esystest/unit_test.h>
 #include <esystest/testcasectrl.h>
 #include <esystest/stdlogger.h>
+
+#include <esys/vld.h>
+
 #include <iostream>
 
 class GlobalInit

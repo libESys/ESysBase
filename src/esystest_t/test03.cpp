@@ -16,6 +16,7 @@
 */
 
 #include "esystest_t/esystest_t_prec.h"
+#include <esystest/unit_test.h>
 #include <esys/inttypes.h>
 
 ESYSTEST_AUTO_TEST_CASE(Test03)

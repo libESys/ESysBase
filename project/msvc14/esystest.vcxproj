@@ -332,6 +332,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\esystest\boost\testcasectrl_boost.cpp" />
+    <ClCompile Include="..\..\src\esystest\em\testcasectrlcore_em.cpp" />
+    <ClCompile Include="..\..\src\esystest\esystest\testcasectrl_esystest.cpp" />
     <ClCompile Include="..\..\src\esystest\esystest_dll.cpp" />
     <ClCompile Include="..\..\src\esystest\esystest_prec.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -345,6 +347,7 @@
     <ClCompile Include="..\..\src\esystest\globalfixture.cpp" />
     <ClCompile Include="..\..\src\esystest\logger.cpp" />
     <ClCompile Include="..\..\src\esystest\mastertestsuite.cpp" />
+    <ClCompile Include="..\..\src\esystest\multios\testcasectrlcore_multios.cpp" />
     <ClCompile Include="..\..\src\esystest\order.cpp" />
     <ClCompile Include="..\..\src\esystest\report.cpp" />
     <ClCompile Include="..\..\src\esystest\stdlogger.cpp" />
@@ -358,6 +361,13 @@
     <ClInclude Include="..\..\include\esystest\assert.h" />
     <ClInclude Include="..\..\include\esystest\boost\boost\testcasectrl.h" />
     <ClInclude Include="..\..\include\esystest\boost\boost\test\unit_test.hpp" />
+    <ClInclude Include="..\..\include\esystest\boost\esystest.h" />
+    <ClInclude Include="..\..\include\esystest\boost\order.h" />
+    <ClInclude Include="..\..\include\esystest\boost\unit_test.h" />
+    <ClInclude Include="..\..\include\esystest\em\testcasectrlcore.h" />
+    <ClInclude Include="..\..\include\esystest\esystest\boost.h" />
+    <ClInclude Include="..\..\include\esystest\esystest\testcasectrl.h" />
+    <ClInclude Include="..\..\include\esystest\esystest\unit_test.h" />
     <ClInclude Include="..\..\include\esystest\esystest_defs.h" />
     <ClInclude Include="..\..\include\esystest\esystest_prec.h" />
     <ClInclude Include="..\..\include\esystest\exception.h" />
@@ -365,13 +375,16 @@
     <ClInclude Include="..\..\include\esystest\inttypes.h" />
     <ClInclude Include="..\..\include\esystest\logger.h" />
     <ClInclude Include="..\..\include\esystest\mastertestsuite.h" />
+    <ClInclude Include="..\..\include\esystest\multios\testcasectrlcore.h" />
     <ClInclude Include="..\..\include\esystest\order.h" />
+    <ClInclude Include="..\..\include\esystest\order_defs.h" />
     <ClInclude Include="..\..\include\esystest\report.h" />
     <ClInclude Include="..\..\include\esystest\setup.h" />
     <ClInclude Include="..\..\include\esystest\stdlogger.h" />
     <ClInclude Include="..\..\include\esystest\testcase.h" />
     <ClInclude Include="..\..\include\esystest\testcasectrl.h" />
     <ClInclude Include="..\..\include\esystest\testcasectrlbase.h" />
+    <ClInclude Include="..\..\include\esystest\testcasectrlcore.h" />
     <ClInclude Include="..\..\include\esystest\testcaseinfo.h" />
     <ClInclude Include="..\..\include\esystest\testsuite.h" />
     <ClInclude Include="..\..\include\esystest\types.h" />
