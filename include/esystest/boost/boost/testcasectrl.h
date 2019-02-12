@@ -35,7 +35,7 @@ public:
 
 }
 
-#ifdef ESYSTEST_USE_BOOST
+#if defined(ESYSTEST_USE_BOOST)
 using namespace boost;
 #endif
 

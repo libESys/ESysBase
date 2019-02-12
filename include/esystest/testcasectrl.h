@@ -19,7 +19,7 @@
 
 #include "esystest/setup.h"
 
-#if defined(ESYSTEST_USE_BOOST) || defined(ESYSTEST_MULTIOS)
+#if defined(ESYSTEST_USE_BOOST)
 #include "esystest/boost/boost/testcasectrl.h"
 #else
 // By default use the command line Test Case Controller, which is not meant for embedded SW
