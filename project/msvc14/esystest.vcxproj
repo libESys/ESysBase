@@ -158,7 +158,9 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(OutDir)$(TargetFileName) $(ESYS_DEV)\bin\vc14_dll</Command>
+      <Command>IF not exist  $(ESYS_DEV)\bin ( mkdir  $(ESYS_DEV)\bin &amp;&amp; echo $(ESYS_DEV)\bin created )
+IF not exist  $(ESYS_DEV)\bin\vc14_dll ( mkdir  $(ESYS_DEV)\bin\vc14_dll &amp;&amp; echo $(ESYS_DEV)\bin\vc14_dll created )
+copy $(OutDir)$(TargetFileName) $(ESYS_DEV)\bin\vc14_dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -193,7 +195,9 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(OutDir)$(TargetFileName) $(ESYS_DEV)\bin\vc14_x64_dll</Command>
+      <Command>IF not exist  $(ESYS_DEV)\bin ( mkdir  $(ESYS_DEV)\bin &amp;&amp; echo $(ESYS_DEV)\bin created )
+IF not exist  $(ESYS_DEV)\bin\vc14_x64_dll ( mkdir  $(ESYS_DEV)\bin\vc14_x64_dll &amp;&amp; echo $(ESYS_DEV)\bin\vc14_x64_dll created )
+copy $(OutDir)$(TargetFileName) $(ESYS_DEV)\bin\vc14_x64_dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='emDebug|Win32'">
@@ -292,7 +296,9 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(OutDir)$(TargetFileName) $(ESYS_DEV)\bin\vc14_dll</Command>
+      <Command>IF not exist  $(ESYS_DEV)\bin ( mkdir  $(ESYS_DEV)\bin &amp;&amp; echo $(ESYS_DEV)\bin created )
+IF not exist  $(ESYS_DEV)\bin\vc14_dll ( mkdir  $(ESYS_DEV)\bin\vc14_dll &amp;&amp; echo $(ESYS_DEV)\bin\vc14_dll created )
+copy $(OutDir)$(TargetFileName) $(ESYS_DEV)\bin\vc14_dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -327,7 +333,9 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(OutDir)$(TargetFileName) $(ESYS_DEV)\bin\vc14_x64_dll</Command>
+      <Command>IF not exist  $(ESYS_DEV)\bin ( mkdir  $(ESYS_DEV)\bin &amp;&amp; echo $(ESYS_DEV)\bin created )
+IF not exist  $(ESYS_DEV)\bin\vc14_x64_dll ( mkdir  $(ESYS_DEV)\bin\vc14_x64_dll &amp;&amp; echo $(ESYS_DEV)\bin\vc14_x64_dll created )
+copy $(OutDir)$(TargetFileName) $(ESYS_DEV)\bin\vc14_x64_dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
