@@ -390,6 +390,7 @@
     <ClInclude Include="..\..\include\esystest\types.h" />
     <ClInclude Include="..\..\include\esystest\unit_test.h" />
     <ClInclude Include="..\..\include\esystest\version.h" />
+    <ClInclude Include="..\..\include\esystest\vld.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\res\esystest.rc" />
