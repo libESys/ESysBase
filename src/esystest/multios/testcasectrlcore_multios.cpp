@@ -21,8 +21,7 @@
 #include "esystest/mastertestsuite.h"
 #include "esystest/exception.h"
 #include "esystest/assert.h"
-
-#include <esys/vld.h>
+#include "esystest/vld.h"
 
 #include <boost/locale.hpp>
 #include <boost/filesystem.hpp>
