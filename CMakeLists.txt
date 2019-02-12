@@ -63,9 +63,9 @@ endif ()
 
 
 if (DEFINED ESYSTEST_BUILD_VHW)
-    add_dependencies( esystest
-        esys
-    )
+    #add_dependencies( esystest
+    #    esys
+    #)
 else ()
 
 endif ()
