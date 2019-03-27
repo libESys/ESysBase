@@ -30,7 +30,11 @@
 #define UINT32_T_MAX ULONG_MAX
 #endif
 
-namespace esystest 
+#ifdef _MSC_VER
+#include <stdint.h>
+#endif
+
+namespace esystest
 {
 
 #ifdef _MSC_VER

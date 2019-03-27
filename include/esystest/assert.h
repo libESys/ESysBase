@@ -5,7 +5,7 @@
  * \cond
  *__legal_b__
  *
- * Copyright (c) 2015-2016 Michel Gillet
+ * Copyright (c) 2015-2019 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
@@ -15,15 +15,14 @@
  *
  */
 
-#ifndef __ESYSTEST_ASSERT_H__
-#define __ESYSTEST_ASSERT_H__
+#pragma once
 
 #ifdef ESYSTEST_USE_ESYS
 #include <esys/assert.h>
 #else
 
 #ifdef _MSC_VER
-#include <cassert>
+#include <assert.h>
 #else
 #include <cassert>
 #endif
@@ -34,5 +33,5 @@
 //#define assert
 #endif
 
-#endif
+
 

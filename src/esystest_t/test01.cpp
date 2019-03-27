@@ -17,7 +17,7 @@
 
 #include "esystest_t/esystest_t_prec.h"
 //#include <boost/test/unit_test.hpp>
-#include <esys/inttypes.h>
+#include <esystest/inttypes.h>
 
 BOOST_AUTO_TEST_CASE(Test01)
 {

@@ -21,7 +21,7 @@
 #include <esystest/testcasectrl.h>
 #include <esystest/stdlogger.h>
 
-#include <esys/vld.h>
+#include <esystest/vld.h>
 
 #include <iostream>
 
