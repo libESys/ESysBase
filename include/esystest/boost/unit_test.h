@@ -214,7 +214,7 @@
         }
 
 #define ESYSTEST_GLOBAL_FIXTURE( F ) \
-BOOST_GLOBAL_FIXTURE( F ) \
+BOOST_TEST_GLOBAL_FIXTURE( F ) \
 /**/
 
 #include "esystest/boost/esystest.h"

@@ -16,10 +16,13 @@
  */
 
 #include "esystest/esystest_prec.h"
-#include "esystest/order.h"
+#include "esystest/esystest/order.h"
 #include "esystest/testcaseinfo.h"
 
 namespace esystest
+{
+
+namespace esystest_impl
 {
 
 Order::Order(int value): m_order(value)
@@ -44,7 +47,9 @@ ESYSTEST_API Order order(int value)
 
 }
 
-ESYSTEST_API esystest::TestCaseInfo &operator*(esystest::TestCaseInfo& info, const esystest::Order &order)
+}
+
+ESYSTEST_API esystest::TestCaseInfo &operator*(esystest::TestCaseInfo& info, const esystest::esystest_impl::Order &order)
 {
     info.SetOrder(order.value());
     return info;

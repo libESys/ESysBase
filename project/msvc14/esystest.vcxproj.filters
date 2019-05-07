@@ -197,6 +197,9 @@
     <ClInclude Include="..\..\include\esystest\vld.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\esystest\esystest\order.h">
+      <Filter>Header Files\esystest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\res\esystest.rc">

@@ -1,6 +1,5 @@
 project (esystest CXX)
 message(STATUS "ESysTest CMakeLists.txt")
-# Helper function for adding source files from HW build files
 
 include_directories(
     ./include
@@ -68,7 +67,7 @@ if (NOT WIN32)
 	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++11")
 	target_include_directories ( esystest  PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/esystest/boost
+        #${CMAKE_CURRENT_SOURCE_DIR}/include/esystest/boost
     )
 
 else ()
@@ -78,26 +77,14 @@ else ()
     ./include
     ${ESYS_BOOST}
     )
-
 endif ()
 
-
-if (DEFINED ESYSTEST_BUILD_VHW)
-    #add_dependencies( esystest
-    #    esys
-    #)
-else ()
-
-endif ()
-
-install(TARGETS esystest 
-    DESTINATION lib
+install(TARGETS esystest
+	LIBRARY DESTINATION lib
 )
 
-install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(DIRECTORY include/ DESTINATION include)
 
-
-# install(FILES test.h DESTINATION include)
 if (DEFINED LOGS_OUTPUT_PATH)
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_OBJDUMP} -C -x -w $<TARGET_FILE:${PROJECT_NAME}> >${LOGS_OUTPUT_PATH}/$<TARGET_FILE_NAME:${PROJECT_NAME}>.objdump || true)
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_NM} --print-size --size-sort --reverse-sort --radix=d  -C $<TARGET_FILE:${PROJECT_NAME}> >${LOGS_OUTPUT_PATH}/$<TARGET_FILE_NAME:${PROJECT_NAME}>.nm)

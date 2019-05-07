@@ -31,7 +31,7 @@
 namespace esystest
 {
 
-namespace boost
+namespace boost_impl
 {
 
 TestCaseCtrl::TestCaseCtrl()

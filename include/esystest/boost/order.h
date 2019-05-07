@@ -10,6 +10,9 @@
 namespace esystest
 {
 
+namespace boost_impl
+{
+
 class /*ESYSTEST_API*/ order : public ::boost::unit_test::decorator::base
 {
 public:
@@ -32,3 +35,8 @@ private:
 
 }
 
+#ifdef ESYSTEST_USE_BOOST
+using namespace boost_impl;
+#endif
+
+}

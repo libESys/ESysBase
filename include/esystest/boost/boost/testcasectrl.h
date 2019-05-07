@@ -23,7 +23,7 @@
 namespace esystest
 {
 
-namespace boost
+namespace boost_impl
 {
 
 class ESYSTEST_API TestCaseCtrl: public TestCaseCtrlCore
@@ -36,7 +36,7 @@ public:
 }
 
 #if defined(ESYSTEST_USE_BOOST)
-using namespace boost;
+using namespace boost_impl;
 #endif
 
 }

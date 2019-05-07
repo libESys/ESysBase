@@ -20,27 +20,9 @@
 #include "esystest/esystest_defs.h"
 #include "esystest/order_defs.h"
 
-namespace esystest
-{
-
-class ESYSTEST_API TestCaseInfo;
-
-class ESYSTEST_API Order
-{
-public:
-    Order(int value);
-
-    void set_value(int order);
-    int value() const;
-
-protected:
-    int m_order;
-};
-
-ESYSTEST_API Order order(int value);
-
-}
-
-ESYSTEST_API esystest::TestCaseInfo &operator*(esystest::TestCaseInfo& info, const esystest::Order & order);
-
+#ifdef ESYSTEST_USE_BOOST
+#include "esystest/boost/order.h"
+#else
+#include "esystest/esystest/order.h"
+#endif
 
