@@ -65,7 +65,13 @@ int32_t TestCaseCtrlCore::Init()
 
     result = 0;
     if (DoFindFolders() == true)
+    {
         result = FindFolders();
+        if (result < 0)
+        {
+            std::cout << "ERROR: couldn't find the folder with test files." << std::endl;
+        }
+    }
     return result;
 }
 
@@ -136,8 +142,17 @@ int TestCaseCtrlCore::Parse()
 {
     int result = 0;
 
-    po::store(po::parse_command_line(MasterTestSuite::Get().GetArgC(), MasterTestSuite::Get().GetArgV(), m_desc), m_vm);
-    po::notify(m_vm);
+    try
+    {
+        po::store(po::parse_command_line(MasterTestSuite::Get().GetArgC(), MasterTestSuite::Get().GetArgV(), m_desc), m_vm);
+        po::notify(m_vm);
+    }
+    catch (po::error &e)
+    {
+        std::cout << e.what() << std::endl << std::flush;
+//        std::cout << m_desc << "\n";
+        return -1;
+    }
 
     m_is_parsed = true;
 
@@ -155,6 +170,27 @@ int TestCaseCtrlCore::Parse()
     }
     else
     {
+        if (m_vm.count("log_trace"))
+        {
+            m_log_trace = true;
+        }
+        if (m_vm.count("verbose"))
+        {
+            m_verbose = m_vm["verbose"].as<int>();
+        }
+        if (m_vm.count("vld-off"))
+        {
+#ifdef WIN32
+            VLDDisable();
+#endif
+        }
+        if (m_vm.count("test_file_path"))
+        {
+            std::string test_file_path = m_vm["test_file_path"].as<std::string>();
+
+            std::cout << "test_file_path was set to " << test_file_path << ".\n";
+            SetTestFilesFolder(test_file_path);
+        }
         if (m_vm.count("run_test"))
         {
             RunOneTest((char *)m_run_test.c_str());
@@ -175,6 +211,8 @@ bool TestCaseCtrlCore::IsParsed()
 
 bool TestCaseCtrlCore::DoFindFolders()
 {
+    if (!GetTestFilesFolder().empty())
+        return false;
     if (m_search_paths.size() != 0)
         return true;
     if (m_search_path_env_vars.size() != 0)
@@ -323,7 +361,7 @@ void TestCaseCtrlCore::AddDefaultOptions()
 
     ("log_trace", po::value<std::string>(&m_log_trace_path)->implicit_value(""), "log calling traces")
     ("verbose,v", po::value<int>()->default_value(0), "set verbosity level: 0 is off")
-    ("test_file_path", po::value<std::string>(&m_test_file_path_s)->default_value(m_dft_test_file_path), "set the path for test files");
+    ("test_file_path", po::value<std::string>(&m_test_file_path_s), "set the path for test files");
 }
 
 void TestCaseCtrlCore::SetArgs(int argc, char **argv)
