@@ -40,15 +40,24 @@ SET( LIBESYSTEST_MULTIOS_CXX_SOURCES
     src/esystest/multios/testcasectrlcore_multios.cpp
 )
 
-if (NOT DEFINED ESYSTEST_USE_BOOST OR DEFINED ESYSTEST_USE_ESYSTEST)
+if (NOT DEFINED ESYSTEST_USE_BOOST AND NOT DEFINED ESYSTEST_USE_ESYSTEST)
+set(ESYSTEST_USE_BOOST 1)
+set(ESYSTEST_USE_ESYSTEST 1)
+
 set(LIBESYSTEST_CXX_SOURCES
         ${LIBESYSTEST_CXX_SOURCES}
         ${LIBESYSTEST_ESYSTEST_CXX_SOURCES}
+        ${LIBESYSTEST_BOOST_CXX_SOURCES}
     )
 elseif(DEFINED ESYSTEST_USE_BOOST)
 set(LIBESYSTEST_CXX_SOURCES
         ${LIBESYSTEST_CXX_SOURCES}
         ${LIBESYSTEST_BOOST_CXX_SOURCES}
+    )
+elseif(DEFINED ESYSTEST_USE_ESYSTEST)
+set(LIBESYSTEST_CXX_SOURCES
+        ${LIBESYSTEST_CXX_SOURCES}
+        ${LIBESYSTEST_ESYSTEST_CXX_SOURCES}
     )
 endif()
 
@@ -62,6 +71,17 @@ if (DEFINED ESYSTEST_BUILD_VHW)
 else ()
     add_library (esystest STATIC ${LIBESYSTEST_CXX_SOURCES})
 endif ()
+
+if (DEFINED ESYSTEST_USE_BOOST)
+
+find_package(Boost 1.66 REQUIRED QUIET COMPONENTS
+             filesystem program_options)
+
+target_link_libraries(esystest
+    Boost::filesystem
+    Boost::program_options
+)
+endif()
 
 if (NOT WIN32)
 	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++11")
