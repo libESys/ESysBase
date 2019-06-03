@@ -84,11 +84,12 @@ endif ()
 if (DEFINED ESYSTEST_USE_BOOST)
 
 find_package(Boost 1.66 REQUIRED QUIET COMPONENTS
-             filesystem program_options)
+             filesystem program_options unit_test_framework)
 
 target_link_libraries(esystest
     Boost::filesystem
     Boost::program_options
+	Boost::unit_test_framework
 )
 endif()
 
