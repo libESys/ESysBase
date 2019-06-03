@@ -82,6 +82,7 @@ public:
     void SetArgs(int argc, wchar_t **argv);
 
     const std::wstring &GetTestFilesFolder();
+    const std::wstring &GetTempFilesFolder();
 protected:
     void AddDefaultOptions();
     //! Set the folder where the test files are located
@@ -89,6 +90,12 @@ protected:
 
     //! Set the folder where the test files are located
     void SetTestFilesFolder(const std::string &test_files_folder);
+
+    //! Set the folder where the temp files are located
+    void SetTempFilesFolder(const std::wstring &temp_files_folder);
+
+    //! Set the folder where the temp files are located
+    void SetTempFilesFolder(const std::string &temp_files_folder);
 
     int m_argc = 0;
     char **m_argv = nullptr;
@@ -99,11 +106,13 @@ protected:
     std::vector<std::wstring> m_search_path_env_vars;
     std::wstring m_test_file_path;
     std::string m_test_file_path_s;
+    std::string m_temp_file_path_s;
     std::string m_log_trace_path;
     std::wstring m_test_files_folder;
+    std::wstring m_temp_files_folder;
     std::string m_dft_test_file_path;
-    boost::filesystem::path m_abs_test_file_path;
-    boost::filesystem::path m_abs_temp_path;
+    //boost::filesystem::path m_abs_test_file_path;
+    //boost::filesystem::path m_abs_temp_path;
     std::string m_run_test;
     po::variables_map m_vm;
     po::options_description m_desc;

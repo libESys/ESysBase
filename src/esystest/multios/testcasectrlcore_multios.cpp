@@ -191,6 +191,13 @@ int TestCaseCtrlCore::Parse()
             std::cout << "test_file_path was set to " << test_file_path << ".\n";
             SetTestFilesFolder(test_file_path);
         }
+        if (m_vm.count("temp_file_path"))
+        {
+            std::string temp_file_path = m_vm["temp_file_path"].as<std::string>();
+
+            std::cout << "temp_file_path was set to " << temp_file_path << ".\n";
+            SetTempFilesFolder(temp_file_path);
+        }
         if (m_vm.count("run_test"))
         {
             RunOneTest((char *)m_run_test.c_str());
@@ -361,7 +368,8 @@ void TestCaseCtrlCore::AddDefaultOptions()
 
     ("log_trace", po::value<std::string>(&m_log_trace_path)->implicit_value(""), "log calling traces")
     ("verbose,v", po::value<int>()->default_value(0), "set verbosity level: 0 is off")
-    ("test_file_path", po::value<std::string>(&m_test_file_path_s), "set the path for test files");
+    ("test_file_path", po::value<std::string>(&m_test_file_path_s), "set the path for test files")
+    ("temp_file_path", po::value<std::string>(&m_temp_file_path_s), "set the path for temp files");
 }
 
 void TestCaseCtrlCore::SetArgs(int argc, char **argv)
@@ -389,6 +397,34 @@ void TestCaseCtrlCore::SetTestFilesFolder(const std::wstring &test_files_folder)
 const std::wstring &TestCaseCtrlCore::GetTestFilesFolder()
 {
     return m_test_files_folder;
+}
+
+void TestCaseCtrlCore::SetTempFilesFolder(const std::string &temp_files_folder)
+{
+    m_temp_files_folder = boost::locale::conv::utf_to_utf<wchar_t>(temp_files_folder);
+}
+
+void TestCaseCtrlCore::SetTempFilesFolder(const std::wstring &temp_files_folder)
+{
+    m_temp_files_folder = temp_files_folder;
+}
+
+const std::wstring &TestCaseCtrlCore::GetTempFilesFolder()
+{
+    if (m_temp_files_folder.empty())
+    {
+        ::boost::filesystem::path cur_path = ::boost::filesystem::absolute("");
+
+        cur_path /= "temp";
+        m_temp_files_folder = cur_path.wstring();
+    }
+
+    if (!::boost::filesystem::exists(m_temp_files_folder))
+    {
+        ::boost::filesystem::create_directories(m_temp_files_folder);
+    }
+
+    return m_temp_files_folder;
 }
 
 }
