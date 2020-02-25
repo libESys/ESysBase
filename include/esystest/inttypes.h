@@ -3,20 +3,19 @@
  * \brief
  *
  * \cond
- *__legal_b__
+ * __legal_b__
  *
- * Copyright (c) 2015-2016 Michel Gillet
+ * Copyright (c) 2015-2020 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
  *
- *__legal_e__
+ * __legal_e__
  * \endcond
  *
  */
 
-#ifndef __ESYSTEST_INTTYPES_H__
-#define __ESYSTEST_INTTYPES_H__
+#pragma once
 
 #if defined __GNUC__ || defined __GNUG__
 #include <stdint.h>
@@ -66,9 +65,4 @@ typedef ::uint64_t uint64_t;
 
 #endif //_MSC_VER
 
-}
-
-
-#endif
-
-
+} // namespace esystest

@@ -3,20 +3,19 @@
  * \brief Definitions needed for esystest
  *
  * \cond
- *__legal_b__
+ * __legal_b__
  *
- * Copyright (c) 2015-2016 Michel Gillet
+ * Copyright (c) 2015-2020 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
  *
- *__legal_e__
+ * __legal_e__
  * \endcond
  *
  */
 
-#ifndef __ESYSTEST_DEFS_H__
-#define __ESYSTEST_DEFS_H__
+#pragma once
 
 #ifdef ESYSTEST_EXPORTS
 #define ESYSTEST_API __declspec(dllexport)
@@ -30,7 +29,7 @@
 #endif
 
 #ifdef _MSC_VER
-#pragma warning (disable : 4251)
+#pragma warning(disable : 4251)
 #endif
 
 #ifndef ESYSTEST_USE_OWN_DATA_SECTION
@@ -38,13 +37,12 @@
 #else
 
 #if defined(__GNUC__) || defined(__GNUG__)
-#define ESYSTEST_DATA_SECTION __attribute__((section (".data_esystest")))
+#define ESYSTEST_DATA_SECTION __attribute__((section(".data_esystest")))
 #else
 #error Compiler doesn''t support the usage of ESYSTEST_USE_OWN_SECTION
 #endif
 
 #endif
-
 
 #ifdef __cplusplus
 
@@ -53,7 +51,10 @@ namespace esystest
 
 enum ToolLevel
 {
-    WARN, CHECK, REQUIRE, PASS,
+    WARN,
+    CHECK,
+    REQUIRE,
+    PASS,
     TOOLLEVEL_COUNT
 
 };
@@ -78,8 +79,5 @@ enum CheckType
     CHECKTYPE_COUNT
 };
 
-}
+} // namespace esystest
 #endif
-
-#endif
-

@@ -5,7 +5,7 @@
  * \cond
  * __legal_b__
  *
- * Copyright (c) 2015-2018 Michel Gillet
+ * Copyright (c) 2015-2020 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
@@ -23,7 +23,6 @@
 #include "esystest/assert.h"
 #include "esystest/vld.h"
 
-#include <boost/locale.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/program_options/cmdline.hpp>
 #include <boost/program_options/options_description.hpp>
@@ -42,8 +41,11 @@ namespace multios
 {
 
 TestCaseCtrlCore::TestCaseCtrlCore()
-    : TestCaseCtrlBase(), m_desc("ESysTest options"), m_is_parsed(false)
-    , m_verbose(-1), m_log_trace(false)
+    : TestCaseCtrlBase()
+    , m_desc("ESysTest options")
+    , m_is_parsed(false)
+    , m_verbose(-1)
+    , m_log_trace(false)
 {
 }
 
@@ -60,8 +62,7 @@ int32_t TestCaseCtrlCore::Init()
     AddOptions(m_desc);
 
     result = Parse();
-    if (result < 0)
-        return result;
+    if (result < 0) return result;
 
     result = 0;
     if (DoFindFolders() == true)
@@ -77,7 +78,6 @@ int32_t TestCaseCtrlCore::Init()
 
 void TestCaseCtrlCore::BeforeTest()
 {
-
 }
 
 void TestCaseCtrlCore::AfterTest()
@@ -94,8 +94,7 @@ void TestCaseCtrlCore::Invoke(TestCaseInfo *cur_test)
 
     if (GetRunAll() == false)
     {
-        if (strcmp(GetTestToRun(), cur_test->GetName()) != 0)
-            run_test = false;
+        if (strcmp(GetTestToRun(), cur_test->GetName()) != 0) run_test = false;
     }
 
     if (run_test == true)
@@ -144,24 +143,23 @@ int TestCaseCtrlCore::Parse()
 
     try
     {
-        po::store(po::parse_command_line(MasterTestSuite::Get().GetArgC(), MasterTestSuite::Get().GetArgV(), m_desc), m_vm);
+        po::store(po::parse_command_line(MasterTestSuite::Get().GetArgC(), MasterTestSuite::Get().GetArgV(), m_desc),
+                  m_vm);
         po::notify(m_vm);
     }
     catch (po::error &e)
     {
         std::cout << e.what() << std::endl << std::flush;
-//        std::cout << m_desc << "\n";
+        //        std::cout << m_desc << "\n";
         return -1;
     }
 
     m_is_parsed = true;
 
     result = HandleSwitches();
-    if (result < 0)
-        return -1;
+    if (result < 0) return -1;
     result = HandleActions();
-    if (result <= 0)
-        return result;
+    if (result <= 0) return result;
 
     if (m_vm.count("help"))
     {
@@ -218,12 +216,9 @@ bool TestCaseCtrlCore::IsParsed()
 
 bool TestCaseCtrlCore::DoFindFolders()
 {
-    if (!GetTestFilesFolder().empty())
-        return false;
-    if (m_search_paths.size() != 0)
-        return true;
-    if (m_search_path_env_vars.size() != 0)
-        return true;
+    if (!GetTestFilesFolder().empty()) return false;
+    if (m_search_paths.size() != 0) return true;
+    if (m_search_path_env_vars.size() != 0) return true;
     return false;
 }
 
@@ -233,21 +228,19 @@ int32_t TestCaseCtrlCore::FindFolders()
 
     // First check all given environment variables as path root
     result = FindFoldersEnvVarAsRoot();
-    if (result == 0)
-        return 0;
+    if (result == 0) return 0;
     result = FindFoldersCWDAsRoot();
-    if (result == 0)
-        return 0;
+    if (result == 0) return 0;
     return -1;
 }
 
 int32_t TestCaseCtrlCore::SearchRelativePathFromRoot(const boost::filesystem::path &root_path)
 {
-    std::vector<std::wstring>::iterator search_path_it;
-    std::wstring wenv_var;
+    std::vector<std::string>::iterator search_path_it;
+    std::string wenv_var;
     std::string env_var;
-    std::wstring wenv_var_value;
-    //char *value;
+    std::string wenv_var_value;
+    // char *value;
     boost::filesystem::path full_path;
 
     LoadEnvVar();
@@ -257,8 +250,7 @@ int32_t TestCaseCtrlCore::SearchRelativePathFromRoot(const boost::filesystem::pa
     {
         full_path = *search_path_it;
         // If the search path is absolute, it can't be used as a relative path
-        if (full_path.is_absolute())
-            continue;
+        if (full_path.is_absolute()) continue;
         // Build the full path using the enviroment variable value as root path
         full_path = root_path;
         // Append the relative search path
@@ -268,7 +260,7 @@ int32_t TestCaseCtrlCore::SearchRelativePathFromRoot(const boost::filesystem::pa
         if (boost::filesystem::exists(full_path) == true)
         {
             // Since the path exists, it is assumed to be the correct one
-            SetTestFilesFolder(full_path.wstring());
+            SetTestFilesFolder(full_path.string());
             return 0;
         }
     }
@@ -277,18 +269,17 @@ int32_t TestCaseCtrlCore::SearchRelativePathFromRoot(const boost::filesystem::pa
 
 int32_t TestCaseCtrlCore::FindFoldersCWDAsRoot()
 {
-    std::vector<std::wstring>::iterator it;
+    std::vector<std::string>::iterator it;
     boost::filesystem::path test_path;
-    //int result;
+    // int result;
 
     for (it = m_search_paths.begin(); it != m_search_paths.end(); ++it)
     {
         test_path = *it;
-        if (test_path.is_absolute() == true)
-            continue;
+        if (test_path.is_absolute() == true) continue;
         if (boost::filesystem::exists(test_path))
         {
-            SetTestFilesFolder(test_path.wstring());
+            SetTestFilesFolder(test_path.string());
             return 0;
         }
     }
@@ -297,12 +288,12 @@ int32_t TestCaseCtrlCore::FindFoldersCWDAsRoot()
 
 int32_t TestCaseCtrlCore::FindFoldersEnvVarAsRoot()
 {
-    std::vector<std::wstring>::iterator env_var_it;
-    std::vector<std::wstring>::iterator search_path_it;
+    std::vector<std::string>::iterator env_var_it;
+    std::vector<std::string>::iterator search_path_it;
     boost::filesystem::path test_path;
     boost::filesystem::path full_path;
-    std::wstring wenv_var_value;
-    std::wstring search_path;
+    std::string wenv_var_value;
+    std::string search_path;
     int result;
 
     // Make sure all enviroment variables were loaded
@@ -314,62 +305,55 @@ int32_t TestCaseCtrlCore::FindFoldersEnvVarAsRoot()
         test_path = wenv_var_value;
 
         result = SearchRelativePathFromRoot(test_path);
-        if (result == 0)
-            return result;
+        if (result == 0) return result;
     }
     return -1;
 }
 
-void TestCaseCtrlCore::AddSearchPath(const std::wstring &search_path)
+void TestCaseCtrlCore::AddSearchPath(const std::string &search_path)
 {
     m_search_paths.push_back(search_path);
 }
 
-void TestCaseCtrlCore::AddSearchPathEnvVar(const std::wstring &env_var)
+void TestCaseCtrlCore::AddSearchPathEnvVar(const std::string &env_var)
 {
     m_search_path_env_vars.push_back(env_var);
 }
 
 void TestCaseCtrlCore::LoadEnvVar()
 {
-    if (m_vec_env_vars.size() == m_search_path_env_vars.size())
-        return;
+    if (m_vec_env_vars.size() == m_search_path_env_vars.size()) return;
 
-    std::vector<std::wstring>::iterator it;
-    std::wstring wenv_var;
+    std::vector<std::string>::iterator it;
     std::string env_var;
     char *value;
-    std::wstring wenv_value;
+    std::string env_value;
 
     for (it = m_search_path_env_vars.begin(); it != m_search_path_env_vars.end(); ++it)
     {
-        wenv_var = *it;
-        env_var = boost::locale::conv::utf_to_utf<char>(wenv_var);
+        env_var = *it;
         value = std::getenv(env_var.c_str());
-        if (value == nullptr)
-            continue;
-        wenv_value = boost::locale::conv::utf_to_utf<wchar_t>(value);
-        m_map_env_vars[wenv_var] = wenv_value;
-        m_vec_env_vars.push_back(wenv_value);
+        if (value == nullptr) continue;
+        
+        m_map_env_vars[env_var] = env_value;
+        m_vec_env_vars.push_back(env_value);
     }
 }
 
 void TestCaseCtrlCore::AddDefaultOptions()
 {
-    m_desc.add_options()
-    ("help", "produce help message")
-    ("help-all", "produce help message")
-    ("run_test", po::value<std::string>(&m_run_test), "give the name of the test to run")
-    ("list", "list all unit tests")
+    m_desc.add_options()("help", "produce help message")("help-all", "produce help message")(
+        "run_test", po::value<std::string>(&m_run_test), "give the name of the test to run")("list",
+                                                                                             "list all unit tests")
 
 #ifdef ESYS_USE_VLD
-    ("vld-off", "turn off vld")
+        ("vld-off", "turn off vld")
 #endif
 
-    ("log_trace", po::value<std::string>(&m_log_trace_path)->implicit_value(""), "log calling traces")
-    ("verbose,v", po::value<int>()->default_value(0), "set verbosity level: 0 is off")
-    ("test_file_path", po::value<std::string>(&m_test_file_path_s), "set the path for test files")
-    ("temp_file_path", po::value<std::string>(&m_temp_file_path_s), "set the path for temp files");
+            ("log_trace", po::value<std::string>(&m_log_trace_path)->implicit_value(""),
+             "log calling traces")("verbose,v", po::value<int>()->default_value(0), "set verbosity level: 0 is off")(
+                "test_file_path", po::value<std::string>(&m_test_file_path_s), "set the path for test files")(
+                "temp_file_path", po::value<std::string>(&m_temp_file_path_s), "set the path for temp files");
 }
 
 void TestCaseCtrlCore::SetArgs(int argc, char **argv)
@@ -386,37 +370,27 @@ void TestCaseCtrlCore::SetArgs(int argc, wchar_t **argv)
 
 void TestCaseCtrlCore::SetTestFilesFolder(const std::string &test_files_folder)
 {
-    m_test_files_folder = boost::locale::conv::utf_to_utf<wchar_t>(test_files_folder);
-}
-
-void TestCaseCtrlCore::SetTestFilesFolder(const std::wstring &test_files_folder)
-{
     m_test_files_folder = test_files_folder;
 }
 
-const std::wstring &TestCaseCtrlCore::GetTestFilesFolder()
+const std::string &TestCaseCtrlCore::GetTestFilesFolder()
 {
     return m_test_files_folder;
 }
 
 void TestCaseCtrlCore::SetTempFilesFolder(const std::string &temp_files_folder)
 {
-    m_temp_files_folder = boost::locale::conv::utf_to_utf<wchar_t>(temp_files_folder);
-}
-
-void TestCaseCtrlCore::SetTempFilesFolder(const std::wstring &temp_files_folder)
-{
     m_temp_files_folder = temp_files_folder;
 }
 
-const std::wstring &TestCaseCtrlCore::GetTempFilesFolder()
+const std::string &TestCaseCtrlCore::GetTempFilesFolder()
 {
     if (m_temp_files_folder.empty())
     {
         ::boost::filesystem::path cur_path = ::boost::filesystem::absolute("");
 
         cur_path /= "temp";
-        m_temp_files_folder = cur_path.wstring();
+        m_temp_files_folder = cur_path.string();
     }
 
     if (!::boost::filesystem::exists(m_temp_files_folder))
@@ -427,7 +401,6 @@ const std::wstring &TestCaseCtrlCore::GetTempFilesFolder()
     return m_temp_files_folder;
 }
 
-}
+} // namespace multios
 
-}
-
+} // namespace esystest

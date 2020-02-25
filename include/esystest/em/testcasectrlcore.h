@@ -3,14 +3,14 @@
  * \brief
  *
  * \cond
- *__legal_b__
+ * __legal_b__
  *
- * Copyright (c) 2015-2018 Michel Gillet
+ * Copyright (c) 2015-2020 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
  *
- *__legal_e__
+ * __legal_e__
  * \endcond
  *
  */
@@ -26,7 +26,7 @@ namespace esystest
 namespace em
 {
 
-class ESYSTEST_API TestCaseCtrlCore: public TestCaseCtrlBase
+class ESYSTEST_API TestCaseCtrlCore : public TestCaseCtrlBase
 {
 public:
     TestCaseCtrlCore();
@@ -39,16 +39,10 @@ protected:
     bool m_log_trace;
 };
 
-}
+} // namespace em
 
 #ifdef ESYSTEST_EM
 using namespace em;
 #endif
 
-}
-
-
-
-
-
-
+} // namespace esystest

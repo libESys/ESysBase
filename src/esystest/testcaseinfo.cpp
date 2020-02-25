@@ -3,14 +3,14 @@
  * \brief
  *
  * \cond
- *__legal_b__
+ * __legal_b__
  *
- * Copyright (c) 2015-2016 Michel Gillet
+ * Copyright (c) 2015-2020 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
  *
- *__legal_e__
+ * __legal_e__
  * \endcond
  *
  */
@@ -63,8 +63,14 @@ void TestCaseInfo::Populate()
 }
 
 TestCaseInfo::TestCaseInfo(const char *name, const char *file, int line)
-	: m_name(name), m_file(file), m_line(line), m_test_suite(nullptr), m_prev(nullptr)
-    , m_next(nullptr), m_order(ORDER_NOT_SET), m_result(0)
+    : m_name(name)
+    , m_file(file)
+    , m_line(line)
+    , m_test_suite(nullptr)
+    , m_prev(nullptr)
+    , m_next(nullptr)
+    , m_order(ORDER_NOT_SET)
+    , m_result(0)
 {
 #ifdef ESYSTEST_DBG
     m_id = m_count;
@@ -90,12 +96,12 @@ TestCaseInfo::~TestCaseInfo()
 
 const char *TestCaseInfo::GetFile()
 {
-	return m_file;
+    return m_file;
 }
 
 int TestCaseInfo::GetLine()
 {
-	return m_line;
+    return m_line;
 }
 
 const char *TestCaseInfo::GetName()
@@ -115,32 +121,32 @@ int TestCaseInfo::GetResult()
 
 void TestCaseInfo::SetSuite(TestSuite *test_suite)
 {
-	m_test_suite = test_suite;
+    m_test_suite = test_suite;
 }
 
 TestSuite *TestCaseInfo::GetSuite()
 {
-	return m_test_suite;
+    return m_test_suite;
 }
 
 void TestCaseInfo::SetPrev(TestCaseInfo *prev)
 {
-	m_prev = prev;
+    m_prev = prev;
 }
 
 TestCaseInfo *TestCaseInfo::GetPrev()
 {
-	return m_prev;
+    return m_prev;
 }
 
 void TestCaseInfo::SetNext(TestCaseInfo *next)
 {
-	m_next = next;
+    m_next = next;
 }
 
 TestCaseInfo *TestCaseInfo::GetNext()
 {
-	return m_next;
+    return m_next;
 }
 
 void TestCaseInfo::SetOrder(unsigned int order)
@@ -196,5 +202,4 @@ int TestCaseInfo::GetId()
 }
 #endif
 
-}
-
+} // namespace esystest

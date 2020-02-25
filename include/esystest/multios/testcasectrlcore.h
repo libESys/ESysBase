@@ -3,14 +3,14 @@
  * \brief
  *
  * \cond
- *__legal_b__
+ * __legal_b__
  *
- * Copyright (c) 2015-2018 Michel Gillet
+ * Copyright (c) 2015-2020 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
  *
- *__legal_e__
+ * __legal_e__
  * \endcond
  *
  */
@@ -36,7 +36,7 @@ namespace esystest
 namespace multios
 {
 
-class ESYSTEST_API TestCaseCtrlCore: public TestCaseCtrlBase
+class ESYSTEST_API TestCaseCtrlCore : public TestCaseCtrlBase
 {
 public:
     TestCaseCtrlCore();
@@ -57,12 +57,12 @@ public:
 
     //! Search for the folder containing the test files
     /*
-    * The following steps are taken by searching path:
-    * - composed of 1 environment variable and a relative search path
-    * - composed of current working directory and a relative search path
-    * - absolute search path
-    * - environment variable as absolute path
-    */
+     * The following steps are taken by searching path:
+     * - composed of 1 environment variable and a relative search path
+     * - composed of current working directory and a relative search path
+     * - absolute search path
+     * - environment variable as absolute path
+     */
     virtual int32_t FindFolders();
     virtual bool DoFindFolders();
 
@@ -72,8 +72,8 @@ public:
     //! Search for test files folder by using current working directory as root folder
     virtual int32_t FindFoldersCWDAsRoot();
 
-    void AddSearchPath(const std::wstring &search_path);
-    void AddSearchPathEnvVar(const std::wstring &env_var);
+    void AddSearchPath(const std::string &search_path);
+    void AddSearchPathEnvVar(const std::string &env_var);
     int32_t SearchRelativePathFromRoot(const boost::filesystem::path &root_path);
 
     void LoadEnvVar();
@@ -81,18 +81,13 @@ public:
     void SetArgs(int argc, char **argv);
     void SetArgs(int argc, wchar_t **argv);
 
-    const std::wstring &GetTestFilesFolder();
-    const std::wstring &GetTempFilesFolder();
+    const std::string &GetTestFilesFolder();
+    const std::string &GetTempFilesFolder();
+
 protected:
     void AddDefaultOptions();
     //! Set the folder where the test files are located
-    void SetTestFilesFolder(const std::wstring &test_files_folder);
-
-    //! Set the folder where the test files are located
     void SetTestFilesFolder(const std::string &test_files_folder);
-
-    //! Set the folder where the temp files are located
-    void SetTempFilesFolder(const std::wstring &temp_files_folder);
 
     //! Set the folder where the temp files are located
     void SetTempFilesFolder(const std::string &temp_files_folder);
@@ -100,19 +95,19 @@ protected:
     int m_argc = 0;
     char **m_argv = nullptr;
     wchar_t **m_wargv = nullptr;
-    std::map<std::wstring, std::wstring> m_map_env_vars;
-    std::vector<std::wstring> m_vec_env_vars;
-    std::vector<std::wstring> m_search_paths;
-    std::vector<std::wstring> m_search_path_env_vars;
-    std::wstring m_test_file_path;
+    std::map<std::string, std::string> m_map_env_vars;
+    std::vector<std::string> m_vec_env_vars;
+    std::vector<std::string> m_search_paths;
+    std::vector<std::string> m_search_path_env_vars;
+    std::string m_test_file_path;
     std::string m_test_file_path_s;
     std::string m_temp_file_path_s;
     std::string m_log_trace_path;
-    std::wstring m_test_files_folder;
-    std::wstring m_temp_files_folder;
+    std::string m_test_files_folder;
+    std::string m_temp_files_folder;
     std::string m_dft_test_file_path;
-    //boost::filesystem::path m_abs_test_file_path;
-    //boost::filesystem::path m_abs_temp_path;
+    // boost::filesystem::path m_abs_test_file_path;
+    // boost::filesystem::path m_abs_temp_path;
     std::string m_run_test;
     po::variables_map m_vm;
     po::options_description m_desc;
@@ -121,15 +116,10 @@ protected:
     bool m_log_trace;
 };
 
-}
+} // namespace multios
 
 #ifdef ESYSTEST_MULTIOS
 using namespace multios;
 #endif
 
-}
-
-
-
-
-
+} // namespace esystest

@@ -3,30 +3,28 @@
  * \brief
  *
  * \cond
- *__legal_b__
+ * __legal_b__
  *
- * Copyright (c) 2015-2016 Michel Gillet
+ * Copyright (c) 2015-2020 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
  *
- *__legal_e__
+ * __legal_e__
  * \endcond
  *
  */
 
-#ifndef __ESYSTEST_TESTSUITE_H__
-#define __ESYSTEST_TESTSUITE_H__
+#pragma once
 
 #include "esystest/esystest_defs.h"
 
 extern "C"
 {
 
-typedef void (*before_main_type)(void);
+    typedef void (*before_main_type)(void);
 
-ESYSTEST_API void esystest_set_before_main(before_main_type before_main);
-
+    ESYSTEST_API void esystest_set_before_main(before_main_type before_main);
 }
 
 #ifdef __cplusplus
@@ -105,10 +103,11 @@ public:
     static void IncTotalFailureCount();
 
     static before_main_type GetBeforeMain();
+
 protected:
     static TestSuite ESYSTEST_DATA_SECTION *g_current;
     static TestSuite ESYSTEST_DATA_SECTION *g_master;
-    //static TestSuite g_dft;
+    // static TestSuite g_dft;
     static unsigned int ESYSTEST_DATA_SECTION g_count;
 
     TestSuite *m_first;
@@ -133,10 +132,5 @@ protected:
 #endif
 };
 
-}
+} // namespace esystest
 #endif
-
-
-#endif
-
-

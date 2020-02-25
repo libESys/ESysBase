@@ -3,14 +3,14 @@
  * \brief
  *
  * \cond
- *__legal_b__
+ * __legal_b__
  *
- * Copyright (c) 2015-2016 Michel Gillet
+ * Copyright (c) 2015-2020 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
  *
- *__legal_e__
+ * __legal_e__
  * \endcond
  *
  */
@@ -33,7 +33,8 @@ Logger *Logger::Get()
     return s_logger;
 }
 
-Logger::Logger(): m_report_pass(false)
+Logger::Logger()
+    : m_report_pass(false)
 {
 }
 
@@ -51,16 +52,14 @@ bool Logger::GetReportPass()
     return m_report_pass;
 }
 
-Logger& Logger::operator<< (Logger& (*op)(Logger&))
+Logger &Logger::operator<<(Logger &(*op)(Logger &))
 {
     return (*op)(*this);
 }
 
-ESYSTEST_API Logger& endl(Logger &log)
+ESYSTEST_API Logger &endl(Logger &log)
 {
     return log.endl();
 }
 
-}
-
-
+} // namespace esystest

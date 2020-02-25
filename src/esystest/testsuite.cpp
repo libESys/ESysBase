@@ -3,14 +3,14 @@
  * \brief
  *
  * \cond
- *__legal_b__
+ * __legal_b__
  *
- * Copyright (c) 2015-2016 Michel Gillet
+ * Copyright (c) 2015-2020 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
  *
- *__legal_e__
+ * __legal_e__
  * \endcond
  *
  */
@@ -31,7 +31,6 @@ extern "C"
     {
         g_esystest_before_main = before_main;
     }
-
 }
 
 namespace esystest
@@ -77,8 +76,7 @@ void TestSuite::SetCurrent(TestSuite *current)
 
 TestSuite *TestSuite::GetCurrent()
 {
-    if (g_current == nullptr)
-        g_current = g_master;
+    if (g_current == nullptr) g_current = g_master;
     return g_current;
 }
 
@@ -88,9 +86,18 @@ TestSuite *TestSuite::GetMaster()
 }
 
 TestSuite::TestSuite(const char *name)
-    : m_first(nullptr), m_last(nullptr), m_prev(nullptr), m_next(nullptr), m_first_child(nullptr)
-    , m_first_case(nullptr), m_last_case(nullptr), m_test_case_count(0), m_child_suite_count(0)
-    , m_argc(0), m_argv(nullptr), m_name(name)
+    : m_first(nullptr)
+    , m_last(nullptr)
+    , m_prev(nullptr)
+    , m_next(nullptr)
+    , m_first_child(nullptr)
+    , m_first_case(nullptr)
+    , m_last_case(nullptr)
+    , m_test_case_count(0)
+    , m_child_suite_count(0)
+    , m_argc(0)
+    , m_argv(nullptr)
+    , m_name(name)
 {
     ++TestSuite::g_count;
 
@@ -149,7 +156,6 @@ TestSuite *TestSuite::GetNext()
 {
     return m_next;
 }
-
 
 void TestSuite::SetFirstChild(TestSuite *first_child)
 {
@@ -220,8 +226,7 @@ void TestSuite::Run()
     if (ctrl != nullptr)
     {
         result = ctrl->Init();
-        if (result < 0)
-            return;
+        if (result < 0) return;
     }
 
     // This is the default behavior if there is TestCase Controller
@@ -232,7 +237,7 @@ void TestSuite::RunTestCases()
 {
     TestSuite *cur;
     TestCaseInfo *cur_test;
-    TestCaseCtrlBase *ctrl= TestCaseCtrlBase::Get();
+    TestCaseCtrlBase *ctrl = TestCaseCtrlBase::Get();
 
     Start();
 
@@ -246,14 +251,11 @@ void TestSuite::RunTestCases()
         }
         else
             cur_test->Invoke();
-        if (ctrl != nullptr)
-            ctrl->AfterTest();
-        if (cur_test->GetResult() < 0)
-            cur_test->Failed();
+        if (ctrl != nullptr) ctrl->AfterTest();
+        if (cur_test->GetResult() < 0) cur_test->Failed();
 
         cur_test = cur_test->GetNext();
-        if (GetBeforeMain() != nullptr)
-            (*GetBeforeMain())();
+        if (GetBeforeMain() != nullptr) (*GetBeforeMain())();
     }
 
     cur = GetFirst();
@@ -270,11 +272,10 @@ void TestSuite::ListTestCases()
 {
     TestSuite *cur;
     TestCaseInfo *cur_test;
-    //TestCaseCtrlBase *ctrl = TestCaseCtrlBase::Get();
+    // TestCaseCtrlBase *ctrl = TestCaseCtrlBase::Get();
     Logger *log = Logger::Get();
 
-    if (log == nullptr)
-        return;
+    if (log == nullptr) return;
 
     *log << "TestSuite " << this->GetName() << ":" << endl;
     cur_test = GetFirstCase();
@@ -292,9 +293,6 @@ void TestSuite::ListTestCases()
         cur->ListTestCases();
         cur = m_first->GetNext();
     }
-
-
-
 }
 
 void TestSuite::Sort()
@@ -311,8 +309,7 @@ void TestSuite::SortTestCaseInfo()
     unsigned int idx;
     unsigned int count;
 
-    if (m_test_case_count < 2)
-        return;
+    if (m_test_case_count < 2) return;
 
     // Very simply bubble sort, mostly because there is no need for auxiliary memory
     count = m_test_case_count - 1;
@@ -343,19 +340,15 @@ void TestSuite::SortTestCaseInfo()
 
 void TestSuite::Swap(TestCaseInfo *test1, TestCaseInfo *test2)
 {
-    if (test1->GetPrev()!=nullptr)
-        test1->GetPrev()->SetNext(test2);
-    if (test2->GetNext() != nullptr)
-        test2->GetNext()->SetPrev(test1);
+    if (test1->GetPrev() != nullptr) test1->GetPrev()->SetNext(test2);
+    if (test2->GetNext() != nullptr) test2->GetNext()->SetPrev(test1);
     test2->SetPrev(test1->GetPrev());
     test1->SetNext(test2->GetNext());
     test2->SetNext(test1);
     test1->SetPrev(test2);
 
-    if (m_first_case == test1)
-        m_first_case = test2;
-    if (m_last_case == test2)
-        m_last_case = test1;
+    if (m_first_case == test1) m_first_case = test2;
+    if (m_last_case == test2) m_last_case = test1;
 }
 
 unsigned int TestSuite::GetTestCaseCount()
@@ -393,10 +386,8 @@ void TestSuite::IncFailureCount()
 int TestSuite::GetSuccessCountArray(CheckType check_type, ToolLevel tool_level)
 {
 #ifdef ESYSTEST_META
-    if (check_type >= CHECKTYPE_COUNT)
-        return -2;
-    if (tool_level >= TOOLLEVEL_COUNT)
-        return -3;
+    if (check_type >= CHECKTYPE_COUNT) return -2;
+    if (tool_level >= TOOLLEVEL_COUNT) return -3;
     return m_success_count_array[check_type, tool_level];
 #else
     return -1;
@@ -406,10 +397,8 @@ int TestSuite::GetSuccessCountArray(CheckType check_type, ToolLevel tool_level)
 int TestSuite::GetFailureCountArray(CheckType check_type, ToolLevel tool_level)
 {
 #ifdef ESYSTEST_META
-    if (check_type >= CHECKTYPE_COUNT)
-        return -2;
-    if (tool_level >= TOOLLEVEL_COUNT)
-        return -3;
+    if (check_type >= CHECKTYPE_COUNT) return -2;
+    if (tool_level >= TOOLLEVEL_COUNT) return -3;
     return m_failure_count_array[check_type, tool_level];
 #else
     return -1;
@@ -462,27 +451,19 @@ const char *TestSuite::GetName()
 void TestSuite::Start()
 {
     Logger *log = Logger::Get();
-    if (log == nullptr)
-        return;
+    if (log == nullptr) return;
     *log << "[StartSuite: ";
-    if (GetName() != nullptr)
-        *log << GetName();
+    if (GetName() != nullptr) *log << GetName();
     *log << "]" << esystest::endl;
 }
 
 void TestSuite::End()
 {
     Logger *log = Logger::Get();
-    if (log == nullptr)
-        return;
+    if (log == nullptr) return;
     *log << "[EndSuite: ";
-    if (GetName() != nullptr)
-        *log << GetName();
+    if (GetName() != nullptr) *log << GetName();
     *log << "]" << esystest::endl;
 }
 
-}
-
-
-
-
+} // namespace esystest

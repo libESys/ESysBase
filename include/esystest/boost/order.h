@@ -16,12 +16,13 @@ namespace boost_impl
 class /*ESYSTEST_API*/ order : public ::boost::unit_test::decorator::base
 {
 public:
-    explicit order(int value) : m_value(value)
+    explicit order(int value)
+        : m_value(value)
     {
     }
 
 private:
-    virtual void apply(::boost::unit_test::test_unit& tu)
+    virtual void apply(::boost::unit_test::test_unit &tu)
     {
     }
 
@@ -33,10 +34,10 @@ private:
     int m_value;
 };
 
-}
+} // namespace boost_impl
 
 #ifdef ESYSTEST_USE_BOOST
 using namespace boost_impl;
 #endif
 
-}
+} // namespace esystest

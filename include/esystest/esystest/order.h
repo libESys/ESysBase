@@ -3,14 +3,14 @@
  * \brief
  *
  * \cond
- *__legal_b__
+ * __legal_b__
  *
- * Copyright (c) 2015-2018 Michel Gillet
+ * Copyright (c) 2015-2020 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
  *
- *__legal_e__
+ * __legal_e__
  * \endcond
  *
  */
@@ -42,16 +42,13 @@ protected:
 
 ESYSTEST_API Order order(int value);
 
-}
+} // namespace esystest_impl
 
 #ifdef ESYSTEST_USE_ESYSTEST
 using namespace esystest_impl;
 #endif
 
-}
+} // namespace esystest
 
-ESYSTEST_API esystest::TestCaseInfo &operator*(esystest::TestCaseInfo& info, const esystest::esystest_impl::Order & order);
-
-
-
-
+ESYSTEST_API esystest::TestCaseInfo &operator*(esystest::TestCaseInfo &info,
+                                               const esystest::esystest_impl::Order &order);
