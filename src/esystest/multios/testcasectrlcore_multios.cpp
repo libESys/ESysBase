@@ -178,7 +178,7 @@ int TestCaseCtrlCore::Parse()
         }
         if (m_vm.count("vld-off"))
         {
-#ifdef WIN32
+#if defined(WIN32) && defined(ESYS_USE_VLD)
             VLDDisable();
 #endif
         }

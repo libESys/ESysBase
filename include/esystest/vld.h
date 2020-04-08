@@ -17,9 +17,6 @@
 
 #pragma once
 
-#if defined(WIN32) && !defined(ESYS_NO_VLD)
+#if defined(WIN32) && defined(ESYS_USE_VLD)
 #include <vld.h>
-#ifndef ESYS_USE_VLD
-#define ESYS_USE_VLD
-#endif
 #endif
