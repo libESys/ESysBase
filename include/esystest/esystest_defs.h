@@ -28,6 +28,10 @@
 #define ESYSPROG_TEMPLATE
 #endif
 
+#ifndef ESYSTEST_EXPORTS
+#include "esystest/config.h"
+#endif
+
 #ifdef _MSC_VER
 #pragma warning(disable : 4251)
 #endif

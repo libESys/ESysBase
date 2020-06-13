@@ -19,7 +19,7 @@
 #include "esystest/testcasectrlbase.h"
 #include "esystest/mastertestsuite.h"
 
-#include <string.h>
+#include <cstring>
 
 namespace esystest
 {
@@ -48,7 +48,8 @@ TestCaseCtrlBase::~TestCaseCtrlBase()
 void TestCaseCtrlBase::RunOneTest(char *name)
 {
     m_run_all = false;
-    strcpy(m_test_case_name, name);
+    strncpy(m_test_case_name, name, NAME_SIZE);
+    m_test_case_name[NAME_SIZE] = 0;
 }
 
 bool TestCaseCtrlBase::GetRunAll()

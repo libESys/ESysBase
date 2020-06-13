@@ -292,7 +292,6 @@ int32_t TestCaseCtrlCore::FindFoldersEnvVarAsRoot()
     std::vector<std::string>::iterator search_path_it;
     boost::filesystem::path test_path;
     boost::filesystem::path full_path;
-    std::string wenv_var_value;
     std::string search_path;
     int result;
 
@@ -301,8 +300,8 @@ int32_t TestCaseCtrlCore::FindFoldersEnvVarAsRoot()
 
     for (env_var_it = m_vec_env_vars.begin(); env_var_it != m_vec_env_vars.end(); ++env_var_it)
     {
-        wenv_var_value = *env_var_it;
-        test_path = wenv_var_value;
+        test_path = *env_var_it;
+        test_path = test_path.normalize().make_preferred();
 
         result = SearchRelativePathFromRoot(test_path);
         if (result == 0) return result;
@@ -335,8 +334,8 @@ void TestCaseCtrlCore::LoadEnvVar()
         value = std::getenv(env_var.c_str());
         if (value == nullptr) continue;
         
-        m_map_env_vars[env_var] = env_value;
-        m_vec_env_vars.push_back(env_value);
+        m_map_env_vars[env_var] = value;
+        m_vec_env_vars.push_back(value);
     }
 }
 

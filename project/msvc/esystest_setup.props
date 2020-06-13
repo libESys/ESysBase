@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="UserMacros">
+    <esystestVersionString>010</esystestVersionString>
+    <esystestShortVersionString>01</esystestShortVersionString>
+    <esystestToolkitPrefix>msw</esystestToolkitPrefix>
+    <esystestCfg>
+    </esystestCfg>
+    <esystestVendor>custom</esystestVendor>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(VisualStudioVersion)' == '10.0'">
+    <esystestCompilerPrefix>vc100</esystestCompilerPrefix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(VisualStudioVersion)' == '11.0'">
+    <esystestCompilerPrefix>vc110</esystestCompilerPrefix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(VisualStudioVersion)' == '12.0'">
+    <esystestCompilerPrefix>vc120</esystestCompilerPrefix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(VisualStudioVersion)' == '14.0'">
+    <esystestCompilerPrefix>vc140</esystestCompilerPrefix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(VisualStudioVersion)' == '15.0'">
+    <esystestCompilerPrefix>vc141</esystestCompilerPrefix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(VisualStudioVersion)' == '16.0'">
+    <esystestCompilerPrefix>vc142</esystestCompilerPrefix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(Platform)'=='Win32'">
+    <esysArchSuffix>x32</esysArchSuffix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(Platform)'=='x64'">
+    <esysArchSuffix>x64</esysArchSuffix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(Platform)'=='ARM64'">
+    <esysArchSuffix>arm64</esysArchSuffix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(Platform)'=='Itanium'">
+    <esysArchSuffix>ia64</esysArchSuffix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="('$(Configuration)'=='Debug' or '$(Configuration)'=='DebugDLL') and '$(CharacterSet)'=='Unicode'">
+    <esystestSuffix>u</esystestSuffix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="('$(Configuration)'=='Debug' or '$(Configuration)'=='DebugDLL') and '$(CharacterSet)'!='Unicode'">
+    <esystestSuffix></esystestSuffix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="('$(Configuration)'=='Release' or '$(Configuration)'=='ReleaseDLL') and '$(CharacterSet)'=='Unicode'">
+    <esystestSuffix>u</esystestSuffix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="('$(Configuration)'=='Release' or '$(Configuration)'=='ReleaseDLL') and '$(CharacterSet)'!='Unicode'">
+    <esystestSuffix>
+    </esystestSuffix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(Configuration)'=='Debug' or '$(Configuration)'=='DebugDLL'">
+    <esystestSuffixDebug>-gd</esystestSuffixDebug>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(Configuration)'!='Debug' and '$(Configuration)'!='DebugDLL'">
+    <esystestSuffixDebug>
+    </esystestSuffixDebug>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(Configuration)'=='DebugDLL' or '$(Configuration)'=='ReleaseDLL'">
+    <esystestLibTypeSuffix>dll</esystestLibTypeSuffix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(Configuration)'!='DebugDLL' and '$(Configuration)'!='ReleaseDLL'">
+    <esystestLibTypeSuffix>lib</esystestLibTypeSuffix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros">
+    <esystestOutDirName>$(esystestCompilerPrefix)_$(esysArchSuffix)_$(esystestLibTypeSuffix)$(esycCfg)</esystestOutDirName>
+    <esystestLibOutDir>..\..\lib\$(esystestOutDirName)\</esystestLibOutDir>
+	<esystestLibDir>lib\$(esystestOutDirName)</esystestLibDir>
+	<esystestExeOutDir>bin\$(esystestOutDirName)\</esystestExeOutDir>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(Configuration)'=='DebugDLL'">
+    <esystestIntRootDir>build\$(esystestOutDirName)\$(ProjectName)\$(Configuration)\</esystestIntRootDir>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(Configuration)'=='ReleaseDLL'">
+    <esystestIntRootDir>build\$(esystestOutDirName)\$(ProjectName)\$(Configuration)</esystestIntRootDir>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(Configuration)'=='Debug'">
+    <esystestIntRootDir>build\$(esystestOutDirName)\$(ProjectName)\$(Configuration)\</esystestIntRootDir>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(Configuration)'=='Release'">
+    <esystestIntRootDir>build\$(esystestOutDirName)\$(ProjectName)\$(Configuration)\</esystestIntRootDir>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros">
+    <esystestIncSubDir>$(wxToolkitPrefix)$(esystestSuffix)</esystestIncSubDir>
+    <esystestDllNameSuffix>-$(esystestCompilerPrefix)$(esystestSuffixDebug)-$(esysArchSuffix)</esystestDllNameSuffix>
+    <esystestLibNameSuffix>-$(esystestCompilerPrefix)$(esystestSuffixDebug)-$(esysArchSuffix)</esystestLibNameSuffix>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalOptions Condition="'$(PlatformToolset)' == 'v140_xp'">/Zc:threadSafeInit- %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;shell32.lib;shlwapi.lib;ole32.lib;oleaut32.lib;uuid.lib;advapi32.lib;version.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;wininet.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="wxShortVersionString">
+      <Value>$(wxShortVersionString)</Value>
+    </BuildMacro>
+    <BuildMacro Include="esysArchSuffix">
+      <Value>$(esysArchSuffix)</Value>
+    </BuildMacro>
+    <BuildMacro Include="wxToolkitPrefix">
+      <Value>$(wxToolkitPrefix)</Value>
+    </BuildMacro>
+    <BuildMacro Include="esystestCompilerPrefix">
+      <Value>$(esystestCompilerPrefix)</Value>
+    </BuildMacro>
+    <BuildMacro Include="esycCfg">
+      <Value>$(esycCfg)</Value>
+    </BuildMacro>
+    <BuildMacro Include="esystestVendor">
+      <Value>$(esystestVendor)</Value>
+    </BuildMacro>
+    <BuildMacro Include="esystestLibOutDir">
+      <Value>$(esystestLibOutDir)</Value>
+    </BuildMacro>
+	<BuildMacro Include="esystestLibDir">
+      <Value>$(esystestLibDir)</Value>
+    </BuildMacro>
+	<BuildMacro Include="esystestExeOutDir">
+      <Value>$(esystestExeOutDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="esystestOutDirName">
+      <Value>$(esystestOutDirName)</Value>
+    </BuildMacro>
+    <BuildMacro Include="esystestIntRootDir">
+      <Value>$(esystestIntRootDir)</Value>
+    </BuildMacro>
+	<BuildMacro Include="esystestDllNameSuffix">
+      <Value>$(esystestDllNameSuffix)</Value>
+    </BuildMacro>
+	<BuildMacro Include="esystestLibNameSuffix">
+      <Value>$(esystestLibNameSuffix)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

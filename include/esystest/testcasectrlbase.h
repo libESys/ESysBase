@@ -30,6 +30,8 @@ class ESYSTEST_API TestCaseInfo;
 class ESYSTEST_API TestCaseCtrlBase
 {
 public:
+    static const int NAME_SIZE = 50;
+
     TestCaseCtrlBase();
     virtual ~TestCaseCtrlBase();
 
@@ -53,7 +55,7 @@ protected:
     static TestCaseCtrlBase *s_ctrl;
 
     bool m_run_all;
-    char m_test_case_name[50];
+    char m_test_case_name[NAME_SIZE + 1];
 };
 
 } // namespace esystest
