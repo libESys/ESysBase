@@ -55,6 +55,9 @@ public:
     virtual int HandleSwitches();
     bool IsParsed();
 
+    virtual int GetArgC();
+    virtual char **GetArgV();
+
     //! Search for the folder containing the test files
     /*
      * The following steps are taken by searching path:
@@ -72,6 +75,8 @@ public:
     //! Search for test files folder by using current working directory as root folder
     virtual int32_t FindFoldersCWDAsRoot();
 
+    virtual int32_t FindFoldersInParentsFromCurrent();
+
     void AddSearchPath(const std::string &search_path);
     void AddSearchPathEnvVar(const std::string &env_var);
     int32_t SearchRelativePathFromRoot(const boost::filesystem::path &root_path);
@@ -84,8 +89,14 @@ public:
     const std::string &GetTestFilesFolder();
     const std::string &GetTempFilesFolder();
 
+    void set_strict_parsing(bool strict_parsing);
+    bool get_strict_parsing() const;
+
+    void set_use_esystest(bool use_esystest);
+    bool get_use_esystest() const;
+
 protected:
-    void AddDefaultOptions();
+    virtual void AddDefaultOptions();
     //! Set the folder where the test files are located
     void SetTestFilesFolder(const std::string &test_files_folder);
 
@@ -114,6 +125,8 @@ protected:
     bool m_is_parsed;
     int m_verbose;
     bool m_log_trace;
+    bool m_strict_parsing = true;
+    bool m_use_esystest = true;
 };
 
 } // namespace multios

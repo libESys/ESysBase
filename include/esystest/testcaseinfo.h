@@ -56,7 +56,7 @@ public:
     static TestCaseInfo *GetFirst();
     static TestCaseInfo *GetLast();
     static int GetCount();
-    static void Populate();
+    static void populate();
 
 #ifdef ESYSTEST_DBG
     int GetId();

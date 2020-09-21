@@ -45,7 +45,7 @@ int TestCaseInfo::GetCount()
     return m_count;
 }
 
-void TestCaseInfo::Populate()
+void TestCaseInfo::populate()
 {
     TestCaseInfo *cur = GetFirst();
     TestSuite *test_suite;

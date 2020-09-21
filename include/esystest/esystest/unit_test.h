@@ -400,7 +400,7 @@ int main(int argc, char *argv[])
 {
     esystest::MasterTestSuite &master = esystest::MasterTestSuite::Get();
 
-    esystest::TestCaseInfo::Populate();
+    esystest::TestCaseInfo::populate();
 
     master.SetCommandLine(argc, argv);
     master.Sort();

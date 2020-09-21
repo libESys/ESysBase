@@ -31,6 +31,10 @@ class ESYSTEST_API TestCaseCtrl : public TestCaseCtrlCore
 public:
     TestCaseCtrl();
     virtual ~TestCaseCtrl();
+
+    virtual void AddDefaultOptions() override;
+    virtual int GetArgC() override;
+    virtual char **GetArgV() override;
 };
 
 } // namespace boost_impl

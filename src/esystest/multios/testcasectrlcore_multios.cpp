@@ -143,8 +143,17 @@ int TestCaseCtrlCore::Parse()
 
     try
     {
-        po::store(po::parse_command_line(MasterTestSuite::Get().GetArgC(), MasterTestSuite::Get().GetArgV(), m_desc),
-                  m_vm);
+        if (get_strict_parsing())
+        {
+            po::parsed_options parsed = po::command_line_parser(GetArgC(), GetArgV()).options(m_desc).run();
+            po::store(parsed, m_vm);
+        }
+        else
+        {
+            po::parsed_options parsed =
+                po::command_line_parser(GetArgC(), GetArgV()).options(m_desc).allow_unregistered().run();
+            po::store(parsed, m_vm);
+        }
         po::notify(m_vm);
     }
     catch (po::error &e)
@@ -196,14 +205,17 @@ int TestCaseCtrlCore::Parse()
             std::cout << "temp_file_path was set to " << temp_file_path << ".\n";
             SetTempFilesFolder(temp_file_path);
         }
-        if (m_vm.count("run_test"))
+        if (get_use_esystest())
         {
-            RunOneTest((char *)m_run_test.c_str());
-        }
-        else if (m_vm.count("list"))
-        {
-            PrintList();
-            result = -1;
+            if (m_vm.count("run_test"))
+            {
+                RunOneTest((char *)m_run_test.c_str());
+            }
+            else if (m_vm.count("list"))
+            {
+                PrintList();
+                result = -1;
+            }
         }
     }
     return result;
@@ -212,6 +224,16 @@ int TestCaseCtrlCore::Parse()
 bool TestCaseCtrlCore::IsParsed()
 {
     return m_is_parsed;
+}
+
+int TestCaseCtrlCore::GetArgC()
+{
+    return MasterTestSuite::Get().GetArgC();
+}
+
+char **TestCaseCtrlCore::GetArgV()
+{
+    return MasterTestSuite::Get().GetArgV();
 }
 
 bool TestCaseCtrlCore::DoFindFolders()
@@ -230,6 +252,8 @@ int32_t TestCaseCtrlCore::FindFolders()
     result = FindFoldersEnvVarAsRoot();
     if (result == 0) return 0;
     result = FindFoldersCWDAsRoot();
+    if (result == 0) return 0;
+    result = FindFoldersInParentsFromCurrent();
     if (result == 0) return 0;
     return -1;
 }
@@ -260,7 +284,7 @@ int32_t TestCaseCtrlCore::SearchRelativePathFromRoot(const boost::filesystem::pa
         if (boost::filesystem::exists(full_path) == true)
         {
             // Since the path exists, it is assumed to be the correct one
-            SetTestFilesFolder(full_path.string());
+            SetTestFilesFolder(full_path.normalize().make_preferred().string());
             return 0;
         }
     }
@@ -282,6 +306,21 @@ int32_t TestCaseCtrlCore::FindFoldersCWDAsRoot()
             SetTestFilesFolder(test_path.string());
             return 0;
         }
+    }
+    return -1;
+}
+
+int32_t TestCaseCtrlCore::FindFoldersInParentsFromCurrent()
+{
+    boost::filesystem::path cur_path = boost::filesystem::current_path();
+    int result;
+
+    while (boost::filesystem::exists(cur_path))
+    {
+        result = SearchRelativePathFromRoot(cur_path);
+        if (result == 0) return result;
+
+        cur_path = cur_path.parent_path();
     }
     return -1;
 }
@@ -333,7 +372,7 @@ void TestCaseCtrlCore::LoadEnvVar()
         env_var = *it;
         value = std::getenv(env_var.c_str());
         if (value == nullptr) continue;
-        
+
         m_map_env_vars[env_var] = value;
         m_vec_env_vars.push_back(value);
     }
@@ -341,18 +380,20 @@ void TestCaseCtrlCore::LoadEnvVar()
 
 void TestCaseCtrlCore::AddDefaultOptions()
 {
-    m_desc.add_options()("help", "produce help message")("help-all", "produce help message")(
-        "run_test", po::value<std::string>(&m_run_test), "give the name of the test to run")("list",
-                                                                                             "list all unit tests")
-
+    // clang-format off
+    m_desc.add_options()
+        ("help", "produce help message")
+        ("help-all", "produce help message")
+        ("run_test", po::value<std::string>(&m_run_test), "give the name of the test to run")
+        ("list", "list all unit tests")
 #ifdef ESYS_USE_VLD
         ("vld-off", "turn off vld")
 #endif
-
-            ("log_trace", po::value<std::string>(&m_log_trace_path)->implicit_value(""),
-             "log calling traces")("verbose,v", po::value<int>()->default_value(0), "set verbosity level: 0 is off")(
-                "test_file_path", po::value<std::string>(&m_test_file_path_s), "set the path for test files")(
-                "temp_file_path", po::value<std::string>(&m_temp_file_path_s), "set the path for temp files");
+        ("log_trace", po::value<std::string>(&m_log_trace_path)->implicit_value(""), "log calling traces")
+        ("verbose,v", po::value<int>()->default_value(0), "set verbosity level: 0 is off")
+        ("test_file_path", po::value<std::string>(&m_test_file_path_s), "set the path for test files")
+        ("temp_file_path", po::value<std::string>(&m_temp_file_path_s), "set the path for temp files");
+    // clang-format on
 }
 
 void TestCaseCtrlCore::SetArgs(int argc, char **argv)
@@ -398,6 +439,26 @@ const std::string &TestCaseCtrlCore::GetTempFilesFolder()
     }
 
     return m_temp_files_folder;
+}
+
+void TestCaseCtrlCore::set_strict_parsing(bool strict_parsing)
+{
+    m_strict_parsing = strict_parsing;
+}
+
+bool TestCaseCtrlCore::get_strict_parsing() const
+{
+    return m_strict_parsing;
+}
+
+void TestCaseCtrlCore::set_use_esystest(bool use_esystest)
+{
+    m_use_esystest = use_esystest;
+}
+
+bool TestCaseCtrlCore::get_use_esystest() const
+{
+    return m_use_esystest;
 }
 
 } // namespace multios
