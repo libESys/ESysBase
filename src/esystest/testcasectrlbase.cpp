@@ -39,6 +39,7 @@ void TestCaseCtrlBase::Set(TestCaseCtrlBase *ctrl)
 TestCaseCtrlBase::TestCaseCtrlBase()
     : m_run_all(true)
 {
+    s_ctrl = this;
 }
 
 TestCaseCtrlBase::~TestCaseCtrlBase()

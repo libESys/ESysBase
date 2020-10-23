@@ -32,6 +32,8 @@ public:
     TestCaseCtrl();
     virtual ~TestCaseCtrl();
 
+    void setup();
+
     virtual void AddDefaultOptions() override;
     virtual int GetArgC() override;
     virtual char **GetArgV() override;

@@ -25,25 +25,21 @@
 
 #include <iostream>
 
-class GlobalInit
+class GlobalInit : public esystest::TestCaseCtrl
 {
 public:
     GlobalInit();
     ~GlobalInit();
-    int m_count;
 
 protected:
     esystest::StdLogger m_logger;
     esystest::TestCaseCtrl m_test_ctrl;
 };
 
-GlobalInit::GlobalInit()
-    : m_count(0)
+GlobalInit::GlobalInit(): esystest::TestCaseCtrl()
 {
-    m_count++;
     m_logger.Set(&std::cout);
     esystest::Logger::Set(&m_logger);
-    esystest::TestCaseCtrl::Set(&m_test_ctrl);
 }
 
 GlobalInit::~GlobalInit()

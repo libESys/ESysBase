@@ -46,6 +46,17 @@ TestCaseCtrl::~TestCaseCtrl()
 {
 }
 
+void TestCaseCtrl::setup()
+{    
+    int result = 0;
+
+    result = Init();
+    if (result < 0)
+    {
+        BOOST_TEST_MESSAGE("TestCaseCtrl initialization failed!");
+    }
+}
+
 void TestCaseCtrl::AddDefaultOptions()
 {
     // clang-format off
@@ -71,31 +82,6 @@ char **TestCaseCtrl::GetArgV()
 {
     return boost::unit_test::framework::master_test_suite().argv;
 }
-
-class __MyGlobalFixture
-{
-public:
-    __MyGlobalFixture()
-    {
-    }
-
-    void setup()
-    {
-        TestCaseCtrlBase *ctrl = TestCaseCtrlBase::Get();
-        int result = 0;
-
-        if (ctrl != nullptr)
-        {
-            result = ctrl->Init();
-            if (result < 0)
-            {
-                BOOST_TEST_MESSAGE("TestCaseCtrl initialization failed!");
-            }
-        }
-    }
-};
-
-BOOST_TEST_GLOBAL_FIXTURE(__MyGlobalFixture);
 
 } // namespace boost_impl
 
