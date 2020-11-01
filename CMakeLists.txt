@@ -123,3 +123,11 @@ if (DEFINED LOGS_OUTPUT_PATH)
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_OBJDUMP} -C -x -w $<TARGET_FILE:${PROJECT_NAME}> >${LOGS_OUTPUT_PATH}/$<TARGET_FILE_NAME:${PROJECT_NAME}>.objdump || true)
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_NM} --print-size --size-sort --reverse-sort --radix=d  -C $<TARGET_FILE:${PROJECT_NAME}> >${LOGS_OUTPUT_PATH}/$<TARGET_FILE_NAME:${PROJECT_NAME}>.nm)
 endif()
+
+if (COMMAND add_clang_format_target)
+add_clang_format_target(esystest)
+endif()
+
+if (COMMAND add_clang_tidy_target)
+add_clang_tidy_target(esystest)
+endif()

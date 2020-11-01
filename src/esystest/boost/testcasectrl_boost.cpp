@@ -47,7 +47,7 @@ TestCaseCtrl::~TestCaseCtrl()
 }
 
 void TestCaseCtrl::setup()
-{    
+{
     int result = 0;
 
     result = Init();

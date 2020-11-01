@@ -328,7 +328,6 @@ int32_t TestCaseCtrlCore::FindFoldersInParentsFromCurrent()
 int32_t TestCaseCtrlCore::FindFoldersEnvVarAsRoot()
 {
     std::vector<std::string>::iterator env_var_it;
-    std::vector<std::string>::iterator search_path_it;
     boost::filesystem::path test_path;
     boost::filesystem::path full_path;
     std::string search_path;

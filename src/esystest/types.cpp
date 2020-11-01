@@ -19,8 +19,7 @@
 #include "esystest/types.h"
 #include "esystest/testcaseinfo.h"
 
-ESYSTEST_API esystest::TestCaseInfo &operator*(esystest::TestCaseInfo& info, const esystest::nil_t &n)
+ESYSTEST_API esystest::TestCaseInfo &operator*(esystest::TestCaseInfo &info, const esystest::nil_t &n)
 {
     return info;
 }
-
