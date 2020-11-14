@@ -1,6 +1,10 @@
 project (esystest CXX)
 message(STATUS "ESysTest CMakeLists.txt")
 
+option(ESYSTEST_BUILD_OS "Build for when a OS is present" On)
+option(ESYSTEST_USE_ONLY_BOOST "Use only the Boost backend" Off)
+option(ESYSTEST_USE_ONLY_ESYSTEST "Use only the ESysTest backend" Off)
+
 IF(NOT CMAKE_CXX_STANDARD)
 SET(CMAKE_CXX_STANDARD 11)
 ENDIF(NOT CMAKE_CXX_STANDARD)
@@ -29,7 +33,7 @@ SET( LIBESYSTEST_CXX_SOURCES
     src/esystest/types.cpp
 )
 
-if (DEFINED ESYSTEST_BUILD_VHW)
+if (ESYSTEST_BUILD_OS)
 SET( LIBESYSTEST_CXX_SOURCES
     ${LIBESYSTEST_CXX_SOURCES}
     src/esystest/exception.cpp
@@ -49,7 +53,7 @@ SET( LIBESYSTEST_MULTIOS_CXX_SOURCES
     src/esystest/multios/testcasectrlcore_multios.cpp
 )
 
-if (NOT DEFINED ESYSTEST_USE_ONLY_BOOST AND NOT DEFINED ESYSTEST_USE_ONLY_ESYSTEST)
+if (NOT ESYSTEST_USE_ONLY_BOOST AND NOT ESYSTEST_USE_ONLY_ESYSTEST)
 set(ESYSTEST_USE_BOOST 1)
 set(ESYSTEST_USE_ESYSTEST 1)
 
@@ -58,13 +62,13 @@ set(LIBESYSTEST_CXX_SOURCES
         ${LIBESYSTEST_ESYSTEST_CXX_SOURCES}
         ${LIBESYSTEST_BOOST_CXX_SOURCES}
     )
-elseif(DEFINED ESYSTEST_USE_ONLY_BOOST)
+elseif(ESYSTEST_USE_ONLY_BOOST)
 set(ESYSTEST_USE_BOOST 1)
 set(LIBESYSTEST_CXX_SOURCES
         ${LIBESYSTEST_CXX_SOURCES}
         ${LIBESYSTEST_BOOST_CXX_SOURCES}
     )
-elseif(DEFINED ESYSTEST_USE_ONLY_ESYSTEST)
+elseif(ESYSTEST_USE_ONLY_ESYSTEST)
 set(ESYSTEST_USE_ESYSTEST 1)
 set(LIBESYSTEST_CXX_SOURCES
         ${LIBESYSTEST_CXX_SOURCES}
@@ -72,7 +76,7 @@ set(LIBESYSTEST_CXX_SOURCES
     )
 endif()
 
-if (DEFINED ESYSTEST_BUILD_VHW)
+if (ESYSTEST_BUILD_OS)
     set(LIBESYSTEST_CXX_SOURCES
         ${LIBESYSTEST_CXX_SOURCES}
         ${LIBESYSTEST_MULTIOS_CXX_SOURCES}
@@ -81,6 +85,7 @@ if (DEFINED ESYSTEST_BUILD_VHW)
     add_library (esystest SHARED ${LIBESYSTEST_CXX_SOURCES})
     set_property(TARGET esystest PROPERTY VERSION ${ESYSTEST_VERSION})
     set_property(TARGET esystest PROPERTY SOVERSION ${ESYSTEST_VERSION_MAJOR} )
+    target_compile_definitions(esystest PUBLIC ESYSTEST_MULTIOS)
 else ()
     add_library (esystest STATIC ${LIBESYSTEST_CXX_SOURCES})
 endif ()
@@ -93,29 +98,29 @@ find_package(Boost 1.66 REQUIRED QUIET COMPONENTS
 target_link_libraries(esystest
     Boost::filesystem
     Boost::program_options
-	Boost::unit_test_framework
+    Boost::unit_test_framework
 )
 endif()
 
 if (NOT WIN32)
-	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++11")
-	target_include_directories ( esystest  PUBLIC
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++11")
+    target_include_directories ( esystest  PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         #${CMAKE_CURRENT_SOURCE_DIR}/include/esystest/boost
     )
 
 else ()
-	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DWIN32 -D_DEBUG -D_WINDOWS -D_USRDLL -DPAL_EXPORTS")
-	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc  /W3")
-	target_include_directories ( esystest  PUBLIC
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DWIN32 -D_DEBUG -D_WINDOWS -D_USRDLL -DPAL_EXPORTS")
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc  /W3")
+    target_include_directories ( esystest  PUBLIC
     ./include
     ${ESYS_BOOST}
     )
 endif ()
 
 install(TARGETS esystest
-    LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
 )
 
 install(DIRECTORY include/ DESTINATION include)
