@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
     </Filter>
+    <Filter Include="Header Files\impl_wx">
+      <UniqueIdentifier>{73823697-7b0e-4243-bb21-04914dfb73af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\impl_boost">
+      <UniqueIdentifier>{f7457a3c-9dca-450e-8465-9ee499264bc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\impl_boost">
+      <UniqueIdentifier>{8bfbbb5d-2aae-40a0-93b8-114c0dc8a8e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\esys\base\esysbase_dll.cpp">
@@ -20,6 +29,24 @@
     </ClCompile>
     <ClCompile Include="..\..\src\esys\base\esysbase_prec.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\dynlibrarybase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\pluginbase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\pluginmngrbase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\impl_boost\dynlibrary_boost.cpp">
+      <Filter>Source Files\impl_boost</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\impl_boost\dynlibraryimpl_boost.cpp">
+      <Filter>Source Files\impl_boost</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\impl_boost\pluginmngrcore_boost.cpp">
+      <Filter>Source Files\impl_boost</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -34,6 +61,33 @@
     </ClInclude>
     <ClInclude Include="..\..\include\esys\base\autolink.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\dynlibrary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\dynlibrarybase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\pluginbase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\pluginmngrbase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\pluginmngrcore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\pluginmngrcore_t.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\impl_boost\dynlibrary.h">
+      <Filter>Header Files\impl_boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\impl_boost\pluginmngrcore.h">
+      <Filter>Header Files\impl_boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\esys\base\impl_boost\dynlibraryimpl.h">
+      <Filter>Source Files\impl_boost</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
