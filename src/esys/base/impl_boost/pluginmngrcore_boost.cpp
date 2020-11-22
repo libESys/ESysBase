@@ -161,7 +161,8 @@ int PluginMngrCore::load()
     }
     set_is_loaded(true);
 
-    return result;
+    if (m_plugins.size() != 0) return 0;
+    return -1;
 }
 
 int PluginMngrCore::release()
