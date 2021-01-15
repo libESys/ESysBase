@@ -189,6 +189,13 @@ bool boost_require_equal(const L &left, const R &right, const char *file, int li
     }
 /**/
 
+#define ESYSTEST_TEST_TOOL_IMPL_FL(frwd_type, P, assertion_descr, TL, CT, L, R, FILE, LINE)         \
+    {                                                                                               \
+        bool esystest_result = ::esystest::boost_test_tool_impl(L, R, P, FILE, LINE);               \
+        ::esystest::report_assertion(esystest_result, FILE, LINE, TL, CT, assertion_descr);         \
+    }
+/**/
+
 #define ESYSTEST_TEST_TOOL_IMPL_P(frwd_type, P, assertion_descr, TL, CT, L, R)          \
     {                                                                                   \
         ::esystest::report_assertion((P), __FILE__, __LINE__, TL, CT, assertion_descr); \
@@ -206,6 +213,10 @@ bool boost_require_equal(const L &left, const R &right, const char *file, int li
 #define ESYSTEST_REQUIRE_EQUAL(L, R)                                                             \
     ESYSTEST_TEST_TOOL_IMPL(0, ::esystest::equal_impl_frwd(), #L " == " #R, ::esystest::REQUIRE, \
                             ::esystest::CHECK_EQUAL, (L), (R))
+
+#define ESYSTEST_REQUIRE_EQUAL_FL(L, R, FILE, LINE)                                                 \
+    ESYSTEST_TEST_TOOL_IMPL_FL(0, ::esystest::equal_impl_frwd(), #L " == " #R, ::esystest::REQUIRE, \
+                            ::esystest::CHECK_EQUAL, (L), (R), (FILE), (LINE))
 
 #define ESYSTEST_WARN_NE(L, R) \
     ESYSTEST_TEST_TOOL_IMPL(0, ::esystest::ne_impl(), "", ::esystest::WARN, ::esystest::CHECK_NE, (L), (R))
