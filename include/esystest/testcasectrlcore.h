@@ -19,7 +19,7 @@
 
 #ifdef ESYSTEST_EM
 #include "esystest/em/testcasectrlcore.h"
-#elif defined(WIN32) || defined(LINUX) || defined(ESYS_VHW) || defined(ESYSTEST_MULTIOS)
+#elif defined(WIN32) || defined(LINUX) || defined(linux) || defined(ESYS_VHW) || defined(ESYSTEST_MULTIOS)
 #ifndef ESYSTEST_MULTIOS
 #define ESYSTEST_MULTIOS
 #endif
