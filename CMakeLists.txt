@@ -104,26 +104,48 @@ endif()
 
 if (NOT WIN32)
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=gnu++11")
-    target_include_directories ( esystest  PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
-        #${CMAKE_CURRENT_SOURCE_DIR}/include/esystest/boost
-    )
-
 else ()
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DWIN32 -D_DEBUG -D_WINDOWS -D_USRDLL -DPAL_EXPORTS")
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc  /W3")
-    target_include_directories ( esystest  PUBLIC
-    ./include
-    ${ESYS_BOOST}
-    )
 endif ()
 
+target_include_directories(esystest
+    PUBLIC
+    $<INSTALL_INTERFACE:include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+ )
+
 install(TARGETS esystest
-    ARCHIVE DESTINATION lib
+    EXPORT esystest-export
     LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
 )
 
-install(DIRECTORY include/ DESTINATION include)
+install(EXPORT esystest-export
+    FILE esystestTargets.cmake
+    DESTINATION lib/cmake/esystest
+)
+
+install(
+    DIRECTORY ${CMAKE_SOURCE_DIR}/include/
+    DESTINATION include
+    FILES_MATCHING PATTERN "*.h*"
+)
+
+install(FILES
+    ${CMAKE_SOURCE_DIR}/project/cmake/esystestConfig.cmake
+    DESTINATION "lib/cmake/esystest"
+)
+
+set(CMAKE_EXPORT_PACKAGE_REGISTRY ON)
+export(PACKAGE esystest)
+
+# install(TARGETS esystest
+#     ARCHIVE DESTINATION lib
+#     LIBRARY DESTINATION lib
+# )
+
+# install(DIRECTORY include/ DESTINATION include)
 
 if (DEFINED LOGS_OUTPUT_PATH)
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_OBJDUMP} -C -x -w $<TARGET_FILE:${PROJECT_NAME}> >${LOGS_OUTPUT_PATH}/$<TARGET_FILE_NAME:${PROJECT_NAME}>.objdump || true)
