@@ -127,13 +127,13 @@ install(EXPORT esystest-export
 )
 
 install(
-    DIRECTORY ${CMAKE_SOURCE_DIR}/include/
-    DESTINATION include
+    DIRECTORY include/esystest/
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/esystest
     FILES_MATCHING PATTERN "*.h*"
 )
 
 install(FILES
-    ${CMAKE_SOURCE_DIR}/project/cmake/esystestConfig.cmake
+    ${CMAKE_CURRENT_SOURCE_DIR}/project/cmake/esystestConfig.cmake
     DESTINATION "lib/cmake/esystest"
 )
 
