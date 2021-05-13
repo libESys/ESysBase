@@ -13,6 +13,9 @@
       <UniqueIdentifier>{c23f0ec8-3b4a-4938-af51-40102cbeba44}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
     </Filter>
+    <Filter Include="Source Files\impl_boost">
+      <UniqueIdentifier>{bca9ec1e-acc1-4959-a5d4-12d4d32e3be1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\esys\base\test\esysbase_t_prec.cpp">
@@ -23,6 +26,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\esys\base\test\testcasectrl.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\impl_boost\test\getexepath01_boost.cpp">
+      <Filter>Source Files\impl_boost</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

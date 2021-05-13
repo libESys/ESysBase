@@ -5,7 +5,7 @@
  * \cond
  * __legal_b__
  *
- * Copyright (c) 2017-2020 Michel Gillet
+ * Copyright (c) 2017-2021 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
@@ -100,11 +100,14 @@ public:
     //! Destructor
     virtual ~PluginMngrCore();
 
-    int load() override; 
+    int load() override;
     int load(const std::string &dir) override;
-    int release() override;                          
-    std::size_t get_size() override;                  
-    PluginBase *get_base(std::size_t index) override; 
+    int release() override;
+    std::size_t get_size() override;
+    PluginBase *get_base(std::size_t index) override;
+
+    int find_exe_path(std::string &exe_path) override;
+    static int s_find_exe_path(std::string &exe_path);
 
 protected:
     //!< \cond DOXY_IMPL

@@ -5,7 +5,7 @@
  * \cond
  * __legal_b__
  *
- * Copyright (c) 2017-2020 Michel Gillet
+ * Copyright (c) 2017-2021 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
@@ -104,6 +104,13 @@ public:
      * \return the plugin if any, nullptr otherwise
      */
     virtual PluginBase *get_base(const std::string &short_name) = 0;
+
+    //! Find the full path of the current executable
+    /*!
+     * \param[out] exe_path the absolute path of the current executable, if successful
+     * \return 0 if successful, < 0 otherwise
+     */
+    virtual int find_exe_path(std::string &exe_path) = 0;
 
     //! Set the verbosity level
     /*!

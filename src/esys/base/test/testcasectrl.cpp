@@ -39,9 +39,9 @@ TestCaseCtrl::TestCaseCtrl()
 {
     g_test_case = this;
 
-    AddSearchPathEnvVar("ESYSBASE");
-    AddSearchPath("res/esysbase_t");                    // If cwd is root of the emdev git repo
-    AddSearchPath("../../src/esysbase/res/esysbase_t"); // if cwd is the bin folder
+    //AddSearchPathEnvVar("ESYSBASE");
+    //AddSearchPath("res/esysbase_t");                    // If cwd is root of the emdev git repo
+    //AddSearchPath("../../src/esysbase/res/esysbase_t"); // if cwd is the bin folder
 
     m_logger.Set(&std::cout);
     esystest::Logger::Set(&m_logger);

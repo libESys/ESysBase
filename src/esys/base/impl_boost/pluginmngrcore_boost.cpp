@@ -20,6 +20,7 @@
 #include "esys/base/impl_boost/pluginmngrcore.h"
 
 #include <boost/filesystem.hpp>
+#include <boost/dll/runtime_symbol_info.hpp>
 
 #include <iostream>
 
@@ -191,6 +192,23 @@ PluginBase *PluginMngrCore::get_base(std::size_t index)
 {
     if (index >= m_plugins.size()) return nullptr;
     return m_plugins[index]->get_plugin();
+}
+
+int PluginMngrCore::find_exe_path(std::string &exe_path)
+{
+    return s_find_exe_path(exe_path);
+}
+
+int PluginMngrCore::s_find_exe_path(std::string &exe_path)
+{
+    boost::filesystem::path p;
+    boost::system::error_code ec;
+
+    p = boost::dll::program_location(ec);
+    if (ec) return -1;
+
+    exe_path = p.normalize().make_preferred().string();
+    return 0;
 }
 
 } // namespace impl_boost

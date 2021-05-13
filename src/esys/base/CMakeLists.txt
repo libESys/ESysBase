@@ -54,6 +54,7 @@ target_include_directories(esysbase PUBLIC
 target_link_libraries(esysbase PRIVATE
     Boost::filesystem
     Boost::system
+    dl
 )
 
 install(TARGETS esysbase LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
@@ -72,4 +73,4 @@ if (COMMAND add_clang_tidy_target)
 add_clang_tidy_target(esysbase)
 endif()
 
-# add_subdirectory(test)
+add_subdirectory(test)
