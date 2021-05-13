@@ -38,10 +38,89 @@ class ESYSBASE_API PluginMngrBase
 {
 public:
     //! Default constructor
-    PluginMngrBase();
+    /*!
+     * \param[in] name the name of the Plugin Manager
+     */
+    PluginMngrBase(const std::string &name="");
 
     //! Destructor
     virtual ~PluginMngrBase();
+
+    //! Set the name of the Plugin Manager
+    /*!
+     * \param[in] name the name of the Plugin Manager
+     */
+    void set_name(const std::string &name);
+
+    //! Get the name of the Plugin Manager
+    /*!
+     * \return the name of the Plugin Manager
+     */
+    const std::string &get_name() const;
+
+    //! Set the version of the Plugin Manager
+    /*!
+     * \param[in] version the version of the Plugin Manager
+     */
+    void set_version(const std::string &version);
+
+    //! Set the version of the Plugin Manager
+    /*!
+     * \param[in] major the major version of the Plugin Manager
+     * \param[in] minor the minor version of the Plugin Manager
+     * \param[in] patch the pacth version of the Plugin Manager
+     */
+    void set_version(int major, int minor, int patch = 0);
+
+    //! Get the version of the Plugin Manager
+    /*!
+     * \return the version of the Plugin Manager
+     */
+    const std::string &get_version();
+
+    //! Get the version of the Plugin Manager
+    /*!
+     * \param[out] major the major version of the Plugin Manager
+     * \param[out] minor the minor version of the Plugin Manager
+     * \param[out] patch the pacth version of the Plugin Manager
+     */
+    void get_version(int &major, int &minor, int &patch);
+
+    //! Set the major version of the Plugin Manager
+    /*!
+     * \param[in] major the major version of the Plugin Manager
+     */
+    void set_major_version(int major_version);
+
+    //! Get the major version of the Plugin Manager
+    /*!
+     * \return the major version of the Plugin Manager
+     */
+    int get_major_version() const;
+
+    //! Set the minor version of the Plugin Manager
+    /*!
+     * \param[in] minor the minor version of the Plugin Manager
+     */
+    void set_minor_version(int minor_version);
+
+    //! Get the minor version of the Plugin Manager
+    /*!
+     * \return the minor version of the Plugin Manager
+     */
+    int get_minor_version() const;
+
+    //! Set the patch version of the Plugin Manager
+    /*!
+     * \param[in] patch the pacth version of the Plugin Manager
+     */
+    void set_patch_version(int patch_version); 
+
+    //! Get the patch version of the Plugin Manager
+    /*!
+     * \return the pacth version of the Plugin Manager
+     */   
+    int get_patch_version() const;
 
     //! Set the folder where to find plugins
     /*!
@@ -112,6 +191,13 @@ public:
      */
     virtual int find_exe_path(std::string &exe_path) = 0;
 
+    //! Get the relative path of the folder with the plugins
+    /*!
+     * \param[out] rel_plugin_path the relative path of the folder with the plugins
+     * \return 0 if successful, < 0 otherwise
+     */
+    virtual int get_rel_plugin_path(std::string &rel_plugin_path);
+
     //! Set the verbosity level
     /*!
      * \param[in] verbose_level the verbosity level
@@ -179,6 +265,11 @@ protected:
     static std::string m_base_folder; //!< The base folder
     static std::string m_app_exe;     //!< The application exe name
 
+    std::string m_name; 
+    std::string m_version;
+    int m_major_version = 0;
+    int m_minor_version = -1;
+    int m_patch_version = -1;
     uint32_t m_verbose_level = 0; //!< The verbosity level
     std::string m_entry_fct_name; //!< The plugin entry function name
     std::string m_search_folder;  //!< The search folder

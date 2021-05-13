@@ -71,8 +71,8 @@ PluginBase *PluginMngrImplHelper::get_plugin()
     return m_plugin;
 }
 
-PluginMngrCore::PluginMngrCore()
-    : PluginMngrBase()
+PluginMngrCore::PluginMngrCore(const std::string &name)
+    : PluginMngrBase(name)
 {
 }
 

@@ -21,7 +21,9 @@
 
 #include <boost/filesystem.hpp>
 #include <boost/locale.hpp>
+#include <boost/algorithm/string.hpp>
 
+#include <sstream>
 #include <memory>
 
 namespace esys
@@ -64,12 +66,97 @@ void PluginMngrBase::set_plugin_filename(PluginBase *plugin, const std::string &
     plugin->set_filename(filename);
 }
 
-PluginMngrBase::PluginMngrBase()
+PluginMngrBase::PluginMngrBase(const std::string &name) : m_name(name)
 {
 }
 
 PluginMngrBase::~PluginMngrBase()
 {
+}
+
+void PluginMngrBase::set_name(const std::string &name)
+{
+    m_name = name;
+}
+
+const std::string &PluginMngrBase::get_name() const
+{
+    return m_name;
+}
+
+void PluginMngrBase::set_version(const std::string &version)
+{
+    std::vector<std::string> versions;
+
+    m_version = version;
+
+    boost::split(versions,version,boost::is_any_of("."));
+
+    if (versions.size() < 1) return;
+    set_major_version(atoi(versions[0].c_str()));
+}
+
+void PluginMngrBase::set_version(int major, int minor, int patch)
+{
+    m_major_version = major;
+    m_minor_version = minor;
+    m_patch_version = patch;
+}
+
+const std::string &PluginMngrBase::get_version()
+{
+    if (m_version.empty())
+    {
+        std::ostringstream oss;
+
+        oss << m_major_version;
+        if (m_minor_version > 0)
+        {
+            oss << "." << m_minor_version;
+            if (m_patch_version > 0) oss << "." << m_patch_version;
+        }
+        m_version = oss.str(); 
+    }
+    return m_version;
+}
+
+void PluginMngrBase::get_version(int &major, int &minor, int &patch)
+{
+    major = m_major_version;
+    minor = m_minor_version;
+    patch = m_patch_version;
+}
+
+void PluginMngrBase::set_major_version(int major_version)
+{
+    m_major_version = major_version;
+    m_version.clear();
+
+}
+
+int PluginMngrBase::get_major_version() const
+{
+    return m_major_version;
+}
+
+void PluginMngrBase::set_minor_version(int minor_version)
+{
+    m_minor_version = minor_version;;
+}
+
+int PluginMngrBase::get_minor_version() const
+{
+    return m_minor_version;
+}
+
+void PluginMngrBase::set_patch_version(int patch_version)
+{
+    m_patch_version = patch_version;
+}
+
+int PluginMngrBase::get_patch_version() const
+{
+    return m_patch_version;
 }
 
 void PluginMngrBase::set_search_folder(const std::string &search_folder)
@@ -90,6 +177,28 @@ void PluginMngrBase::set_is_loaded(bool is_loaded)
 bool PluginMngrBase::get_is_loaded() const
 {
     return m_is_loaded;
+}
+
+int PluginMngrBase::get_rel_plugin_path(std::string &rel_plugin_path)
+{
+    boost::filesystem::path p;
+
+#ifdef WIN32
+    p = "plugins";
+    p /= get_name();
+    rel_plugin_path = p.make_preferred().string();
+    return 0;
+#else
+    std::ostringstream oss;
+    oss << get_major_version();
+
+    p = "lib";
+    p /= get_name();
+    p /= oss.str();
+    p /= "plugins";
+    rel_plugin_path = p.make_preferred().string();
+    return 0;
+#endif
 }
 
 void PluginMngrBase::set_verbose_level(uint32_t verbose_level)

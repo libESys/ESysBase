@@ -25,6 +25,7 @@ include_directories(
 
 set(ESYSBASE_T_CXX_SOURCES
     esysbase_t_prec.cpp
+    getpluginrelpath01.cpp
     main.cpp
     testcasectrl.cpp
 )

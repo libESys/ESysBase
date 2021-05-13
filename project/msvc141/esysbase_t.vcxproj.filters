@@ -30,6 +30,9 @@
     <ClCompile Include="..\..\src\esys\base\impl_boost\test\getexepath01_boost.cpp">
       <Filter>Source Files\impl_boost</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\test\getpluginrelpath01.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\esys\base\test\esysbase_t_prec.h">

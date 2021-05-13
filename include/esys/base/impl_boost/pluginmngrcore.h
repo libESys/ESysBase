@@ -95,7 +95,7 @@ class ESYSBASE_API PluginMngrCore : public PluginMngrBase
 {
 public:
     //! Default constructor
-    PluginMngrCore();
+    PluginMngrCore(const std::string &name="");
 
     //! Destructor
     virtual ~PluginMngrCore();

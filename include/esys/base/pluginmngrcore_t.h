@@ -36,7 +36,7 @@ class PluginMngrCore_t : public PluginMngrCore
 {
 public:
     //! Default constructor
-    PluginMngrCore_t();
+    PluginMngrCore_t(const std::string &name="");
 
     //! Destructor
     virtual ~PluginMngrCore_t();
@@ -87,8 +87,8 @@ protected:
 };
 
 template<typename T>
-PluginMngrCore_t<T>::PluginMngrCore_t()
-    : PluginMngrCore()
+PluginMngrCore_t<T>::PluginMngrCore_t(const std::string &name)
+    : PluginMngrCore(name)
 {
 }
 
