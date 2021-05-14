@@ -171,10 +171,11 @@ int PluginMngrCore::load()
 #endif
     boost::filesystem::path search_path = abs_plugin_dir / mask;
 
-    for (::boost::filesystem::directory_iterator it(abs_plugin_dir); it != file_end_it; ++it)
+    for (boost::filesystem::directory_iterator it(abs_plugin_dir); it != file_end_it; ++it)
     {
         // If it's not a directory, list it. If you want to list directories too, just remove this check.
-        if (!::boost::filesystem::is_regular_file(it->path())) continue;
+        if (!boost::filesystem::is_regular_file(it->path())) continue;
+        if (boost::filesystem::is_symlink(it->path())) continue;
 
         // assign current file name to current_file and echo it out to the console.
         std::string current_file = it->path().string();

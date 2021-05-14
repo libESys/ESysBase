@@ -49,13 +49,13 @@ public:
     /*!
      * \return the vector of loaded plugins
      */
-    std::vector<T *> get_plugins();
+    std::vector<T *> &get_plugins();
 
     //! Get the vector of loaded plugins
     /*!
      * \return the vector of loaded plugins
      */
-    const std::vector<T *> get_plugins() const;
+    const std::vector<T *> &get_plugins() const;
 
     //! Get a plugin based on its index
     /*!
@@ -132,13 +132,13 @@ PluginBase *PluginMngrCore_t<T>::get_base(const std::string &short_name)
 }
 
 template<typename T>
-std::vector<T *> PluginMngrCore_t<T>::get_plugins()
+std::vector<T *> &PluginMngrCore_t<T>::get_plugins()
 {
     return m_plugins;
 }
 
 template<typename T>
-const std::vector<T *> PluginMngrCore_t<T>::get_plugins() const
+const std::vector<T *> &PluginMngrCore_t<T>::get_plugins() const
 {
     return m_plugins;
 }
