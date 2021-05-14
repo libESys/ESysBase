@@ -125,6 +125,26 @@ int PluginMngrCore::load()
     boost::filesystem::directory_iterator file_end_it;
     DynLibrary *plugin_lib = nullptr;
 
+    if (get_search_folder().empty())
+    {
+        boost::filesystem::path search_path;
+        std::string path;
+        result = find_exe_path(path);
+        if (result < 0) return -2;
+        search_path = path;
+        search_path = search_path.parent_path(); // Remove the executable name
+#ifndef WIN32
+        // To get to the parent of bin folder
+        search_path = search_path.parent_path(); 
+#endif
+        result = get_rel_plugin_path(path);
+        if (result < 0) return -3;
+        search_path /= path;
+        search_path = search_path.normalize().make_preferred();
+        set_search_folder(search_path.string());
+        set_base_folder("");
+    }
+
     if (!get_base_folder().empty())
     {
         filename = get_base_folder();
