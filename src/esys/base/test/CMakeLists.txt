@@ -18,6 +18,7 @@ include(GNUInstallDirs)
 
 # add_definitions(-DESYSTEST_USE_ESYSTEST)
 add_definitions(-DESYSTEST_MULTIOS -DESYSTEST_USE_BOOST)
+set(ESYSTEST_USE_BOOST 1)
 
 include_directories(
     ../../../../include
