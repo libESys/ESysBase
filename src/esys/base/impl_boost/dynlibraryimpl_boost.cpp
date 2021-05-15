@@ -34,6 +34,7 @@ DynLibraryImpl::DynLibraryImpl(DynLibrary *self)
 
 DynLibraryImpl::~DynLibraryImpl()
 {
+    if (m_lib.is_loaded()) m_lib.unload();
 }
 
 int DynLibraryImpl::load(const std::string &filename)
