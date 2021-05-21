@@ -107,6 +107,7 @@ public:
     PluginBase *get_base(std::size_t index) override;
 
     int find_exe_path(std::string &exe_path) override;
+    int find_plugin_folder(std::string &plugin_folder) override;
     static int s_find_exe_path(std::string &exe_path);
 
 protected:

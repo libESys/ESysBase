@@ -191,6 +191,13 @@ public:
      */
     virtual int find_exe_path(std::string &exe_path) = 0;
 
+    //! Find the full path of the plugin folder
+    /*!
+     * \param[out] plugin_folder the absolute path of the plugin folder, if successful
+     * \return 0 if successful, < 0 otherwise
+     */
+    virtual int find_plugin_folder(std::string &plugin_folder) = 0;
+
     //! Get the relative path of the folder with the plugins
     /*!
      * \param[out] rel_plugin_path the relative path of the folder with the plugins

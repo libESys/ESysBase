@@ -119,49 +119,19 @@ int PluginMngrCore::load()
     if (get_is_loaded()) return -1;
 
     int result = 0;
-    boost::filesystem::path abs_plugin_dir;
-    boost::filesystem::path plugin_dir;
-    boost::filesystem::path filename;
+    std::string abs_plugin_dir;
     boost::filesystem::directory_iterator file_end_it;
     DynLibrary *plugin_lib = nullptr;
 
-    if (get_search_folder().empty())
-    {
-        boost::filesystem::path search_path;
-        std::string path;
-        result = find_exe_path(path);
-        if (result < 0) return -2;
-        search_path = path;
-        search_path = search_path.parent_path(); // Remove the executable name
-#ifndef WIN32
-        // To get to the parent of bin folder
-        search_path = search_path.parent_path(); 
-#endif
-        result = get_rel_plugin_path(path);
-        if (result < 0) return -3;
-        search_path /= path;
-        search_path = search_path.normalize().make_preferred();
-        set_search_folder(search_path.string());
-        set_base_folder("");
-    }
-
-    if (!get_base_folder().empty())
-    {
-        filename = get_base_folder();
-        filename /= get_search_folder();
-    }
-    else
-        filename = get_search_folder();
-    filename = ::boost::filesystem::absolute(filename);
-
-    abs_plugin_dir = filename;
+    result = find_plugin_folder(abs_plugin_dir);
+    if (result < 0) return result;
 
     if (get_verbose_level() > 0)
     {
         std::cout << "Plugin folder = " << abs_plugin_dir.c_str() << std::endl;
     }
 #ifdef WIN32
-    SetDllDirectory(abs_plugin_dir.string().c_str());
+    SetDllDirectory(abs_plugin_dir.c_str());
 #endif
 
 #ifdef WIN32
@@ -169,7 +139,8 @@ int PluginMngrCore::load()
 #else
     std::string mask = "*.so";
 #endif
-    boost::filesystem::path search_path = abs_plugin_dir / mask;
+    boost::filesystem::path search_path = abs_plugin_dir;
+    search_path /= mask;
 
     for (boost::filesystem::directory_iterator it(abs_plugin_dir); it != file_end_it; ++it)
     {
@@ -218,6 +189,44 @@ PluginBase *PluginMngrCore::get_base(std::size_t index)
 int PluginMngrCore::find_exe_path(std::string &exe_path)
 {
     return s_find_exe_path(exe_path);
+}
+
+int PluginMngrCore::find_plugin_folder(std::string &plugin_folder)
+{
+    int result = 0;
+    boost::filesystem::path plugin_dir;
+
+    if (get_search_folder().empty())
+    {
+        boost::filesystem::path search_path;
+        std::string path;
+        result = find_exe_path(path);
+        if (result < 0) return -2;
+        search_path = path;
+        search_path = search_path.parent_path(); // Remove the executable name
+#ifndef WIN32
+        // To get to the parent of bin folder
+        search_path = search_path.parent_path();
+#endif
+        result = get_rel_plugin_path(path);
+        if (result < 0) return -3;
+        search_path /= path;
+        search_path = search_path.normalize().make_preferred();
+        set_search_folder(search_path.string());
+        set_base_folder("");
+    }
+
+    if (!get_base_folder().empty())
+    {
+        plugin_dir = get_base_folder();
+        plugin_dir /= get_search_folder();
+    }
+    else
+        plugin_dir = get_search_folder();
+    plugin_dir = ::boost::filesystem::absolute(plugin_dir).make_preferred();
+
+    plugin_folder = plugin_dir.string();
+    return 0;
 }
 
 int PluginMngrCore::s_find_exe_path(std::string &exe_path)
