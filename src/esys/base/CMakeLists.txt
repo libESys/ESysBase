@@ -24,15 +24,30 @@ set(ESYSBASE_VERSION
 
 include_directories(../../../include)
 
-set(ESYSBASE_CXX_SOURCES dynlibrarybase.cpp pluginbase.cpp pluginmngr.cpp
+set(ESYSBASE_CXX_SOURCES dynlibrarybase.cpp objectbase.cpp objectnamebase.cpp objplatif.cpp pluginbase.cpp pluginmngr.cpp
                          pluginmngrbase.cpp)
+
+set(ESYSBASE_EM_CXX_SOURCES em/object_em.cpp em/objectname_em.cpp em/objectnamemngr_em.cpp
+)
 
 set(ESYSBASE_IMPL_BOOST_CXX_SOURCES
     impl_boost/dynlibrary_boost.cpp impl_boost/dynlibraryimpl_boost.cpp
     impl_boost/pluginmngrcore_boost.cpp)
 
+set(ESYSBASE_STDCPP_CXX_SOURCES
+  stdcpp/node_stdcpp.cpp
+  stdcpp/nodemngr_stdcpp.cpp
+  stdcpp/object_stdcpp.cpp
+  stdcpp/objectname_stdcpp.cpp
+  stdcpp/objectnamemngr_stdcpp.cpp
+  stdcpp/objectoperation_stdcpp.cpp
+)
+
 add_library(esysbase SHARED ${ESYSBASE_CXX_SOURCES}
-                            ${ESYSBASE_IMPL_BOOST_CXX_SOURCES})
+                            ${ESYSBASE_EM_CXX_SOURCES}
+                            ${ESYSBASE_IMPL_BOOST_CXX_SOURCES}
+                            ${ESYSBASE_STDCPP_CXX_SOURCES}
+                            )
 
 set_property(TARGET esysbase PROPERTY VERSION ${ESYSBASE_VERSION})
 set_property(TARGET esysbase PROPERTY SOVERSION ${ESYSBASE_VERSION_MAJOR})

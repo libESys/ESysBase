@@ -22,6 +22,18 @@
     <Filter Include="Source Files\impl_boost">
       <UniqueIdentifier>{8bfbbb5d-2aae-40a0-93b8-114c0dc8a8e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\em">
+      <UniqueIdentifier>{bcedcf08-b5d7-4ea1-acb7-113e41d6e3db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\em">
+      <UniqueIdentifier>{34cf8cfe-6d66-43a1-98fa-1a442e3965c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\stdcpp">
+      <UniqueIdentifier>{b66cb780-6ab0-49ce-bdd2-1127b0dfa3ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\stdcpp">
+      <UniqueIdentifier>{1c06a803-5023-46b7-90d4-dd20d12ca043}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\esys\base\esysbase_dll.cpp">
@@ -49,6 +61,42 @@
       <Filter>Source Files\impl_boost</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\esys\base\pluginmngr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\em\object_em.cpp">
+      <Filter>Source Files\em</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\objectbase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\objectnamebase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\em\objectnamemngr_em.cpp">
+      <Filter>Source Files\em</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\em\objectname_em.cpp">
+      <Filter>Source Files\em</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\stdcpp\node_stdcpp.cpp">
+      <Filter>Source Files\stdcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\stdcpp\object_stdcpp.cpp">
+      <Filter>Source Files\stdcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\stdcpp\objectname_stdcpp.cpp">
+      <Filter>Source Files\stdcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\stdcpp\objectnamemngr_stdcpp.cpp">
+      <Filter>Source Files\stdcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\stdcpp\nodemngr_stdcpp.cpp">
+      <Filter>Source Files\stdcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\stdcpp\objectoperation_stdcpp.cpp">
+      <Filter>Source Files\stdcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\objplatif.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -99,6 +147,84 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\esys\base\pluginmngr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\objectbase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\objectbase_t.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\em\object_t.h">
+      <Filter>Header Files\em</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\stdcpp\object_t.h">
+      <Filter>Header Files\stdcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\em\objectinit_t.h">
+      <Filter>Header Files\em</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\assert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\em\object.h">
+      <Filter>Header Files\em</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\objectname_t.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\objectnamebase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\objectnamemngr_t.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\em\objectnamemngr.h">
+      <Filter>Header Files\em</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\em\objectname.h">
+      <Filter>Header Files\em</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\stdcpp\objectinit_t.h">
+      <Filter>Header Files\stdcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\stdcpp\objectnamemngr.h">
+      <Filter>Header Files\stdcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\stdcpp\node.h">
+      <Filter>Header Files\stdcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\stdcpp\nodemngr.h">
+      <Filter>Header Files\stdcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\stdcpp\objectname.h">
+      <Filter>Header Files\stdcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\stdcpp\object.h">
+      <Filter>Header Files\stdcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\objectname.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\objectnamemngr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\object_t.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\layerbase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\stdcpp\objectoperation.h">
+      <Filter>Header Files\stdcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\objectinitbase_t.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\objplatif.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
