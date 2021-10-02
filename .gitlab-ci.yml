@@ -1,0 +1,15 @@
+variables:
+    TXT_E: "\e[31m"
+    TXT_S: "\e[35m"
+    TXT_W: "\e[33m"
+    TXT_CLEAR: "\e[0m"
+
+create_conan_pkg:ubuntu20_04:
+  tags:
+    - ubuntu20.04
+  stage: deploy
+  script:
+    - scripts/conan_configure.sh
+    - scripts/conan_build_pkg.sh
+    - scripts/conan_publish_gitlab.sh
+    - scripts/conan_publish_libesys.sh $LIBESYS_CONAN_USER $LIBESYS_CONAN_PASSWORD
