@@ -28,7 +28,8 @@ set(LIBESYSTEST_CXX_SOURCES
     testcasectrlbase.cpp
     testcaseinfo.cpp
     testsuite.cpp
-    types.cpp)
+    types.cpp
+    version.cpp)
 
 if(ESYSTEST_BUILD_OS)
   set(LIBESYSTEST_CXX_SOURCES ${LIBESYSTEST_CXX_SOURCES} exception.cpp

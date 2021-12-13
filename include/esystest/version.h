@@ -17,27 +17,27 @@
 
 #pragma once
 
-// Bump-up with each new version
-#define ESYSTEST_MAJOR_VERSION 0
-#define ESYSTEST_MINOR_VERSION 0
-#define ESYSTEST_RELEASE_NUMBER 1
-#define ESYSTEST_VERSION_STRING "esystest 0.0.1"
+#include "esystest/esystest_defs.h"
 
-// Must be updated manually as well each time the version above changes
+// Don't bump-up manually, this is done automatically with the tool Commitizen
 #define ESYSTEST_VERSION_NUM_DOT_STRING "0.0.1"
-#define ESYSTEST_VERSION_NUM_STRING "0001"
-
-// nothing should be updated below this line when updating the version
-
-#define ESYSTEST_VERSION_NUMBER \
-    (ESYSTEST_MAJOR_VERSION * 1000) + (ESYSTEST_MINOR_VERSION * 100) + ESYSTEST_RELEASE_NUMBER
-#define ESYSTEST_BETA_NUMBER 1
-#define ESYSTEST_VERSION_FLOAT                                                                   \
-    ESYSTEST_MAJOR_VERSION + (ESYSTEST_MINOR_VERSION / 10.0) + (ESYSTEST_RELEASE_NUMBER / 100.0) \
-        + (ESYSTEST_BETA_NUMBER / 10000.0)
+#define ESYSTEST_VERSION_STRING "ESysTest 0.0.1"
 
 // check if the current version is at least major.minor.release
 #define ESYSTEST_CHECK_VERSION(major, minor, release)                                                            \
     (ESYSTEST_MAJOR_VERSION > (major) || (ESYSTEST_MAJOR_VERSION == (major) && ESYSTEST_MINOR_VERSION > (minor)) \
      || (ESYSTEST_MAJOR_VERSION == (major) && ESYSTEST_MINOR_VERSION == (minor)                                  \
          && ESYSTEST_RELEASE_NUMBER >= (release)))
+
+namespace esystest
+{
+
+ESYSTEST_API int get_major_version();
+ESYSTEST_API int get_minor_version();
+ESYSTEST_API int get_patch_version();
+
+ESYSTEST_API bool check_version(int major, int minor, int patch = -1);
+ESYSTEST_API bool check_version(const char *version, int major, int minor, int patch = -1);
+
+ESYSTEST_API int get_int_till_dot(const char *str, int skip_dot = 0, bool till_end_str = false);
+} // namespace esystest

@@ -18,7 +18,7 @@ include(GNUInstallDirs)
 include_directories(../../include)
 
 set(ESYSTEST_T_CXX_SOURCES esystest_t_prec.cpp test01.cpp test02.cpp test03.cpp
-                           unittest.cpp)
+                           unittest.cpp version01.cpp)
 
 find_package(Boost 1.66 REQUIRED QUIET
              COMPONENTS date_time filesystem iostreams program_options thread)
