@@ -6,4 +6,6 @@ version = "0.1.0"
 version_files = [
     "include/esystest/config.h",
     "include/esystest/version.h",
+    "scripts/conan_pkg_version.env",
+    "conanfile.py:version",
 ]

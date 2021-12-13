@@ -4,13 +4,34 @@ variables:
     TXT_W: "\e[33m"
     TXT_CLEAR: "\e[0m"
 
-create_conan_pkg:ubuntu20_04:
-  tags:
-    - ubuntu20.04
-  stage: deploy
+.create_conan_pkg: &create_conan_pkg
+  stage: build
   script:
     - scripts/conan_configure.sh
     - scripts/conan_build_pkg.sh
-    - scripts/conan_publish_gitlab.sh
-    - scripts/conan_publish_libesys.sh $LIBESYS_CONAN_USER $LIBESYS_CONAN_PASSWORD
-    - scripts/conan_publish_jfrogio.sh $LIBESYS_CONAN_USER $LIBESYS_CONAN_PASSWORD
+    - scripts/conan_publish_gitlab.sh $ESYSTEST_CONAN_USER_CHANNEL
+    - scripts/conan_publish_libesys.sh $LIBESYS_CONAN_USER $LIBESYS_CONAN_PASSWORD $ESYSTEST_CONAN_USER_CHANNEL
+    - scripts/conan_publish_jfrogio.sh $LIBESYS_CONAN_USER $LIBESYS_CONAN_PASSWORD $ESYSTEST_CONAN_USER_CHANNEL
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /^bump:/
+
+create_conan_pkg_testing:ubuntu20_04:
+  <<: *create_conan_pkg
+  tags:
+    - ubuntu20.04
+  variables:
+    ESYSTEST_CONAN_USER_CHANNEL: "@libesys/testing"
+  except:
+    - master
+
+create_conan_pkg:ubuntu20_04:
+  <<: *create_conan_pkg
+  tags:
+    - ubuntu20.04
+  variables:
+    ESYSTEST_CONAN_USER_CHANNEL: ""
+  only:
+    - master
+    
+  
