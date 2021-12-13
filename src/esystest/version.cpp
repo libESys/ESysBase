@@ -39,15 +39,16 @@ ESYSTEST_API int get_patch_version()
     return get_int_till_dot(ESYSTEST_VERSION_NUM_DOT_STRING, 2, true);
 }
 
-ESYSTEST_API bool check_version(int major, int minor, int patch)
+ESYSTEST_API bool check_at_least_version(int major, int minor, int patch)
 {
-    return check_version(ESYSTEST_VERSION_NUM_DOT_STRING, major, minor, patch);
+    return check_at_least_version(ESYSTEST_VERSION_NUM_DOT_STRING, major, minor, patch);
 }
 
-ESYSTEST_API bool check_version(const char *version, int major, int minor, int patch)
+ESYSTEST_API bool check_at_least_version(const char *version, int major, int minor, int patch)
 {
     int major_test = get_int_till_dot(version);
-    int minor_test = get_int_till_dot(version, 1);
+    bool minor_till_end = (patch == -1);
+    int minor_test = get_int_till_dot(version, 1, minor_till_end);
     int patch_test = get_int_till_dot(version, 2, true);
 
     if (major < 0) return false;

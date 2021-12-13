@@ -96,6 +96,9 @@
     <ClCompile Include="..\..\src\esystest\esystest\testcasectrl_esystest.cpp">
       <Filter>Source Files\esystest</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\esystest\version.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\esystest\esystest_defs.h">
@@ -204,6 +207,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\esystest\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esystest\version_defs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

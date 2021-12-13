@@ -52,7 +52,7 @@ BEGIN
             VALUE "FileDescription", "esystest for Windows\000"
             VALUE "FileVersion", "esystest " ESYSTEST_VERSION_NUM_DOT_STRING "\000"
             VALUE "InternalName", "esystest\000"
-            VALUE "LegalCopyright", "Copyright © 2006 HamletG\000"
+            VALUE "LegalCopyright", "Copyright © 2021 HamletG\000"
             VALUE "LegalTrademarks", "\000"
             VALUE "OriginalFilename", "esystest.exe\000"
             VALUE "PrivateBuild", PRIVATEBUILD_T

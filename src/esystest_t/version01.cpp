@@ -16,7 +16,7 @@
  */
 
 #include "esystest_t/esystest_t_prec.h"
-//#include <boost/test/unit_test.hpp>
+
 #include <esystest/version.h>
 
 #include <stdlib.h>
@@ -58,19 +58,19 @@ ESYSTEST_AUTO_TEST_CASE(Version01)
     value = esystest::get_int_till_dot("53.15", 2, true);
     ESYSTEST_REQUIRE_EQUAL(value, -1);
 
-    bool val_bool = esystest::check_version("1.0.0", 1, 0, 0);
+    bool val_bool = esystest::check_at_least_version("1.0.0", 1, 0, 0);
     ESYSTEST_REQUIRE_EQUAL(val_bool, true);
 
-    val_bool = esystest::check_version("1.0", 1, 0);
+    val_bool = esystest::check_at_least_version("1.0", 1, 0);
     ESYSTEST_REQUIRE_EQUAL(val_bool, true);
 
-    val_bool = esystest::check_version("1.0", 2, 0);
+    val_bool = esystest::check_at_least_version("1.0", 2, 0);
     ESYSTEST_REQUIRE_EQUAL(val_bool, false);
 
-    val_bool = esystest::check_version("1.0", 1, 1);
+    val_bool = esystest::check_at_least_version("1.0", 1, 1);
     ESYSTEST_REQUIRE_EQUAL(val_bool, false);
 
-    val_bool = esystest::check_version("1.0", 1, 1);
+    val_bool = esystest::check_at_least_version("1.2", 1, 1);
     ESYSTEST_REQUIRE_EQUAL(val_bool, true);
 
     int major = esystest::get_major_version();

@@ -33,6 +33,9 @@
     <ClCompile Include="..\..\src\esystest_t\test03.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\esystest_t\version01.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\esystest_t\esystest_t_defs.h">

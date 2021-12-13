@@ -18,16 +18,11 @@
 #pragma once
 
 #include "esystest/esystest_defs.h"
+#include "esystest/version_defs.h"
 
 // Don't bump-up manually, this is done automatically with the tool Commitizen
-#define ESYSTEST_VERSION_NUM_DOT_STRING "0.0.1"
-#define ESYSTEST_VERSION_STRING "ESysTest 0.0.1"
-
-// check if the current version is at least major.minor.release
-#define ESYSTEST_CHECK_VERSION(major, minor, release)                                                            \
-    (ESYSTEST_MAJOR_VERSION > (major) || (ESYSTEST_MAJOR_VERSION == (major) && ESYSTEST_MINOR_VERSION > (minor)) \
-     || (ESYSTEST_MAJOR_VERSION == (major) && ESYSTEST_MINOR_VERSION == (minor)                                  \
-         && ESYSTEST_RELEASE_NUMBER >= (release)))
+#define ESYSTEST_VERSION_NUM_DOT_STRING "0.1.0"
+#define ESYSTEST_VERSION_STRING "ESysTest 0.1.0"
 
 namespace esystest
 {
@@ -36,8 +31,9 @@ ESYSTEST_API int get_major_version();
 ESYSTEST_API int get_minor_version();
 ESYSTEST_API int get_patch_version();
 
-ESYSTEST_API bool check_version(int major, int minor, int patch = -1);
-ESYSTEST_API bool check_version(const char *version, int major, int minor, int patch = -1);
+ESYSTEST_API bool check_at_least_version(int major, int minor, int patch = -1);
+ESYSTEST_API bool check_at_least_version(const char *version, int major, int minor, int patch = -1);
 
 ESYSTEST_API int get_int_till_dot(const char *str, int skip_dot = 0, bool till_end_str = false);
+
 } // namespace esystest
