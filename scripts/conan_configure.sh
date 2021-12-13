@@ -45,5 +45,11 @@ if [ ! $? -eq 0 ]; then
    exit 1
 fi
 
+conan remote add libesys_jfrogio https://libesys.jfrog.io/artifactory/api/conan/libesys-conan-local
+if [ ! $? -eq 0 ]; then
+   echo "${TXT_E}Couldn't add LibEsys JFrog.io remote.${TXT_CLEAR}"
+   exit 1
+fi
+
 echo "pwd = "`pwd`
 echo "${TXT_S}configure Conan done.${TXT_CLEAR}"

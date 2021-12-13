@@ -13,3 +13,4 @@ create_conan_pkg:ubuntu20_04:
     - scripts/conan_build_pkg.sh
     - scripts/conan_publish_gitlab.sh
     - scripts/conan_publish_libesys.sh $LIBESYS_CONAN_USER $LIBESYS_CONAN_PASSWORD
+    - scripts/conan_publish_jfrogio.sh $LIBESYS_CONAN_USER $LIBESYS_CONAN_PASSWORD
