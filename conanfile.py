@@ -3,7 +3,7 @@ from conans import ConanFile, CMake, tools
 
 class ESysTestConan(ConanFile):
     name = "ESysTest"
-    version = "0.1.0"
+    version = "0.0.0"
     license = "wxWindows Library Licence, Version 3.1"
     author = "Michel Gillet michel.gillet@libesys.org"
     url = "https://gitlab.com/libesys/esystest"
