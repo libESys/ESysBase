@@ -21,8 +21,8 @@
 #include "esystest/version_defs.h"
 
 // Don't bump-up manually, this is done automatically with the tool Commitizen
-#define ESYSTEST_VERSION_NUM_DOT_STRING "0.0.0"
-#define ESYSTEST_VERSION_STRING "ESysTest 0.0.0"
+#define ESYSTEST_VERSION_NUM_DOT_STRING "0.1.0"
+#define ESYSTEST_VERSION_STRING "ESysTest 0.1.0"
 
 namespace esystest
 {

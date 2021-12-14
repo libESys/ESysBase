@@ -20,6 +20,6 @@
 #ifdef ESYS_LIB_VERSION
 #undef ESYS_LIB_VERSION
 #endif
-#define ESYS_LIB_VERSION "0.0.0"
+#define ESYS_LIB_VERSION "0.1.0"
 
 #include "esystest/autolink_msvc.h"
