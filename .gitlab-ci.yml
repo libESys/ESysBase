@@ -44,5 +44,3 @@ create_conan_pkg:ubuntu20_04:
     ESYSTEST_CONAN_USER_CHANNEL: ""
   only:
     - master
-    
-  

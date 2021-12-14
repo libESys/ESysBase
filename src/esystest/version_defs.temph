@@ -23,5 +23,3 @@
 #define ESYSTEST_PATCH_VERSION ${patch}
 
 #define ESYSTEST_BETA_NUMBER 0
-
-
