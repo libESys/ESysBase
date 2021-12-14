@@ -4,6 +4,17 @@ variables:
     TXT_W: "\e[33m"
     TXT_CLEAR: "\e[0m"
 
+stages:
+  - check
+  - build
+
+run_pre_commit:
+  stage: check
+  tags:
+    - ubuntu20.04
+  script:
+    - scripts/pre_commit_test.sh
+
 .create_conan_pkg: &create_conan_pkg
   stage: build
   script:
