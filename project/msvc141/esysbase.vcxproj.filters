@@ -89,6 +89,9 @@
     <ClInclude Include="..\..\src\esys\base\impl_boost\dynlibraryimpl.h">
       <Filter>Source Files\impl_boost</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\pluginmngr_t.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\res\esysbase.rc">

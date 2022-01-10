@@ -41,7 +41,7 @@ public:
     /*!
      * \param[in] name the name of the Plugin Manager
      */
-    PluginMngrBase(const std::string &name="");
+    PluginMngrBase(const std::string &name = "");
 
     //! Destructor
     virtual ~PluginMngrBase();
@@ -114,12 +114,12 @@ public:
     /*!
      * \param[in] patch the pacth version of the Plugin Manager
      */
-    void set_patch_version(int patch_version); 
+    void set_patch_version(int patch_version);
 
     //! Get the patch version of the Plugin Manager
     /*!
      * \return the pacth version of the Plugin Manager
-     */   
+     */
     int get_patch_version() const;
 
     //! Set the folder where to find plugins
@@ -157,6 +157,12 @@ public:
      * \return 0 if successful, < 0 otherwise
      */
     virtual int load(const std::string &dir) = 0;
+
+    //! Load all plugins if not already done
+    /*!
+     * \return 0 if successful, < 0 otherwise
+     */
+    int load_if_not_loaded();
 
     //! Release the plugins
     /*!
@@ -272,7 +278,7 @@ protected:
     static std::string m_base_folder; //!< The base folder
     static std::string m_app_exe;     //!< The application exe name
 
-    std::string m_name; 
+    std::string m_name;
     std::string m_version;
     int m_major_version = 0;
     int m_minor_version = -1;

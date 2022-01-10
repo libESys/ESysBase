@@ -221,6 +221,15 @@ void PluginMngrBase::set_entry_fct_name(const std::string &entry_fct_name)
     m_entry_fct_name = entry_fct_name;
 }
 
+int PluginMngrBase::load_if_not_loaded()
+{
+    int result = 0;
+
+    if (!get_is_loaded()) result = load();
+
+    return result;
+}
+
 } // namespace base
 
 } // namespace esys
