@@ -51,7 +51,7 @@ target_link_libraries(esysbase_t PUBLIC
 
 target_link_libraries(esysbase_t PUBLIC esystest)
 
-install(TARGETS esysbase_t LIBRARY DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(TARGETS esysbase_t RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 add_test(NAME esysbase_t
     WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
