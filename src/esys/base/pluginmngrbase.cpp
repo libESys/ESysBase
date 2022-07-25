@@ -66,7 +66,8 @@ void PluginMngrBase::set_plugin_filename(PluginBase *plugin, const std::string &
     plugin->set_filename(filename);
 }
 
-PluginMngrBase::PluginMngrBase(const std::string &name) : m_name(name)
+PluginMngrBase::PluginMngrBase(const std::string &name)
+    : m_name(name)
 {
 }
 
@@ -90,7 +91,7 @@ void PluginMngrBase::set_version(const std::string &version)
 
     m_version = version;
 
-    boost::split(versions,version,boost::is_any_of("."));
+    boost::split(versions, version, boost::is_any_of("."));
 
     if (versions.size() < 1) return;
     set_major_version(atoi(versions[0].c_str()));
@@ -115,7 +116,7 @@ const std::string &PluginMngrBase::get_version()
             oss << "." << m_minor_version;
             if (m_patch_version > 0) oss << "." << m_patch_version;
         }
-        m_version = oss.str(); 
+        m_version = oss.str();
     }
     return m_version;
 }
@@ -131,7 +132,6 @@ void PluginMngrBase::set_major_version(int major_version)
 {
     m_major_version = major_version;
     m_version.clear();
-
 }
 
 int PluginMngrBase::get_major_version() const
@@ -141,7 +141,8 @@ int PluginMngrBase::get_major_version() const
 
 void PluginMngrBase::set_minor_version(int minor_version)
 {
-    m_minor_version = minor_version;;
+    m_minor_version = minor_version;
+    ;
 }
 
 int PluginMngrBase::get_minor_version() const
@@ -167,6 +168,21 @@ void PluginMngrBase::set_search_folder(const std::string &search_folder)
 const std::string &PluginMngrBase::get_search_folder() const
 {
     return m_search_folder;
+}
+
+void PluginMngrBase::add_env_var_search_folder(const std::string &env_var_search_folder)
+{
+    m_env_var_search_folders.push_back(env_var_search_folder);
+}
+
+std::vector<std::string> &PluginMngrBase::get_env_var_search_folders()
+{
+    return m_env_var_search_folders;
+}
+
+const std::vector<std::string> &PluginMngrBase::get_env_var_search_folders() const
+{
+    return m_env_var_search_folders;
 }
 
 void PluginMngrBase::set_is_loaded(bool is_loaded)

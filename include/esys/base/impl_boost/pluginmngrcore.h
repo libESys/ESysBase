@@ -23,10 +23,7 @@
 
 #include <memory>
 
-namespace esys
-{
-
-namespace base
+namespace esys::base
 {
 
 namespace impl_boost
@@ -95,7 +92,7 @@ class ESYSBASE_API PluginMngrCore : public PluginMngrBase
 {
 public:
     //! Default constructor
-    PluginMngrCore(const std::string &name="");
+    PluginMngrCore(const std::string &name = "");
 
     //! Destructor
     virtual ~PluginMngrCore();
@@ -122,6 +119,4 @@ protected:
 using namespace impl_boost;
 #endif
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base

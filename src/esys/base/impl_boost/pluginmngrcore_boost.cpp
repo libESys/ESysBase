@@ -5,7 +5,7 @@
  * \cond
  * __legal_b__
  *
- * Copyright (c) 2017-2020 Michel Gillet
+ * Copyright (c) 2017-2022 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
@@ -24,13 +24,7 @@
 
 #include <iostream>
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace impl_boost
+namespace esys::base::impl_boost
 {
 
 PluginMngrImplHelper::PluginMngrImplHelper()
@@ -125,6 +119,7 @@ int PluginMngrCore::load()
 
     result = find_plugin_folder(abs_plugin_dir);
     if (result < 0) return result;
+    if (abs_plugin_dir.empty()) return -2;
 
     if (get_verbose_level() > 0)
     {
@@ -196,6 +191,8 @@ int PluginMngrCore::find_plugin_folder(std::string &plugin_folder)
     int result = 0;
     boost::filesystem::path plugin_dir;
 
+    std::vector<std::string> search_paths;
+
     if (get_search_folder().empty())
     {
         boost::filesystem::path search_path;
@@ -208,25 +205,43 @@ int PluginMngrCore::find_plugin_folder(std::string &plugin_folder)
         // To get to the parent of bin folder
         search_path = search_path.parent_path();
 #endif
-        result = get_rel_plugin_path(path);
-        if (result < 0) return -3;
-        search_path /= path;
-        search_path = search_path.normalize().make_preferred();
-        set_search_folder(search_path.string());
-        set_base_folder("");
+        search_paths.push_back(search_path.string());
+    }
+    else
+        search_paths.push_back(get_search_folder());
+
+    char *value = nullptr;
+
+    for (auto &env_var_search_path : get_env_var_search_folders())
+    {
+        value = std::getenv(env_var_search_path.c_str());
+        if (value == nullptr) continue;
+        search_paths.push_back(value);
     }
 
     if (!get_base_folder().empty())
     {
-        plugin_dir = get_base_folder();
-        plugin_dir /= get_search_folder();
+        search_paths.push_back(get_base_folder());
     }
-    else
-        plugin_dir = get_search_folder();
-    plugin_dir = ::boost::filesystem::absolute(plugin_dir).make_preferred();
 
-    plugin_folder = plugin_dir.string();
-    return 0;
+    boost::filesystem::path path_to_test;
+
+    std::string rel_plugin_path;
+    result = get_rel_plugin_path(rel_plugin_path);
+    if (result < 0) return -3;
+
+    for (auto &search_path : search_paths)
+    {
+        path_to_test = search_path;
+        path_to_test /= rel_plugin_path;
+        path_to_test = ::boost::filesystem::absolute(path_to_test).normalize().make_preferred();
+        if (boost::filesystem::exists(path_to_test))
+        {
+            plugin_folder = path_to_test.string();
+            return 0;
+        }
+    }
+    return -1;
 }
 
 int PluginMngrCore::s_find_exe_path(std::string &exe_path)
@@ -241,8 +256,4 @@ int PluginMngrCore::s_find_exe_path(std::string &exe_path)
     return 0;
 }
 
-} // namespace impl_boost
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::impl_boost

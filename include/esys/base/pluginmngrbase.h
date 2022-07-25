@@ -5,7 +5,7 @@
  * \cond
  * __legal_b__
  *
- * Copyright (c) 2017-2021 Michel Gillet
+ * Copyright (c) 2017-2022 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
@@ -25,10 +25,7 @@
 #include <map>
 #include <memory>
 
-namespace esys
-{
-
-namespace base
+namespace esys::base
 {
 
 /*! \class PluginMngrBase esys/base/pluginmngrbase.h "esys/base/pluginmngrbase.h"
@@ -133,6 +130,11 @@ public:
      * \return the folder where to find plugins
      */
     const std::string &get_search_folder() const;
+
+    void add_env_var_search_folder(const std::string &env_var_search_folder);
+
+    std::vector<std::string> &get_env_var_search_folders();
+    const std::vector<std::string> &get_env_var_search_folders() const;
 
     //! Load the plugins
     /*!
@@ -287,9 +289,8 @@ protected:
     std::string m_entry_fct_name; //!< The plugin entry function name
     std::string m_search_folder;  //!< The search folder
     bool m_is_loaded = false;     //!< True if already loaded, false otherwise
+    std::vector<std::string> m_env_var_search_folders; //!< Environement variables potentially storing path to plugins
     //!< \endcond
 };
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base
