@@ -48,6 +48,9 @@
     <ClCompile Include="..\..\src\esys\base\impl_boost\pluginmngrcore_boost.cpp">
       <Filter>Source Files\impl_boost</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\pluginmngr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\esys\base\esysbase_defs.h">
@@ -90,6 +93,12 @@
       <Filter>Source Files\impl_boost</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\esys\base\pluginmngr_t.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\plugin_t.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\pluginmngr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

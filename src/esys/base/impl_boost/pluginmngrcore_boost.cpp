@@ -80,19 +80,54 @@ int PluginMngrCore::load(const std::string &dir)
     PluginBase *plugin;
     std::shared_ptr<DynLibrary> plugin_lib = std::make_shared<DynLibrary>();
 
-    if (plugin_lib->load(dir) != 0) return -1;
-    if (plugin_lib->has_symbol(get_entry_fct_name()) == false) return -2;
+    if (plugin_lib->load(dir) != 0)
+    {
+        if (get_verbose_level() > 0)
+        {
+            std::cout << "    failed to load the plugin." << std::endl;
+        }
+        return -1;
+    }
+    if (plugin_lib->has_symbol(get_entry_fct_name()) == false)
+    {
+        if (get_verbose_level() > 0)
+        {
+            std::cout << "    doesn't have entry fct '" << get_entry_fct_name() << "'." << std::endl;
+        }
+        return -2;
+    }
 
     void *plugin_entry_function = plugin_lib->get_symbol(get_entry_fct_name());
-    if (plugin_entry_function == nullptr) return -3;
+    if (plugin_entry_function == nullptr)
+    {
+        if (get_verbose_level() > 0)
+        {
+            std::cout << "    failed to get the entry fct '" << get_entry_fct_name() << "'." << std::endl;
+        }
+        return -3;
+    }
 
     plugin = get_plugin_from_entry_fct(plugin_entry_function);
 
 #ifdef _MSC_VER
 #ifdef _DEBUG
-    if (plugin->is_debug() == false) return -4;
+    if (plugin->is_debug() == false)
+    {
+        if (get_verbose_level() > 0)
+        {
+            std::cout << "    plugin is a release build." << std::endl;
+        }
+        return -4;
+    }
 #elif NDEBUG
-    if (plugin->is_debug() == true) return -5;
+    if (plugin->is_debug() == true)
+    {
+        if (get_verbose_level() > 0)
+        {
+            std::cout << "    plugin is a debug build." << std::endl;
+        }
+        return -5;
+    }
 #else
 #error _DEBUG or NDEBUG must be defined
 #endif
@@ -105,6 +140,10 @@ int PluginMngrCore::load(const std::string &dir)
     set_plugin_filename(plugin, dir);
 
     m_plugins.push_back(helper);
+    if (get_verbose_level() > 0)
+    {
+        std::cout << "    plugin loaded successfully." << std::endl;
+    }
     return 0;
 }
 
@@ -118,8 +157,43 @@ int PluginMngrCore::load()
     DynLibrary *plugin_lib = nullptr;
 
     result = find_plugin_folder(abs_plugin_dir);
-    if (result < 0) return result;
-    if (abs_plugin_dir.empty()) return -2;
+    if (result < 0)
+    {
+        if (get_verbose_level() > 0)
+        {
+            std::cout << "Couldn't deduce the plugin folder." << std::endl;
+        }
+        return result;
+    }
+    if (abs_plugin_dir.empty())
+    {
+        if (get_verbose_level() > 0)
+        {
+            std::cout << "Found plugin folder is empty." << std::endl;
+        }
+        return -2;
+    }
+
+#ifdef _MSC_VER
+#ifdef _DEBUG
+
+    if (get_verbose_level() > 0)
+    {
+        std::cout << "Build type    = debug" << std::endl;
+    }
+
+#elif NDEBUG
+    if (get_verbose_level() > 0)
+    {
+        std::cout << "Build type    = release" << std::endl;
+    }
+#else
+    if (get_verbose_level() > 0)
+    {
+        std::cout << "Build type    = ?" << std::endl;
+    }
+#endif
+#endif
 
     if (get_verbose_level() > 0)
     {
@@ -137,17 +211,45 @@ int PluginMngrCore::load()
     boost::filesystem::path search_path = abs_plugin_dir;
     search_path /= mask;
 
+    if (get_verbose_level() > 0)
+    {
+        std::cout << "Search path   = " << search_path.string() << std::endl << std::endl;
+    }
+
     for (boost::filesystem::directory_iterator it(abs_plugin_dir); it != file_end_it; ++it)
     {
+        if (get_verbose_level() > 0)
+        {
+            std::cout << "Test file = " << it->path().string() << std::endl;
+        }
         // If it's not a directory, list it. If you want to list directories too, just remove this check.
-        if (!boost::filesystem::is_regular_file(it->path())) continue;
-        if (boost::filesystem::is_symlink(it->path())) continue;
+        if (!boost::filesystem::is_regular_file(it->path()))
+        {
+            if (get_verbose_level() > 0)
+            {
+                std::cout << "    not a regular file." << std::endl;
+            }
+            continue;
+        }
+        if (boost::filesystem::is_symlink(it->path()))
+        {
+            if (get_verbose_level() > 0)
+            {
+                std::cout << "    is a symlink." << std::endl;
+            }
+            continue;
+        }
 
         // assign current file name to current_file and echo it out to the console.
         std::string current_file = it->path().string();
         result = load(current_file);
     }
     set_is_loaded(true);
+
+    if (get_verbose_level() > 0)
+    {
+        std::cout << std::endl;
+    }
 
     if (m_plugins.size() != 0) return 0;
     return -1;

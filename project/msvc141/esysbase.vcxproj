@@ -235,6 +235,7 @@
     <ClCompile Include="..\..\src\esys\base\impl_boost\dynlibrary_boost.cpp" />
     <ClCompile Include="..\..\src\esys\base\impl_boost\pluginmngrcore_boost.cpp" />
     <ClCompile Include="..\..\src\esys\base\pluginbase.cpp" />
+    <ClCompile Include="..\..\src\esys\base\pluginmngr.cpp" />
     <ClCompile Include="..\..\src\esys\base\pluginmngrbase.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -246,10 +247,12 @@
     <ClInclude Include="..\..\include\esys\base\impl_boost\dynlibrary.h" />
     <ClInclude Include="..\..\include\esys\base\impl_boost\pluginmngrcore.h" />
     <ClInclude Include="..\..\include\esys\base\pluginbase.h" />
+    <ClInclude Include="..\..\include\esys\base\pluginmngr.h" />
     <ClInclude Include="..\..\include\esys\base\pluginmngrbase.h" />
     <ClInclude Include="..\..\include\esys\base\pluginmngrcore.h" />
     <ClInclude Include="..\..\include\esys\base\pluginmngrcore_t.h" />
     <ClInclude Include="..\..\include\esys\base\pluginmngr_t.h" />
+    <ClInclude Include="..\..\include\esys\base\plugin_t.h" />
     <ClInclude Include="..\..\include\esys\base\version.h" />
     <ClInclude Include="..\..\src\esys\base\impl_boost\dynlibraryimpl.h" />
   </ItemGroup>

@@ -285,10 +285,10 @@ protected:
     int m_major_version = 0;
     int m_minor_version = -1;
     int m_patch_version = -1;
-    uint32_t m_verbose_level = 0; //!< The verbosity level
-    std::string m_entry_fct_name; //!< The plugin entry function name
-    std::string m_search_folder;  //!< The search folder
-    bool m_is_loaded = false;     //!< True if already loaded, false otherwise
+    uint32_t m_verbose_level = 0;                      //!< The verbosity level
+    std::string m_entry_fct_name;                      //!< The plugin entry function name
+    std::string m_search_folder;                       //!< The search folder
+    bool m_is_loaded = false;                          //!< True if already loaded, false otherwise
     std::vector<std::string> m_env_var_search_folders; //!< Environement variables potentially storing path to plugins
     //!< \endcond
 };

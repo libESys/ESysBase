@@ -24,6 +24,8 @@ namespace esys
 namespace base
 {
 
+const std::string PluginBase::s_entry_fct_name = "get_base_plugin";
+
 PluginBase::PluginBase()
 {
 }

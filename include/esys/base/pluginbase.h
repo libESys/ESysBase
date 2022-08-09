@@ -5,7 +5,7 @@
  * \cond
  * __legal_b__
  *
- * Copyright (c) 2017-2018 Michel Gillet
+ * Copyright (c) 2017-2022 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
@@ -29,10 +29,22 @@
 
 namespace po = boost::program_options;
 
-namespace esys
-{
+#define DECLARE_ESYSBASE_PLUGIN(exp, shortname, base_class_) \
+    extern "C" exp base_class_ *get_##short_name##_plugin(); \
+    extern "C" exp esys::base::PluginBase *get_esysbase_plugin();
 
-namespace base
+#define DEFINE_ESYSBASE_PLUGIN(exp, shortname, base_class_, class_) \
+    static class_ g_plugin;                                         \
+    extern "C" exp base_class_ *get_##shortname##_plugin()          \
+    {                                                               \
+        return &g_plugin;                                           \
+    }                                                               \
+    extern "C" exp esys::base::PluginBase *get_esysbase_plugin()    \
+    {                                                               \
+        return &g_plugin;                                           \
+    }
+
+namespace esys::base
 {
 
 /*! \class PluginBase esys/base/pluginbase.h "esys/base/pluginbase.h"
@@ -42,6 +54,8 @@ class ESYSBASE_API PluginBase
 {
 public:
     friend class ESYSBASE_API PluginMngrBase;
+
+    static const std::string s_entry_fct_name;
 
     //! Defalut constructor
     PluginBase();
@@ -153,6 +167,6 @@ protected:
     //!< \endcond
 };
 
-} // namespace base
+typedef PluginBase *(*PluginBaseEntryFunction)();
 
-} // namespace esys
+} // namespace esys::base
