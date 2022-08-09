@@ -9,6 +9,7 @@ mkdir cmake
 cd cmake
 pwd
 cmake ../..
+make esysbaseexe
 make esysbase_t
 
 echo "Build done."
