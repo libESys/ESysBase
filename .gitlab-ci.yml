@@ -1,25 +1,45 @@
 unit_tests:ubuntu20_04:
-  image: ubuntu:20.04
+  stage: test
+  tags:
+    - ubuntu20.04
   script:
-    - apt update
-    - apt -y install git
-    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/libesys/esysbuild/dev.git _ci_dev
-    - _ci_dev/scripts/vm_setup/ubuntu20_04.sh
-    - _ci_dev/scripts/bootstrap.sh
-    - cd build_dev
-    - cd src
-    - cd esysbase
+    - scripts/bootstrap.sh
+    - cd build_dev/src/esysbase
     - git checkout ${CI_COMMIT_BRANCH}
-    - cd ../..
-    - src/esysbase/scripts/build_ci.sh
+    - cd ../../..
+    - scripts/build_ci.sh
+    - cd build_dev
     - build/cmake/bin/esysbase_t --logger=HRF,test_suite,stdout:JUNIT,all,report.junit
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "push"'
   artifacts:
     paths:
       - build_dev/*.junit
     reports:
       junit: build_dev/*.junit
 
-
-
-
-
+unit_tests_sonar:
+  stage: test
+  tags:
+    - ubuntu20.04
+  script:
+    - scripts/install_sonarcloud.sh
+    - scripts/bootstrap.sh
+    - cd build_dev/src/esysbase
+    - git checkout ${CI_COMMIT_SHA}
+    - cd ../../..
+    - scripts/build_ci.sh
+    - cd build_dev/src/esysbase
+    - ../../../sonar-scanner/bin/sonar-scanner -Dsonar.host.url="${SONAR_HOST_URL}" -Dsonar.token="${SONAR_TOKEN}" -Dsonar.cfamily.compile-commands=../../build/cmake/compile_commands.json -X
+    - cd ../..
+    - build/cmake/bin/esysbase_t --logger=HRF,test_suite,stdout:JUNIT,all,report.junit
+  artifacts:
+    paths:
+      - build_dev/*.junit
+    reports:
+      junit: build_dev/*.junit
+  only:
+    - merge_requests
+    - master
