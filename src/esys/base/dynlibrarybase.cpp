@@ -18,20 +18,11 @@
 #include "esys/base/esysbase_prec.h"
 #include "esys/base/dynlibrarybase.h"
 
-namespace esys
+namespace esys::base
 {
 
-namespace base
-{
+DynLibraryBase::DynLibraryBase() = default;
 
-DynLibraryBase::DynLibraryBase()
-{
-}
+DynLibraryBase::~DynLibraryBase() = default;
 
-DynLibraryBase::~DynLibraryBase()
-{
-}
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base

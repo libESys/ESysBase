@@ -18,13 +18,7 @@
 #include "esys/base/esysbase_prec.h"
 #include "esys/base/impl_boost/dynlibraryimpl.h"
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace impl_boost
+namespace esys::base::impl_boost
 {
 
 DynLibraryImpl::DynLibraryImpl(DynLibrary *self)
@@ -78,8 +72,4 @@ void *DynLibraryImpl::get_symbol(const std::string &name)
     return (void *)m_lib.get<void()>(name);
 }
 
-} // namespace impl_boost
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::impl_boost

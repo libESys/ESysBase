@@ -18,13 +18,7 @@
 #include "esys/base/esysbase_prec.h"
 #include "esys/base/stdcpp/object.h"
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace stdcpp
+namespace esys::base::stdcpp
 {
 
 Object::Object(const ObjectName &name)
@@ -32,12 +26,6 @@ Object::Object(const ObjectName &name)
 {
 }
 
-Object::~Object()
-{
-}
+Object::~Object() = default;
 
-} // namespace stdcpp
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::stdcpp

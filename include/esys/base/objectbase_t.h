@@ -21,10 +21,7 @@
 #include "esys/base/objectbase.h"
 #include "esys/base/assert.h"
 
-namespace esys
-{
-
-namespace base
+namespace esys::base
 {
 
 /*! \class ObjectBase_t esys/base/objectbase_t.h "esys/base/objectbase_t.h"
@@ -34,9 +31,9 @@ template<typename T, typename IL>
 class ObjectBase_t : public ObjectBase, public IL
 {
 public:
-    ObjectBase_t(T *object);
+    explicit ObjectBase_t(T *object);
 
-    virtual ~ObjectBase_t();
+    ~ObjectBase_t() override;
 
     //! Adds a child object
     /*!
@@ -108,7 +105,7 @@ public:
         return m_parent;
     }
 
-protected:
+private:
     //!< \cond DOXY_IMPL
     T *m_next = nullptr;        //!< The next object to be initialized
     T *m_prev = nullptr;        //!< The previous object
@@ -183,6 +180,4 @@ unsigned int ObjectBase_t<T, IL>::get_children_count() const
     return count;
 }
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base

@@ -35,7 +35,7 @@ public:
     PluginMngr_t(const std::string &name = "");
 
     //! Destructor
-    virtual ~PluginMngr_t();
+    ~PluginMngr_t() override;
 
     base::PluginBase *get_plugin_from_entry_fct(void *entry_fct) override;
 
@@ -52,6 +52,7 @@ protected:
 
     int plugin_loaded(PLUGIN *plugin) override;
 
+private:
     std::map<TYPE, PLUGIN *> m_map_type_plugin;
     //! \endcond
 };

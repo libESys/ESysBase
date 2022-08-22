@@ -21,13 +21,7 @@
 
 #include <cassert>
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace impl_boost
+namespace esys::base::impl_boost
 {
 
 DynLibrary::DynLibrary()
@@ -36,9 +30,7 @@ DynLibrary::DynLibrary()
     m_impl = std::make_unique<DynLibraryImpl>(this);
 }
 
-DynLibrary::~DynLibrary()
-{
-}
+DynLibrary::~DynLibrary() = default;
 
 int DynLibrary::load(const std::string &filename)
 {
@@ -75,8 +67,4 @@ void *DynLibrary::get_symbol(const std::string &name)
     return m_impl->get_symbol(name);
 }
 
-} // namespace impl_boost
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::impl_boost

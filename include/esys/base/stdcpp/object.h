@@ -22,10 +22,7 @@
 #include "esys/base/stdcpp/object_t.h"
 #include "esys/base/stdcpp/objectinit_t.h"
 
-namespace esys::base
-{
-
-namespace stdcpp
+namespace esys::base::stdcpp
 {
 
 /*! \class Object esys/base/stdcpp/object.h "esys/base/stdcpp/object.h"
@@ -34,16 +31,17 @@ namespace stdcpp
 class ESYSBASE_API Object : public Object_t<Object>
 {
 public:
-    typedef Object_t<Object> BaseType;
+    using BaseType = Object_t<Object>;
 
     Object(const ObjectName &name);
-    virtual ~Object();
+    ~Object() override;
 };
 
-} // namespace stdcpp
+} // namespace esys::base::stdcpp
 
 #ifndef ESYSBASE_EM
+namespace esys::base
+{
 using namespace stdcpp;
+}
 #endif
-
-} // namespace esys::base

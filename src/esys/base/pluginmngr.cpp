@@ -36,13 +36,11 @@ PluginMngr::PluginMngr()
     add_env_var_search_folder("ESYSSDK_INST_DIR");
 }
 
-PluginMngr::~PluginMngr()
-{
-}
+PluginMngr::~PluginMngr() = default;
 
 base::PluginBase *PluginMngr::get_plugin_from_entry_fct(void *entry_fct)
 {
-    PluginBaseEntryFunction the_entry_fct = (PluginBaseEntryFunction)entry_fct;
+    auto the_entry_fct = (PluginBaseEntryFunction)entry_fct;
     PluginBase *plugin;
 
     assert(entry_fct != nullptr);

@@ -21,19 +21,13 @@
 
 #include <boost/dll.hpp>
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace impl_boost
+namespace esys::base::impl_boost
 {
 
 class ESYSBASE_API DynLibraryImpl
 {
 public:
-    DynLibraryImpl(DynLibrary *self);
+    explicit DynLibraryImpl(DynLibrary *self);
     virtual ~DynLibraryImpl();
 
     int load(const std::string &filename);
@@ -42,13 +36,9 @@ public:
     bool has_symbol(const std::string &name);
     void *get_symbol(const std::string &name);
 
-protected:
+private:
     DynLibrary *m_self = nullptr;
     boost::dll::shared_library m_lib;
 };
 
-} // namespace impl_boost
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::impl_boost

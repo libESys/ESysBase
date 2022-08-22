@@ -81,7 +81,7 @@ public:
      * \param[out] minor the minor version of the Plugin Manager
      * \param[out] patch the pacth version of the Plugin Manager
      */
-    void get_version(int &major, int &minor, int &patch);
+    void get_version(int &major, int &minor, int &patch) const;
 
     //! Set the major version of the Plugin Manager
     /*!
@@ -223,7 +223,7 @@ public:
     /*!
      * \return the verbosity level
      */
-    uint32_t get_verbose_level();
+    uint32_t get_verbose_level() const;
 
     //! Get the plugin entry function name
     /*!
@@ -280,6 +280,7 @@ protected:
     static std::string m_base_folder; //!< The base folder
     static std::string m_app_exe;     //!< The application exe name
 
+private:
     std::string m_name;
     std::string m_version;
     int m_major_version = 0;

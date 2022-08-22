@@ -26,10 +26,7 @@
 #include <sstream>
 #include <memory>
 
-namespace esys
-{
-
-namespace base
+namespace esys::base
 {
 
 std::string PluginMngrBase::m_base_folder;
@@ -71,9 +68,7 @@ PluginMngrBase::PluginMngrBase(const std::string &name)
 {
 }
 
-PluginMngrBase::~PluginMngrBase()
-{
-}
+PluginMngrBase::~PluginMngrBase() = default;
 
 void PluginMngrBase::set_name(const std::string &name)
 {
@@ -121,7 +116,7 @@ const std::string &PluginMngrBase::get_version()
     return m_version;
 }
 
-void PluginMngrBase::get_version(int &major, int &minor, int &patch)
+void PluginMngrBase::get_version(int &major, int &minor, int &patch) const
 {
     major = m_major_version;
     minor = m_minor_version;
@@ -222,7 +217,7 @@ void PluginMngrBase::set_verbose_level(uint32_t verbose_level)
     m_verbose_level = verbose_level;
 }
 
-uint32_t PluginMngrBase::get_verbose_level()
+uint32_t PluginMngrBase::get_verbose_level() const
 {
     return m_verbose_level;
 }
@@ -246,6 +241,4 @@ int PluginMngrBase::load_if_not_loaded()
     return result;
 }
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base

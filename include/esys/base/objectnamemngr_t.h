@@ -20,10 +20,7 @@
 #include "esys/base/esysbase_defs.h"
 #include "esys/base/objectname_t.h"
 
-namespace esys
-{
-
-namespace base
+namespace esys::base
 {
 
 /*! \class ObjecttNameMngr_t esys/base/objectnamemngr_t.h "esys/base/objectnamemgr_t.h"
@@ -52,11 +49,6 @@ public:
      *  \return the current ObjectName
      */
     virtual OBJ *get_current() = 0;
-
-protected:
-    //!< \cond DOXY_IMPL
-
-    //!< \endcond
 };
 
 template<typename OBJ, typename MNGR>
@@ -77,6 +69,4 @@ MNGR &ObjectNameMngr_t<OBJ, MNGR>::get()
     return s_mngr;
 }
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base

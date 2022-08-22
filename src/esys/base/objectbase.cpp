@@ -18,33 +18,28 @@
 #include "esys/base/esysbase_prec.h"
 #include "esys/base/objectbase.h"
 
-namespace esys
+namespace esys::base
 {
 
-namespace base
-{
-
-ObjectBase::ObjectBase(bool skip_init)
+ObjectBase::ObjectBase([[maybe_unused]] bool skip_init)
     : m_can_be_disabled(false)
     , m_enabled(true)
 {
 }
 
-ObjectBase::~ObjectBase()
-{
-}
+ObjectBase::~ObjectBase() = default;
 
 void ObjectBase::set_can_be_disabled(bool can_be_disabled)
 {
     m_can_be_disabled = can_be_disabled;
 }
 
-bool ObjectBase::get_can_be_disabled()
+bool ObjectBase::get_can_be_disabled() const
 {
     return m_can_be_disabled;
 }
 
-bool ObjectBase::is_enabled()
+bool ObjectBase::is_enabled() const
 {
     return m_enabled;
 }
@@ -69,6 +64,4 @@ ObjectBase *ObjectBase::get_parent() const
     return m_parent;
 }
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base

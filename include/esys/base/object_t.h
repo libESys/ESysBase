@@ -23,10 +23,7 @@
 
 #include <string>
 
-namespace esys
-{
-
-namespace base
+namespace esys::base
 {
 
 /*! \class Object_t esys/base/object_t.h "esys/base/object_t.h"
@@ -88,6 +85,4 @@ const std::string &Object_t<T, IL>::get_name_str()
     return m_name;
 }
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base

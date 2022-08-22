@@ -21,10 +21,7 @@
 
 #include <string>
 
-namespace esys
-{
-
-namespace base
+namespace esys::base
 {
 
 /*! \class DynLibraryBase esys/base/dynlibrarybase.h "esys/base/dynlibrarybase.h"
@@ -73,6 +70,4 @@ public:
     virtual void *get_symbol(const std::string &name) = 0;
 };
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base

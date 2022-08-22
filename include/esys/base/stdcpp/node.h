@@ -25,13 +25,7 @@
 #include <memory>
 #include <string>
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace stdcpp
+namespace esys::base::stdcpp
 {
 
 /*! \class Node esys/base/stdcpp/node.h "esys/base/stdcpp/node.h"
@@ -47,19 +41,15 @@ public:
     Node(const ObjectName &name);
 
     //! Destructor
-    virtual ~Node();
+    ~Node() override;
 
     ObjectNameMngr &get_object_name_mngr();
     const ObjectNameMngr &get_object_name_mngr() const;
     
-protected:
+private:
     //!< \cond DOXY_IMPL
     ObjectNameMngr m_object_name_mngr;
     //!< \endcond
 };
 
-} // namespace stdcpp
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::stdcpp

@@ -19,13 +19,7 @@
 #include "esys/base/em/objectname.h"
 #include "esys/base/em/object.h"
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace em
+namespace esys::base::em
 {
 
 ObjectName::ObjectName(const char *name)
@@ -38,12 +32,6 @@ ObjectName::ObjectName(const ObjectName &name)
 {
 }
 
-ObjectName::~ObjectName()
-{
-}
+ObjectName::~ObjectName() = default;
 
-} // namespace em
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::em

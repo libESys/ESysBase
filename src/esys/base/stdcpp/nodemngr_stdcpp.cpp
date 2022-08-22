@@ -20,13 +20,7 @@
 
 #include <cassert>
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace stdcpp
+namespace esys::base::stdcpp
 {
 
 std::unique_ptr<NodeMngr> NodeMngr::s_mngr;
@@ -38,13 +32,9 @@ NodeMngr &NodeMngr::get()
     return *s_mngr.get();
 }
 
-NodeMngr::NodeMngr()
-{
-}
+NodeMngr::NodeMngr() = default;
 
-NodeMngr::~NodeMngr()
-{
-}
+NodeMngr::~NodeMngr() = default;
 
 void NodeMngr::add(std::shared_ptr<Node> node)
 {
@@ -128,13 +118,9 @@ std::thread::id NodeMngr::get_main_thread_id() const
     return m_main_thread_id;
 }
 
-bool NodeMngr::is_main_thread_id_set()
+bool NodeMngr::is_main_thread_id_set() const
 {
     return m_is_main_thread_id_set;
 }
 
-} // namespace stdcpp
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::stdcpp

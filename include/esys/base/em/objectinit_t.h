@@ -30,15 +30,10 @@ template<typename T>
 class ObjectInit_t : public base::ObjectInitBase_t<T>
 {
 public:
-    typedef base::ObjectInitBase_t<T> BaseType;
+    using BaseType = base::ObjectInitBase_t<T>;
 
-    ObjectInit_t(T *object);
+    explicit ObjectInit_t(T *object);
     virtual ~ObjectInit_t();
-
-protected:
-    //!< \cond DOXY_IMPL
-
-    //!< \endcond
 };
 
 template<typename T>

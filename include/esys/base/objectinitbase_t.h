@@ -30,7 +30,7 @@ class ObjectInitBase_t
 {
 public:
     //! Default constructor
-    ObjectInitBase_t(T *object);
+    explicit ObjectInitBase_t(T *object);
 
     //! Destructor
     ~ObjectInitBase_t();

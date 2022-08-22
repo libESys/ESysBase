@@ -91,7 +91,7 @@ public:
     /*!
      * \return if the plugin was created by a debug build or not
      */
-    bool is_debug();
+    bool is_debug() const;
 
     //! Initialize the plugin
     /*!
@@ -156,6 +156,7 @@ protected:
      */
     void set_filename(const std::string &filename);
 
+private:
     bool m_is_debug = false;        //!< True if debug build, false otherwise
     bool m_init = false;            //!< True if already initialized, false otherwise
     std::string m_name;             //!< The name of the plugin
@@ -167,6 +168,6 @@ protected:
     //!< \endcond
 };
 
-typedef PluginBase *(*PluginBaseEntryFunction)();
+using PluginBaseEntryFunction = PluginBase * (*)();
 
 } // namespace esys::base

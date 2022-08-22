@@ -22,13 +22,7 @@
 #include "esys/base/em/object_t.h"
 #include "esys/base/em/objectinit_t.h"
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace em
+namespace esys::base::em
 {
 
 /*! \class Object esys/base/em/object.h "esys/base/em/object.h"
@@ -37,18 +31,14 @@ namespace em
 class ESYSBASE_API Object : public Object_t<Object>
 {
 public:
-    typedef Object_t<Object> BaseType;
+    using BaseType = Object_t<Object>;
 
     Object(const ObjectName &name);
-    virtual ~Object();
+    ~Object() override;
 };
-
-} // namespace em
 
 #ifdef ESYSBASE_EM
 using namespace em;
 #endif
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::em

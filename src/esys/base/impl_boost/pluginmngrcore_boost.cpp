@@ -27,13 +27,9 @@
 namespace esys::base::impl_boost
 {
 
-PluginMngrImplHelper::PluginMngrImplHelper()
-{
-}
+PluginMngrImplHelper::PluginMngrImplHelper() = default;
 
-PluginMngrImplHelper::~PluginMngrImplHelper()
-{
-}
+PluginMngrImplHelper::~PluginMngrImplHelper() = default;
 
 void PluginMngrImplHelper::set_dyn_lib(std::shared_ptr<DynLibrary> &dyn_lib)
 {
@@ -70,15 +66,13 @@ PluginMngrCore::PluginMngrCore(const std::string &name)
 {
 }
 
-PluginMngrCore::~PluginMngrCore()
-{
-}
+PluginMngrCore::~PluginMngrCore() = default;
 
 int PluginMngrCore::load(const std::string &dir)
 {
     std::shared_ptr<PluginMngrImplHelper> helper;
     PluginBase *plugin;
-    std::shared_ptr<DynLibrary> plugin_lib = std::make_shared<DynLibrary>();
+    auto plugin_lib = std::make_shared<DynLibrary>();
 
     if (plugin_lib->load(dir) != 0)
     {
@@ -251,7 +245,7 @@ int PluginMngrCore::load()
         std::cout << std::endl;
     }
 
-    if (m_plugins.size() != 0) return 0;
+    if (!m_plugins.empty()) return 0;
     return -1;
 }
 
@@ -312,9 +306,9 @@ int PluginMngrCore::find_plugin_folder(std::string &plugin_folder)
     else
         search_paths.push_back(get_search_folder());
 
-    char *value = nullptr;
+    char const *value = nullptr;
 
-    for (auto &env_var_search_path : get_env_var_search_folders())
+    for (auto const &env_var_search_path : get_env_var_search_folders())
     {
         value = std::getenv(env_var_search_path.c_str());
         if (value == nullptr) continue;
@@ -332,7 +326,7 @@ int PluginMngrCore::find_plugin_folder(std::string &plugin_folder)
     result = get_rel_plugin_path(rel_plugin_path);
     if (result < 0) return -3;
 
-    for (auto &search_path : search_paths)
+    for (auto const &search_path : search_paths)
     {
         path_to_test = search_path;
         path_to_test /= rel_plugin_path;

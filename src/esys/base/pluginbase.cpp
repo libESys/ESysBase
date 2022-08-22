@@ -18,21 +18,14 @@
 #include "esys/base/esysbase_prec.h"
 #include "esys/base/pluginbase.h"
 
-namespace esys
-{
-
-namespace base
+namespace esys::base
 {
 
 const std::string PluginBase::s_entry_fct_name = "get_base_plugin";
 
-PluginBase::PluginBase()
-{
-}
+PluginBase::PluginBase() = default;
 
-PluginBase::~PluginBase()
-{
-}
+PluginBase::~PluginBase() = default;
 
 std::string &PluginBase::get_name()
 {
@@ -49,7 +42,7 @@ std::string &PluginBase::get_version()
     return m_version;
 }
 
-bool PluginBase::is_debug()
+bool PluginBase::is_debug() const
 {
     return m_is_debug;
 }
@@ -125,6 +118,4 @@ void PluginBase::set_filename(const std::string &filename)
     m_filename = filename;
 }
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base

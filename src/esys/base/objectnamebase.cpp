@@ -14,10 +14,7 @@
 #include "esys/base/esysbase_prec.h"
 #include "esys/base/objectnamebase.h"
 
-namespace esys
-{
-
-namespace base
+namespace esys::base
 {
 
 ObjectNameBase::ObjectNameBase(const char *name)
@@ -25,9 +22,7 @@ ObjectNameBase::ObjectNameBase(const char *name)
 {
 }
 
-ObjectNameBase::~ObjectNameBase()
-{
-}
+ObjectNameBase::~ObjectNameBase() = default;
 
 const char *ObjectNameBase::get_name() const
 {
@@ -39,6 +34,4 @@ ObjectNameBase::operator const char *() const
     return m_name;
 }
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base

@@ -19,13 +19,7 @@
 #include "esys/base/stdcpp/node.h"
 #include "esys/base/stdcpp/nodemngr.h"
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace stdcpp
+namespace esys::base::stdcpp
 {
 
 Node::Node(const ObjectName &name)
@@ -33,9 +27,7 @@ Node::Node(const ObjectName &name)
 {
 }
 
-Node::~Node()
-{
-}
+Node::~Node() = default;
 
 ObjectNameMngr &Node::get_object_name_mngr()
 {
@@ -47,8 +39,4 @@ const ObjectNameMngr &Node::get_object_name_mngr() const
     return m_object_name_mngr;
 }
 
-} // namespace stdcpp
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::stdcpp

@@ -21,13 +21,7 @@
 
 #include <memory>
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace impl_boost
+namespace esys::base::impl_boost
 {
 
 class ESYSBASE_API DynLibraryImpl;
@@ -42,7 +36,7 @@ public:
     DynLibrary();
 
     //! Destructor
-    virtual ~DynLibrary();
+    ~DynLibrary() override;
 
     int load(const std::string &filename) override;
     int unload() override;
@@ -50,18 +44,14 @@ public:
     bool has_symbol(const std::string &name) override;
     void *get_symbol(const std::string &name) override;
 
-protected:
+private:
     //!< \cond DOXY_IMPL
     std::unique_ptr<DynLibraryImpl> m_impl; //!< The PIMPL instance
     //!< \endcond
 };
 
-} // namespace impl_boost
-
 #ifdef ESYSBASE_DYNLIB_USE_BOOST
 using namespace impl_boost;
 #endif
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::impl_boost

@@ -44,9 +44,9 @@ public:
     PluginMngr();
 
     //! Destructor
-    virtual ~PluginMngr();
+    ~PluginMngr() override;
 
-    virtual base::PluginBase *get_plugin_from_entry_fct(void *entry_fct) override;
+    base::PluginBase *get_plugin_from_entry_fct(void *entry_fct) override;
 
 protected:
     int plugin_loaded(PluginBase *plugin) override;

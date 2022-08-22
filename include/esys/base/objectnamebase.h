@@ -19,10 +19,7 @@
 
 #include "esys/base/esysbase_defs.h"
 
-namespace esys
-{
-
-namespace base
+namespace esys::base
 {
 
 /*! \class ObjecttNameBase esys/base/objectnamebase.h "esys/base/objectnamebase.h"
@@ -35,7 +32,7 @@ public:
     /*!
      *  \param[in] name The name of the Object
      */
-    ObjectNameBase(const char *name);
+    explicit ObjectNameBase(const char *name);
 
     //! Destructor
     virtual ~ObjectNameBase();
@@ -52,12 +49,10 @@ public:
      */
     operator const char *() const;
 
-protected:
+private:
     //!< \cond DOXY_IMPL
     const char *m_name = nullptr; //!< The actual name of the Object
     //!< \endcond
 };
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base

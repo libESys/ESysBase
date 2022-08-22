@@ -78,7 +78,7 @@ public:
      */
     PluginBase *get_plugin();
 
-protected:
+private:
     std::shared_ptr<DynLibrary> m_dyn_lib; //!< Pointer to the object implementing the dynamic loading
     void *m_entry_fct = nullptr;           //!< The entry point giving access to the plugin
     PluginBase *m_plugin = nullptr;        //!< Pointer to the plugin
@@ -95,7 +95,7 @@ public:
     PluginMngrCore(const std::string &name = "");
 
     //! Destructor
-    virtual ~PluginMngrCore();
+    ~PluginMngrCore() override;
 
     int load() override;
     int load(const std::string &dir) override;
@@ -107,7 +107,7 @@ public:
     int find_plugin_folder(std::string &plugin_folder) override;
     static int s_find_exe_path(std::string &exe_path);
 
-protected:
+private:
     //!< \cond DOXY_IMPL
     std::vector<std::shared_ptr<PluginMngrImplHelper>> m_plugins;
     //!< \endcond

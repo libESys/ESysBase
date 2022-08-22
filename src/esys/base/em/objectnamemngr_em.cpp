@@ -18,13 +18,7 @@
 #include "esys/base/esysbase_prec.h"
 #include "esys/base/em/objectnamemngr.h"
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace em
+namespace esys::base::em
 {
 
 ObjectName *ObjectNameMngr::s_current = nullptr;
@@ -34,9 +28,7 @@ ObjectNameMngr::ObjectNameMngr()
 {
 }
 
-ObjectNameMngr::~ObjectNameMngr()
-{
-}
+ObjectNameMngr::~ObjectNameMngr() = default;
 
 void ObjectNameMngr::set_current(ObjectName *current)
 {
@@ -48,8 +40,4 @@ ObjectName *ObjectNameMngr::get_current()
     return s_current;
 }
 
-} // namespace em
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::em

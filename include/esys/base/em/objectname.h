@@ -21,13 +21,7 @@
 #include "esys/base/objectname_t.h"
 #include "esys/base/em/objectnamemngr.h"
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace em
+namespace esys::base::em
 {
 
 class ESYSBASE_API Object;
@@ -39,7 +33,7 @@ class ESYSBASE_API Object;
 class ESYSBASE_API ObjectName : public ObjectName_t<Object, ObjectNameMngr, ObjectName>
 {
 public:
-    typedef ObjectName_t<Object, ObjectNameMngr, ObjectName> BaseType;
+    using BaseType = ObjectName_t<Object, ObjectNameMngr, ObjectName>;
 
     //! Constructor
     /*!
@@ -54,20 +48,11 @@ public:
     ObjectName(const ObjectName &name);
 
     //! Destructor
-    virtual ~ObjectName();
-
-protected:
-    //!< \cond DOXY_IMPL
-
-    //!< \endcond
+    ~ObjectName() override;
 };
-
-} // namespace em
 
 #ifdef ESYSBASE_EM
 using namespace em;
 #endif
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::em

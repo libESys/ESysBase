@@ -20,10 +20,7 @@
 #include "esys/base/esysbase_defs.h"
 #include "esys/base/objplatif.h"
 
-namespace esys
-{
-
-namespace base
+namespace esys::base
 {
 
 /*! \class Object esys/base/objectbase.h "esys/base/objectbase.h"
@@ -32,12 +29,12 @@ namespace base
 class ESYSBASE_API ObjectBase : public virtual ObjPlatIf
 {
 public:
-    ObjectBase(bool skip_init = false);
-    virtual ~ObjectBase();
+    explicit ObjectBase(bool skip_init = false);
+    ~ObjectBase() override;
 
     void set_can_be_disabled(bool can_be_disabled = true);
-    bool get_can_be_disabled();
-    bool is_enabled();
+    bool get_can_be_disabled() const;
+    bool is_enabled() const;
     virtual int object_enable();
     virtual int object_disable();
 
@@ -48,7 +45,7 @@ public:
     virtual void set_parent(ObjectBase *parent);
     ObjectBase *get_parent() const;
 
-protected:
+private:
     //!< \cond DOXY_IMPL
     ObjectBase *m_parent = nullptr;
     bool m_can_be_disabled : 1;
@@ -56,6 +53,4 @@ protected:
     //!< \endcond
 };
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base

@@ -22,10 +22,7 @@
 
 #include <cassert>
 
-namespace esys
-{
-
-namespace base
+namespace esys::base
 {
 
 /*! \class ObjecttName_t esys/base/objectname_t.h "esys/base/objectname_t.h"
@@ -48,7 +45,7 @@ public:
     ObjectName_t(const OBJNAME &name);
 
     //! Destructor
-    virtual ~ObjectName_t();
+    ~ObjectName_t() override;
 
     //! Set the ObjectName preceeding this instance
     /*!
@@ -98,7 +95,7 @@ public:
      */
     static OBJNAME *get_current();
 
-protected:
+private:
     //!< \cond DOXY_IMPL
     OBJNAME *m_prev = nullptr; //!< The previous ObjectName
     OBJNAME *m_next = nullptr; //!< The next ObjectName
@@ -204,6 +201,4 @@ OBJNAME *ObjectName_t<OBJ, MNGR, OBJNAME>::get_current()
     return MNGR::get().get_current();
 }
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base

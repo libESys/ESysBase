@@ -30,8 +30,6 @@ class Plugin_t : public BASE
 public:
     Plugin_t();
     virtual ~Plugin_t();
-
-protected:
 };
 
 template<typename DERIVED, typename BASE>

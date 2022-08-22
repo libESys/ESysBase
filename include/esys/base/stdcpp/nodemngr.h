@@ -54,7 +54,7 @@ public:
 
     void set_main_thread_id(std::thread::id main_thread_id);
     std::thread::id get_main_thread_id() const;
-    bool is_main_thread_id_set();
+    bool is_main_thread_id_set() const;
 
     std::shared_ptr<Node> find(const std::string &name);
     std::shared_ptr<Node> find(std::thread::id thread_id);

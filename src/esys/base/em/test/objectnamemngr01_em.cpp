@@ -17,49 +17,58 @@
 
 #include <iostream>
 
-namespace esys
+namespace esys::base::em::test::objectnamemngr01
 {
 
-namespace base
+class MyObjectBase : public Object
 {
+public:
+    MyObjectBase(const ObjectName &name)
+        : Object(name)
+    {
+    }
 
-namespace em
-{
+    ~MyObjectBase() override = default;
 
-namespace test
-{
+    int plat_init() override
+    {
+        return 0;
+    }
 
-namespace objectnamemngr01
-{
+    int plat_release() override
+    {
+        return 0;
+    }
+};
 
-class MyObject : public Object
+class MyObject : public MyObjectBase
 {
 public:
     MyObject(const ObjectName &name);
 
-protected:
-    Object m_obj_a{"obj_a"};
-    Object m_obj_b{"obj_b"};
+private:
+    MyObjectBase m_obj_a{"obj_a"};
+    MyObjectBase m_obj_b{"obj_b"};
 };
 
 MyObject::MyObject(const ObjectName &name)
-    : Object(name)
+    : MyObjectBase(name)
 {
 }
 
-class ObjectA : public Object
+class ObjectA : public MyObjectBase
 {
 public:
     ObjectA(const ObjectName &name);
 
 protected:
-    MyObject m_my_obj_a{"my_obj_a"};
-    MyObject m_my_obj_b{"my_obj_b"};
-    MyObject m_my_obj_c{"my_obj_c"};
+    MyObjectBase m_my_obj_a{"my_obj_a"};
+    MyObjectBase m_my_obj_b{"my_obj_b"};
+    MyObjectBase m_my_obj_c{"my_obj_c"};
 };
 
 ObjectA::ObjectA(const ObjectName &name)
-    : Object(name)
+    : MyObjectBase(name)
 {
 }
 
@@ -105,12 +114,4 @@ ESYSTEST_AUTO_TEST_CASE(ObjectNameMngr01EM)
     ESYSTEST_REQUIRE_EQUAL(child, nullptr);
 }
 
-} // namespace objectnamemngr01
-
-} // namespace test
-
-} // namespace em
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::em::test::objectnamemngr01

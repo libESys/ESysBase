@@ -33,22 +33,43 @@ namespace test
 namespace objectnamemngr01
 {
 
-class MyObject : public Object
+class MyObjectBase : public Object
+{
+public:
+    MyObjectBase(const ObjectName &name)
+        : Object(name)
+    {
+    }
+
+    ~MyObjectBase() override = default;
+
+    int plat_init() override
+    {
+        return 0;
+    }
+
+    int plat_release() override
+    {
+        return 0;
+    }
+};
+
+class MyObject : public MyObjectBase
 {
 public:
     MyObject(const ObjectName &name);
 
 protected:
-    Object m_obj_a{"obj_a"};
-    Object m_obj_b{"obj_b"};
+    MyObjectBase m_obj_a{"obj_a"};
+    MyObjectBase m_obj_b{"obj_b"};
 };
 
 MyObject::MyObject(const ObjectName &name)
-    : Object(name)
+    : MyObjectBase(name)
 {
 }
 
-class ObjectA : public Object
+class ObjectA : public MyObjectBase
 {
 public:
     ObjectA(const ObjectName &name);
@@ -60,7 +81,7 @@ protected:
 };
 
 ObjectA::ObjectA(const ObjectName &name)
-    : Object(name)
+    : MyObjectBase(name)
 {
 }
 
@@ -113,7 +134,7 @@ ESYSTEST_AUTO_TEST_CASE(ObjectNameMngr01StdCpp)
 
 } // namespace test
 
-} // namespace em
+} // namespace stdcpp
 
 } // namespace base
 

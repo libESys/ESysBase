@@ -39,7 +39,7 @@ public:
     PluginMngrCore_t(const std::string &name="");
 
     //! Destructor
-    virtual ~PluginMngrCore_t();
+    ~PluginMngrCore_t() override;
 
     int load() override;
 
@@ -81,6 +81,7 @@ protected:
      */
     virtual int plugin_loaded(T *plugin);
 
+private:
     std::vector<T *> m_plugins;                         //!< The vector of loaded plugins
     std::map<std::string, T *> m_map_plugin_short_name; //!< The map of plugins
     //!< \endcond

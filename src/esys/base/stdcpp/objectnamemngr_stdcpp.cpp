@@ -19,13 +19,7 @@
 #include "esys/base/stdcpp/objectnamemngr.h"
 #include "esys/base/stdcpp/nodemngr.h"
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace stdcpp
+namespace esys::base::stdcpp
 {
 
 ObjectNameMngr::ObjectNameMngr()
@@ -33,9 +27,7 @@ ObjectNameMngr::ObjectNameMngr()
 {
 }
 
-ObjectNameMngr::~ObjectNameMngr()
-{
-}
+ObjectNameMngr::~ObjectNameMngr() = default;
 
 void ObjectNameMngr::set_current(ObjectName *current)
 {
@@ -57,8 +49,4 @@ ObjectName *ObjectNameMngr::get_current()
         return node->get_object_name_mngr().get_current();
 }
 
-} // namespace stdcpp
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::stdcpp
