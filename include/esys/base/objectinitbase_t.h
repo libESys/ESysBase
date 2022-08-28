@@ -33,7 +33,7 @@ public:
     explicit ObjectInitBase_t(T *object);
 
     //! Destructor
-    ~ObjectInitBase_t();
+    virtual ~ObjectInitBase_t();
 
     virtual int init() = 0;
     virtual int release() = 0;

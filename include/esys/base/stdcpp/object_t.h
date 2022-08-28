@@ -36,7 +36,7 @@ class Object_t : public ObjectBase_t<T, IL>
 {
 public:
     Object_t(const ObjectName &name, T *obj);
-    virtual ~Object_t();
+    ~Object_t() override;
 
     const char *get_name() const override;
     unsigned int get_id() const override;

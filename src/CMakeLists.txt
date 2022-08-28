@@ -12,4 +12,6 @@
 #
 
 add_subdirectory(esys/base)
-add_subdirectory(esysbaseexe)
+if(ESYSBASE_VHW)
+  add_subdirectory(esysbaseexe)
+endif()

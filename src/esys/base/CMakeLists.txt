@@ -1,11 +1,14 @@
 #
+# cmake-format: off
 # __legal_b__
 #
-# Copyright (c) 2021 Michel Gillet Distributed under the wxWindows Library
-# Licence, Version 3.1. (See accompanying file LICENSE_3_1.txt or copy at
-# http://www.wxwidgets.org/about/licence)
+# Copyright (c) 2021-2022 Michel Gillet
+# Distributed under the wxWindows Library Licence, Version 3.1.
+# (See accompanying file LICENSE_3_1.txt or
+# copy at http://www.wxwidgets.org/about/licence)
 #
 # __legal_e__
+# cmake-format: on
 #
 
 project(esysbase CXX)
@@ -13,7 +16,9 @@ project(esysbase CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Boost 1.66 REQUIRED COMPONENTS filesystem system)
+if(ESYSBASE_VHW)
+  find_package(Boost 1.66 REQUIRED COMPONENTS filesystem system)
+endif()
 
 set(ESYSBASE_VERSION_MAJOR 0)
 set(ESYSBASE_VERSION_MINOR 1)
@@ -24,37 +29,45 @@ set(ESYSBASE_VERSION
 
 include_directories(../../../include)
 
-set(ESYSBASE_CXX_SOURCES dynlibrarybase.cpp objectbase.cpp objectnamebase.cpp objplatif.cpp pluginbase.cpp pluginmngr.cpp
-                         pluginmngrbase.cpp)
+set(ESYSBASE_CXX_SOURCES objectbase.cpp objectnamebase.cpp objplatif.cpp)
 
-set(ESYSBASE_EM_CXX_SOURCES em/object_em.cpp em/objectname_em.cpp em/objectnamemngr_em.cpp
-)
+if(ESYSBASE_VHW)
+  set(ESYSBASE_CXX_SOURCES ${ESYSBASE_CXX_SOURCES} dynlibrarybase.cpp
+                           pluginbase.cpp pluginmngr.cpp pluginmngrbase.cpp)
+endif()
+
+set(ESYSBASE_EM_CXX_SOURCES em/object_em.cpp em/objectname_em.cpp
+                            em/objectnamemngr_em.cpp)
 
 set(ESYSBASE_IMPL_BOOST_CXX_SOURCES
     impl_boost/dynlibrary_boost.cpp impl_boost/dynlibraryimpl_boost.cpp
     impl_boost/pluginmngrcore_boost.cpp)
 
 set(ESYSBASE_STDCPP_CXX_SOURCES
-  stdcpp/node_stdcpp.cpp
-  stdcpp/nodemngr_stdcpp.cpp
-  stdcpp/object_stdcpp.cpp
-  stdcpp/objectname_stdcpp.cpp
-  stdcpp/objectnamemngr_stdcpp.cpp
-  stdcpp/objectoperation_stdcpp.cpp
-)
+    stdcpp/node_stdcpp.cpp stdcpp/nodemngr_stdcpp.cpp stdcpp/object_stdcpp.cpp
+    stdcpp/objectname_stdcpp.cpp stdcpp/objectnamemngr_stdcpp.cpp
+    stdcpp/objectoperation_stdcpp.cpp)
 
-add_library(esysbase SHARED ${ESYSBASE_CXX_SOURCES}
-                            ${ESYSBASE_EM_CXX_SOURCES}
-                            ${ESYSBASE_IMPL_BOOST_CXX_SOURCES}
-                            ${ESYSBASE_STDCPP_CXX_SOURCES}
-                            )
+set(ESYSBASE_CXX_SOURCES ${ESYSBASE_CXX_SOURCES} ${ESYSBASE_EM_CXX_SOURCES})
 
-set_property(TARGET esysbase PROPERTY VERSION ${ESYSBASE_VERSION})
-set_property(TARGET esysbase PROPERTY SOVERSION ${ESYSBASE_VERSION_MAJOR})
+if(ESYSBASE_VHW)
+  set(ESYSBASE_CXX_SOURCES
+      ${ESYSBASE_CXX_SOURCES} ${ESYSBASE_IMPL_BOOST_CXX_SOURCES}
+      ${ESYSBASE_STDCPP_CXX_SOURCES})
+endif()
+
+add_library(esysbase ${ESYSBASE_LIB_TYPE} ${ESYSBASE_CXX_SOURCES})
+
+if(ESYSBASE_SHARED)
+  set_property(TARGET esysbase PROPERTY VERSION ${ESYSBASE_VERSION})
+  set_property(TARGET esysbase PROPERTY SOVERSION ${ESYSBASE_VERSION_MAJOR})
+endif()
 
 target_include_directories(esysbase PUBLIC ../.. ../../../include)
 
-target_link_libraries(esysbase PRIVATE Boost::filesystem Boost::system dl)
+if(ESYSBASE_SHARED)
+  target_link_libraries(esysbase PRIVATE Boost::filesystem Boost::system dl)
+endif()
 
 install(TARGETS esysbase LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
@@ -64,12 +77,16 @@ install(
   FILES_MATCHING
   PATTERN "*.h*")
 
-if(COMMAND add_clang_format_target)
-  add_clang_format_target(esysbase)
+if(ESYSBASE_VHW)
+  if(COMMAND add_clang_format_target)
+    add_clang_format_target(esysbase)
+  endif()
+
+  if(COMMAND add_clang_tidy_target)
+    add_clang_tidy_target(esysbase)
+  endif()
 endif()
 
-if(COMMAND add_clang_tidy_target)
-  add_clang_tidy_target(esysbase)
+if(ESYSBASE_VHW AND ESYSBASE_BUILD_UTS)
+  add_subdirectory(test)
 endif()
-
-add_subdirectory(test)

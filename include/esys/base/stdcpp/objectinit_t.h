@@ -33,7 +33,7 @@ public:
     using BaseType = base::ObjectInitBase_t<T>;
 
     explicit ObjectInit_t(T *object);
-    virtual ~ObjectInit_t();
+    ~ObjectInit_t() override;
 
     int init() override;
     int release() override;
