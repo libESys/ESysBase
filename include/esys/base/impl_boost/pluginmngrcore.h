@@ -103,13 +103,20 @@ public:
     std::size_t get_size() override;
     PluginBase *get_base(std::size_t index) override;
 
+    void set_plugin_path_without_prefix_valid(bool plugin_path_without_prefix_valid);
+    bool get_plugin_path_without_prefix_valid() const;
+
     int find_exe_path(std::string &exe_path) override;
     int find_plugin_folder(std::string &plugin_folder) override;
     static int s_find_exe_path(std::string &exe_path);
 
+    int search_existing_folder(const std::vector<std::string> &search_paths, const std::string &rel_plugin_path,
+                               std::string &plugin_folder, bool use_rel_plugin_path = true) const;
+
 private:
     //!< \cond DOXY_IMPL
     std::vector<std::shared_ptr<PluginMngrImplHelper>> m_plugins;
+    bool m_plugin_path_without_prefix_valid = false;
     //!< \endcond
 };
 

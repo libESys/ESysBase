@@ -277,6 +277,16 @@ PluginBase *PluginMngrCore::get_base(std::size_t index)
     return m_plugins[index]->get_plugin();
 }
 
+void PluginMngrCore::set_plugin_path_without_prefix_valid(bool plugin_path_without_prefix_valid)
+{
+    m_plugin_path_without_prefix_valid = plugin_path_without_prefix_valid;
+}
+
+bool PluginMngrCore::get_plugin_path_without_prefix_valid() const
+{
+    return m_plugin_path_without_prefix_valid;
+}
+
 int PluginMngrCore::find_exe_path(std::string &exe_path)
 {
     return s_find_exe_path(exe_path);
@@ -285,7 +295,7 @@ int PluginMngrCore::find_exe_path(std::string &exe_path)
 int PluginMngrCore::find_plugin_folder(std::string &plugin_folder)
 {
     int result = 0;
-    boost::filesystem::path plugin_dir;
+    boost::filesystem::path exe_folder;
 
     std::vector<std::string> search_paths;
 
@@ -297,6 +307,7 @@ int PluginMngrCore::find_plugin_folder(std::string &plugin_folder)
         if (result < 0) return -2;
         search_path = path;
         search_path = search_path.parent_path(); // Remove the executable name
+        exe_folder = search_path;
 #ifndef WIN32
         // To get to the parent of bin folder
         search_path = search_path.parent_path();
@@ -326,10 +337,24 @@ int PluginMngrCore::find_plugin_folder(std::string &plugin_folder)
     result = get_rel_plugin_path(rel_plugin_path);
     if (result < 0) return -3;
 
+    result = search_existing_folder(search_paths, rel_plugin_path, plugin_folder);
+    if (result == 0) return 0;
+
+    if (!get_plugin_path_without_prefix_valid()) return -1;
+
+    return search_existing_folder(search_paths, rel_plugin_path, plugin_folder, false);
+}
+
+int PluginMngrCore::search_existing_folder(const std::vector<std::string> &search_paths,
+                                           const std::string &rel_plugin_path, std::string &plugin_folder,
+                                           bool use_rel_plugin_path) const
+{
+    boost::filesystem::path path_to_test;
+
     for (auto const &search_path : search_paths)
     {
         path_to_test = search_path;
-        path_to_test /= rel_plugin_path;
+        if (use_rel_plugin_path) path_to_test /= rel_plugin_path;
         path_to_test = ::boost::filesystem::absolute(path_to_test).normalize().make_preferred();
         if (boost::filesystem::exists(path_to_test))
         {
@@ -337,6 +362,7 @@ int PluginMngrCore::find_plugin_folder(std::string &plugin_folder)
             return 0;
         }
     }
+    plugin_folder = "";
     return -1;
 }
 
