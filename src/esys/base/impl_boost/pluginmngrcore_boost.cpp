@@ -198,10 +198,11 @@ int PluginMngrCore::load()
 #endif
 
 #ifdef WIN32
-    std::string mask = "*.dll";
+    std::string ext = ".dll";
 #else
-    std::string mask = "*.so";
+    std::string ext = ".so";
 #endif
+    std::string mask = "*" + ext; 
     boost::filesystem::path search_path = abs_plugin_dir;
     search_path /= mask;
 
@@ -230,6 +231,14 @@ int PluginMngrCore::load()
             if (get_verbose_level() > 0)
             {
                 std::cout << "    is a symlink." << std::endl;
+            }
+            continue;
+        }
+        if (it->path().extension() != ext)
+        {
+            if (get_verbose_level() > 0)
+            {
+                std::cout << "    wrong extension : " << ext << std::endl;
             }
             continue;
         }
