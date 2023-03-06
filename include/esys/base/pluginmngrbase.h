@@ -235,7 +235,7 @@ public:
     /*!
      * \return the plugin instance
      */
-    virtual PluginBase *get_plugin_from_entry_fct(void *entry_fct) = 0;
+    virtual PluginBase *get_plugin_from_entry_fct(void *entry_fct);
 
     //! Set the base folder
     /*!

@@ -227,6 +227,18 @@ const std::string &PluginMngrBase::get_entry_fct_name() const
     return m_entry_fct_name;
 }
 
+PluginBase *PluginMngrBase::get_plugin_from_entry_fct(void *entry_fct)
+{
+    auto the_entry_fct = (PluginBaseEntryFunction)entry_fct;
+    PluginBase *plugin;
+
+    assert(entry_fct != nullptr);
+
+    plugin = (*the_entry_fct)();
+
+    return plugin;
+}
+
 void PluginMngrBase::set_entry_fct_name(const std::string &entry_fct_name)
 {
     m_entry_fct_name = entry_fct_name;
