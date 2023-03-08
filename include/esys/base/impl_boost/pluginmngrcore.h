@@ -98,7 +98,7 @@ public:
     ~PluginMngrCore() override;
 
     int load() override;
-    int load(const std::string &dir) override;
+    int load(const std::string &dir, PluginBase **plugin_base = nullptr) override;
     int release() override;
     std::size_t get_size() override;
     PluginBase *get_base(std::size_t index) override;
@@ -113,10 +113,12 @@ public:
     int search_existing_folder(const std::vector<std::string> &search_paths, const std::string &rel_plugin_path,
                                std::string &plugin_folder, bool use_rel_plugin_path = true) const;
 
+    int set_dll_directory(const std::string &dir, bool only_if_different = true);
 private:
     //!< \cond DOXY_IMPL
     std::vector<std::shared_ptr<PluginMngrImplHelper>> m_plugins;
     bool m_plugin_path_without_prefix_valid = false;
+    std::string m_set_dll_directory;
     //!< \endcond
 };
 

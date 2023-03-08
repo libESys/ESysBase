@@ -158,7 +158,7 @@ public:
     /*!
      * \return 0 if successful, < 0 otherwise
      */
-    virtual int load(const std::string &dir) = 0;
+    virtual int load(const std::string &dir, PluginBase **plugin_base = nullptr) = 0;
 
     //! Load all plugins if not already done
     /*!

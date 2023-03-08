@@ -68,11 +68,29 @@ PluginMngrCore::PluginMngrCore(const std::string &name)
 
 PluginMngrCore::~PluginMngrCore() = default;
 
-int PluginMngrCore::load(const std::string &dir)
+int PluginMngrCore::load(const std::string &dir, PluginBase **plugin_base)
 {
-    std::shared_ptr<PluginMngrImplHelper> helper;
-    PluginBase *plugin;
     auto plugin_lib = std::make_shared<DynLibrary>();
+    boost::filesystem::path dir_path = dir;
+    dir_path = dir_path.parent_path();
+
+    if (!boost::filesystem::is_regular_file(dir))
+    {
+        std::cout << "This is not a file = " << dir_path << std::endl;
+        return -1;
+    }
+
+    if (!boost::filesystem::is_directory(dir_path))
+    {
+        std::cout << "This is not a directory = " << dir_path.string() << std::endl;
+        return -1;
+    }
+
+    auto result = set_dll_directory(dir_path.string());
+    if (result < 0)
+    {
+        std::cout << "Failed to set plugin folder = " << dir_path.string() << std::endl;
+    }
 
     if (plugin_lib->load(dir) != 0)
     {
@@ -101,6 +119,7 @@ int PluginMngrCore::load(const std::string &dir)
         return -3;
     }
 
+    PluginBase *plugin;
     plugin = get_plugin_from_entry_fct(plugin_entry_function);
 
 #ifdef _MSC_VER
@@ -126,6 +145,10 @@ int PluginMngrCore::load(const std::string &dir)
 #error _DEBUG or NDEBUG must be defined
 #endif
 #endif
+    if (plugin_base != nullptr) *plugin_base = plugin;
+
+    std::shared_ptr<PluginMngrImplHelper> helper;
+
     helper = std::make_shared<PluginMngrImplHelper>();
 
     helper->set_dyn_lib(plugin_lib);
@@ -141,14 +164,24 @@ int PluginMngrCore::load(const std::string &dir)
     return 0;
 }
 
+int PluginMngrCore::set_dll_directory(const std::string &dir, bool only_if_different)
+{
+    if (only_if_different && (dir == m_set_dll_directory)) return 0;
+
+#ifdef WIN32
+    bool result = SetDllDirectory(dir.c_str());
+    if (!result) return -1;
+#endif
+    m_set_dll_directory = dir;
+    return 0;
+}
+
 int PluginMngrCore::load()
 {
     if (get_is_loaded()) return -1;
 
     int result = 0;
     std::string abs_plugin_dir;
-    boost::filesystem::directory_iterator file_end_it;
-    DynLibrary *plugin_lib = nullptr;
 
     result = find_plugin_folder(abs_plugin_dir);
     if (result < 0)
@@ -193,16 +226,18 @@ int PluginMngrCore::load()
     {
         std::cout << "Plugin folder = " << abs_plugin_dir.c_str() << std::endl;
     }
-#ifdef WIN32
-    SetDllDirectory(abs_plugin_dir.c_str());
-#endif
 
+    result = set_dll_directory(abs_plugin_dir);
+    if (result < 0)
+    {
+        std::cout << "Failed to set plugin folder = " << abs_plugin_dir.c_str() << std::endl;
+    }
 #ifdef WIN32
     std::string ext = ".dll";
 #else
     std::string ext = ".so";
 #endif
-    std::string mask = "*" + ext; 
+    std::string mask = "*" + ext;
     boost::filesystem::path search_path = abs_plugin_dir;
     search_path /= mask;
 
@@ -210,6 +245,8 @@ int PluginMngrCore::load()
     {
         std::cout << "Search path   = " << search_path.string() << std::endl << std::endl;
     }
+
+    boost::filesystem::directory_iterator file_end_it;
 
     for (boost::filesystem::directory_iterator it(abs_plugin_dir); it != file_end_it; ++it)
     {

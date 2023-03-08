@@ -36,12 +36,14 @@ class PluginMngrCore_t : public PluginMngrCore
 {
 public:
     //! Default constructor
-    PluginMngrCore_t(const std::string &name="");
+    PluginMngrCore_t(const std::string &name = "");
 
     //! Destructor
     ~PluginMngrCore_t() override;
 
     int load() override;
+
+    int load(const std::string &dir, T **plugin = nullptr);
 
     PluginBase *get_base(const std::string &short_name) override;
 
@@ -124,6 +126,19 @@ int PluginMngrCore_t<T>::load()
         plugin_loaded(plugin);
     }
     return result;
+}
+
+template<typename T>
+int PluginMngrCore_t<T>::load(const std::string &dir, T **plugin)
+{
+    PluginBase *plugin_base = nullptr;
+    int result = PluginMngrCore::load(dir, &plugin_base);
+    if (result < 0) return result;
+
+    if (plugin_base == nullptr) return -1;
+    if (plugin != nullptr)
+        *plugin = dynamic_cast<T *>(plugin_base);
+    return 0;
 }
 
 template<typename T>
