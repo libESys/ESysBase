@@ -273,11 +273,21 @@ int PluginMngrCore::load()
         }
         if (it->path().extension() != ext)
         {
-            if (get_verbose_level() > 0)
+            // Needed because .so file can have version like .so.0.1.0
+            auto temp_str = it->path().filename().string();
+            auto idx = temp_str.find(ext);
+            if (idx == std::string::npos)
             {
-                std::cout << "    wrong extension : " << ext << std::endl;
+                idx = temp_str.find(ext + ".");
+                if (idx == std::string::npos)
+                {
+                    if (get_verbose_level() > 0)
+                    {
+                        std::cout << "    wrong extension : " << it->path() << std::endl;
+                    }
+                    continue;
+                }
             }
-            continue;
         }
 
         // assign current file name to current_file and echo it out to the console.
