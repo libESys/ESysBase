@@ -117,6 +117,8 @@ public:
      */
     const boost::filesystem::path &get_path() const;
 
+    static const std::string &get_plugin_path_rel_exe_no_prefix(std::string &path, const std::string &plugin_name);
+    
 protected:
     //!< \cond DOXY_IMPL
 

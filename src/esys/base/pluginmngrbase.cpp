@@ -190,6 +190,29 @@ bool PluginMngrBase::get_is_loaded() const
     return m_is_loaded;
 }
 
+int PluginMngrBase::find_plugin_path_rel_exe(const std::string &plugin_name, std::string &plugin_path)
+{
+    std::string exe_path;
+    boost::filesystem::path plugin_path_;
+
+    plugin_path = "";
+
+    int result = find_exe_path(exe_path);
+    if (result < 0) return result;
+
+    plugin_path_ = exe_path;
+    plugin_path_ = plugin_path_.parent_path();
+#ifndef WIN32
+    plugin_path_ /= "..";
+    plugin_path_ /= "lib";
+    plugin_path_ /= "lib" + plugin_name + ".so*";
+#else
+    plugin_path_ /= plugin_name + ".dll";
+#endif
+    plugin_path = plugin_path_.string();
+    return 0;
+}
+
 int PluginMngrBase::get_rel_plugin_path(std::string &rel_plugin_path)
 {
     boost::filesystem::path p;
