@@ -74,7 +74,19 @@ int PluginMngrCore::load(const std::string &dir, PluginBase **plugin_base)
     boost::filesystem::path dir_path = dir;
     dir_path = dir_path.parent_path();
 
-    if (!boost::filesystem::is_regular_file(dir))
+    std::string the_path = dir;
+    if (boost::filesystem::is_symlink(the_path))
+    {
+        int result = find_regular_file(dir, the_path);
+        if (result < 0)
+        {
+            std::cout << "    symlink doesn't point to a regular file: " << dir << std::endl;
+            return -1;
+        }
+        std::cout << "the_path" << the_path << std::endl;
+    }
+
+    if (!boost::filesystem::is_regular_file(the_path))
     {
         std::cout << "This is not a file = " << dir_path << std::endl;
         return -1;
@@ -92,7 +104,7 @@ int PluginMngrCore::load(const std::string &dir, PluginBase **plugin_base)
         std::cout << "Failed to set plugin folder = " << dir_path.string() << std::endl;
     }
 
-    if (plugin_lib->load(dir) != 0)
+    if (plugin_lib->load(the_path) != 0)
     {
         if (get_verbose_level() > 0)
         {
@@ -154,7 +166,7 @@ int PluginMngrCore::load(const std::string &dir, PluginBase **plugin_base)
     helper->set_dyn_lib(plugin_lib);
     helper->set_entry_point(plugin_entry_function);
     helper->set_plugin(plugin);
-    set_plugin_filename(plugin, dir);
+    set_plugin_filename(plugin, the_path);
 
     m_plugins.push_back(helper);
     if (get_verbose_level() > 0)
@@ -174,6 +186,26 @@ int PluginMngrCore::set_dll_directory(const std::string &dir, bool only_if_diffe
 #endif
     m_set_dll_directory = dir;
     return 0;
+}
+
+int PluginMngrCore::find_regular_file(const std::string &symlink, std::string &regular_file)
+{
+    boost::filesystem::path temp = symlink;
+    int count = 10;
+    regular_file = "";
+
+    while (boost::filesystem::is_symlink(temp) && (count > 0))
+    {
+        temp = boost::filesystem::read_symlink(temp);
+        --count;
+    }
+
+    if (boost::filesystem::is_regular_file(temp))
+    {
+        regular_file = boost::filesystem::absolute(temp).string();
+        return 0;
+    }
+    return -1;
 }
 
 int PluginMngrCore::load()
@@ -263,11 +295,25 @@ int PluginMngrCore::load()
             }
             continue;
         }
-        if (boost::filesystem::is_symlink(it->path()))
+        std::string the_path = it->path().string();
+        if (boost::filesystem::is_symlink(the_path))
+        {
+            int result = find_regular_file(it->path().string(), the_path);
+            if (result < 0)
+            {
+                if (get_verbose_level() > 0)
+                {
+                    std::cout << "    this is not a regular file: " << it->path() << std::endl;
+                }
+                continue;
+            }
+            std::cout << "the_path" << the_path << std::endl;
+        }
+        if (find_plugin_abs_path(the_path) != nullptr)
         {
             if (get_verbose_level() > 0)
             {
-                std::cout << "    is a symlink." << std::endl;
+                std::cout << "    this plugin was already loaded: " << the_path << "." << std::endl;
             }
             continue;
         }
@@ -291,8 +337,10 @@ int PluginMngrCore::load()
         }
 
         // assign current file name to current_file and echo it out to the console.
-        std::string current_file = it->path().string();
-        result = load(current_file);
+        std::string current_file = the_path;
+        PluginBase *plugin;
+        result = load(current_file, &plugin);
+        if (result == 0) add_plugin_abs_path(the_path, plugin);
     }
     set_is_loaded(true);
 
@@ -367,6 +415,10 @@ int PluginMngrCore::find_plugin_folder(std::string &plugin_folder)
 #ifndef WIN32
         // To get to the parent of bin folder
         search_path = search_path.parent_path();
+        auto search_path_str = search_path.string();
+        search_path /= "lib";
+        search_paths.push_back(search_path.string());
+        search_path = search_path_str;
 #endif
         search_paths.push_back(search_path.string());
     }

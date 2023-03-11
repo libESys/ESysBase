@@ -114,6 +114,9 @@ public:
                                std::string &plugin_folder, bool use_rel_plugin_path = true) const;
 
     int set_dll_directory(const std::string &dir, bool only_if_different = true);
+
+    int find_regular_file(const std::string &symlink, std::string &regular_file);
+
 private:
     //!< \cond DOXY_IMPL
     std::vector<std::shared_ptr<PluginMngrImplHelper>> m_plugins;

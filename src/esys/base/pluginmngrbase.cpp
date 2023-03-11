@@ -205,7 +205,7 @@ int PluginMngrBase::find_plugin_path_rel_exe(const std::string &plugin_name, std
 #ifndef WIN32
     plugin_path_ /= "..";
     plugin_path_ /= "lib";
-    plugin_path_ /= "lib" + plugin_name + ".so*";
+    plugin_path_ /= "lib" + plugin_name + ".so";
 #else
     plugin_path_ /= plugin_name + ".dll";
 #endif
@@ -265,6 +265,25 @@ PluginBase *PluginMngrBase::get_plugin_from_entry_fct(void *entry_fct)
 void PluginMngrBase::set_entry_fct_name(const std::string &entry_fct_name)
 {
     m_entry_fct_name = entry_fct_name;
+}
+
+PluginBase *PluginMngrBase::find_plugin_abs_path(const std::string &abs_path) const
+{
+    boost::filesystem::path path = boost::filesystem::absolute(abs_path);
+
+    auto it = m_abs_path_plugin_map.find(path.string());
+
+    if (it == m_abs_path_plugin_map.end()) return nullptr;
+    return it->second;
+}
+
+void PluginMngrBase::add_plugin_abs_path(const std::string &abs_path, PluginBase *plugin)
+{
+    boost::filesystem::path path = boost::filesystem::absolute(abs_path);
+
+    if (find_plugin_abs_path(path.string()) != nullptr) return;
+
+    m_abs_path_plugin_map[path.string()] = plugin;
 }
 
 int PluginMngrBase::load_if_not_loaded()

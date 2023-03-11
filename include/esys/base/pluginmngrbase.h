@@ -282,6 +282,9 @@ protected:
     static std::string m_base_folder; //!< The base folder
     static std::string m_app_exe;     //!< The application exe name
 
+    PluginBase *find_plugin_abs_path(const std::string &abs_path) const;
+    void add_plugin_abs_path(const std::string &abs_path, PluginBase *plugin);
+
 private:
     std::string m_name;
     std::string m_version;
@@ -293,6 +296,7 @@ private:
     std::string m_search_folder;                       //!< The search folder
     bool m_is_loaded = false;                          //!< True if already loaded, false otherwise
     std::vector<std::string> m_env_var_search_folders; //!< Environement variables potentially storing path to plugins
+    std::map<std::string, PluginBase *> m_abs_path_plugin_map; //!< Map absolute path to the Plugin
     //!< \endcond
 };
 
