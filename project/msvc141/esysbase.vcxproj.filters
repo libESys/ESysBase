@@ -99,6 +99,15 @@
     <ClCompile Include="..\..\src\esys\base\objplatif.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\stdcpp\log_if_stdcpp.cpp">
+      <Filter>Source Files\stdcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\em\log_if_em.cpp">
+      <Filter>Source Files\em</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\stdcpp\logger_stdcpp.cpp">
+      <Filter>Source Files\stdcpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\esys\base\esysbase_defs.h">
@@ -226,6 +235,18 @@
     </ClInclude>
     <ClInclude Include="..\..\include\esys\base\objplatif.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\log_if.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\stdcpp\log_if.h">
+      <Filter>Header Files\stdcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\em\log_if.h">
+      <Filter>Header Files\em</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\stdcpp\logger.h">
+      <Filter>Header Files\stdcpp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

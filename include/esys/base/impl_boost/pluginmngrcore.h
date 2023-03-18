@@ -117,11 +117,16 @@ public:
 
     int find_regular_file(const std::string &symlink, std::string &regular_file);
 
+    void error_or_debug(const std::string &msg);
 private:
     //!< \cond DOXY_IMPL
+    void set_load_auto_detect(bool load_auto_detect);
+    bool get_load_auto_detect() const;
+
     std::vector<std::shared_ptr<PluginMngrImplHelper>> m_plugins;
     bool m_plugin_path_without_prefix_valid = false;
     std::string m_set_dll_directory;
+    bool m_load_auto_detect = false;
     //!< \endcond
 };
 

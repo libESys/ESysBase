@@ -36,16 +36,21 @@ if(ESYSBASE_VHW)
                            pluginbase.cpp pluginmngr.cpp pluginmngrbase.cpp)
 endif()
 
-set(ESYSBASE_EM_CXX_SOURCES em/object_em.cpp em/objectname_em.cpp
-                            em/objectnamemngr_em.cpp)
+set(ESYSBASE_EM_CXX_SOURCES em/log_if_em.cpp em/object_em.cpp
+                            em/objectname_em.cpp em/objectnamemngr_em.cpp)
 
 set(ESYSBASE_IMPL_BOOST_CXX_SOURCES
     impl_boost/dynlibrary_boost.cpp impl_boost/dynlibraryimpl_boost.cpp
     impl_boost/pluginmngrcore_boost.cpp)
 
 set(ESYSBASE_STDCPP_CXX_SOURCES
-    stdcpp/node_stdcpp.cpp stdcpp/nodemngr_stdcpp.cpp stdcpp/object_stdcpp.cpp
-    stdcpp/objectname_stdcpp.cpp stdcpp/objectnamemngr_stdcpp.cpp
+    stdcpp/log_if_stdcpp.cpp
+    stdcpp/logger_stdcpp.cpp
+    stdcpp/node_stdcpp.cpp
+    stdcpp/nodemngr_stdcpp.cpp
+    stdcpp/object_stdcpp.cpp
+    stdcpp/objectname_stdcpp.cpp
+    stdcpp/objectnamemngr_stdcpp.cpp
     stdcpp/objectoperation_stdcpp.cpp)
 
 set(ESYSBASE_CXX_SOURCES ${ESYSBASE_CXX_SOURCES} ${ESYSBASE_EM_CXX_SOURCES})

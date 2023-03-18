@@ -31,15 +31,16 @@
 
 ESysBaseExe::ESysBaseExe()
 {
+    m_logger = std::make_shared<esys::base::stdcpp::Logger>();
+    m_logger->set_os(std::cout);
 }
 
-ESysBaseExe::~ESysBaseExe()
-{
-}
+ESysBaseExe::~ESysBaseExe() = default;
 
 void ESysBaseExe::set_os(std::ostream &os)
 {
     m_os = &os;
+    m_logger->set_os(os);
 }
 
 std::ostream *ESysBaseExe::get_os()
@@ -142,6 +143,7 @@ int ESysBaseExe::cmd_list_plugings()
     std::string app_name = m_vm["list_plugins"].as<std::string>();
 
     esys::base::PluginMngr mngr;
+    mngr.set_log_if(m_logger);
     mngr.set_verbose_level(m_vm["verbose"].as<int>());
 
     if (!app_name.empty()) mngr.set_name(app_name);

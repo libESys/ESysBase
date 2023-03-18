@@ -25,4 +25,14 @@ DynLibraryBase::DynLibraryBase() = default;
 
 DynLibraryBase::~DynLibraryBase() = default;
 
+const std::string &DynLibraryBase::get_last_error() const
+{
+    return m_last_error;
+}
+
+void DynLibraryBase::set_last_error(const std::string &last_error)
+{
+    m_last_error = last_error;
+}
+
 } // namespace esys::base

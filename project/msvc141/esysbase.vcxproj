@@ -224,6 +224,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\esys\base\dynlibrarybase.cpp" />
+    <ClCompile Include="..\..\src\esys\base\em\log_if_em.cpp" />
     <ClCompile Include="..\..\src\esys\base\em\objectnamemngr_em.cpp" />
     <ClCompile Include="..\..\src\esys\base\em\objectname_em.cpp" />
     <ClCompile Include="..\..\src\esys\base\em\object_em.cpp" />
@@ -243,6 +244,8 @@
     <ClCompile Include="..\..\src\esys\base\pluginbase.cpp" />
     <ClCompile Include="..\..\src\esys\base\pluginmngr.cpp" />
     <ClCompile Include="..\..\src\esys\base\pluginmngrbase.cpp" />
+    <ClCompile Include="..\..\src\esys\base\stdcpp\logger_stdcpp.cpp" />
+    <ClCompile Include="..\..\src\esys\base\stdcpp\log_if_stdcpp.cpp" />
     <ClCompile Include="..\..\src\esys\base\stdcpp\nodemngr_stdcpp.cpp" />
     <ClCompile Include="..\..\src\esys\base\stdcpp\node_stdcpp.cpp" />
     <ClCompile Include="..\..\src\esys\base\stdcpp\objectnamemngr_stdcpp.cpp" />
@@ -255,6 +258,7 @@
     <ClInclude Include="..\..\include\esys\base\autolink.h" />
     <ClInclude Include="..\..\include\esys\base\dynlibrary.h" />
     <ClInclude Include="..\..\include\esys\base\dynlibrarybase.h" />
+    <ClInclude Include="..\..\include\esys\base\em\log_if.h" />
     <ClInclude Include="..\..\include\esys\base\em\object.h" />
     <ClInclude Include="..\..\include\esys\base\em\objectinit_t.h" />
     <ClInclude Include="..\..\include\esys\base\em\objectname.h" />
@@ -265,6 +269,7 @@
     <ClInclude Include="..\..\include\esys\base\impl_boost\dynlibrary.h" />
     <ClInclude Include="..\..\include\esys\base\impl_boost\pluginmngrcore.h" />
     <ClInclude Include="..\..\include\esys\base\layerbase.h" />
+    <ClInclude Include="..\..\include\esys\base\log_if.h" />
     <ClInclude Include="..\..\include\esys\base\object.h" />
     <ClInclude Include="..\..\include\esys\base\objectbase.h" />
     <ClInclude Include="..\..\include\esys\base\objectinitbase_t.h" />
@@ -283,6 +288,8 @@
     <ClInclude Include="..\..\include\esys\base\pluginmngrcore_t.h" />
     <ClInclude Include="..\..\include\esys\base\pluginmngr_t.h" />
     <ClInclude Include="..\..\include\esys\base\plugin_t.h" />
+    <ClInclude Include="..\..\include\esys\base\stdcpp\logger.h" />
+    <ClInclude Include="..\..\include\esys\base\stdcpp\log_if.h" />
     <ClInclude Include="..\..\include\esys\base\stdcpp\node.h" />
     <ClInclude Include="..\..\include\esys\base\stdcpp\nodemngr.h" />
     <ClInclude Include="..\..\include\esys\base\stdcpp\object.h" />

@@ -36,7 +36,12 @@ int DynLibrary::load(const std::string &filename)
 {
     assert(m_impl != nullptr);
 
-    return m_impl->load(filename);
+    std::string last_error;
+
+    auto result = m_impl->load(filename, last_error);
+
+    set_last_error(last_error);
+    return result;
 }
 
 int DynLibrary::unload()

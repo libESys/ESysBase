@@ -30,7 +30,7 @@ public:
     explicit DynLibraryImpl(DynLibrary *self);
     virtual ~DynLibraryImpl();
 
-    int load(const std::string &filename);
+    int load(const std::string &filename, std::string &last_error);
     int unload();
     bool is_loaded();
     bool has_symbol(const std::string &name);

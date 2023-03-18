@@ -68,6 +68,14 @@ public:
      * \return the symbol is existing, nullptr otherwise
      */
     virtual void *get_symbol(const std::string &name) = 0;
+
+    const std::string &get_last_error() const;
+
+protected:
+    void set_last_error(const std::string &last_error);
+
+private:
+    std::string m_last_error;
 };
 
 } // namespace esys::base

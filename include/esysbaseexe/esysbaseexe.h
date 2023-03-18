@@ -17,6 +17,8 @@
 
 #pragma once
 
+#include <esys/base/stdcpp/logger.h>
+
 #include <boost/program_options/variables_map.hpp>
 #include <boost/program_options/options_description.hpp>
 
@@ -47,7 +49,8 @@ public:
     void set_error_msg(const std::string &error_msg);
     const std::string &get_error_msg();
 
-protected:
+private:
+    std::shared_ptr<esys::base::stdcpp::Logger> m_logger; 
     std::ostream *m_os = nullptr;
     int m_argc = 0;
     char **m_argv = nullptr;

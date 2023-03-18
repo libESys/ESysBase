@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
         return -result;
     }
 
-    //esys::PluginMngrBase::SetAppExe(argv[0]);
+    // esys::PluginMngrBase::SetAppExe(argv[0]);
 
     return esys_exe.run();
 }

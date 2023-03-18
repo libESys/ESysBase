@@ -31,14 +31,17 @@ DynLibraryImpl::~DynLibraryImpl()
     if (m_lib.is_loaded()) m_lib.unload();
 }
 
-int DynLibraryImpl::load(const std::string &filename)
+int DynLibraryImpl::load(const std::string &filename, std::string &last_error)
 {
+    last_error = "";
+
     try
     {
         m_lib.load(filename);
     }
-    catch (::boost::system::system_error &)
+    catch (::boost::system::system_error &e)
     {
+        last_error = e.what();
         return -1;
     }
 

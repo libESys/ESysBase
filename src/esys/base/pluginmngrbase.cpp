@@ -262,6 +262,61 @@ PluginBase *PluginMngrBase::get_plugin_from_entry_fct(void *entry_fct)
     return plugin;
 }
 
+void PluginMngrBase::set_log_if(std::shared_ptr<Log_if> log_if)
+{
+    m_log_if = log_if;
+}
+
+std::shared_ptr<Log_if> PluginMngrBase::get_log_if() const
+{
+    return m_log_if;
+}
+
+void PluginMngrBase::debug(int level, const std::string &msg)
+{
+    if (m_log_if)
+    {
+        m_log_if->debug(level, msg);
+        return;
+    }
+}
+
+void PluginMngrBase::info(const std::string &msg)
+{
+    if (m_log_if)
+    {
+        m_log_if->info(msg);
+        return;
+    }
+}
+
+void PluginMngrBase::warn(const std::string &msg)
+{
+    if (m_log_if)
+    {
+        m_log_if->warn(msg);
+        return;
+    }
+}
+
+void PluginMngrBase::error(const std::string &msg)
+{
+    if (m_log_if)
+    {
+        m_log_if->error(msg);
+        return;
+    }
+}
+
+void PluginMngrBase::critical(const std::string &msg)
+{
+    if (m_log_if)
+    {
+        m_log_if->critical(msg);
+        return;
+    }
+}
+
 void PluginMngrBase::set_entry_fct_name(const std::string &entry_fct_name)
 {
     m_entry_fct_name = entry_fct_name;

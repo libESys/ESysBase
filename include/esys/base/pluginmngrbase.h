@@ -19,6 +19,7 @@
 
 #include "esys/base/esysbase_defs.h"
 #include "esys/base/pluginbase.h"
+#include "esys/base/log_if.h"
 
 #include <vector>
 #include <string>
@@ -31,7 +32,7 @@ namespace esys::base
 /*! \class PluginMngrBase esys/base/pluginmngrbase.h "esys/base/pluginmngrbase.h"
  * \brief Base class for all plugin managers
  */
-class ESYSBASE_API PluginMngrBase
+class ESYSBASE_API PluginMngrBase : public Log_if
 {
 public:
     //! Default constructor
@@ -239,6 +240,15 @@ public:
      */
     virtual PluginBase *get_plugin_from_entry_fct(void *entry_fct);
 
+    void set_log_if(std::shared_ptr<Log_if> log_if);
+    std::shared_ptr<Log_if> get_log_if() const;
+
+    void debug(int level, const std::string &msg) override;
+    void info(const std::string &msg) override;
+    void warn(const std::string &msg) override;
+    void error(const std::string &msg) override;
+    void critical(const std::string &msg) override;
+
     //! Set the base folder
     /*!
      * \param[in] base_folder the base folder
@@ -297,6 +307,7 @@ private:
     bool m_is_loaded = false;                          //!< True if already loaded, false otherwise
     std::vector<std::string> m_env_var_search_folders; //!< Environement variables potentially storing path to plugins
     std::map<std::string, PluginBase *> m_abs_path_plugin_map; //!< Map absolute path to the Plugin
+    std::shared_ptr<Log_if> m_log_if;
     //!< \endcond
 };
 
