@@ -19,6 +19,9 @@
 #include "esys/base/pluginbase.h"
 #include "esys/base/impl_boost/pluginmngrcore.h"
 
+#include <esys/trace/call.h>
+#include <esys/trace/macros.h>
+
 #include <boost/filesystem.hpp>
 #include <boost/dll/runtime_symbol_info.hpp>
 
@@ -71,6 +74,9 @@ PluginMngrCore::~PluginMngrCore() = default;
 
 int PluginMngrCore::load(const std::string &dir, PluginBase **plugin_base)
 {
+    int result = 0;
+    ETRC_CALL_RET(result, dir);
+
     auto plugin_lib = std::make_shared<DynLibrary>();
     boost::filesystem::path dir_path = dir;
     dir_path = boost::filesystem::absolute(dir_path).normalize().make_preferred();
@@ -82,14 +88,15 @@ int PluginMngrCore::load(const std::string &dir, PluginBase **plugin_base)
 
     if (boost::filesystem::is_symlink(the_path))
     {
-        int result = find_regular_file(dir, the_path);
+        result = find_regular_file(dir, the_path);
         if (result < 0)
         {
             std::ostringstream oss;
 
             oss << "symlink doesn't point to a regular file: " << dir;
             error_or_debug(oss.str());
-            return -1;
+            result = -1;
+            return result;
         }
 
         std::ostringstream oss;
@@ -104,7 +111,8 @@ int PluginMngrCore::load(const std::string &dir, PluginBase **plugin_base)
 
         oss << "This is not a file = " << the_path;
         error_or_debug(oss.str());
-        return -1;
+        result = -1;
+        return result;
     }
 
     if (!boost::filesystem::is_directory(dir_path))
@@ -113,10 +121,11 @@ int PluginMngrCore::load(const std::string &dir, PluginBase **plugin_base)
 
         oss << "This is not a directory = " << dir_path.string();
         error_or_debug(oss.str());
-        return -1;
+        result = -1;
+        return result;
     }
 
-    auto result = set_dll_directory(dir_path.string());
+    result = set_dll_directory(dir_path.string());
     if (result < 0)
     {
         std::ostringstream oss;
@@ -131,8 +140,8 @@ int PluginMngrCore::load(const std::string &dir, PluginBase **plugin_base)
 
         oss << "Failed to load the plugin.";
         error_or_debug(oss.str());
-
-        return -1;
+        result = -1;
+        return result;
     }
     if (plugin_lib->has_symbol(get_entry_fct_name()) == false)
     {
@@ -141,7 +150,8 @@ int PluginMngrCore::load(const std::string &dir, PluginBase **plugin_base)
         oss << "doesn't have entry fct '" << get_entry_fct_name() << "'.";
         error_or_debug(oss.str());
 
-        return -2;
+        result = -2;
+        return result;
     }
 
     void *plugin_entry_function = plugin_lib->get_symbol(get_entry_fct_name());
@@ -150,7 +160,9 @@ int PluginMngrCore::load(const std::string &dir, PluginBase **plugin_base)
         std::ostringstream oss;
         oss << "failed to get the entry fct '" << get_entry_fct_name() << "'.";
         error_or_debug(oss.str());
-        return -3;
+
+        result = -3;
+        return result;
     }
 
     PluginBase *plugin;
@@ -164,7 +176,8 @@ int PluginMngrCore::load(const std::string &dir, PluginBase **plugin_base)
 
         oss << "plugin is a release build.";
         error_or_debug(oss.str());
-        return -4;
+        result = -4;
+        return result;
     }
 #elif NDEBUG
     if (plugin->is_debug() == true)
@@ -173,7 +186,8 @@ int PluginMngrCore::load(const std::string &dir, PluginBase **plugin_base)
 
         oss << "plugin is a debug build.";
         error_or_debug(oss.str());
-        return -5;
+        result = -5;
+        return result;
     }
 #else
 #error _DEBUG or NDEBUG must be defined
@@ -193,8 +207,8 @@ int PluginMngrCore::load(const std::string &dir, PluginBase **plugin_base)
     m_plugins.push_back(helper);
 
     debug(0, "plugin loaded successfully.");
-
-    return 0;
+    result = 0;
+    return result;
 }
 
 int PluginMngrCore::set_dll_directory(const std::string &dir, bool only_if_different)
@@ -231,19 +245,19 @@ int PluginMngrCore::find_regular_file(const std::string &symlink, std::string &r
 
 int PluginMngrCore::load()
 {
-    if (get_is_loaded()) return -1;
+    ETRC_CALL_RET_DEF_NP(int, result);
+    if (get_is_loaded()) return ETRC_RET(-1);
 
     set_load_auto_detect(true);
 
-    int result = 0;
     std::string abs_plugin_dir;
 
-    result = find_plugin_folder(abs_plugin_dir);
-    if (result < 0)
+    auto l_result = find_plugin_folder(abs_plugin_dir);
+    if (l_result < 0)
     {
         debug(0, "Couldn't deduce the plugin folder.");
         set_load_auto_detect(false);
-        return result;
+        return ETRC_RET(l_result);
     }
 
     debug(0, "The plugin folder = " + abs_plugin_dir);
@@ -251,7 +265,7 @@ int PluginMngrCore::load()
     {
         debug(0, "Found plugin folder is empty.");
         set_load_auto_detect(false);
-        return -2;
+        return ETRC_RET(-2);
     }
 
 #ifdef _MSC_VER
@@ -341,10 +355,10 @@ int PluginMngrCore::load()
     if (!m_plugins.empty())
     {
         debug(0, "Load successfull.");
-        return 0;
+        return ETRC_RET(0);
     }
     debug(0, "Load failed.");
-    return -1;
+    return ETRC_RET(-1);
 }
 
 int PluginMngrCore::release()

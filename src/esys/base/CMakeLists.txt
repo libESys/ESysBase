@@ -75,6 +75,10 @@ if(ESYSBASE_SHARED)
   target_link_libraries(esysbase PRIVATE Boost::filesystem Boost::system dl)
 endif()
 
+if(ESYSBASE_VHW)
+  target_link_libraries(esysbase PRIVATE esystrace)
+endif()
+
 install(TARGETS esysbase LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 install(

@@ -25,12 +25,13 @@ int main(int argc, char *argv[])
     esys_exe.set_os(std::cout);
     esys_exe.set_args(argc, argv);
     int result = esys_exe.parse_args();
-
     if (result < 0)
     {
         esys_exe.print_help(std::cout);
         return -result;
     }
+
+    esys_exe.create_log();
 
     // esys::PluginMngrBase::SetAppExe(argv[0]);
 

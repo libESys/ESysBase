@@ -20,6 +20,9 @@
 
 #include <esys/base/pluginmngr.h>
 
+#include <esys/trace/call.h>
+#include <esys/trace/macros.h>
+
 #include <boost/program_options/cmdline.hpp>
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/parsers.hpp>
@@ -30,9 +33,10 @@
 #include <string>
 
 ESysBaseExe::ESysBaseExe()
+    : esys::log::User()
 {
-    m_logger = std::make_shared<esys::base::stdcpp::Logger>();
-    m_logger->set_os(std::cout);
+    // m_logger = std::make_shared<esys::base::stdcpp::Logger>();
+    // m_logger->set_os(std::cout);
 }
 
 ESysBaseExe::~ESysBaseExe() = default;
@@ -40,7 +44,7 @@ ESysBaseExe::~ESysBaseExe() = default;
 void ESysBaseExe::set_os(std::ostream &os)
 {
     m_os = &os;
-    m_logger->set_os(os);
+    // m_logger->set_os(os);
 }
 
 std::ostream *ESysBaseExe::get_os()
@@ -128,23 +132,27 @@ bool ESysBaseExe::get_trace()
 
 int ESysBaseExe::run()
 {
+    ETRC_CALL_RET_DEF_NP(int, result);
+
     if (m_vm.count("help"))
     {
         if (get_os() != nullptr) print_help(*get_os());
-        return 0;
+        return ETRC_RET(0);
     }
     if (m_vm.count("list_plugins"))
     {
-        return cmd_list_plugings();
+        return ETRC_RET(cmd_list_plugings());
     }
-    return -1;
+    return ETRC_RET(-1);
 }
 
 int ESysBaseExe::cmd_list_plugings()
 {
-    if (get_os() == nullptr) return -17;
+    ETRC_CALL_RET_DEF_NP(int, result);
 
-    if (m_vm.count("list_plugins") == 0) return -18;
+    if (get_os() == nullptr) return ETRC_RET(-17);
+
+    if (m_vm.count("list_plugins") == 0) return ETRC_RET(-18);
 
     std::string app_name = m_vm["list_plugins"].as<std::string>();
 
@@ -154,11 +162,11 @@ int ESysBaseExe::cmd_list_plugings()
 
     if (!app_name.empty()) mngr.set_name(app_name);
 
-    int result = mngr.load();
-    if (result < 0)
+    int l_result = mngr.load();
+    if (l_result < 0)
     {
         *get_os() << "No plugins found" << std::endl;
-        return result;
+        return ETRC_RET(l_result);
     }
 
     *get_os() << "Number of '" << app_name << "' Plugins : " << mngr.get_plugins().size() << std::endl;
@@ -176,7 +184,7 @@ int ESysBaseExe::cmd_list_plugings()
         *get_os() << "    Filename : " << plugin->get_filename() << std::endl;
     }
     *get_os() << std::endl;
-    return 0;
+    return ETRC_RET(0);
 }
 
 void ESysBaseExe::set_error_msg(const std::string &error_msg)
@@ -187,6 +195,59 @@ void ESysBaseExe::set_error_msg(const std::string &error_msg)
 const std::string &ESysBaseExe::get_error_msg()
 {
     return m_error_msg;
+}
+
+void ESysBaseExe::create_log()
+{
+    if (m_logger != nullptr) return;
+
+    if (m_logger_mngr == nullptr) m_logger_mngr = esys::log::Mngr::get();
+    m_logger = m_logger_mngr->new_logger(esys::log::LoggerType::SPDLOG, "metacppcli");
+    if (m_logger != nullptr)
+    {
+        set_logger_if(m_logger);
+
+        auto level = esys::log::Level::DEBUG;
+        if (get_trace()) level = esys::log::Level::TRACE;
+
+        if (get_debug() || get_trace())
+        {
+            m_logger->add_console("[%^%l%$] %v", level);
+            if (!get_log_file_path().empty()) m_logger->add_basic_file(get_log_file_path());
+            m_logger->set_log_level(level);
+            m_logger->set_debug_level(10);
+            m_logger->set_flush_log_level(level);
+
+            if (get_trace())
+            {
+                m_trace = std::make_shared<esys::log::Trace>();
+                m_trace->set_logger(m_logger);
+
+                m_trace_logger.set_log_if(m_trace);
+                esys::trace::Call::set_default_logger(&m_trace_logger);
+                esys::trace::Call::enable();
+            }
+        }
+        else
+        {
+            m_logger->add_console("[%^%l%$] %v", esys::log::Level::INFO);
+            if (!get_log_file_path().empty())
+                m_logger->add_basic_file(get_log_file_path(), false, esys::log::Level::INFO);
+            m_logger->set_log_level(esys::log::Level::INFO);
+            m_logger->set_flush_log_level(esys::log::Level::INFO);
+        }
+    }
+}
+
+void ESysBaseExe::set_log_file_path(const std::string &log_file_path)
+{
+    m_log_file_path = log_file_path;
+}
+
+const std::string &ESysBaseExe::get_log_file_path()
+{
+    if (m_log_file_path.empty()) m_log_file_path = "log.txt";
+    return m_log_file_path;
 }
 
 void ESysBaseExe::print_help(std::ostream &os)
