@@ -272,6 +272,8 @@ int PluginMngrCore::load()
     }
 #ifdef WIN32
     std::string ext = ".dll";
+#elif __APPLE__
+    std::string ext = ".dylib";
 #else
     std::string ext = ".so";
 #endif
