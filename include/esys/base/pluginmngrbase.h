@@ -20,6 +20,7 @@
 #include "esys/base/esysbase_defs.h"
 #include "esys/base/pluginbase.h"
 #include "esys/base/log_if.h"
+#include "esys/base/version.h"
 
 #include <vector>
 #include <string>
@@ -60,65 +61,19 @@ public:
     /*!
      * \param[in] version the version of the Plugin Manager
      */
-    void set_version(const std::string &version);
-
-    //! Set the version of the Plugin Manager
-    /*!
-     * \param[in] major the major version of the Plugin Manager
-     * \param[in] minor the minor version of the Plugin Manager
-     * \param[in] patch the pacth version of the Plugin Manager
-     */
-    void set_version(int major, int minor, int patch = 0);
+    void set_version(const Version &version);
 
     //! Get the version of the Plugin Manager
     /*!
      * \return the version of the Plugin Manager
      */
-    const std::string &get_version();
+    const Version &get_version() const;
 
     //! Get the version of the Plugin Manager
     /*!
-     * \param[out] major the major version of the Plugin Manager
-     * \param[out] minor the minor version of the Plugin Manager
-     * \param[out] patch the pacth version of the Plugin Manager
+     * \return the version of the Plugin Manager
      */
-    void get_version(int &major, int &minor, int &patch) const;
-
-    //! Set the major version of the Plugin Manager
-    /*!
-     * \param[in] major the major version of the Plugin Manager
-     */
-    void set_major_version(int major_version);
-
-    //! Get the major version of the Plugin Manager
-    /*!
-     * \return the major version of the Plugin Manager
-     */
-    int get_major_version() const;
-
-    //! Set the minor version of the Plugin Manager
-    /*!
-     * \param[in] minor the minor version of the Plugin Manager
-     */
-    void set_minor_version(int minor_version);
-
-    //! Get the minor version of the Plugin Manager
-    /*!
-     * \return the minor version of the Plugin Manager
-     */
-    int get_minor_version() const;
-
-    //! Set the patch version of the Plugin Manager
-    /*!
-     * \param[in] patch the pacth version of the Plugin Manager
-     */
-    void set_patch_version(int patch_version);
-
-    //! Get the patch version of the Plugin Manager
-    /*!
-     * \return the pacth version of the Plugin Manager
-     */
-    int get_patch_version() const;
+    Version &get_version();
 
     //! Set the folder where to find plugins
     /*!
@@ -296,11 +251,8 @@ protected:
     void add_plugin_abs_path(const std::string &abs_path, PluginBase *plugin);
 
 private:
-    std::string m_name;
-    std::string m_version;
-    int m_major_version = 0;
-    int m_minor_version = -1;
-    int m_patch_version = -1;
+    std::string m_name;                                //!< The name of the plugin manager
+    Version m_version;                                 //!< The version of the plugin manager
     uint32_t m_verbose_level = 0;                      //!< The verbosity level
     std::string m_entry_fct_name;                      //!< The plugin entry function name
     std::string m_search_folder;                       //!< The search folder

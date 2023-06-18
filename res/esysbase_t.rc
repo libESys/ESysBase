@@ -10,7 +10,7 @@
  *
  */
 
-#include "../include/esys/base/test/version.h"
+#include "../include/esys/base/test/version_defs.h"
 
 esysbase_t ICON "esysbase_t.ico"
 

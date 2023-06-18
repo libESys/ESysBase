@@ -252,6 +252,7 @@
     <ClCompile Include="..\..\src\esys\base\stdcpp\objectname_stdcpp.cpp" />
     <ClCompile Include="..\..\src\esys\base\stdcpp\objectoperation_stdcpp.cpp" />
     <ClCompile Include="..\..\src\esys\base\stdcpp\object_stdcpp.cpp" />
+    <ClCompile Include="..\..\src\esys\base\version.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\esys\base\assert.h" />
@@ -299,6 +300,7 @@
     <ClInclude Include="..\..\include\esys\base\stdcpp\objectoperation.h" />
     <ClInclude Include="..\..\include\esys\base\stdcpp\object_t.h" />
     <ClInclude Include="..\..\include\esys\base\version.h" />
+    <ClInclude Include="..\..\include\esys\base\version_defs.h" />
     <ClInclude Include="..\..\src\esys\base\impl_boost\dynlibraryimpl.h" />
   </ItemGroup>
   <ItemGroup>

@@ -1,9 +1,14 @@
 /*!
  * \file esys/base/version.h
- * \brief Version info for esysbase
+ * \brief
  *
  * \cond
  * __legal_b__
+ *
+ * Copyright (c) 2023 Michel Gillet
+ * Distributed under the wxWindows Library Licence, Version 3.1.
+ * (See accompanying file LICENSE_3_1.txt or
+ * copy at http://www.wxwidgets.org/about/licence)
  *
  * __legal_e__
  * \endcond
@@ -12,27 +17,87 @@
 
 #pragma once
 
-// Bump-up with each new version
-#define ESYSBASE_MAJOR_VERSION 0
-#define ESYSBASE_MINOR_VERSION 1
-#define ESYSBASE_RELEASE_NUMBER 0
-#define ESYSBASE_VERSION_STRING "ESysBase 0.1.0"
+#include "esys/base/esysbase_defs.h"
 
-// Must be updated manually as well each time the version above changes
-#define ESYSBASE_VERSION_NUM_DOT_STRING "0.1.0"
-#define ESYSBASE_VERSION_NUM_STRING "0100"
+#include <string>
 
-// nothing should be updated below this line when updating the version
+namespace esys::base
+{
 
-#define ESYSBASE_VERSION_NUMBER \
-    (ESYSBASE_MAJOR_VERSION * 1000) + (ESYSBASE_MINOR_VERSION * 100) + ESYSBASE_RELEASE_NUMBER
-#define ESYSBASE_BETA_NUMBER 1
-#define ESYSBASE_VERSION_FLOAT                                                                   \
-    ESYSBASE_MAJOR_VERSION + (ESYSBASE_MINOR_VERSION / 10.0) + (ESYSBASE_RELEASE_NUMBER / 100.0) \
-        + (ESYSBASE_BETA_NUMBER / 10000.0)
+/*! \class Version esys/base/version.h "esys/base/version.h"
+ * \brief Base class for all plugin managers
+ */
+class ESYSBASE_API Version
+{
+public:
+    Version();
+    Version(const std::string &version);
+    Version(int major, int minor, int patch = 0);
 
-// check if the current version is at least major.minor.release
-#define ESYSBASE_CHECK_VERSION(major, minor, release)                                                            \
-    (ESYSBASE_MAJOR_VERSION > (major) || (ESYSBASE_MAJOR_VERSION == (major) && ESYSBASE_MINOR_VERSION > (minor)) \
-     || (ESYSBASE_MAJOR_VERSION == (major) && ESYSBASE_MINOR_VERSION == (minor)                                  \
-         && ESYSBASE_RELEASE_NUMBER >= (release)))
+    //! Set the version as text following semantic versioning format
+    /*!
+     * \param[in] version the version
+     */
+    void set(const std::string &version);
+
+    //! Get the version of the Plugin Manager
+    /*!
+     * \return the version of the Plugin Manager
+     */
+    const std::string &get() const;
+
+    //! Set the version
+    /*!
+     * \param[in] major the major part of the version
+     * \param[in] minor the minor part of the version
+     * \param[in] patch the pacth part of the version
+     */
+    void set(int major, int minor = -1, int patch = -1);
+
+    //! Set the major part of the version
+    /*!
+     * \param[in] major the major part of the version
+     */
+    void set_major(int major);
+
+    //! Get the major part of the version
+    /*!
+     * \return the major part of the version
+     */
+    int get_major() const;
+
+    //! Set the minor part of version
+    /*!
+     * \param[in] minor the minor part of the version
+     */
+    void set_minor(int minor);
+
+    //! Get the minor part of version
+    /*!
+     * \return the minor part of the version
+     */
+    int get_minor() const;
+
+    //! Set the patch part of version
+    /*!
+     * \param[in] patch the patch part of the version
+     */
+    void set_patch(int patch_part);
+
+    //! Get the patch part of the version
+    /*!
+     * \return the patch part of the version
+     */
+    int get_patch() const;
+
+private:
+    //!< \cond DOXY_IMPL
+    void update_string();
+
+    std::string m_version; //!< The textual representation
+    int m_major = 0;       //!< The major part of the semantic versioning
+    int m_minor = -1;      //!< The minor part of the semantic versioning
+    int m_patch = -1;      //!< The patch part of the semantic versioning
+};
+
+} // namespace esys::base

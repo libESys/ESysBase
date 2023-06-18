@@ -108,6 +108,9 @@
     <ClCompile Include="..\..\src\esys\base\stdcpp\logger_stdcpp.cpp">
       <Filter>Source Files\stdcpp</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\esys\base\version.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\esys\base\esysbase_defs.h">
@@ -247,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\esys\base\stdcpp\logger.h">
       <Filter>Header Files\stdcpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\version_defs.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

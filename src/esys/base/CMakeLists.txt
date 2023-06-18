@@ -32,8 +32,9 @@ include_directories(../../../include)
 set(ESYSBASE_CXX_SOURCES objectbase.cpp objectnamebase.cpp objplatif.cpp)
 
 if(ESYSBASE_VHW)
-  set(ESYSBASE_CXX_SOURCES ${ESYSBASE_CXX_SOURCES} dynlibrarybase.cpp
-                           pluginbase.cpp pluginmngr.cpp pluginmngrbase.cpp)
+  set(ESYSBASE_CXX_SOURCES
+      ${ESYSBASE_CXX_SOURCES} dynlibrarybase.cpp pluginbase.cpp pluginmngr.cpp
+      pluginmngrbase.cpp version.cpp)
 endif()
 
 set(ESYSBASE_EM_CXX_SOURCES em/log_if_em.cpp em/object_em.cpp

@@ -10,7 +10,7 @@
  *
  */
 
-#include "../include/esys/base/version.h"
+#include "../include/esys/base/version_defs.h"
 
 esysbase ICON "esysbase.ico"
 
