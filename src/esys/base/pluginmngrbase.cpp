@@ -29,35 +29,6 @@
 namespace esys::base
 {
 
-std::string PluginMngrBase::m_base_folder;
-std::string PluginMngrBase::m_app_exe;
-
-void PluginMngrBase::set_base_folder(const std::string &base_folder)
-{
-    m_base_folder = base_folder;
-}
-
-const std::string &PluginMngrBase::get_base_folder()
-{
-    return m_base_folder;
-}
-
-void PluginMngrBase::set_app_exe(const std::string &app_exe)
-{
-    m_app_exe = app_exe;
-
-    boost::filesystem::path exe_path = app_exe;
-    exe_path.remove_filename();
-    if (!exe_path.is_absolute()) exe_path = boost::filesystem::absolute(exe_path);
-    exe_path.normalize();
-    set_base_folder(exe_path.generic_string());
-}
-
-const std::string &PluginMngrBase::get_app_exe()
-{
-    return m_app_exe;
-}
-
 void PluginMngrBase::set_plugin_filename(PluginBase *plugin, const std::string &filename)
 {
     plugin->set_filename(filename);

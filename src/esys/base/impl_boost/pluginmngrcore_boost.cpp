@@ -433,11 +433,6 @@ int PluginMngrCore::find_plugin_folder(std::string &plugin_folder)
         search_paths.push_back(value);
     }
 
-    if (!get_base_folder().empty())
-    {
-        search_paths.push_back(get_base_folder());
-    }
-
     boost::filesystem::path path_to_test;
 
     std::string rel_plugin_path;

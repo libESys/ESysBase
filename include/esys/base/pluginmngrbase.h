@@ -204,30 +204,6 @@ public:
     void error(const std::string &msg) override;
     void critical(const std::string &msg) override;
 
-    //! Set the base folder
-    /*!
-     * \param[in] base_folder the base folder
-     */
-    static void set_base_folder(const std::string &base_folder);
-
-    //! Get the base folder
-    /*!
-     * \return the base folder
-     */
-    static const std::string &get_base_folder();
-
-    //! Set the application exe name
-    /*!
-     * \param[in] app_exe the application exe name
-     */
-    static void set_app_exe(const std::string &app_exe);
-
-    //! Get the application exe name
-    /*!
-     * \return the application exe name
-     */
-    static const std::string &get_app_exe();
-
 protected:
     //!< \cond DOXY_IMPL
 
@@ -243,9 +219,6 @@ protected:
      * \param[in] entry_fct_name the name of the entry function of the plugin
      */
     void set_entry_fct_name(const std::string &entry_fct_name);
-
-    static std::string m_base_folder; //!< The base folder
-    static std::string m_app_exe;     //!< The application exe name
 
     PluginBase *find_plugin_abs_path(const std::string &abs_path) const;
     void add_plugin_abs_path(const std::string &abs_path, PluginBase *plugin);
