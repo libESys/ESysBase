@@ -5,7 +5,7 @@
  * \cond
  * __legal_b__
  *
- * Copyright (c) 2018-2022 Michel Gillet
+ * Copyright (c) 2018-2023 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
@@ -83,6 +83,7 @@ int ESysBaseExe::parse_args()
         ("list_plugins", po::value<std::string>()->implicit_value(""), "list plugins of the given application")
         ("verbose", po::value<int>()->default_value(0)->implicit_value(1), "set verbose level")
         ("debug", po::value<bool>()->default_value(false)->implicit_value(true), "set debug mode, default random variable")
+        ("trace", po::value<bool>()->default_value(false)->implicit_value(true), "set trace mode")
         ;
     // clang-format on
 
@@ -118,6 +119,11 @@ int ESysBaseExe::parse_args()
 bool ESysBaseExe::get_debug()
 {
     return m_vm["debug"].as<bool>();
+}
+
+bool ESysBaseExe::get_trace()
+{
+    return m_vm["trace"].as<bool>();
 }
 
 int ESysBaseExe::run()

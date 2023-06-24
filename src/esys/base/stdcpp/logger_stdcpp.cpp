@@ -20,6 +20,14 @@ Logger::Logger() = default;
 
 Logger::~Logger() = default;
 
+void Logger::trace(const std::string &msg)
+{
+    if (m_os == nullptr) return;
+
+    *m_os << "[trace] " << msg << std::endl;
+    m_os->flush();
+}
+
 void Logger::debug(int level, const std::string &msg)
 {
     if (m_os == nullptr) return;

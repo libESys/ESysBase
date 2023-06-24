@@ -35,6 +35,7 @@ public:
     //! Destructor
     ~Logger() override;
 
+    void trace(const std::string &msg) override;
     void debug(int level, const std::string &msg) override;
     void info(const std::string &msg) override;
     void warn(const std::string &msg) override;

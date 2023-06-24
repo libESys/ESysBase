@@ -198,6 +198,7 @@ public:
     void set_log_if(std::shared_ptr<Log_if> log_if);
     std::shared_ptr<Log_if> get_log_if() const;
 
+    void trace(const std::string &msg) override;
     void debug(int level, const std::string &msg) override;
     void info(const std::string &msg) override;
     void warn(const std::string &msg) override;

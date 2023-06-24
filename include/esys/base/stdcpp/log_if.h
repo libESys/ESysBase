@@ -34,6 +34,12 @@ public:
     //! Destructor
     virtual ~Log_if();
 
+    //! Log a trace message
+    /*!
+     * \param[in] msg the trace message to log
+     */
+    virtual void trace(const std::string &msg) = 0;
+
     //! Log a debug message
     /*!
      * \param[in] level the level of the debug message

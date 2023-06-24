@@ -38,6 +38,7 @@ public:
     int run();
 
     bool get_debug();
+    bool get_trace();
 
     void set_os(std::ostream &os);
     std::ostream *get_os();

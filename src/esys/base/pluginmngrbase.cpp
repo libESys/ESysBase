@@ -183,6 +183,15 @@ std::shared_ptr<Log_if> PluginMngrBase::get_log_if() const
     return m_log_if;
 }
 
+void PluginMngrBase::trace(const std::string &msg)
+{
+    if (m_log_if)
+    {
+        m_log_if->trace(msg);
+        return;
+    }
+}
+
 void PluginMngrBase::debug(int level, const std::string &msg)
 {
     if (m_log_if)
