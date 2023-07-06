@@ -27,6 +27,6 @@ set_target_properties(esysbaseexe PROPERTIES OUTPUT_NAME "esysbase")
 
 target_link_libraries(
   esysbaseexe PRIVATE Boost::filesystem Boost::program_options Boost::system
-                      esysbase)
+                      esysbase esyslog esystrace)
 
 install(TARGETS esysbaseexe DESTINATION bin)
