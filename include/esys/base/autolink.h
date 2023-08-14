@@ -22,7 +22,10 @@
 #endif
 #define ESYS_LIB_VERSION "0.1.0"
 
-#if !defined(ESYSBASE_EXPORTS) && defined(_MSC_VER)
+#if !defined(ESYSBASE_EXPORTS) && !defined(ESYSBASE_STATIC_LIB)
+#define ESYSBASE_AUTO_LINK 1
+#endif
+
+#if defined(ESYSBASE_AUTO_LINK) && defined(_MSC_VER)
 #include <esysmsvc/autolink.h>
 #endif
-#pragma once

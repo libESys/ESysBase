@@ -35,7 +35,7 @@ PluginMngrImplHelper::PluginMngrImplHelper() = default;
 
 PluginMngrImplHelper::~PluginMngrImplHelper() = default;
 
-void PluginMngrImplHelper::set_dyn_lib(std::shared_ptr<DynLibrary> &dyn_lib)
+void PluginMngrImplHelper::set_dyn_lib(std::shared_ptr<DynLibrary> dyn_lib)
 {
     m_dyn_lib = dyn_lib;
 }
@@ -65,12 +65,37 @@ PluginBase *PluginMngrImplHelper::get_plugin()
     return m_plugin;
 }
 
+void PluginMngrImplHelper::set_dynamically_loaded(bool dynamically_loaded)
+{
+    m_dynamically_loaded = dynamically_loaded;
+}
+
+bool PluginMngrImplHelper::get_dynamically_loaded() const
+{
+    return m_dynamically_loaded;
+}
+
 PluginMngrCore::PluginMngrCore(const std::string &name)
     : PluginMngrBase(name)
 {
 }
 
 PluginMngrCore::~PluginMngrCore() = default;
+
+void PluginMngrCore::add_static_plugin_base(PluginBase *plugin)
+{
+    std::shared_ptr<PluginMngrImplHelper> helper;
+
+    helper = std::make_shared<PluginMngrImplHelper>();
+
+    helper->set_dynamically_loaded(false);
+    helper->set_dyn_lib(nullptr);
+    helper->set_entry_point(nullptr);
+    helper->set_plugin(plugin);
+    set_plugin_filename(plugin, "");
+
+    m_plugins.push_back(helper);
+}
 
 int PluginMngrCore::load(const std::string &dir, PluginBase **plugin_base)
 {

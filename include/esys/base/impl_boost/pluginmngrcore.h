@@ -46,7 +46,7 @@ public:
     /*!
      * \param[in] dyn_lib the dynamic library of this plugin
      */
-    void set_dyn_lib(std::shared_ptr<DynLibrary> &dyn_lib);
+    void set_dyn_lib(std::shared_ptr<DynLibrary> dyn_lib);
 
     //! Get the dynamic library instance for this plugin
     /*!
@@ -78,10 +78,15 @@ public:
      */
     PluginBase *get_plugin();
 
+    void set_dynamically_loaded(bool dynamically_loaded);
+
+    bool get_dynamically_loaded() const;
+
 private:
     std::shared_ptr<DynLibrary> m_dyn_lib; //!< Pointer to the object implementing the dynamic loading
     void *m_entry_fct = nullptr;           //!< The entry point giving access to the plugin
     PluginBase *m_plugin = nullptr;        //!< Pointer to the plugin
+    bool m_dynamically_loaded = true;
 };
 //!< \endcond
 
@@ -118,6 +123,9 @@ public:
     int find_regular_file(const std::string &symlink, std::string &regular_file);
 
     void error_or_debug(const std::string &msg);
+
+    void add_static_plugin_base(PluginBase *plugin);
+
 private:
     //!< \cond DOXY_IMPL
     void set_load_auto_detect(bool load_auto_detect);

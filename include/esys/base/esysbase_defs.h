@@ -18,6 +18,7 @@
 #define ESYSBASE_API __declspec(dllimport)
 #else
 #define ESYSBASE_API
+#define ESYS_STATIC_LINK 1
 #endif
 
 #include "esys/base/autolink.h"

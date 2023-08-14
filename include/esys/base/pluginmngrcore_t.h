@@ -73,6 +73,9 @@ public:
      */
     T *get(const std::string &short_name);
 
+    std::vector<std::shared_ptr<T>> &get_static_plugins();
+    const std::vector<std::shared_ptr<T>> &get_static_plugins() const;
+
 protected:
     //!< \cond DOXY_IMPL
 
@@ -83,9 +86,12 @@ protected:
      */
     virtual int plugin_loaded(T *plugin);
 
+    void add_static_plugin(std::shared_ptr<T> plugin);
+
 private:
     std::vector<T *> m_plugins;                         //!< The vector of loaded plugins
     std::map<std::string, T *> m_map_plugin_short_name; //!< The map of plugins
+    std::vector<std::shared_ptr<T>> m_static_plugins;
     //!< \endcond
 };
 
@@ -136,8 +142,7 @@ int PluginMngrCore_t<T>::load(const std::string &dir, T **plugin)
     if (result < 0) return result;
 
     if (plugin_base == nullptr) return -1;
-    if (plugin != nullptr)
-        *plugin = dynamic_cast<T *>(plugin_base);
+    if (plugin != nullptr) *plugin = dynamic_cast<T *>(plugin_base);
     return 0;
 }
 
@@ -180,6 +185,25 @@ template<typename T>
 int PluginMngrCore_t<T>::plugin_loaded(T *plugin)
 {
     return 0;
+}
+
+template<typename T>
+void PluginMngrCore_t<T>::add_static_plugin(std::shared_ptr<T> plugin)
+{
+    m_static_plugins.push_back(plugin);
+    add_static_plugin_base(plugin.get());
+}
+
+template<typename T>
+std::vector<std::shared_ptr<T>> &PluginMngrCore_t<T>::get_static_plugins()
+{
+    return m_static_plugins;
+}
+
+template<typename T>
+const std::vector<std::shared_ptr<T>> &PluginMngrCore_t<T>::get_static_plugins() const
+{
+    return m_static_plugins;
 }
 
 } // namespace base
