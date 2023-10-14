@@ -112,11 +112,11 @@ public:
     bool get_plugin_path_without_prefix_valid() const;
 
     int find_exe_path(std::string &exe_path) override;
-    int find_plugin_folder(std::string &plugin_folder) override;
+    int find_plugin_folders(std::vector<std::string> &plugin_folders) override;
     static int s_find_exe_path(std::string &exe_path);
 
     int search_existing_folder(const std::vector<std::string> &search_paths, const std::string &rel_plugin_path,
-                               std::string &plugin_folder, bool use_rel_plugin_path = true) const;
+                               std::vector<std::string> &plugin_folders, bool use_rel_plugin_path = true) const;
 
     int set_dll_directory(const std::string &dir, bool only_if_different = true);
 
@@ -130,6 +130,7 @@ private:
     //!< \cond DOXY_IMPL
     void set_load_auto_detect(bool load_auto_detect);
     bool get_load_auto_detect() const;
+    int load_folder(const std::string &path);
 
     std::vector<std::shared_ptr<PluginMngrImplHelper>> m_plugins;
     bool m_plugin_path_without_prefix_valid = false;

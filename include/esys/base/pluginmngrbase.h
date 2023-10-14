@@ -22,10 +22,10 @@
 #include "esys/base/log_if.h"
 #include "esys/base/version.h"
 
-#include <vector>
-#include <string>
 #include <map>
 #include <memory>
+#include <string>
+#include <vector>
 
 namespace esys::base
 {
@@ -162,7 +162,7 @@ public:
      * \param[out] plugin_folder the absolute path of the plugin folder, if successful
      * \return 0 if successful, < 0 otherwise
      */
-    virtual int find_plugin_folder(std::string &plugin_folder) = 0;
+    virtual int find_plugin_folders(std::vector<std::string> &plugin_folders) = 0;
 
     //! Get the relative path of the folder with the plugins
     /*!

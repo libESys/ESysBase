@@ -5,7 +5,7 @@
  * \cond
  * __legal_b__
  *
- * Copyright (c) 2017-2022 Michel Gillet
+ * Copyright (c) 2017-2023 Michel Gillet
  * Distributed under the wxWindows Library Licence, Version 3.1.
  * (See accompanying file LICENSE_3_1.txt or
  * copy at http://www.wxwidgets.org/about/licence)
@@ -275,15 +275,41 @@ int PluginMngrCore::load()
 
     set_load_auto_detect(true);
 
-    std::string abs_plugin_dir;
+    std::vector<std::string> abs_plugin_dirs;
 
-    auto l_result = find_plugin_folder(abs_plugin_dir);
+    auto l_result = find_plugin_folders(abs_plugin_dirs);
     if (l_result < 0)
     {
         debug(0, "Couldn't deduce the plugin folder.");
         set_load_auto_detect(false);
         return ETRC_RET(l_result);
     }
+
+    for (const auto &abs_plugin_dir : abs_plugin_dirs)
+    {
+        result = load_folder(abs_plugin_dir);
+        if (result < 0) return ETRC_RET(result);
+    }
+    set_is_loaded(true);
+
+    /*if (get_verbose_level() > 0)
+    {
+        std::cout << std::endl;
+    }*/
+
+    set_load_auto_detect(false);
+    if (!m_plugins.empty())
+    {
+        debug(0, "Load successfull.");
+        return ETRC_RET(0);
+    }
+    debug(0, "Load failed.");
+    return ETRC_RET(-1);
+}
+
+int PluginMngrCore::load_folder(const std::string &abs_plugin_dir)
+{
+    ETRC_CALL_RET_DEF_NP(int, result);
 
     debug(0, "The plugin folder = " + abs_plugin_dir);
     if (abs_plugin_dir.empty())
@@ -369,21 +395,8 @@ int PluginMngrCore::load()
         result = load(current_file, &plugin);
         if (result == 0) add_plugin_abs_path(the_path, plugin);
     }
-    set_is_loaded(true);
 
-    /*if (get_verbose_level() > 0)
-    {
-        std::cout << std::endl;
-    }*/
-
-    set_load_auto_detect(false);
-    if (!m_plugins.empty())
-    {
-        debug(0, "Load successfull.");
-        return ETRC_RET(0);
-    }
-    debug(0, "Load failed.");
-    return ETRC_RET(-1);
+    return ETRC_RET(0);
 }
 
 int PluginMngrCore::release()
@@ -434,7 +447,7 @@ int PluginMngrCore::find_exe_path(std::string &exe_path)
     return result;
 }
 
-int PluginMngrCore::find_plugin_folder(std::string &plugin_folder)
+int PluginMngrCore::find_plugin_folders(std::vector<std::string> &plugin_folders)
 {
     int result = 0;
     boost::filesystem::path exe_folder;
@@ -481,19 +494,21 @@ int PluginMngrCore::find_plugin_folder(std::string &plugin_folder)
     result = get_rel_plugin_path(rel_plugin_path);
     if (result < 0) return -3;
 
-    result = search_existing_folder(search_paths, rel_plugin_path, plugin_folder);
+    result = search_existing_folder(search_paths, rel_plugin_path, plugin_folders);
     if (result == 0) return 0;
 
     if (!get_plugin_path_without_prefix_valid()) return -1;
 
-    return search_existing_folder(search_paths, rel_plugin_path, plugin_folder, false);
+    return search_existing_folder(search_paths, rel_plugin_path, plugin_folders, false);
 }
 
 int PluginMngrCore::search_existing_folder(const std::vector<std::string> &search_paths,
-                                           const std::string &rel_plugin_path, std::string &plugin_folder,
+                                           const std::string &rel_plugin_path, std::vector<std::string> &plugin_folders,
                                            bool use_rel_plugin_path) const
 {
     boost::filesystem::path path_to_test;
+
+    plugin_folders.clear();
 
     for (auto const &search_path : search_paths)
     {
@@ -502,12 +517,11 @@ int PluginMngrCore::search_existing_folder(const std::vector<std::string> &searc
         path_to_test = ::boost::filesystem::absolute(path_to_test).normalize().make_preferred();
         if (boost::filesystem::exists(path_to_test))
         {
-            plugin_folder = path_to_test.string();
-            return 0;
+            plugin_folders.push_back(path_to_test.string());
         }
     }
-    plugin_folder = "";
-    return -1;
+    if (plugin_folders.size() == 0) return -1;
+    return 0;
 }
 
 int PluginMngrCore::s_find_exe_path(std::string &exe_path)
