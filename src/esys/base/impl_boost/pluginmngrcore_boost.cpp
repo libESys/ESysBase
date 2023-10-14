@@ -456,6 +456,9 @@ int PluginMngrCore::find_plugin_folder(std::string &plugin_folder)
         auto search_path_str = search_path.string();
         search_path /= "lib";
         search_paths.push_back(search_path.string());
+        search_path = search_path.parent_path();
+        search_path /= "lib64";
+        search_paths.push_back(search_path.string());
         search_path = search_path_str;
 #endif
         search_paths.push_back(search_path.string());
