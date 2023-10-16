@@ -80,11 +80,11 @@ ESYSTEST_AUTO_TEST_CASE(GetPluginRelPath01)
 
     result = mngr.get_rel_plugin_path(path);
     ESYSTEST_REQUIRE_EQUAL(result, 0);
-    
+
 #ifdef WIN32
     ESYSTEST_REQUIRE_EQUAL(path, "plugins\\test_esysbase");
 #else
-    ESYSTEST_REQUIRE_EQUAL(path, "lib/test_esysbase/0/plugins");
+    ESYSTEST_REQUIRE_EQUAL(path, "test_esysbase/0/plugins");
 #endif
 }
 

@@ -140,8 +140,7 @@ int PluginMngrBase::get_rel_plugin_path(std::string &rel_plugin_path)
     std::ostringstream oss;
     oss << get_version().get_major();
 
-    p = "lib";
-    p /= get_name();
+    p = get_name();
     p /= oss.str();
     p /= "plugins";
     rel_plugin_path = p.make_preferred().string();
