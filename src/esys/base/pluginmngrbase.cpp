@@ -19,6 +19,9 @@
 #include "esys/base/pluginmngrbase.h"
 #include "esys/base/pluginbase.h"
 
+#include <esys/trace/call.h>
+#include <esys/trace/macros.h>
+
 #include <boost/filesystem.hpp>
 #include <boost/locale.hpp>
 #include <boost/algorithm/string.hpp>
@@ -185,6 +188,8 @@ std::shared_ptr<Log_if> PluginMngrBase::get_log_if() const
 
 void PluginMngrBase::trace(const std::string &msg)
 {
+    ETRC_CALL(msg);
+
     if (m_log_if)
     {
         m_log_if->trace(msg);
@@ -194,6 +199,8 @@ void PluginMngrBase::trace(const std::string &msg)
 
 void PluginMngrBase::debug(int level, const std::string &msg)
 {
+    ETRC_CALL(level, msg);
+
     if (m_log_if)
     {
         m_log_if->debug(level, msg);
@@ -203,6 +210,8 @@ void PluginMngrBase::debug(int level, const std::string &msg)
 
 void PluginMngrBase::info(const std::string &msg)
 {
+    ETRC_CALL(msg);
+
     if (m_log_if)
     {
         m_log_if->info(msg);
@@ -212,6 +221,8 @@ void PluginMngrBase::info(const std::string &msg)
 
 void PluginMngrBase::warn(const std::string &msg)
 {
+    ETRC_CALL(msg);
+
     if (m_log_if)
     {
         m_log_if->warn(msg);
@@ -221,6 +232,8 @@ void PluginMngrBase::warn(const std::string &msg)
 
 void PluginMngrBase::error(const std::string &msg)
 {
+    ETRC_CALL(msg);
+
     if (m_log_if)
     {
         m_log_if->error(msg);
@@ -230,6 +243,8 @@ void PluginMngrBase::error(const std::string &msg)
 
 void PluginMngrBase::critical(const std::string &msg)
 {
+    ETRC_CALL(msg);
+
     if (m_log_if)
     {
         m_log_if->critical(msg);
