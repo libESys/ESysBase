@@ -88,6 +88,7 @@ int ESysBaseExe::parse_args()
         ("verbose", po::value<int>()->default_value(0)->implicit_value(1), "set verbose level")
         ("debug", po::value<bool>()->default_value(false)->implicit_value(true), "set debug mode, default random variable")
         ("trace", po::value<bool>()->default_value(false)->implicit_value(true), "set trace mode")
+        ("no_esyslog", po::value<bool>()->default_value(false)->implicit_value(true), "don't use esyslog for traces")
         ;
     // clang-format on
 
@@ -120,14 +121,19 @@ int ESysBaseExe::parse_args()
     return 0;
 }
 
-bool ESysBaseExe::get_debug()
+bool ESysBaseExe::get_debug() const
 {
     return m_vm["debug"].as<bool>();
 }
 
-bool ESysBaseExe::get_trace()
+bool ESysBaseExe::get_trace() const
 {
     return m_vm["trace"].as<bool>();
+}
+
+bool ESysBaseExe::get_no_esyslog() const
+{
+    return m_vm["no_esyslog"].as<bool>();
 }
 
 int ESysBaseExe::run()
@@ -197,7 +203,17 @@ const std::string &ESysBaseExe::get_error_msg()
     return m_error_msg;
 }
 
-void ESysBaseExe::create_log()
+void ESysBaseExe::create_esystrace_log()
+{
+    if (m_trace_logger != nullptr) return;
+
+    m_trace_logger = std::make_shared<esys::trace::Logger>();
+    m_trace_logger->use_std_streams("etrc_call01.txt");
+    esys::trace::Call::set_default_logger(m_trace_logger.get());
+    esys::trace::Call::enable();
+}
+
+void ESysBaseExe::create_esyslog_log()
 {
     if (m_logger != nullptr) return;
 
@@ -223,8 +239,9 @@ void ESysBaseExe::create_log()
                 m_trace = std::make_shared<esys::log::Trace>();
                 m_trace->set_logger(m_logger);
 
-                m_trace_logger.set_log_if(m_trace);
-                esys::trace::Call::set_default_logger(&m_trace_logger);
+                m_trace_logger = std::shared_ptr<esys::trace::Logger>();
+                m_trace_logger->set_log_if(m_trace);
+                esys::trace::Call::set_default_logger(m_trace_logger.get());
                 esys::trace::Call::enable();
             }
         }
@@ -237,6 +254,20 @@ void ESysBaseExe::create_log()
             m_logger->set_flush_log_level(esys::log::Level::INFO);
         }
     }
+    else
+    {
+        if (get_trace()) create_esystrace_log();
+    }
+}
+
+void ESysBaseExe::create_log()
+{
+    if (get_no_esyslog())
+    {
+        if (get_trace()) create_esystrace_log();
+        return;
+    }
+    create_esyslog_log();
 }
 
 void ESysBaseExe::set_log_file_path(const std::string &log_file_path)

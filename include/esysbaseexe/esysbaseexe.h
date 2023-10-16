@@ -43,8 +43,9 @@ public:
     int parse_args();
     int run();
 
-    bool get_debug();
-    bool get_trace();
+    bool get_debug() const;
+    bool get_trace() const;
+    bool get_no_esyslog() const;
 
     void set_os(std::ostream &os);
     std::ostream *get_os();
@@ -57,6 +58,8 @@ public:
     const std::string &get_error_msg();
 
     void create_log();
+    void create_esystrace_log();
+    void create_esyslog_log();
 
     void set_log_file_path(const std::string &log_file_path);
     const std::string &get_log_file_path();
@@ -66,7 +69,7 @@ private:
     std::shared_ptr<esys::log::LoggerBase> m_logger;
     std::shared_ptr<esys::log::Trace> m_trace;
     std::shared_ptr<esys::log::Mngr> m_logger_mngr;
-    esys::trace::Logger m_trace_logger;
+    std::shared_ptr<esys::trace::Logger> m_trace_logger;
     std::string m_log_file_path;
     std::ostream *m_os = nullptr;
     int m_argc = 0;
