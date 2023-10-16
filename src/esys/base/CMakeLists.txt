@@ -65,7 +65,7 @@ endif()
 add_library(esysbase ${ESYSBASE_LIB_TYPE} ${ESYSBASE_CXX_SOURCES})
 
 if(ESYSBASE_SHARED)
-  find_package(dl)
+  # find_package(dl)
   set_property(TARGET esysbase PROPERTY VERSION ${ESYSBASE_VERSION})
   set_property(TARGET esysbase PROPERTY SOVERSION ${ESYSBASE_VERSION_MAJOR})
 endif()
