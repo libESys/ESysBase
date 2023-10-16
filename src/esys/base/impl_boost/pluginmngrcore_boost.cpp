@@ -450,16 +450,23 @@ int PluginMngrCore::find_exe_path(std::string &exe_path)
 int PluginMngrCore::find_plugin_folders(std::vector<std::string> &plugin_folders)
 {
     int result = 0;
+
+    ETRC_CALL_RET_NP(result);
+
     boost::filesystem::path exe_folder;
 
     std::vector<std::string> search_paths;
 
     if (get_search_folder().empty())
     {
+        debug(0, "get_search_folder().empty()");
+
         boost::filesystem::path search_path;
         std::string path;
         result = find_exe_path(path);
         if (result < 0) return -2;
+
+        debug(0, "exe_path = " + path);
         search_path = path;
         search_path = search_path.parent_path(); // Remove the executable name
         exe_folder = search_path;
@@ -494,18 +501,28 @@ int PluginMngrCore::find_plugin_folders(std::vector<std::string> &plugin_folders
     result = get_rel_plugin_path(rel_plugin_path);
     if (result < 0) return -3;
 
+    debug(0, "rel_plugin_path = " + rel_plugin_path);
+    debug_helper(0, "search_paths", search_paths);
+
     result = search_existing_folder(search_paths, rel_plugin_path, plugin_folders);
     if (result == 0) return 0;
 
+    debug_helper(0, "plugin_folders", plugin_folders);
+
     if (!get_plugin_path_without_prefix_valid()) return -1;
 
-    return search_existing_folder(search_paths, rel_plugin_path, plugin_folders, false);
+    result = search_existing_folder(search_paths, rel_plugin_path, plugin_folders, false);
+    debug_helper(0, "plugin_folders", plugin_folders);
+    return result;
 }
 
 int PluginMngrCore::search_existing_folder(const std::vector<std::string> &search_paths,
                                            const std::string &rel_plugin_path, std::vector<std::string> &plugin_folders,
                                            bool use_rel_plugin_path) const
 {
+    int result = 0;
+    ETRC_CALL_RET(result, /*search_paths,*/ rel_plugin_path);
+
     boost::filesystem::path path_to_test;
 
     plugin_folders.clear();
@@ -520,7 +537,12 @@ int PluginMngrCore::search_existing_folder(const std::vector<std::string> &searc
             plugin_folders.push_back(path_to_test.string());
         }
     }
-    if (plugin_folders.size() == 0) return -1;
+
+    if (plugin_folders.size() == 0)
+    {
+        result = -1;
+        return result;
+    }
     return 0;
 }
 

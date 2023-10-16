@@ -208,6 +208,20 @@ void PluginMngrBase::debug(int level, const std::string &msg)
     }
 }
 
+void PluginMngrBase::debug_helper(int level, const std::string &msg, const std::vector<std::string> &strings)
+{
+    std::ostringstream oss;
+
+    oss << msg << " (count = " << strings.size() << "):";
+
+    for (auto idx = 0; idx < strings.size(); ++idx)
+    {
+        oss << std::endl << "[" << idx << "] " << strings[idx];
+    }
+
+    debug(level, oss.str());
+}
+
 void PluginMngrBase::info(const std::string &msg)
 {
     ETRC_CALL(msg);

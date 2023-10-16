@@ -43,7 +43,7 @@ public:
     PluginMngrBase(const std::string &name = "");
 
     //! Destructor
-    virtual ~PluginMngrBase();
+    ~PluginMngrBase() override;
 
     //! Set the name of the Plugin Manager
     /*!
@@ -205,15 +205,17 @@ public:
     void error(const std::string &msg) override;
     void critical(const std::string &msg) override;
 
+    void debug_helper(int level, const std::string &msg, const std::vector<std::string> &strings);
+    
 protected:
-    //!< \cond DOXY_IMPL
+        //!< \cond DOXY_IMPL
 
-    //! Set the filename of a plugin
-    /*!
-     * \param[in] plugin the plugin
-     * \param[in] filename the file name
-     */
-    static void set_plugin_filename(PluginBase *plugin, const std::string &filename);
+        //! Set the filename of a plugin
+        /*!
+         * \param[in] plugin the plugin
+         * \param[in] filename the file name
+         */
+        static void set_plugin_filename(PluginBase *plugin, const std::string &filename);
 
     //! Set the name of the entry function of the plugin
     /*!
