@@ -6,9 +6,9 @@
  * __legal_b__
  *
  * Copyright (c) 2018-2023 Michel Gillet
- * Distributed under the wxWindows Library Licence, Version 3.1.
- * (See accompanying file LICENSE_3_1.txt or
- * copy at http://www.wxwidgets.org/about/licence)
+ * Distributed under the MIT License.
+ * (See accompanying file LICENSE.txt or
+ * copy at https://opensource.org/licenses/MIT)
  *
  * __legal_e__
  * \endcond
@@ -239,7 +239,7 @@ void ESysBaseExe::create_esyslog_log()
                 m_trace = std::make_shared<esys::log::Trace>();
                 m_trace->set_logger(m_logger);
 
-                m_trace_logger = std::shared_ptr<esys::trace::Logger>();
+                m_trace_logger = std::make_shared<esys::trace::Logger>();
                 m_trace_logger->set_log_if(m_trace);
                 esys::trace::Call::set_default_logger(m_trace_logger.get());
                 esys::trace::Call::enable();

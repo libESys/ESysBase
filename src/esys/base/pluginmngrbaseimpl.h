@@ -6,9 +6,9 @@
  * __legal_b__
  *
  * Copyright (c) 2017 Michel Gillet
- * Distributed under the wxWindows Library Licence, Version 3.1.
- * (See accompanying file LICENSE_3_1.txt or
- * copy at http://www.wxwidgets.org/about/licence)
+ * Distributed under the MIT License.
+ * (See accompanying file LICENSE.txt or
+ * copy at https://opensource.org/licenses/MIT)
  *
  * __legal_e__
  * \endcond
@@ -21,4 +21,3 @@
 #include "esys/wx/pluginmngrbaseimpl.h"
 
 #endif
-

@@ -5,6 +5,11 @@
  * \cond
  * __legal_b__
  *
+ * Copyright (c) 2020-2023 Michel Gillet
+ * Distributed under the MIT License.
+ * (See accompanying file LICENSE.txt or
+ * copy at https://opensource.org/licenses/MIT)
+ *
  * __legal_e__
  * \endcond
  *
@@ -120,7 +125,7 @@ ESYSTEST_AUTO_TEST_CASE(NodeMngr01StdCpp)
     auto obj = node1->get_child(0);
     ESYSTEST_REQUIRE_NE(obj, nullptr);
     ESYSTEST_REQUIRE_EQUAL(obj->get_name_str(), "my_obj");
-    
+
     obj = node1->get_child(1);
     ESYSTEST_REQUIRE_NE(obj, nullptr);
     ESYSTEST_REQUIRE_EQUAL(obj->get_name_str(), "obj_b");
