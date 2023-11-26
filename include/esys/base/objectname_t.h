@@ -32,6 +32,10 @@ template<typename OBJ, typename MNGR, typename OBJNAME>
 class ObjectName_t : public ObjectNameBase
 {
 public:
+    using ObjectType = OBJ;
+    using ObjectMngrType = MNGR;
+    using ObjectNameType = OBJNAME;
+
     //! Constructor
     /*!
      *  \param[in] name The name of the Object

@@ -16,65 +16,32 @@
  */
 
 #include "esys/base/test/esysbase_t_prec.h"
+#include "esys/base/stdcpp/test/fix/object.h"
 
 #include <esys/base/stdcpp/objectnamemngr.h>
 #include <esys/base/stdcpp/object.h>
-#include <esys/base/stdcpp/nodemngr.h>
 
 #include <iostream>
 
-namespace esys
+namespace esys::base::stdcpp::test::objectnamemngr01
 {
 
-namespace base
-{
-
-namespace stdcpp
-{
-
-namespace test
-{
-
-namespace objectnamemngr01
-{
-
-class MyObjectBase : public Object
-{
-public:
-    MyObjectBase(const ObjectName &name)
-        : Object(name)
-    {
-    }
-
-    ~MyObjectBase() override = default;
-
-    int plat_init() override
-    {
-        return 0;
-    }
-
-    int plat_release() override
-    {
-        return 0;
-    }
-};
-
-class MyObject : public MyObjectBase
+class MyObject : public fix::Object
 {
 public:
     MyObject(const ObjectName &name);
 
-protected:
-    MyObjectBase m_obj_a{"obj_a"};
-    MyObjectBase m_obj_b{"obj_b"};
+private:
+    fix::Object m_obj_a{"obj_a"};
+    fix::Object m_obj_b{"obj_b"};
 };
 
 MyObject::MyObject(const ObjectName &name)
-    : MyObjectBase(name)
+    : fix::Object(name)
 {
 }
 
-class ObjectA : public MyObjectBase
+class ObjectA : public fix::Object
 {
 public:
     ObjectA(const ObjectName &name);
@@ -86,7 +53,7 @@ protected:
 };
 
 ObjectA::ObjectA(const ObjectName &name)
-    : MyObjectBase(name)
+    : fix::Object(name)
 {
 }
 
@@ -96,9 +63,6 @@ ObjectA::ObjectA(const ObjectName &name)
  */
 ESYSTEST_AUTO_TEST_CASE(ObjectNameMngr01StdCpp)
 {
-    NodeMngr::get().clear();
-    NodeMngr::get().init();
-
     MyObject obj("master");
 
     ESYSTEST_REQUIRE_EQUAL(obj.get_children_count(), 2);
@@ -135,12 +99,4 @@ ESYSTEST_AUTO_TEST_CASE(ObjectNameMngr01StdCpp)
     ESYSTEST_REQUIRE_EQUAL(child, nullptr);
 }
 
-} // namespace objectnamemngr01
-
-} // namespace test
-
-} // namespace stdcpp
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::stdcpp::test::objectnamemngr01

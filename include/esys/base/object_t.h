@@ -19,7 +19,6 @@
 
 #include "esys/base/esysbase_defs.h"
 #include "esys/base/objectbase_t.h"
-#include "esys/base/objectinit_t.h"
 
 #include <string>
 

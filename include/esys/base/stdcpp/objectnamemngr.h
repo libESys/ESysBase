@@ -5,7 +5,7 @@
  * \cond
  * __legal_b__
  *
- * Copyright (c) 2016-2020 Michel Gillet
+ * Copyright (c) 2016-2023 Michel Gillet
  * Distributed under the MIT License.
  * (See accompanying file LICENSE.txt or
  * copy at https://opensource.org/licenses/MIT)
@@ -22,13 +22,7 @@
 
 #include <thread>
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace stdcpp
+namespace esys::base::stdcpp
 {
 
 class ESYSBASE_API ObjectName;
@@ -39,13 +33,13 @@ class ESYSBASE_API ObjectName;
 class ESYSBASE_API ObjectNameMngr : public ObjectNameMngr_t<ObjectName, ObjectNameMngr>
 {
 public:
-    typedef ObjectNameMngr_t<ObjectName, ObjectNameMngr> BaseType;
+    using BaseType = ObjectNameMngr_t<ObjectName, ObjectNameMngr>;
 
     //! Default Constructor
     ObjectNameMngr();
 
     //! Destructor
-    virtual ~ObjectNameMngr();
+    ~ObjectNameMngr() override;
 
     void set_current(ObjectName *current) override;
     virtual ObjectName *get_current() override;
@@ -56,12 +50,12 @@ protected:
     //!< \endcond
 };
 
-} // namespace stdcpp
+} // namespace esys::base::stdcpp
 
+namespace esys::base
+{
 #ifndef ESYSBASE_EM
 using namespace stdcpp;
 #endif
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base

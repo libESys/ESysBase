@@ -21,13 +21,7 @@
 #include "esys/base/objectname_t.h"
 #include "esys/base/stdcpp/objectnamemngr.h"
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace stdcpp
+namespace esys::base::stdcpp
 {
 
 class ESYSBASE_API Object;
@@ -39,7 +33,7 @@ class ESYSBASE_API Object;
 class ESYSBASE_API ObjectName : public ObjectName_t<Object, ObjectNameMngr, ObjectName>
 {
 public:
-    typedef ObjectName_t<Object, ObjectNameMngr, ObjectName> BaseType;
+    using BaseType = ObjectName_t<Object, ObjectNameMngr, ObjectName>;
 
     //! Constructor
     /*!
@@ -62,12 +56,12 @@ protected:
     //!< \endcond
 };
 
-} // namespace stdcpp
+} // namespace esys::base::stdcpp
 
+namespace esys::base
+{
 #ifndef ESYSBASE_EM
 using namespace stdcpp;
 #endif
 
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base

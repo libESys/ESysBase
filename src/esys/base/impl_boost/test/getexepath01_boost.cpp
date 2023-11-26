@@ -5,7 +5,7 @@
  * \cond
  * __legal_b__
  *
- * Copyright (c) 2021 Michel Gillet
+ * Copyright (c) 2021-2023 Michel Gillet
  * Distributed under the MIT License.
  * (See accompanying file LICENSE.txt or
  * copy at https://opensource.org/licenses/MIT)
@@ -28,23 +28,13 @@
 
 #include <iostream>
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace impl_boost
-{
-
-namespace test
+namespace esys::base::impl_boost::test
 {
 
 /*! \class GetExePath01Boost esys/base/impl_boost/test/getexepath01_boost.cpp
  * "esys/base/impl_boost/test/getexepath01_boost.cpp"
  *
  *  \brief
- *
  */
 ESYSTEST_AUTO_TEST_CASE(GetExePath01Boost)
 {
@@ -67,13 +57,6 @@ ESYSTEST_AUTO_TEST_CASE(GetExePath01Boost)
 #endif
 
     ESYSTEST_REQUIRE_EQUAL(exe_path, exe_path_test.string());
-
 }
 
-} // namespace test
-
-} // namespace ci
-
-} // namespace repo
-
-} // namespace esys
+} // namespace esys::base::impl_boost::test

@@ -132,7 +132,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\include;$(ESYSMSVC)\include;$(ESYSTEST)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;BOOST_ALL_DYN_LINK;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;ESYSBASE_USE;BOOST_ALL_DYN_LINK;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -198,7 +198,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\include;$(ESYSMSVC)\include;$(ESYSTEST)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;BOOST_ALL_DYN_LINK;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;ESYSBASE_USE;BOOST_ALL_DYN_LINK;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -261,7 +261,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\include;$(ESYSMSVC)\include;$(ESYSTEST)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;BOOST_ALL_DYN_LINK;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;ESYSBASE_USE;BOOST_ALL_DYN_LINK;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>esys/base/test/$(ProjectName)_prec.h</PrecompiledHeaderFile>
@@ -293,7 +293,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\include;$(ESYSMSVC)\include;$(ESYSTEST)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;BOOST_ALL_DYN_LINK;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;ESYSBASE_USE;BOOST_ALL_DYN_LINK;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>esys/base/test/$(ProjectName)_prec.h</PrecompiledHeaderFile>
@@ -325,7 +325,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\esys\base\impl_boost\test\getexepath01_boost.cpp" />
     <ClCompile Include="..\..\src\esys\base\em\test\objectnamemngr01_em.cpp" />
-    <ClCompile Include="..\..\src\esys\base\stdcpp\test\nodemngr01_stdcpp.cpp" />
+    <ClCompile Include="..\..\src\esys\base\stdcpp\test\fix\object_stdcpp_fix.cpp" />
     <ClCompile Include="..\..\src\esys\base\stdcpp\test\objectnamemngr01_stdcpp.cpp" />
     <ClCompile Include="..\..\src\esys\base\test\esysbase_t_prec.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugDLL|Win32'">Create</PrecompiledHeader>
@@ -347,6 +347,7 @@
     <ClCompile Include="..\..\src\esys\base\test\testcasectrl.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\esys\base\stdcpp\test\fix\object.h" />
     <ClInclude Include="..\..\include\esys\base\test\esysbase_t_prec.h" />
     <ClInclude Include="..\..\include\esys\base\test\testcasectrl.h" />
     <ClInclude Include="..\..\include\esys\base\test\version.h" />

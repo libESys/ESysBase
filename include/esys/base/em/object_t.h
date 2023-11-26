@@ -19,7 +19,6 @@
 
 #include "esys/base/esysbase_defs.h"
 #include "esys/base/objectbase_t.h"
-#include "esys/base/em/objectinit_t.h"
 #include "esys/base/em/objectname.h"
 #include "esys/base/em/objectnamemngr.h"
 
@@ -31,54 +30,44 @@ namespace esys::base::em
 /*! \class Object_t esys/base/em/object_t.h "esys/base/em/object_t.h"
  *  \brief A template class with common features of all Object class implementations
  */
-template<typename T, typename IL = ObjectInit_t<T>>
-class Object_t : public ObjectBase_t<T, IL>
+template<typename OBJ, typename OBJNAME>
+class Object_t : public ObjectBase_t<OBJ, OBJNAME>
 {
 public:
-    Object_t(const ObjectName &name, T *obj);
+    using BaseType = ObjectBase_t<OBJ, OBJNAME>;
+
+    Object_t(const ObjectName &name, OBJ *obj);
     ~Object_t() override;
 
     const char *get_name() const override;
-    unsigned int get_id() const override;
 
 protected:
     static uint16_t s_count;
 
 private:
     const char *m_name = nullptr;
-    uint16_t m_id;
 };
 
-template<typename T, typename IL>
-uint16_t Object_t<T, IL>::s_count = 0;
+template<typename OBJ, typename OBJNAME>
+uint16_t Object_t<OBJ, OBJNAME>::s_count = 0;
 
-template<typename T, typename IL>
-Object_t<T, IL>::Object_t(const ObjectName &name, T *obj)
-    : ObjectBase_t<T, IL>(obj)
+template<typename OBJ, typename OBJNAME>
+Object_t<OBJ, OBJNAME>::Object_t(const ObjectName &name, OBJ *obj)
+    : BaseType(obj)
     , m_name(name.get_name())
 {
-    m_id = s_count;
     ++s_count;
-
-    auto cur_name = ObjectNameMngr::get().get_current();
-    cur_name->set_object(obj);
 }
 
-template<typename T, typename IL>
-Object_t<T, IL>::~Object_t()
+template<typename OBJ, typename OBJNAME>
+Object_t<OBJ, OBJNAME>::~Object_t()
 {
 }
 
-template<typename T, typename IL>
-const char *Object_t<T, IL>::get_name() const
+template<typename OBJ, typename OBJNAME>
+const char *Object_t<OBJ, OBJNAME>::get_name() const
 {
     return m_name;
-}
-
-template<typename T, typename IL>
-unsigned int Object_t<T, IL>::get_id() const
-{
-    return m_id;
 }
 
 } // namespace esys::base::em

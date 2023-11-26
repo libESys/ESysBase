@@ -458,17 +458,13 @@
     <ClCompile Include="..\..\src\esys\base\impl_boost\pluginmngrcore_boost.cpp" />
     <ClCompile Include="..\..\src\esys\base\objectbase.cpp" />
     <ClCompile Include="..\..\src\esys\base\objectnamebase.cpp" />
-    <ClCompile Include="..\..\src\esys\base\objplatif.cpp" />
     <ClCompile Include="..\..\src\esys\base\pluginbase.cpp" />
     <ClCompile Include="..\..\src\esys\base\pluginmngr.cpp" />
     <ClCompile Include="..\..\src\esys\base\pluginmngrbase.cpp" />
     <ClCompile Include="..\..\src\esys\base\stdcpp\logger_stdcpp.cpp" />
     <ClCompile Include="..\..\src\esys\base\stdcpp\log_if_stdcpp.cpp" />
-    <ClCompile Include="..\..\src\esys\base\stdcpp\nodemngr_stdcpp.cpp" />
-    <ClCompile Include="..\..\src\esys\base\stdcpp\node_stdcpp.cpp" />
     <ClCompile Include="..\..\src\esys\base\stdcpp\objectnamemngr_stdcpp.cpp" />
     <ClCompile Include="..\..\src\esys\base\stdcpp\objectname_stdcpp.cpp" />
-    <ClCompile Include="..\..\src\esys\base\stdcpp\objectoperation_stdcpp.cpp" />
     <ClCompile Include="..\..\src\esys\base\stdcpp\object_stdcpp.cpp" />
     <ClCompile Include="..\..\src\esys\base\version.cpp" />
   </ItemGroup>
@@ -487,11 +483,9 @@
     <ClInclude Include="..\..\include\esys\base\esysbase_prec.h" />
     <ClInclude Include="..\..\include\esys\base\impl_boost\dynlibrary.h" />
     <ClInclude Include="..\..\include\esys\base\impl_boost\pluginmngrcore.h" />
-    <ClInclude Include="..\..\include\esys\base\layerbase.h" />
     <ClInclude Include="..\..\include\esys\base\log_if.h" />
     <ClInclude Include="..\..\include\esys\base\object.h" />
     <ClInclude Include="..\..\include\esys\base\objectbase.h" />
-    <ClInclude Include="..\..\include\esys\base\objectinitbase_t.h" />
     <ClInclude Include="..\..\include\esys\base\objectname.h" />
     <ClInclude Include="..\..\include\esys\base\objectnamebase.h" />
     <ClInclude Include="..\..\include\esys\base\objectbase_t.h" />
@@ -499,7 +493,6 @@
     <ClInclude Include="..\..\include\esys\base\objectnamemngr.h" />
     <ClInclude Include="..\..\include\esys\base\objectname_t.h" />
     <ClInclude Include="..\..\include\esys\base\object_t.h" />
-    <ClInclude Include="..\..\include\esys\base\objplatif.h" />
     <ClInclude Include="..\..\include\esys\base\pluginbase.h" />
     <ClInclude Include="..\..\include\esys\base\pluginmngr.h" />
     <ClInclude Include="..\..\include\esys\base\pluginmngrbase.h" />
@@ -509,13 +502,9 @@
     <ClInclude Include="..\..\include\esys\base\plugin_t.h" />
     <ClInclude Include="..\..\include\esys\base\stdcpp\logger.h" />
     <ClInclude Include="..\..\include\esys\base\stdcpp\log_if.h" />
-    <ClInclude Include="..\..\include\esys\base\stdcpp\node.h" />
-    <ClInclude Include="..\..\include\esys\base\stdcpp\nodemngr.h" />
     <ClInclude Include="..\..\include\esys\base\stdcpp\object.h" />
-    <ClInclude Include="..\..\include\esys\base\stdcpp\objectinit_t.h" />
     <ClInclude Include="..\..\include\esys\base\stdcpp\objectname.h" />
     <ClInclude Include="..\..\include\esys\base\stdcpp\objectnamemngr.h" />
-    <ClInclude Include="..\..\include\esys\base\stdcpp\objectoperation.h" />
     <ClInclude Include="..\..\include\esys\base\stdcpp\object_t.h" />
     <ClInclude Include="..\..\include\esys\base\version.h" />
     <ClInclude Include="..\..\include\esys\base\version_defs.h" />

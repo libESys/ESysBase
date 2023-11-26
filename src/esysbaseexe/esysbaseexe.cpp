@@ -54,13 +54,11 @@ std::ostream *ESysBaseExe::get_os()
 
 void ESysBaseExe::set_args(int argc, char **argv)
 {
-    int i;
-
     m_args.clear();
 
     m_argc = argc;
 
-    for (i = 1; i < argc; ++i)
+    for (int i = 1; i < argc; ++i)
     {
 #ifdef WIN32
         std::vector<std::string> temp_args = po::split_winmain(argv[i]);

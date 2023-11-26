@@ -22,6 +22,15 @@
     <Filter Include="Source Files\stdcpp">
       <UniqueIdentifier>{fb2ed2e4-21cf-4ae3-afc3-0e4fc7adeca6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\stdcpp">
+      <UniqueIdentifier>{a3e7c09a-c85d-445a-9521-5d91f6e1b5bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\stdcpp\fix">
+      <UniqueIdentifier>{b64f7fbc-9974-4442-8bab-d45569c7e941}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\stdcpp\fix">
+      <UniqueIdentifier>{7c0e8742-4d2c-42ee-b616-87c1c2eb87e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\esys\base\test\esysbase_t_prec.cpp">
@@ -45,8 +54,8 @@
     <ClCompile Include="..\..\src\esys\base\em\test\objectnamemngr01_em.cpp">
       <Filter>Source Files\em</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\esys\base\stdcpp\test\nodemngr01_stdcpp.cpp">
-      <Filter>Source Files\stdcpp</Filter>
+    <ClCompile Include="..\..\src\esys\base\stdcpp\test\fix\object_stdcpp_fix.cpp">
+      <Filter>Source Files\stdcpp\fix</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\esys\base\test\testcasectrl.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\esys\base\stdcpp\test\fix\object.h">
+      <Filter>Header Files\stdcpp\fix</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@
  * \cond
  * __legal_b__
  *
- * Copyright (c) 2021 Michel Gillet
+ * Copyright (c) 2021-2023 Michel Gillet
  * Distributed under the MIT License.
  * (See accompanying file LICENSE.txt or
  * copy at https://opensource.org/licenses/MIT)
@@ -24,16 +24,7 @@
 
 #include <iostream>
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace test
-{
-
-namespace getpluginrelpath01
+namespace esys::base::test::getpluginrelpath01
 {
 
 class PluginMngr : public PluginMngrCore
@@ -88,10 +79,4 @@ ESYSTEST_AUTO_TEST_CASE(GetPluginRelPath01)
 #endif
 }
 
-} // namespace getpluginrelpath01
-
-} // namespace test
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::test::getpluginrelpath01

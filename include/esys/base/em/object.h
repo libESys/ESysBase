@@ -20,7 +20,6 @@
 #include "esys/base/esysbase_defs.h"
 #include "esys/base/em/objectname.h"
 #include "esys/base/em/object_t.h"
-#include "esys/base/em/objectinit_t.h"
 
 namespace esys::base::em
 {
@@ -28,10 +27,10 @@ namespace esys::base::em
 /*! \class Object esys/base/em/object.h "esys/base/em/object.h"
  *  \brief Object class for embedded
  */
-class ESYSBASE_API Object : public Object_t<Object>
+class ESYSBASE_API Object : public Object_t<Object, ObjectName>
 {
 public:
-    using BaseType = Object_t<Object>;
+    using BaseType = Object_t<Object, ObjectName>;
 
     Object(const ObjectName &name);
     ~Object() override;

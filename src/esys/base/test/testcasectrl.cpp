@@ -5,7 +5,7 @@
  * \cond
  * __legal_b__
  *
- * Copyright (c) 2020-2021 Michel Gillet
+ * Copyright (c) 2020-2023 Michel Gillet
  * Distributed under the MIT License.
  * (See accompanying file LICENSE.txt or
  * copy at https://opensource.org/licenses/MIT)
@@ -21,13 +21,7 @@
 #include <iostream>
 #include <cassert>
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace test
+namespace esys::base::test
 {
 
 TestCaseCtrl *TestCaseCtrl::g_test_case = nullptr;
@@ -44,9 +38,9 @@ TestCaseCtrl::TestCaseCtrl()
 {
     g_test_case = this;
 
-    //AddSearchPathEnvVar("ESYSBASE");
-    //AddSearchPath("res/esysbase_t");                    // If cwd is root of the emdev git repo
-    //AddSearchPath("../../src/esysbase/res/esysbase_t"); // if cwd is the bin folder
+    // AddSearchPathEnvVar("ESYSBASE");
+    // AddSearchPath("res/esysbase_t");                    // If cwd is root of the emdev git repo
+    // AddSearchPath("../../src/esysbase/res/esysbase_t"); // if cwd is the bin folder
 
     m_logger.Set(&std::cout);
     esystest::Logger::Set(&m_logger);
@@ -58,8 +52,4 @@ TestCaseCtrl::~TestCaseCtrl()
 
 ESYSTEST_GLOBAL_FIXTURE(TestCaseCtrl);
 
-} // namespace test
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::test

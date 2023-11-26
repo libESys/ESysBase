@@ -16,6 +16,3 @@
  */
 
 #include "esys/base/test/esysbase_t_prec.h"
-
-// TODO: reference any additional headers you need in esysbase_t_prec.h
-// and not in this file

@@ -20,7 +20,6 @@
 #include "esys/base/esysbase_defs.h"
 #include "esys/base/stdcpp/objectname.h"
 #include "esys/base/stdcpp/object_t.h"
-#include "esys/base/stdcpp/objectinit_t.h"
 
 namespace esys::base::stdcpp
 {
@@ -28,10 +27,10 @@ namespace esys::base::stdcpp
 /*! \class Object esys/base/stdcpp/object.h "esys/base/stdcpp/object.h"
  *  \brief Object class for embedded
  */
-class ESYSBASE_API Object : public Object_t<Object>
+class ESYSBASE_API Object : public Object_t<Object, ObjectName>
 {
 public:
-    using BaseType = Object_t<Object>;
+    using BaseType = Object_t<Object, ObjectName>;
 
     Object(const ObjectName &name);
     ~Object() override;

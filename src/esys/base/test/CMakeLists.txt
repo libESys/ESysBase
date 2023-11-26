@@ -1,10 +1,14 @@
 #
+# cmake-format: off
 # __legal_b__
 #
-# Copyright (c) 2021 Michel Gillet Distributed under the MIT License. (See
-# accompanying file LICENSE.txt or copy at https://opensource.org/licenses/MIT)
+# Copyright (c) 2021-2023 Michel Gillet 
+# Distributed under the MIT License. 
+# (See accompanying file LICENSE.txt or 
+# copy at https://opensource.org/licenses/MIT)
 #
 # __legal_e__
+# cmake-format: on
 #
 
 project(esysbase_t CXX)
@@ -23,10 +27,19 @@ include_directories(../../../../include)
 set(ESYSBASE_T_CXX_SOURCES esysbase_t_prec.cpp getpluginrelpath01.cpp main.cpp
                            testcasectrl.cpp)
 
+set(ESYSBASE_T_EM_CXX_SOURCES ../em/test/objectnamemngr01_em.cpp)
+
 set(ESYSBASE_T_IMPL_BOOST_CXX_SOURCES ../impl_boost/test/getexepath01_boost.cpp)
 
-add_executable(esysbase_t ${ESYSBASE_T_CXX_SOURCES}
-                          ${ESYSBASE_T_IMPL_BOOST_CXX_SOURCES})
+set(ESYSBASE_T_STDCPP_CXX_SOURCES ../stdcpp/test/objectnamemngr01_stdcpp.cpp)
+
+set(ESYSBASE_T_STDCPP_FIX_CXX_SOURCES ../stdcpp/test/fix/object_stdcpp_fix.cpp)
+
+add_executable(
+  esysbase_t
+  ${ESYSBASE_T_EM_CXX_SOURCES} ${ESYSBASE_T_CXX_SOURCES}
+  ${ESYSBASE_T_IMPL_BOOST_CXX_SOURCES} ${ESYSBASE_T_STDCPP_CXX_SOURCES}
+  ${ESYSBASE_T_STDCPP_FIX_CXX_SOURCES})
 
 find_package(Boost 1.66 REQUIRED QUIET
              COMPONENTS date_time filesystem iostreams program_options thread)

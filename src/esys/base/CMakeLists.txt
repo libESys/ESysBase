@@ -2,7 +2,7 @@
 # cmake-format: off
 # __legal_b__
 #
-# Copyright (c) 2021-2022 Michel Gillet
+# Copyright (c) 2021-2023 Michel Gillet
 # Distributed under the MIT License.
 # (See accompanying file LICENSE.txt or
 # copy at https://opensource.org/licenses/MIT)
@@ -29,7 +29,7 @@ set(ESYSBASE_VERSION
 
 include_directories(../../../include)
 
-set(ESYSBASE_CXX_SOURCES objectbase.cpp objectnamebase.cpp objplatif.cpp)
+set(ESYSBASE_CXX_SOURCES objectbase.cpp objectnamebase.cpp)
 
 if(ESYSBASE_VHW)
   set(ESYSBASE_CXX_SOURCES
@@ -45,14 +45,8 @@ set(ESYSBASE_IMPL_BOOST_CXX_SOURCES
     impl_boost/pluginmngrcore_boost.cpp)
 
 set(ESYSBASE_STDCPP_CXX_SOURCES
-    stdcpp/log_if_stdcpp.cpp
-    stdcpp/logger_stdcpp.cpp
-    stdcpp/node_stdcpp.cpp
-    stdcpp/nodemngr_stdcpp.cpp
-    stdcpp/object_stdcpp.cpp
-    stdcpp/objectname_stdcpp.cpp
-    stdcpp/objectnamemngr_stdcpp.cpp
-    stdcpp/objectoperation_stdcpp.cpp)
+    stdcpp/log_if_stdcpp.cpp stdcpp/logger_stdcpp.cpp stdcpp/object_stdcpp.cpp
+    stdcpp/objectname_stdcpp.cpp stdcpp/objectnamemngr_stdcpp.cpp)
 
 set(ESYSBASE_CXX_SOURCES ${ESYSBASE_CXX_SOURCES} ${ESYSBASE_EM_CXX_SOURCES})
 

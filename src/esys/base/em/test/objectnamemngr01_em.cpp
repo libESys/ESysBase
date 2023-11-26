@@ -34,16 +34,6 @@ public:
     }
 
     ~MyObjectBase() override = default;
-
-    int plat_init() override
-    {
-        return 0;
-    }
-
-    int plat_release() override
-    {
-        return 0;
-    }
 };
 
 class MyObject : public MyObjectBase
@@ -66,10 +56,10 @@ class ObjectA : public MyObjectBase
 public:
     ObjectA(const ObjectName &name);
 
-protected:
-    MyObjectBase m_my_obj_a{"my_obj_a"};
-    MyObjectBase m_my_obj_b{"my_obj_b"};
-    MyObjectBase m_my_obj_c{"my_obj_c"};
+private:
+    MyObject m_my_obj_a{"my_obj_a"};
+    MyObject m_my_obj_b{"my_obj_b"};
+    MyObject m_my_obj_c{"my_obj_c"};
 };
 
 ObjectA::ObjectA(const ObjectName &name)

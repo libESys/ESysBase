@@ -20,13 +20,7 @@
 #include <esystest/testcasectrl.h>
 #include <esystest/stdlogger.h>
 
-namespace esys
-{
-
-namespace base
-{
-
-namespace test
+namespace esys::base::test
 {
 
 class TestCaseCtrl : public esystest::TestCaseCtrl
@@ -43,8 +37,4 @@ protected:
     esystest::StdLogger m_logger;
 };
 
-} // namespace test
-
-} // namespace base
-
-} // namespace esys
+} // namespace esys::base::test

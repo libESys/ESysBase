@@ -78,9 +78,6 @@
     <ClCompile Include="..\..\src\esys\base\em\objectname_em.cpp">
       <Filter>Source Files\em</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\esys\base\stdcpp\node_stdcpp.cpp">
-      <Filter>Source Files\stdcpp</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\esys\base\stdcpp\object_stdcpp.cpp">
       <Filter>Source Files\stdcpp</Filter>
     </ClCompile>
@@ -89,15 +86,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\esys\base\stdcpp\objectnamemngr_stdcpp.cpp">
       <Filter>Source Files\stdcpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\esys\base\stdcpp\nodemngr_stdcpp.cpp">
-      <Filter>Source Files\stdcpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\esys\base\stdcpp\objectoperation_stdcpp.cpp">
-      <Filter>Source Files\stdcpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\esys\base\objplatif.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\esys\base\stdcpp\log_if_stdcpp.cpp">
       <Filter>Source Files\stdcpp</Filter>
@@ -197,16 +185,7 @@
     <ClInclude Include="..\..\include\esys\base\em\objectname.h">
       <Filter>Header Files\em</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\esys\base\stdcpp\objectinit_t.h">
-      <Filter>Header Files\stdcpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\esys\base\stdcpp\objectnamemngr.h">
-      <Filter>Header Files\stdcpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\esys\base\stdcpp\node.h">
-      <Filter>Header Files\stdcpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\esys\base\stdcpp\nodemngr.h">
       <Filter>Header Files\stdcpp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\esys\base\stdcpp\objectname.h">
@@ -225,18 +204,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\esys\base\object_t.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\esys\base\layerbase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\esys\base\stdcpp\objectoperation.h">
-      <Filter>Header Files\stdcpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\esys\base\objectinitbase_t.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\esys\base\objplatif.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\esys\base\log_if.h">
