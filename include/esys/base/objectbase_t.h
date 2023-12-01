@@ -91,8 +91,6 @@ public:
      */
     void set_parent(OBJ *parent)
     {
-        ObjectBase::set_parent(parent);
-
         m_parent = parent;
     }
 
@@ -133,10 +131,6 @@ template<typename OBJ, typename OBJNAME, typename OBJ_BASE>
 void ObjectBase_t<OBJ, OBJNAME, OBJ_BASE>::add_child(OBJ *child)
 {
     assert(child != nullptr);
-
-    // child->set_in_hierarchy();
-
-    // child->set_depth(get_depth() + 1);
 
     if (m_first_child == nullptr)
     {
