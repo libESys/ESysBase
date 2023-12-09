@@ -35,60 +35,52 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{99DBC93C-070D-41CE-9E16-743843015369}</ProjectGuid>
-    <RootNamespace>esysbaseexe</RootNamespace>
-    <SccProjectName />
-    <SccLocalPath />
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectGuid>{3A76393F-FCE8-4BB9-BC14-1392BB5BC226}</ProjectGuid>
+    <RootNamespace>esysbase</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.20348.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <Import Project="$(ESYSMSVC)\project\msvc\esysdev_config.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
-    <UseOfMfc>false</UseOfMfc>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
-    <UseOfMfc>false</UseOfMfc>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
-    <UseOfMfc>false</UseOfMfc>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
-    <UseOfMfc>false</UseOfMfc>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
-    <UseOfMfc>false</UseOfMfc>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
-    <UseOfMfc>false</UseOfMfc>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
-    <UseOfMfc>false</UseOfMfc>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
-    <UseOfMfc>false</UseOfMfc>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(ESYSMSVC)\project\msvc\esysdev_setup.props" />
-    <Import Project="..\msvc\esysbase.props" />
-    <Import Project="..\msvc\esysbase_local.props" Condition="Exists('..\msvc\esysbase_local.props')" />
+    <Import Project="esysbase.props" />
+    <Import Project="esysbase_local.props" Condition="Exists('esysbase_local.props')" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -119,81 +111,81 @@
     <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|Win32'">
-    <OutDir>$(ESYSBASE_DEV)\$(esysdevExeOutDir)</OutDir>
+    <OutDir>$(esysdevLibOutDir)</OutDir>
     <IntDir>$(ESYSBASE_DEV)\$(esysdevIntRootDir)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>esysbased</TargetName>
+    <TargetName>$(ProjectName)$(esysdevDllNameSuffix)-$(esysbase_ver)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ESYSBASE_DEV)\$(esysdevExeOutDir)</OutDir>
+    <OutDir>$(esysdevLibOutDir)</OutDir>
     <IntDir>$(ESYSBASE_DEV)\$(esysdevIntRootDir)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>esysbased</TargetName>
+    <TargetName>lib$(ProjectName)$(esysdevDllNameSuffix)-$(esysbase_ver)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>esysbased</TargetName>
-    <OutDir>$(ESYSBASE_DEV)\$(esysdevExeOutDir)</OutDir>
+    <TargetName>$(ProjectName)$(esysdevDllNameSuffix)-$(esysbase_ver)</TargetName>
+    <OutDir>$(esysdevLibOutDir)</OutDir>
     <IntDir>$(ESYSBASE_DEV)\$(esysdevIntRootDir)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>esysbased</TargetName>
-    <OutDir>$(ESYSBASE_DEV)\$(esysdevExeOutDir)</OutDir>
+    <TargetName>lib$(ProjectName)$(esysdevDllNameSuffix)-$(esysbase_ver)</TargetName>
+    <OutDir>$(esysdevLibOutDir)</OutDir>
     <IntDir>$(ESYSBASE_DEV)\$(esysdevIntRootDir)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|Win32'">
-    <OutDir>$(ESYSBASE_DEV)\$(esysdevExeOutDir)</OutDir>
+    <OutDir>$(esysdevLibOutDir)</OutDir>
     <IntDir>$(ESYSBASE_DEV)\$(esysdevIntRootDir)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>esysbase</TargetName>
+    <TargetName>$(ProjectName)$(esysdevDllNameSuffix)-$(esysbase_ver)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(ESYSBASE_DEV)\$(esysdevExeOutDir)</OutDir>
+    <OutDir>$(esysdevLibOutDir)</OutDir>
     <IntDir>$(ESYSBASE_DEV)\$(esysdevIntRootDir)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>esysbase</TargetName>
+    <TargetName>lib$(ProjectName)$(esysdevDllNameSuffix)-$(esysbase_ver)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(ESYSBASE_DEV)\$(esysdevExeOutDir)</OutDir>
+    <TargetName>$(ProjectName)$(esysdevDllNameSuffix)-$(esysbase_ver)</TargetName>
+    <OutDir>$(esysdevLibOutDir)</OutDir>
     <IntDir>$(ESYSBASE_DEV)\$(esysdevIntRootDir)\</IntDir>
-    <TargetName>esysbase</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(ESYSBASE_DEV)\$(esysdevExeOutDir)</OutDir>
+    <TargetName>lib$(ProjectName)$(esysdevDllNameSuffix)-$(esysbase_ver)</TargetName>
+    <OutDir>$(esysdevLibOutDir)</OutDir>
     <IntDir>$(ESYSBASE_DEV)\$(esysdevIntRootDir)\</IntDir>
-    <TargetName>esysbase</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;$(ESYSMSVC)\include;$(ESYSTEST)\include;$(ESYSLOG)\include;$(ESYSTRACE)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;ESYSBASE_USE;ESYSLOG_USE;ESYSTRACE_USE;BOOST_ALL_DYN_LINK;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include;..\..\src;$(ESYSMSVC)\include;$(ESYSTRACE)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;ESYSBASE_EXPORTS;ESYSTRACE_USE;BOOST_ALL_DYN_LINK;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>$(ProjectName)/$(ProjectName)_prec.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>esys/base/$(ProjectName)_prec.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName).pch</PrecompiledHeaderOutputFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <CompileAs>Default</CompileAs>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(TargetFileName)</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>$(esysdevLibOutDir);$(ESYSLOG)\$(esysdevLibDir);$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>$(ESYSSDK_INST_DIR)\bin\esysdep.exe --copy --x32 $(OutDir)</Command>
+      <Command>xcopy /Y $(OutDir)$(TargetFileName) $(ESYSBASE_DEV)\$(esysdevExeOutDir)</Command>
     </PostBuildEvent>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -202,63 +194,66 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;$(ESYSMSVC)\include;$(ESYSTEST)\include;$(ESYSLOG)\include;$(ESYSTRACE)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include;..\..\src;$(ESYSMSVC)\include;$(ESYSTRACE)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;ESYSBASE_STATIC_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>$(ProjectName)/$(ProjectName)_prec.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>esys/base/$(ProjectName)_prec.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName).pch</PrecompiledHeaderOutputFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <CompileAs>Default</CompileAs>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(TargetFileName)</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>$(esysdevLibOutDir);$(ESYSLOG)\$(esysdevLibDir);$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>$(ESYSSDK_INST_DIR)\bin\esysdep.exe --copy --x32 $(OutDir)</Command>
+      <Command>xcopy /Y $(OutDir)$(TargetFileName) $(ESYSBASE_DEV)\$(esysdevExeOutDir)</Command>
     </PostBuildEvent>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
+    <Lib>
+      <AdditionalLibraryDirectories>$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;$(ESYSMSVC)\include;$(ESYSTEST)\include;$(ESYSLOG)\include;$(ESYSTRACE)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;ESYSBASE_USE;ESYSLOG_USE;ESYSTRACE_USE;BOOST_ALL_DYN_LINK;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include;..\..\src;$(ESYSMSVC)\include;$(ESYSTRACE)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;ESYSBASE_EXPORTS;ESYSTRACE_USE;BOOST_ALL_DYN_LINK;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>$(ProjectName)/$(ProjectName)_prec.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>esys/base/$(ProjectName)_prec.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName).pch</PrecompiledHeaderOutputFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <CompileAs>Default</CompileAs>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(TargetFileName)</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
-      <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(esysdevLibOutDir);$(ESYSLOG)\$(esysdevLibDir);$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+      <AdditionalLibraryDirectories>$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>$(ESYSSDK_INST_DIR)\bin\esysdep.exe --copy --x64 $(OutDir)</Command>
+      <Command>xcopy /Y $(OutDir)$(TargetFileName) $(ESYSBASE_DEV)\$(esysdevExeOutDir)</Command>
     </PostBuildEvent>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -267,62 +262,65 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\include;$(ESYSMSVC)\include;$(ESYSTEST)\include;$(ESYSLOG)\include;$(ESYSTRACE)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include;..\..\src;$(ESYSMSVC)\include;$(ESYSTRACE)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;ESYSBASE_STATIC_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>$(ProjectName)/$(ProjectName)_prec.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>esys/base/$(ProjectName)_prec.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName).pch</PrecompiledHeaderOutputFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <CompileAs>Default</CompileAs>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(TargetFileName)</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
-      <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(esysdevLibOutDir);$(ESYSLOG)\$(esysdevLibDir);$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+      <AdditionalLibraryDirectories>$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>$(ESYSSDK_INST_DIR)\bin\esysdep.exe --copy --x64 $(OutDir)</Command>
+      <Command>xcopy /Y $(OutDir)$(TargetFileName) $(ESYSBASE_DEV)\$(esysdevExeOutDir)</Command>
     </PostBuildEvent>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
+    <Lib>
+      <AdditionalLibraryDirectories>$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;$(ESYSMSVC)\include;$(ESYSTEST)\include;$(ESYSLOG)\include;$(ESYSTRACE)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;ESYSBASE_USE;ESYSLOG_USE;ESYSTRACE_USE;BOOST_ALL_DYN_LINK;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include;..\..\src;$(ESYSMSVC)\include;$(ESYSTRACE)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;ESYSBASE_EXPORTS;ESYSTRACE_USE;BOOST_ALL_DYN_LINK;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>$(ProjectName)/$(ProjectName)_prec.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>esys/base/$(ProjectName)_prec.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName).pch</PrecompiledHeaderOutputFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat />
-      <CompileAs>Default</CompileAs>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(TargetFileName)</OutputFile>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>$(esysdevLibOutDir);$(ESYSLOG)\$(esysdevLibDir);$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>$(ESYSSDK_INST_DIR)\bin\esysdep.exe --copy --x32 $(OutDir)</Command>
+      <Command>xcopy /Y $(OutDir)$(TargetFileName) $(ESYSBASE_DEV)\$(esysdevExeOutDir)</Command>
     </PostBuildEvent>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -330,64 +328,67 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;$(ESYSMSVC)\include;$(ESYSTEST)\include;$(ESYSLOG)\include;$(ESYSTRACE)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include;..\..\src;$(ESYSMSVC)\include;$(ESYSTRACE)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;ESYSBASE_STATIC_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>$(ProjectName)/$(ProjectName)_prec.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>esys/base/$(ProjectName)_prec.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName).pch</PrecompiledHeaderOutputFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>
       </DebugInformationFormat>
-      <CompileAs>Default</CompileAs>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(TargetFileName)</OutputFile>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>$(esysdevLibOutDir);$(ESYSLOG)\$(esysdevLibDir);$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>$(ESYSSDK_INST_DIR)\bin\esysdep.exe --copy --x32 $(OutDir)</Command>
+      <Command>xcopy /Y $(OutDir)$(TargetFileName) $(ESYSBASE_DEV)\$(esysdevExeOutDir)</Command>
     </PostBuildEvent>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
+    <Lib>
+      <AdditionalLibraryDirectories>$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;$(ESYSMSVC)\include;$(ESYSTEST)\include;$(ESYSLOG)\include;$(ESYSTRACE)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;ESYSBASE_USE;ESYSLOG_USE;ESYSTRACE_USE;BOOST_ALL_DYN_LINK;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include;..\..\src;$(ESYSMSVC)\include;$(ESYSTRACE)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;ESYSBASE_EXPORTS;ESYSTRACE_USE;BOOST_ALL_DYN_LINK;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>$(ProjectName)/$(ProjectName)_prec.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>esys/base/$(ProjectName)_prec.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName).pch</PrecompiledHeaderOutputFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>
       </DebugInformationFormat>
-      <CompileAs>Default</CompileAs>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(TargetFileName)</OutputFile>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalLibraryDirectories>$(esysdevLibOutDir);$(ESYSLOG)\$(esysdevLibDir);$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+      <AdditionalLibraryDirectories>$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>$(ESYSSDK_INST_DIR)\bin\esysdep.exe --copy --x64 $(OutDir)</Command>
+      <Command>xcopy /Y $(OutDir)$(TargetFileName) $(ESYSBASE_DEV)\$(esysdevExeOutDir)</Command>
     </PostBuildEvent>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -395,39 +396,47 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;$(ESYSMSVC)\include;$(ESYSTEST)\include;$(ESYSLOG)\include;$(ESYSTRACE)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\include;..\..\src;$(ESYSMSVC)\include;$(ESYSTRACE)\include;$(ESYS_BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;ESYSBASE_STATIC_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>$(ProjectName)/$(ProjectName)_prec.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>esys/base/$(ProjectName)_prec.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName).pch</PrecompiledHeaderOutputFile>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>
       </DebugInformationFormat>
-      <CompileAs>Default</CompileAs>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(TargetFileName)</OutputFile>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalLibraryDirectories>$(esysdevLibOutDir);$(ESYSLOG)\$(esysdevLibDir);$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
+      <AdditionalLibraryDirectories>$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>$(ESYSSDK_INST_DIR)\bin\esysdep.exe --copy --x64 $(OutDir)</Command>
+      <Command>xcopy /Y $(OutDir)$(TargetFileName) $(ESYSBASE_DEV)\$(esysdevExeOutDir)</Command>
     </PostBuildEvent>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
+    <Lib>
+      <AdditionalLibraryDirectories>$(ESYSTRACE)\$(esysdevLibDir);$(ESYS_BOOST)\$(boostLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\esysbaseexe\esysbaseexe.cpp" />
-    <ClCompile Include="..\..\src\esysbaseexe\esysbaseexe_prec.cpp">
+    <ClCompile Include="..\..\src\esys\base\dynlibrarybase.cpp" />
+    <ClCompile Include="..\..\src\esys\base\em\log_if_em.cpp" />
+    <ClCompile Include="..\..\src\esys\base\em\objectnamemngr_em.cpp" />
+    <ClCompile Include="..\..\src\esys\base\em\objectname_em.cpp" />
+    <ClCompile Include="..\..\src\esys\base\em\object_em.cpp" />
+    <ClCompile Include="..\..\src\esys\base\esysbase_dll.cpp" />
+    <ClCompile Include="..\..\src\esys\base\esysbase_prec.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugDLL|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugDLL|x64'">Create</PrecompiledHeader>
@@ -437,16 +446,65 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\src\esysbaseexe\main.cpp" />
+    <ClCompile Include="..\..\src\esys\base\impl_boost\dynlibraryimpl_boost.cpp" />
+    <ClCompile Include="..\..\src\esys\base\impl_boost\dynlibrary_boost.cpp" />
+    <ClCompile Include="..\..\src\esys\base\impl_boost\pluginmngrcore_boost.cpp" />
+    <ClCompile Include="..\..\src\esys\base\objectbase.cpp" />
+    <ClCompile Include="..\..\src\esys\base\objectnamebase.cpp" />
+    <ClCompile Include="..\..\src\esys\base\pluginbase.cpp" />
+    <ClCompile Include="..\..\src\esys\base\pluginmngr.cpp" />
+    <ClCompile Include="..\..\src\esys\base\pluginmngrbase.cpp" />
+    <ClCompile Include="..\..\src\esys\base\stdcpp\logger_stdcpp.cpp" />
+    <ClCompile Include="..\..\src\esys\base\stdcpp\log_if_stdcpp.cpp" />
+    <ClCompile Include="..\..\src\esys\base\stdcpp\objectnamemngr_stdcpp.cpp" />
+    <ClCompile Include="..\..\src\esys\base\stdcpp\objectname_stdcpp.cpp" />
+    <ClCompile Include="..\..\src\esys\base\stdcpp\object_stdcpp.cpp" />
+    <ClCompile Include="..\..\src\esys\base\version.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\esysbaseexe\esysbaseexe.h" />
-    <ClInclude Include="..\..\include\esysbaseexe\esysbaseexe_defs.h" />
-    <ClInclude Include="..\..\include\esysbaseexe\esysbaseexe_prec.h" />
-    <ClInclude Include="..\..\include\esysbaseexe\version.h" />
+    <ClInclude Include="..\..\include\esys\base\assert.h" />
+    <ClInclude Include="..\..\include\esys\base\autolink.h" />
+    <ClInclude Include="..\..\include\esys\base\dynlibrary.h" />
+    <ClInclude Include="..\..\include\esys\base\dynlibrarybase.h" />
+    <ClInclude Include="..\..\include\esys\base\em\log_if.h" />
+    <ClInclude Include="..\..\include\esys\base\em\object.h" />
+    <ClInclude Include="..\..\include\esys\base\em\objectinit_t.h" />
+    <ClInclude Include="..\..\include\esys\base\em\objectname.h" />
+    <ClInclude Include="..\..\include\esys\base\em\objectnamemngr.h" />
+    <ClInclude Include="..\..\include\esys\base\em\object_t.h" />
+    <ClInclude Include="..\..\include\esys\base\esysbase_defs.h" />
+    <ClInclude Include="..\..\include\esys\base\esysbase_prec.h" />
+    <ClInclude Include="..\..\include\esys\base\impl_boost\dynlibrary.h" />
+    <ClInclude Include="..\..\include\esys\base\impl_boost\pluginmngrcore.h" />
+    <ClInclude Include="..\..\include\esys\base\log_if.h" />
+    <ClInclude Include="..\..\include\esys\base\object.h" />
+    <ClInclude Include="..\..\include\esys\base\objectbase.h" />
+    <ClInclude Include="..\..\include\esys\base\objectname.h" />
+    <ClInclude Include="..\..\include\esys\base\objectnamebase.h" />
+    <ClInclude Include="..\..\include\esys\base\objectbase_t.h" />
+    <ClInclude Include="..\..\include\esys\base\objectnamemngr_t.h" />
+    <ClInclude Include="..\..\include\esys\base\objectnamemngr.h" />
+    <ClInclude Include="..\..\include\esys\base\objectname_t.h" />
+    <ClInclude Include="..\..\include\esys\base\object_t.h" />
+    <ClInclude Include="..\..\include\esys\base\pluginbase.h" />
+    <ClInclude Include="..\..\include\esys\base\pluginmngr.h" />
+    <ClInclude Include="..\..\include\esys\base\pluginmngrbase.h" />
+    <ClInclude Include="..\..\include\esys\base\pluginmngrcore.h" />
+    <ClInclude Include="..\..\include\esys\base\pluginmngrcore_t.h" />
+    <ClInclude Include="..\..\include\esys\base\pluginmngr_t.h" />
+    <ClInclude Include="..\..\include\esys\base\plugin_t.h" />
+    <ClInclude Include="..\..\include\esys\base\stdcpp\logger.h" />
+    <ClInclude Include="..\..\include\esys\base\stdcpp\log_if.h" />
+    <ClInclude Include="..\..\include\esys\base\stdcpp\object.h" />
+    <ClInclude Include="..\..\include\esys\base\stdcpp\objectname.h" />
+    <ClInclude Include="..\..\include\esys\base\stdcpp\objectnamemngr.h" />
+    <ClInclude Include="..\..\include\esys\base\stdcpp\object_t.h" />
+    <ClInclude Include="..\..\include\esys\base\version.h" />
+    <ClInclude Include="..\..\include\esys\base\version_defs.h" />
+    <ClInclude Include="..\..\src\esys\base\impl_boost\dynlibraryimpl.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\..\res\esysbaseexe.rc" />
+    <ResourceCompile Include="..\..\res\esysbase.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
